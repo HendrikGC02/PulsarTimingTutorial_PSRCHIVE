@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PSRCHIVE Interactive Tutorial</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <h1>PSRCHIVE Interactive Tutorial</h1>
+    <p>Learn the pulsar data workflow and explore precomputed outputs by changing command-line arguments.</p>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>How PSRCHIVE works</h2>
+      <div class="flow">
+        <div class="node">Raw Observation Data</div>
+        <div class="arrow">→</div>
+        <div class="node">PSRCHIVE Command</div>
+        <div class="arrow">→</div>
+        <div class="node">Diagnostic Plot / Profile Output</div>
+      </div>
+      <p class="hint">This tutorial maps selected command arguments to precomputed example outputs.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Try command-line arguments</h2>
+      <form id="scenario-form" class="controls">
+        <label>
+          Tool
+          <select id="tool" name="tool">
+            <option value="psrplot">psrplot</option>
+          </select>
+        </label>
+
+        <label>
+          Plot Type (-p)
+          <select id="plot" name="plot">
+            <option value="Y">Y (pulse profile)</option>
+            <option value="S">S (phase vs frequency)</option>
+          </select>
+        </label>
+
+        <label>
+          Polarization (-j)
+          <select id="pol" name="pol">
+            <option value="I">I (total intensity)</option>
+            <option value="S">S (Stokes)</option>
+          </select>
+        </label>
+
+        <label>
+          Normalization (-N)
+          <select id="norm" name="norm">
+            <option value="0">0 (off)</option>
+            <option value="1">1 (on)</option>
+          </select>
+        </label>
+
+        <button type="submit">Load precomputed output</button>
+      </form>
+
+      <div class="command-preview">
+        <strong>Command:</strong>
+        <code id="command">psrplot -p Y -j I -N 0 example.ar</code>
+      </div>
+
+      <figure class="output">
+        <img id="output-image" src="assets/precomputed/psrplot_pY_jI_N0.svg" alt="Precomputed PSRCHIVE output" />
+        <figcaption id="output-caption">Scenario: pulse profile, total intensity, no normalization.</figcaption>
+      </figure>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
