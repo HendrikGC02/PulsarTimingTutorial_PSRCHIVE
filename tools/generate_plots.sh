@@ -334,7 +334,7 @@ python3 - <<PY
 import os, json, hashlib, glob, datetime
 
 repo = "$REPO"
-out_dir = os.path.join(repo, "site", "plots")
+out_dir = os.path.join(repo, "plots")
 gen_date = "$GEN_DATE"
 
 # Mapping of plot-relative-path -> (archive_shortname, command).  Commands
