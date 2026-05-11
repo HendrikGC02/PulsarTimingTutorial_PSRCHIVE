@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420">
-  <rect width="960" height="420" fill="#0f172a"/>
-  <text x="30" y="45" fill="#f8fafc" font-size="22" font-family="Arial">psrplot -p Y -j I -N 0 example.ar</text>
-  <polyline points="40,280 130,260 220,190 310,210 400,130 490,150 580,200 670,170 760,230 850,210 920,250" fill="none" stroke="#38bdf8" stroke-width="4"/>
-  <line x1="40" y1="320" x2="920" y2="320" stroke="#94a3b8" stroke-width="2"/>
-  <text x="40" y="355" fill="#94a3b8" font-size="16" font-family="Arial">Pulse phase</text>
-  <text x="810" y="40" fill="#94a3b8" font-size="16" font-family="Arial">Intensity</text>
-</svg>
