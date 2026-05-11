@@ -1,4 +1,4 @@
-/* global React, SiteHeader, PulseProfile, DataCube, PhaseFreqPlot, Residuals, TerminalLine, ABTag */
+/* global React, SiteHeader, SiteFooter, PulseProfile, DataCube, PhaseFreqPlot, Residuals, TerminalLine, FoldingAnim, DataCubeInteractive, RfiMorph, ScrunchAnim, TemplateStacking, DedispCurves, CalibPolar */
 
 /* ============================================================
    V2 · LANDING PAGE
@@ -9,7 +9,7 @@
    ============================================================ */
 
 const V2_LANDING_W = 1240;
-const V2_LANDING_H = 2350;
+const V2_LANDING_H = 3050;
 
 const PIPELINE = [
   { n: "01", t: "Pulsar & profile", short: "fold rotations" },
@@ -114,17 +114,9 @@ function LandingV2() {
           </div>
         </div>
         <div className="sk-box" style={{ padding: 18 }}>
-          <div className="sk-label">fig 1 · folding 10⁴ rotations</div>
+          <div className="sk-label">fig 1 · folding rotations into a profile</div>
           <div style={{ marginTop: 8 }}>
-            <PulseProfile w={460} h={140} />
-          </div>
-          <div className="sk-row" style={{ marginTop: 10, justifyContent: "space-between", alignItems: "center" }}>
-            <span className="sk-label">N rotations →</span>
-            <div className="sk-row sk-gap-4">
-              <span className="sk-chip">1</span>
-              <span className="sk-chip">100</span>
-              <span className="sk-chip green fill">10 000</span>
-            </div>
+            <FoldingAnim w={460} h={200} />
           </div>
         </div>
       </div>
@@ -136,46 +128,94 @@ function LandingV2() {
           A PSRCHIVE archive is a four-dimensional block of numbers — <b>phase</b>, <b>frequency</b>, <b>time</b>,
           <b> polarisation</b>. Almost every command underneath is a projection, slice, or sum along one of these axes.
         </div>
-        <div className="sk-box" style={{ marginTop: 18, padding: 28, display: "flex", gap: 36, alignItems: "center", background: "rgba(255,255,255,.5)" }}>
-          <DataCube size={250} animated />
+        <div className="sk-box" style={{ marginTop: 18, padding: 28, display: "flex", gap: 36, alignItems: "center" }}>
+          <DataCubeInteractive size={280} />
           <div style={{ flex: 1 }}>
             <div className="sk-h3" style={{ marginBottom: 10 }}>The four axes</div>
-            <div className="sk-col sk-gap-6">
-              <div className="sk-row" style={{ alignItems: "center", gap: 10 }}><span className="sk-chip green fill" style={{ minWidth: 110, justifyContent: "center" }}>phase</span> <span style={{ fontSize: 13, color: "var(--ink-2)" }}>pulse rotation, [0, 1)</span></div>
-              <div className="sk-row" style={{ alignItems: "center", gap: 10 }}><span className="sk-chip green"  style={{ minWidth: 110, justifyContent: "center" }}>frequency</span> <span style={{ fontSize: 13, color: "var(--ink-2)" }}>radio channel</span></div>
-              <div className="sk-row" style={{ alignItems: "center", gap: 10 }}><span className="sk-chip green"  style={{ minWidth: 110, justifyContent: "center" }}>time</span> <span style={{ fontSize: 13, color: "var(--ink-2)" }}>sub-integration</span></div>
-              <div className="sk-row" style={{ alignItems: "center", gap: 10 }}><span className="sk-chip green"  style={{ minWidth: 110, justifyContent: "center" }}>pol</span> <span style={{ fontSize: 13, color: "var(--ink-2)" }}>Stokes I, Q, U, V</span></div>
+            <div style={{ fontSize: 13.5, color: "var(--ink-2)", lineHeight: 1.6 }}>
+              Every command you'll see is a projection, slice, or sum along one of these. <b>psrplot</b> picks two axes and flattens the others; <b>pam</b> shrinks an axis in place; <b>paz</b> nulls bits of one.
             </div>
+            <ul style={{ marginTop: 12, paddingLeft: 18, fontSize: 13, color: "var(--ink-2)", lineHeight: 1.7 }}>
+              <li><b>phase</b> — pulse rotation, [0, 1)</li>
+              <li><b>frequency</b> — radio channel</li>
+              <li><b>time</b> — sub-integration</li>
+              <li><b>pol</b> — Stokes I, Q, U, V</li>
+            </ul>
           </div>
-        </div>
-        <div className="sk-row sk-gap-10" style={{ marginTop: 16, alignItems: "center" }}>
-          <span className="sk-marker green" style={{ fontSize: 19 }}>↑ drag to rotate</span>
-          <span style={{ color: "var(--ink-3)", fontSize: 13 }}>· every projection you see later is a flattening of this cube</span>
         </div>
       </div>
 
-      {/* ---------- 04 · zap RFI (skipping 03 dedisperse in the visible wireframe to fit) ---------- */}
+      {/* ---------- 03 · dedisperse ---------- */}
+      <div style={{ padding: "40px 160px", display: "grid", gridTemplateColumns: "1.05fr 1fr", gap: 48, alignItems: "center" }}>
+        <div>
+          <StepHeader idx={2} title="Dedispersion — undoing the ν⁻² delay" />
+          <div style={{ fontSize: 15.5, lineHeight: 1.65, color: "var(--ink-2)" }}>
+            Radio waves at different frequencies travel through the ionised interstellar medium at slightly different
+            speeds. Low-frequency components arrive <i>later</i> than high-frequency ones, with the delay scaling as
+            <b> Δt ∝ DM · ν⁻²</b>. Left uncorrected, the pulse smears across the band.
+          </div>
+          <div style={{ fontSize: 14, lineHeight: 1.6, color: "var(--ink-2)", marginTop: 14 }}>
+            <b>pam -d</b> applies an <i>incoherent</i> dedispersion — shifting each channel by its own delay so all
+            channels line up at the same phase. Coherent dedispersion happens earlier, at the backend, by convolving
+            the raw voltages with the inverse transfer function of the ISM.
+          </div>
+          <div className="sk-row sk-gap-8" style={{ marginTop: 14 }}>
+            <span className="sk-chip green">pam -d</span>
+            <span className="sk-chip green">psrplot -j D</span>
+            <span className="sk-chip">DM in archive header</span>
+          </div>
+        </div>
+        <div className="sk-box" style={{ padding: 18 }}>
+          <div className="sk-label">fig · channels aligning after dedispersion</div>
+          <div style={{ marginTop: 8 }}>
+            <DedispCurves w={460} h={240} />
+          </div>
+        </div>
+      </div>
+
+      {/* ---------- 04 · zap RFI ---------- */}
       <div style={{ padding: "40px 160px" }}>
         <StepHeader idx={3} title="Zapping radio frequency interference" />
         <div style={{ fontSize: 15.5, lineHeight: 1.65, color: "var(--ink-2)", maxWidth: 820 }}>
           Satellites, microwaves, that one bored undergrad — corrupt channels and sub-integrations. <b>paz</b>,
           <b> clfd</b>, or a careful manual zap mark them as zero-weight so they don't contaminate the average.
         </div>
-        <div className="sk-row sk-gap-20" style={{ marginTop: 18, alignItems: "stretch" }}>
-          <div className="sk-box" style={{ padding: 8, flex: 1 }}>
-            <div className="sk-label" style={{ textAlign: "center", margin: "2px 0 6px" }}>before</div>
-            <PhaseFreqPlot w={520} h={260} cleaned={false} />
-          </div>
-          <div className="sk-box green" style={{ padding: 8, flex: 1, position: "relative" }}>
-            <div className="sk-label green" style={{ textAlign: "center", margin: "2px 0 6px" }}>after  ✓</div>
-            <PhaseFreqPlot w={520} h={260} cleaned={true} />
-          </div>
+        <div className="sk-box" style={{ marginTop: 18, padding: 12 }}>
+          <RfiMorph w={1080} h={300} />
         </div>
         <div className="sk-row sk-gap-8" style={{ marginTop: 14 }}>
           <span className="sk-chip green">paz</span>
           <span className="sk-chip green">clfd</span>
           <span className="sk-chip green">psrzap (manual)</span>
           <span style={{ marginLeft: "auto" }} className="sk-label">try this in playground →</span>
+        </div>
+      </div>
+
+      {/* ---------- 05 · calibrate ---------- */}
+      <div style={{ padding: "40px 160px", display: "grid", gridTemplateColumns: "1fr 1.05fr", gap: 48, alignItems: "center" }}>
+        <div className="sk-box" style={{ padding: 18 }}>
+          <div className="sk-label">fig · Stokes profile before / after pac</div>
+          <div style={{ marginTop: 8 }}>
+            <CalibPolar w={460} h={240} />
+          </div>
+        </div>
+        <div>
+          <StepHeader idx={4} title="Polarisation calibration" />
+          <div style={{ fontSize: 15.5, lineHeight: 1.65, color: "var(--ink-2)" }}>
+            The receiver's two probes never have perfectly equal gain, perfectly orthogonal feeds, or zero cross-leakage.
+            Without correcting these, the polarisation profile is a smeared, rotated lie. <b>pac</b> applies a known
+            instrumental response derived from a noise diode or a calibrator pulsar.
+          </div>
+          <div style={{ fontSize: 14, lineHeight: 1.6, color: "var(--ink-2)", marginTop: 14 }}>
+            For the toughest receivers, <b>pcm</b> fits a full Measurement Equation model — gain, differential phase,
+            ellipticity and orientation — per channel, often using a pulsar as its own polarisation reference.
+          </div>
+          <div className="sk-row sk-gap-8" style={{ marginTop: 14 }}>
+            <span className="sk-chip green">pac</span>
+            <span className="sk-chip green">pcm</span>
+            <span className="sk-chip">noise diode</span>
+            <span className="sk-chip">MEM model</span>
+          </div>
         </div>
       </div>
 
@@ -186,23 +226,8 @@ function LandingV2() {
           <b>tscrunch</b>, <b>fscrunch</b>, <b>bscrunch</b>: collapse the time, frequency, or phase axis by
           summing groups. You trade resolution for signal-to-noise.
         </div>
-        <div className="sk-row sk-gap-16" style={{ marginTop: 18 }}>
-          {[
-            { lbl: "before",       cube: 230, hand: "1024 ch · 128 sub",  cmd: "" },
-            { lbl: "fscrunch ×4",  cube: 200, hand: "256 ch · 128 sub",   cmd: "pam --setnchn 256 -e f4" },
-            { lbl: "tscrunch all", cube: 170, hand: "256 ch · 1 sub",     cmd: "pam -T -e Tscr" },
-          ].map((s, i) => (
-            <div key={i} className="sk-box" style={{ padding: 16, flex: 1, textAlign: "center" }}>
-              <div className="sk-h3" style={{ marginBottom: 6 }}>{s.lbl}</div>
-              <div style={{ display: "flex", justifyContent: "center" }}><DataCube size={s.cube} /></div>
-              <div className="sk-label" style={{ marginTop: 6 }}>{s.hand}</div>
-              {s.cmd && (
-                <div className="sk-code" style={{ marginTop: 10, textAlign: "left", fontSize: 11 }}>
-                  <span className="prompt">$</span> {s.cmd}
-                </div>
-              )}
-            </div>
-          ))}
+        <div style={{ marginTop: 18 }}>
+          <ScrunchAnim />
         </div>
       </div>
 
@@ -220,16 +245,10 @@ function LandingV2() {
           </div>
         </div>
         <div className="sk-box" style={{ padding: 20 }}>
-          <div className="sk-label">fig · stack of obs → smooth template</div>
-          <svg width="100%" height="180" viewBox="0 0 460 180" style={{ marginTop: 6 }}>
-            {[0, 1, 2, 3, 4].map(i => (
-              <path key={i}
-                d={`M 0 ${156 - i * 2} C 90 ${150 - i * 2}, 140 ${30 + i * 10}, 200 ${30 + i * 10} C 260 ${30 + i * 10}, 300 ${150 - i * 2}, 460 ${152 - i * 2}`}
-                fill="none" stroke="var(--ink-4)" strokeWidth="1" opacity={0.5} />
-            ))}
-            <path d="M 0 156 C 90 150, 140 28, 200 28 C 260 28, 300 150, 460 152" fill="none" stroke="var(--green)" strokeWidth="2.4" />
-            <text x="210" y="22" fontSize="11" fontFamily="var(--font-hand)" fill="var(--green)">smoothed template</text>
-          </svg>
+          <div className="sk-label">fig · stack of obs → smoothed template</div>
+          <div style={{ marginTop: 8 }}>
+            <TemplateStacking w={460} h={220} />
+          </div>
         </div>
       </div>
 
@@ -260,17 +279,18 @@ function LandingV2() {
 
       {/* ---------- CTA ---------- */}
       <div style={{ padding: "40px 160px 60px", borderTop: "1px solid var(--ink-4)", marginTop: 30 }}>
-        <div className="sk-row" style={{ justifyContent: "space-between", alignItems: "center" }}>
+        <div className="sk-row" style={{ justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 18 }}>
           <div>
             <span className="sk-accent green">next</span>
             <h2 className="sk-h2" style={{ marginTop: 6 }}>Now try it on a real archive →</h2>
           </div>
           <div className="sk-row sk-gap-10">
-            <span className="sk-btn green" style={{ fontFamily: "var(--font-display)", fontSize: 14, fontWeight: 500 }}>Open the playground</span>
-            <span className="sk-btn ghost" style={{ fontFamily: "var(--font-display)", fontSize: 14, fontWeight: 500 }}>Command reference</span>
+            <a href="try-it.html" className="sk-btn green" style={{ fontFamily: "var(--font-display)", fontSize: 14, fontWeight: 500, textDecoration: "none" }}>Open the playground</a>
+            <a href="reference.html" className="sk-btn ghost" style={{ fontFamily: "var(--font-display)", fontSize: 14, fontWeight: 500, textDecoration: "none", color: "var(--ink)" }}>Command reference</a>
           </div>
         </div>
       </div>
+      <SiteFooter />
     </div>
   );
 }

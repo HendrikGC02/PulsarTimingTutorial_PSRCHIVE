@@ -2,21 +2,23 @@
    Sketch / wireframe vibe — paper bg, ink lines, marker labels
    Phthalo green is the only color accent.
    ---------------------------------------------------------- */
-:root {
-  --paper: #f4f1e8;
-  --paper-2: #ece8db;
-  --ink: #1a1a1a;
+:root, html[data-theme="light"] {
+  --paper: #faf7f0;
+  --paper-2: #f2efe6;
+  --ink: #141414;
   --ink-2: #3a3a3a;
   --ink-3: #6a6a6a;
-  --ink-4: #a09c92;
-  --green: #0e3b2e;       /* phthalo */
+  --ink-4: #b8b4a8;
+  --green: #0e3b2e;
   --green-2: #154a3a;
   --green-3: #1f6650;
-  --green-mute: #c9d8d0;
+  --green-mute: #d6e3db;
   --plot-bg: #0a0a0a;
   --plot-warm: #e08545;
   --plot-warm-2: #c25a2c;
-  --highlight: #f4e29a;   /* marker-pen yellow, very sparing */
+  --highlight: #f4e29a;
+  --card: #ffffff;
+  --card-2: #f6f3ec;
 
   /* Annotation-only handwritten faces (diagrams only — not UI / headings) */
   --font-hand: "Caveat", "Kalam", cursive;
@@ -40,18 +42,44 @@ body { min-height: 100vh; }
   font-family: var(--font-body);
   color: var(--ink);
 }
-/* faint paper grain via dot pattern */
-.sk-page::before {
-  content: ""; position: absolute; inset: 0;
-  background-image: radial-gradient(rgba(0,0,0,.035) 1px, transparent 1px);
-  background-size: 14px 14px;
-  pointer-events: none;
+/* paper grain removed for production look */
+
+html[data-theme="dark"] {
+  --paper: #0a100d;
+  --paper-2: #0f1814;
+  --ink: #e8efe9;
+  --ink-2: #c8d3cb;
+  --ink-3: #8aa094;
+  --ink-4: #2a3b33;
+  --green: #4dbb91;
+  --green-2: #5fc99f;
+  --green-3: #7cd6b1;
+  --green-mute: #14342a;
+  --highlight: #2a3018;
+  --card: #0f1814;
+  --card-2: #131e19;
 }
+html[data-theme="dark"] body { background: var(--paper); color: var(--ink); }
+html[data-theme="dark"] .sk-box { background: var(--card); border-color: var(--ink-4); }
+html[data-theme="dark"] .sk-btn.ghost { border-color: var(--ink-4); color: var(--ink-2); }
+html[data-theme="dark"] .sk-btn.green { background: var(--green); color: var(--paper); border-color: var(--green); }
+html[data-theme="dark"] .sk-chip { background: transparent; border-color: var(--ink-4); color: var(--ink-2); }
+html[data-theme="dark"] .sk-chip.green { color: var(--green); border-color: var(--green); }
+html[data-theme="dark"] .sk-chip.green.fill { background: var(--green); color: var(--paper); }
+html[data-theme="dark"] .sk-code { background: #07100c; color: #d5ecdd; border-color: var(--ink-4); }
+
+/* shared page max-width + smooth scroll */
+html { scroll-behavior: smooth; }
+.sk-nav { display: flex; gap: 18px; align-items: center; flex-shrink: 0; }
+.sk-nav > * { flex-shrink: 0; white-space: nowrap; }
+body { background: var(--paper); color: var(--ink); margin: 0; font-family: var(--font-body); }
+.sk-page { width: 100% !important; max-width: 1240px; margin: 0 auto; height: auto !important; min-height: 100vh; }
+
 
 .sk-box {
-  border: 1.5px solid var(--ink);
-  border-radius: 6px;
-  background: rgba(255,255,255,.35);
+  border: 1px solid var(--ink-4);
+  border-radius: 8px;
+  background: var(--card);
   position: relative;
 }
 .sk-box.dash { border-style: dashed; border-color: var(--ink-3); }
@@ -284,3 +312,39 @@ body { min-height: 100vh; }
     linear-gradient(to right, var(--paper-2), var(--paper));
   border-right: 1px dashed var(--ink-4);
 }
+
+/* ----- narrow-viewport pass ----- */
+@media (max-width: 1100px) {
+  /* landing/reference: shrink the big 160px side gutters and ease type */
+  .sk-page > div[style*="padding: 70px 160px"],
+  .sk-page > div[style*="padding: 30px 160px"],
+  .sk-page > div[style*="padding: 40px 160px"],
+  .sk-page > div[style*="padding: 30px 160px 20px"],
+  .sk-page > div[style*="padding: 40px 160px 60px"] {
+    padding-left: 6vw !important;
+    padding-right: 6vw !important;
+  }
+  /* collapse two-column landing sections */
+  .sk-page div[style*="gridTemplateColumns"][style*="1.05fr 1fr"],
+  .sk-page div[style*="gridTemplateColumns"][style*="1fr 1.05fr"],
+  .sk-page div[style*="gridTemplateColumns"][style*="1.1fr 1fr"],
+  .sk-page div[style*="gridTemplateColumns"][style*="1fr 1.1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  /* hero scales */
+  .sk-h1 { font-size: 36px !important; }
+  .sk-h2 { font-size: 22px !important; }
+  /* reference: list 220 / detail 1fr */
+  .sk-page > div[style*="gridTemplateColumns: \"320px 1fr\""] { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 760px) {
+  /* try-it: collapse three-column IDE into a single stacked column */
+  .ipg-grid { grid-template-columns: 1fr !important; }
+  .ipg-grid > div { border-left: 0 !important; border-right: 0 !important; max-height: none !important; }
+  /* hide bulky chrome on phones */
+  .sk-nav .item { display: none; }
+  .sk-nav .item.active { display: inline; }
+}
+/* horizontal-scroll safety net: the IDE wants 1300px minimum, allow scroll rather than break */
+.ipg-shell { overflow-x: auto; }

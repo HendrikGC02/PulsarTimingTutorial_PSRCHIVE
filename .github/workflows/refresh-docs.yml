@@ -1,0 +1,49 @@
+name: Refresh PSRCHIVE command docs
+
+# Re-scrape `<command> --help` from a live PSRCHIVE install and commit
+# the result into site/data/commands.json. Runs monthly; can be triggered
+# manually from the Actions tab.
+
+on:
+  schedule:
+    - cron: "0 6 1 * *"   # 06:00 UTC, first of each month
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    # The container has PSRCHIVE pre-installed. Swap the image tag below if
+    # you maintain your own — the parser only needs `<command> --help` to
+    # return non-empty text and `vap --version` to work.
+    container:
+      image: stevertaylor/docker-psrchive:latest
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Show PSRCHIVE version
+        run: vap --version || true
+
+      - name: Run scraper
+        run: python3 tools/scrape_help.py --out site/data/commands.json
+
+      - name: Open PR if changed
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "docs(reference): refresh commands.json from PSRCHIVE --help"
+          title: "Refresh PSRCHIVE command docs"
+          branch: bot/refresh-psrchive-docs
+          body: |
+            Automated refresh of `site/data/commands.json` from a live
+            PSRCHIVE install. The script preserves hand-authored prose
+            (`desc`, `long`, `examples`, `related`) and only rewrites
+            `usage`, `flags`, and `help_raw`.
+
+            If the diff looks bad (a parser regression on a new release of
+            PSRCHIVE), edit `tools/scrape_help.py` rather than the JSON.
+          delete-branch: true

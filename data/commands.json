@@ -1,0 +1,1951 @@
+{
+  "_meta": {
+    "schema_version": 1,
+    "source": "scrape_help.py",
+    "generated_at": "2026-05-11T09:34:40.165022Z",
+    "psrchive_version": "vap: invalid option -- '-'",
+    "note": "This file is a *seed*. The GitHub Action at .github/workflows/refresh-docs.yml regenerates it from a real PSRCHIVE install by scraping `<command> --help` output (see tools/scrape_help.py). Anything authored by hand below the per-command 'desc' / 'long' fields should survive regeneration \u2014 the parser only overwrites 'flags', 'usage', and 'help_raw'."
+  },
+  "categories": {
+    "plot": {
+      "label": "Plot",
+      "blurb": "Render projections of an archive."
+    },
+    "modify": {
+      "label": "Modify",
+      "blurb": "Scrunch, dedisperse, transform in place."
+    },
+    "clean": {
+      "label": "Clean / RFI",
+      "blurb": "Zap bad channels and sub-integrations."
+    },
+    "template": {
+      "label": "Templates",
+      "blurb": "Build the standard profile for timing."
+    },
+    "timing": {
+      "label": "Timing",
+      "blurb": "Generate TOAs and feed timing tools."
+    },
+    "calib": {
+      "label": "Calibration",
+      "blurb": "Polarisation and flux calibration."
+    },
+    "analyze": {
+      "label": "Analysis",
+      "blurb": "Compute statistics & derived quantities."
+    },
+    "meta": {
+      "label": "Metadata",
+      "blurb": "Inspect and edit archive headers."
+    }
+  },
+  "commands": [
+    {
+      "desc": "main plotting front-end",
+      "long": "Project the 4-D archive onto any pair of axes \u2014 phase vs frequency, phase vs time, the Stokes parameters, polarisation angle, the integrated profile. Combine with -j operations to scrunch and dedisperse on the fly.",
+      "examples": [
+        {
+          "t": "Integrated profile",
+          "c": "psrplot -p flux -jFT file.ar"
+        },
+        {
+          "t": "Phase \u00d7 freq, cleaned",
+          "c": "psrplot -p freq -jD file.ar"
+        },
+        {
+          "t": "Phase \u00d7 time",
+          "c": "psrplot -p time -jF file.ar"
+        },
+        {
+          "t": "Stokes I, Q, U, V",
+          "c": "psrplot -p stokes -jFT file.ar"
+        },
+        {
+          "t": "Save to PNG",
+          "c": "psrplot -p flux -D plot.png/png file.ar"
+        }
+      ],
+      "related": [
+        "pav",
+        "pam",
+        "paz",
+        "psrstat",
+        "vap"
+      ],
+      "name": "psrplot",
+      "cat": "plot",
+      "usage": "psrplot [options] filename[s]",
+      "flags": [
+        {
+          "k": "-q",
+          "v": "quiet mode"
+        },
+        {
+          "k": "-v",
+          "v": "verbose mode"
+        },
+        {
+          "k": "-V",
+          "v": "very verbose mode"
+        },
+        {
+          "k": "-M",
+          "v": "metafile contains list of archive filenames"
+        },
+        {
+          "k": "-config",
+          "v": "configuration file"
+        },
+        {
+          "k": "-D",
+          "v": "plot to the specified device"
+        },
+        {
+          "k": "-g",
+          "v": "plot dimensions in pixels, width times height"
+        },
+        {
+          "k": "-N",
+          "v": "plot panels, width by height"
+        },
+        {
+          "k": "-r",
+          "v": "aspect ratio (height/width)"
+        },
+        {
+          "k": "-w",
+          "v": "plot surface width (in centimetres)"
+        },
+        {
+          "k": "-j",
+          "v": "execute pulsar shell preprocessing commands"
+        },
+        {
+          "k": "-J",
+          "v": "execute pulsar shell preprocessing script"
+        },
+        {
+          "k": "-P",
+          "v": "Help: list available plot types"
+        },
+        {
+          "k": "-C",
+          "v": "Help: list options specific to 'plot'"
+        },
+        {
+          "k": "-A",
+          "v": "Help: list common options for 'plot'"
+        },
+        {
+          "k": "-p",
+          "v": "add plot type"
+        },
+        {
+          "k": "-c",
+          "v": "add plot options"
+        },
+        {
+          "k": "-s",
+          "v": "add plot options in 'style' file"
+        },
+        {
+          "k": "-x",
+          "v": "disable default preprocessing"
+        },
+        {
+          "k": "-S",
+          "v": "stack plots"
+        },
+        {
+          "k": "-O",
+          "v": "overlay plots"
+        },
+        {
+          "k": "-F",
+          "v": "overlay plots from multiple files"
+        },
+        {
+          "k": "-l",
+          "v": "loop over the range of the named parameter"
+        },
+        {
+          "k": "-lci",
+          "v": "set the colour indeces to loop over"
+        }
+      ],
+      "help_raw": "\npsrplot - pulsar plotting program\n\nusage: psrplot [options] filename[s] \n\nwhere options are:\n\n  -h,-help          print this help page\n  -i,-version       version information\n  -q                quiet mode\n  -v                verbose mode\n  -V                very verbose mode\n  -M metafile       metafile contains list of archive filenames\n  -config file      configuration file\n\nPlot device options:\n  -D device         plot to the specified device\n  -g WxH            plot dimensions in pixels, width times height\n  -N XxY            plot panels, width by height\n  -r ratio          aspect ratio (height/width)\n  -w width          plot surface width (in centimetres)\n\nPreprocessing options:\n  -j commands       execute pulsar shell preprocessing commands\n  -J script         execute pulsar shell preprocessing script\n\n  -P                Help: list available plot types\n  -C plot           Help: list options specific to 'plot'\n  -A plot           Help: list common options for 'plot'\n\n  -p plot           add plot type\n  -c cfg[s]         add plot options\n  -s style          add plot options in 'style' file\n\n  -x                disable default preprocessing\n  -S                stack plots\n  -O                overlay plots\n  -F                overlay plots from multiple files\n\n  -l name=<range>   loop over the range of the named parameter\n  -lci <range>      set the colour indeces to loop over\n\nSee http://psrchive.sourceforge.net/manuals/psrplot for more details \n\n\n",
+      "help_available": true
+    },
+    {
+      "desc": "older PGPLOT plotting",
+      "long": "The original PGPLOT-based plotter. Largely superseded by psrplot but still common in pipelines because its flags are short.",
+      "examples": [
+        {
+          "t": "Dynamic spectrum",
+          "c": "pav -DFTp -j D file.ar"
+        }
+      ],
+      "related": [
+        "psrplot"
+      ],
+      "name": "pav",
+      "cat": "plot",
+      "usage": "pav",
+      "flags": [
+        {
+          "k": "-b",
+          "v": "Bscrunch scr phase bins together"
+        },
+        {
+          "k": "-C",
+          "v": "Centre the pulse peak at phase 0.5"
+        },
+        {
+          "k": "-d",
+          "v": "Dedisperse all channels"
+        },
+        {
+          "k": "-r",
+          "v": "Rotate all profiles by phase (in turns)"
+        },
+        {
+          "k": "-f",
+          "v": "Fscrunch scr frequency channels together"
+        },
+        {
+          "k": "-F",
+          "v": "Fscrunch all frequency channels"
+        },
+        {
+          "k": "-t",
+          "v": "Tscrunch scr Integrations together"
+        },
+        {
+          "k": "-T",
+          "v": "Tscrunch all Integrations"
+        },
+        {
+          "k": "-p",
+          "v": "Add all polarisations together"
+        },
+        {
+          "k": "-x",
+          "v": "Zoom into the data between 0 and max (normalized coords)"
+        },
+        {
+          "k": "-c",
+          "v": "Do not remove baseline"
+        },
+        {
+          "k": "-g",
+          "v": "Manually specify a plot device"
+        },
+        {
+          "k": "-M",
+          "v": "Read a meta-file containing the files to use"
+        },
+        {
+          "k": "-z",
+          "v": "Zoom to this pulse phase range (in turns)"
+        },
+        {
+          "k": "-k",
+          "v": "Zoom to this frequency range"
+        },
+        {
+          "k": "-y",
+          "v": "Zoom to this subint range"
+        },
+        {
+          "k": "-l",
+          "v": "Zoom to this position angle range (Degrees)"
+        },
+        {
+          "k": "-N",
+          "v": "Divide the window into x by y panels"
+        },
+        {
+          "k": "-H",
+          "v": "Select which frequency channel to display"
+        },
+        {
+          "k": "-P",
+          "v": "Select which polarization to display"
+        },
+        {
+          "k": "-B",
+          "v": "Plot original bandpass"
+        },
+        {
+          "k": "-J",
+          "v": "Plot off-pulse bandpass & channel weights"
+        },
+        {
+          "k": "-D",
+          "v": "Plot a single profile (chan 0, poln 0, subint 0 by default)"
+        },
+        {
+          "k": "-G",
+          "v": "Plot an image of amplitude against frequency & phase"
+        },
+        {
+          "k": "-K",
+          "v": "Plot Digitiser Statistics"
+        },
+        {
+          "k": "-j",
+          "v": "Display a simple dynamic spectrum image"
+        },
+        {
+          "k": "-m",
+          "v": "Plot Poincare vector in spherical coordinates"
+        },
+        {
+          "k": "-n",
+          "v": "Plot S/N against frequency"
+        },
+        {
+          "k": "-R",
+          "v": "Plot stacked sub-integration profiles"
+        },
+        {
+          "k": "-S",
+          "v": "Plot polarization parameters (I,L,V,PA)"
+        },
+        {
+          "k": "-E",
+          "v": "Plot polarization parameters (I,L,V,PA) with an intermediate cropped flux plot"
+        },
+        {
+          "k": "-A",
+          "v": "Plot Digitiser Counts histogram"
+        },
+        {
+          "k": "-X",
+          "v": "Plot cal amplitude and phase vs frequency channel"
+        },
+        {
+          "k": "-Y",
+          "v": "Plot colour map of sub-integrations against pulse phase"
+        },
+        {
+          "k": "--sl",
+          "v": "Stack labels(name,freq) on the left side of the plot"
+        },
+        {
+          "k": "--publn",
+          "v": "Publication quality plot (B&W)  L dashed, V dots"
+        },
+        {
+          "k": "--publnc",
+          "v": "Publication quality plot (keep in colour if device supports it)"
+        },
+        {
+          "k": "--ch",
+          "v": "Set the character height"
+        },
+        {
+          "k": "--cmap",
+          "v": "Select a colour map for PGIMAG style plots"
+        },
+        {
+          "k": "--plot_qu",
+          "v": "Plot Stokes Q and Stokes U in '-S' option instead of degree of linear"
+        },
+        {
+          "k": "--ld",
+          "v": "Label phase axes in degrees"
+        },
+        {
+          "k": "--ebox",
+          "v": "Plot an error box, for -D and -S"
+        },
+        {
+          "k": "--pa_ext",
+          "v": "Plot position angle plot from -90 deg to 180 deg, instead of -90,90"
+        },
+        {
+          "k": "--ha",
+          "v": "Plot versus Hour Angle in '-Y' mode"
+        },
+        {
+          "k": "--convert_binphsperi",
+          "v": "nsub"
+        },
+        {
+          "k": "--convert_binphsasc",
+          "v": "nsub"
+        },
+        {
+          "k": "--convert_binlngperi",
+          "v": "nsub"
+        },
+        {
+          "k": "--convert_binlngasc",
+          "v": "nsub"
+        },
+        {
+          "k": "-a",
+          "v": "Print available plugin information"
+        },
+        {
+          "k": "-h",
+          "v": "Display this useful help page"
+        },
+        {
+          "k": "-i",
+          "v": "Show revision information"
+        },
+        {
+          "k": "-v",
+          "v": "Verbose output"
+        },
+        {
+          "k": "-V",
+          "v": "Very verbose output"
+        }
+      ],
+      "help_raw": "Preprocessing options:\n -b scr    Bscrunch scr phase bins together\n -C        Centre the pulse peak at phase 0.5\n -d        Dedisperse all channels\n -r phase  Rotate all profiles by phase (in turns)\n -f scr    Fscrunch scr frequency channels together\n -F        Fscrunch all frequency channels\n -t src    Tscrunch scr Integrations together\n -T        Tscrunch all Integrations\n -p        Add all polarisations together\n -x  max   Zoom into the data between 0 and max (normalized coords)\n -c        Do not remove baseline\n\nConfiguration options:\n -g dev    Manually specify a plot device\n -M meta   Read a meta-file containing the files to use\n\nSelection options:\n -z x1,x2  Zoom to this pulse phase range (in turns)\n -k f1,f2  Zoom to this frequency range\n -y s1,s2  Zoom to this subint range\n -l a1,a2  Zoom to this position angle range (Degrees)\n -N x,y    Divide the window into x by y panels\n -H chan   Select which frequency channel to display\n -P pol    Select which polarization to display\n -I subint Select which sub-integration to display\n\nPlotting options:\n -B        Plot original bandpass\n -J        Plot off-pulse bandpass & channel weights\n -D        Plot a single profile (chan 0, poln 0, subint 0 by default)\n -G        Plot an image of amplitude against frequency & phase\n -K        Plot Digitiser Statistics\n -j        Display a simple dynamic spectrum image\n -m        Plot Poincare vector in spherical coordinates\n -n        Plot S/N against frequency\n -R        Plot stacked sub-integration profiles\n -S        Plot polarization parameters (I,L,V,PA)\n -E        Plot polarization parameters (I,L,V,PA) with an intermediate cropped flux plot\n -A        Plot Digitiser Counts histogram\n -X        Plot cal amplitude and phase vs frequency channel\n -Y        Plot colour map of sub-integrations against pulse phase\n\nOther plotting options:\n --sl           Stack labels(name,freq) on the left side of the plot\n --publn        Publication quality plot (B&W)  L dashed, V dots\n --publnc       Publication quality plot (keep in colour if device supports it)\n --ch           Set the character height\n --cmap index   Select a colour map for PGIMAG style plots\n                The available indices are: (maybe 4-6 not needed)\n                  0 -> Greyscale\n                  1 -> Inverse Greyscale\n                  2 -> Heat\n                  3 -> Cold\n                  4 -> Plasma\n                  5 -> Forest\n                  6 -> Alien Glow\n                  7 -> CubeHelix\n                  8 -> Test\n\n --plot_qu      Plot Stokes Q and Stokes U in '-S' option instead of degree of linear\n --ld           Label phase axes in degrees\n --ebox         Plot an error box, for -D and -S \n --pa_ext       Plot position angle plot from -90 deg to 180 deg, instead of -90,90\n --ha           Plot versus Hour Angle in '-Y' mode\n\nIntegration re-ordering (nsub = final # of subints) (used with pav Y for binary pulsars):\n --convert_binphsperi   nsub\n --convert_binphsasc    nsub\n --convert_binlngperi   nsub\n --convert_binlngasc    nsub\n\nUtility options:\n -a              Print available plugin information\n -h              Display this useful help page\n -i              Show revision information\n -v              Verbose output\n -V              Very verbose output\n\n\n\n",
+      "help_available": true
+    },
+    {
+      "desc": "scrunch \u00b7 dedisperse \u00b7 in-place mods",
+      "long": "Modify an archive in place (or with a new extension). The workhorse for time/frequency/phase scrunching, dedispersion, weight adjustment, and metadata fixes.",
+      "examples": [
+        {
+          "t": "Sum everything in time",
+          "c": "pam -T -e Tscr file.ar"
+        },
+        {
+          "t": "fscrunch by 4",
+          "c": "pam --setnchn 256 -e f4 file.ar"
+        }
+      ],
+      "related": [
+        "psradd",
+        "psrplot"
+      ],
+      "name": "pam",
+      "cat": "modify",
+      "usage": "pam [options] filenames",
+      "flags": [
+        {
+          "k": "-q",
+          "v": "Quiet mode"
+        },
+        {
+          "k": "-v",
+          "v": "Verbose mode"
+        },
+        {
+          "k": "-V",
+          "v": "Very verbose mode"
+        },
+        {
+          "k": "-i",
+          "v": "Show revision information"
+        },
+        {
+          "k": "-m",
+          "v": "Modify the original files on disk"
+        },
+        {
+          "k": "-M",
+          "v": "List of archive filenames in metafile"
+        },
+        {
+          "k": "-a",
+          "v": "The archive class to create valid types are"
+        },
+        {
+          "k": "-e",
+          "v": "Write new files with this extension"
+        },
+        {
+          "k": "-u",
+          "v": "Write files to this location"
+        },
+        {
+          "k": "-T",
+          "v": "Time scrunch to one subint"
+        },
+        {
+          "k": "-F",
+          "v": "Frequency scrunch to one channel"
+        },
+        {
+          "k": "-p",
+          "v": "Polarisation scrunch to total intensity"
+        },
+        {
+          "k": "-D",
+          "v": "Dedisperse (but not fscrunch)"
+        },
+        {
+          "k": "--DD",
+          "v": "Dededisperse (i.e. undo -D option)"
+        },
+        {
+          "k": "-I",
+          "v": "Transform to Invariant Interval"
+        },
+        {
+          "k": "-S",
+          "v": "Transform to Stokes parameters"
+        },
+        {
+          "k": "--SS",
+          "v": "Transform to coherence parameters (i.e. undo -S option)"
+        },
+        {
+          "k": "-t",
+          "v": "Time scrunch by this factor"
+        },
+        {
+          "k": "-f",
+          "v": "Frequency scrunch by this factor"
+        },
+        {
+          "k": "-b",
+          "v": "Bin scrunch by this factor"
+        },
+        {
+          "k": "--setnsub",
+          "v": "Time scrunch to this many subints"
+        },
+        {
+          "k": "--settsub",
+          "v": "Time scrunch to this subint length"
+        },
+        {
+          "k": "--setnchn",
+          "v": "Frequency scrunch to this many channels"
+        },
+        {
+          "k": "--setnbin",
+          "v": "Bin scrunch to this many bins"
+        },
+        {
+          "k": "--binphsperi",
+          "v": "Convert to binary phase periastron order"
+        },
+        {
+          "k": "--binphsasc",
+          "v": "Convert to binary phase asc node order"
+        },
+        {
+          "k": "--binlngperi",
+          "v": "Convert to binary longitude periastron order"
+        },
+        {
+          "k": "--binlngasc",
+          "v": "Convert to binary longitude asc node order"
+        },
+        {
+          "k": "-d",
+          "v": "Alter the header dispersion measure"
+        },
+        {
+          "k": "-R",
+          "v": "Correct ISM Faraday rotation (wrt centre freq)"
+        },
+        {
+          "k": "--RM",
+          "v": "Install a new RM (but don't correct)"
+        },
+        {
+          "k": "--aux_rm",
+          "v": "Correct absolute auxiliary Faraday rotation"
+        },
+        {
+          "k": "-s",
+          "v": "Smear with this duty cycle"
+        },
+        {
+          "k": "-r",
+          "v": "Rotate profiles by this many turns"
+        },
+        {
+          "k": "-w",
+          "v": "Reset profile weights to this value"
+        },
+        {
+          "k": "--mult",
+          "v": "Multiply amplitudes by 'fac'"
+        },
+        {
+          "k": "--period",
+          "v": "Install a new folding period"
+        },
+        {
+          "k": "--receiver",
+          "v": "Install the Receiver described in the text file"
+        },
+        {
+          "k": "-L",
+          "v": "Set feed basis to Linear"
+        },
+        {
+          "k": "-C",
+          "v": "Set feed basis to Circular"
+        },
+        {
+          "k": "-E",
+          "v": "Install a new ephemeris and update model"
+        },
+        {
+          "k": "--ephver",
+          "v": "Ephem type for -E, 'ver' should be 'tempo' or 'tempo2'"
+        },
+        {
+          "k": "-B",
+          "v": "Flip the sideband sense"
+        },
+        {
+          "k": "--flip",
+          "v": "Flip the band about the given frequency"
+        },
+        {
+          "k": "--reverse_freqs",
+          "v": "Reverse the ordering of the frequency channels and"
+        },
+        {
+          "k": "-o",
+          "v": "Change the frequency labels"
+        },
+        {
+          "k": "--type",
+          "v": "Change the 'type' parameter where 'type' is one of:"
+        },
+        {
+          "k": "--inst",
+          "v": "Change the instrument name"
+        },
+        {
+          "k": "--site",
+          "v": "Correct 'site' of telescope (One letter tempo code- GBT=1, PKS=7 etc)"
+        },
+        {
+          "k": "--name",
+          "v": "Change source name"
+        },
+        {
+          "k": "--update_dm",
+          "v": "Replace header DM with current value from ephemeris"
+        }
+      ],
+      "help_raw": "A program for manipulating Pulsar::Archives \nUsage: pam [options] filenames \n  -q               Quiet mode \n  -v               Verbose mode \n  -V               Very verbose mode \n  -i               Show revision information \n  -m               Modify the original files on disk \n  -M metafile      List of archive filenames in metafile \n  -a archive       The archive class to create valid types are \n                   (Timer,Baseband,EPN,ASP,PSRFITS,WAPP,PRESTO,BPP,UVM,ASCII,EPOS,pdv_KtZ) \n  -e extension     Write new files with this extension \n  -u path          Write files to this location \n  -T               Time scrunch to one subint \n  -F               Frequency scrunch to one channel \n  -p               Polarisation scrunch to total intensity \n  -D               Dedisperse (but not fscrunch) \n  --DD             Dededisperse (i.e. undo -D option) \n  -I               Transform to Invariant Interval \n  -S               Transform to Stokes parameters \n  --SS             Transform to coherence parameters (i.e. undo -S option)\n  -x \"start end\"   Extract subints in this inclusive range \n\nThe following options take integer arguments \n  -t               Time scrunch by this factor \n  -f               Frequency scrunch by this factor \n  -b               Bin scrunch by this factor \n  --setnsub        Time scrunch to this many subints \n  --settsub        Time scrunch to this subint length \n  --setnchn        Frequency scrunch to this many channels \n  --setnbin        Bin scrunch to this many bins \n  --binphsperi     Convert to binary phase periastron order \n  --binphsasc      Convert to binary phase asc node order \n  --binlngperi     Convert to binary longitude periastron order \n  --binlngasc      Convert to binary longitude asc node order \n\nThe following options take floating point arguments \n  -d DM            Alter the header dispersion measure \n  -R RM            Correct ISM Faraday rotation (wrt centre freq) \n  --RM RM          Install a new RM (but don't correct) \n  --aux_rm RMi     Correct absolute auxiliary Faraday rotation \n  -s duty          Smear with this duty cycle \n  -r turns         Rotate profiles by this many turns \n  -w weight        Reset profile weights to this value \n  --mult fac       Multiply amplitudes by 'fac' \n  --period period  Install a new folding period \n\nThe following options override archive parameters \n  --receiver file  Install the Receiver described in the text file \n  -L               Set feed basis to Linear \n  -C               Set feed basis to Circular \n  -E ephfile       Install a new ephemeris and update model \n  --ephver ver     Ephem type for -E, 'ver' should be 'tempo' or 'tempo2'\n  -B               Flip the sideband sense \n  --flip freq      Flip the band about the given frequency \n  --reverse_freqs  Reverse the ordering of the frequency channels and\n                   change the bandwidth flag accordingly\n  -o centre_freq   Change the frequency labels \n  --type type      Change the 'type' parameter where 'type' is one of:\n                   'Pulsar', 'PolnCal', 'FluxCalOn', 'FluxCalOff', 'Calibrator'\n  --inst inst      Change the instrument name \n  --site site      Correct 'site' of telescope (One letter tempo code- GBT=1, PKS=7 etc)\n  --name name      Change source name\n  --update_dm      Replace header DM with current value from ephemeris\n\nSee http://psrchive.sourceforge.net/manuals/pam for more details\n\n\n",
+      "help_available": true
+    },
+    {
+      "desc": "zap bad channels / sub-ints",
+      "long": "Mark interference as zero-weight so it's excluded from averages. -r runs the default median filter; manual ranges allow surgical removal.",
+      "examples": [
+        {
+          "t": "Default zap \u2192 .zap",
+          "c": "paz -r -e zap file.ar"
+        }
+      ],
+      "related": [
+        "clfd",
+        "psrzap"
+      ],
+      "name": "paz",
+      "cat": "clean",
+      "usage": "paz [options] filename[s]",
+      "flags": [
+        {
+          "k": "-q",
+          "v": "quiet mode"
+        },
+        {
+          "k": "-v",
+          "v": "verbose mode"
+        },
+        {
+          "k": "-V",
+          "v": "very verbose mode"
+        },
+        {
+          "k": "-M",
+          "v": "metafile contains list of archive filenames"
+        },
+        {
+          "k": "-config",
+          "v": "configuration file"
+        },
+        {
+          "k": "-j",
+          "v": "execute pulsar shell preprocessing commands"
+        },
+        {
+          "k": "-J",
+          "v": "execute pulsar shell preprocessing script"
+        },
+        {
+          "k": "-m",
+          "v": "modify (overwrite) the original file"
+        },
+        {
+          "k": "-e",
+          "v": "write files with a new extension"
+        },
+        {
+          "k": "-O",
+          "v": "write files to a new directory"
+        },
+        {
+          "k": "-I",
+          "v": "Zero weight the intersection of -[wW] and -[zZk]"
+        },
+        {
+          "k": "-k",
+          "v": "Zero weight chans listed in this kill file"
+        },
+        {
+          "k": "-E",
+          "v": "Zero weight this much of each band edge"
+        },
+        {
+          "k": "-r",
+          "v": "Zap channels using median smoothed difference"
+        },
+        {
+          "k": "-R",
+          "v": "Set the size of the median smoothing window"
+        },
+        {
+          "k": "-l",
+          "v": "Mow the lawn of the specified subint"
+        },
+        {
+          "k": "-L",
+          "v": "Mow the lawn of all subints"
+        },
+        {
+          "k": "-d",
+          "v": "Zero weight chans using mean offset rejection"
+        },
+        {
+          "k": "-C",
+          "v": "Zero weight chans based on S/N (std optional)"
+        },
+        {
+          "k": "-P",
+          "v": "Use this standard profile"
+        },
+        {
+          "k": "-o",
+          "v": "Zero weight subints with negative dropouts"
+        },
+        {
+          "k": "-b",
+          "v": "Remove variable baseline"
+        }
+      ],
+      "help_raw": "\npaz - zaps RFI in archives\n\nusage: paz [options] filename[s] \n\nwhere options are:\n\n  -h,-help         print this help page\n  -i,-version      version information\n  -q               quiet mode\n  -v               verbose mode\n  -V               very verbose mode\n  -M metafile      metafile contains list of archive filenames\n  -config file     configuration file\n\nPreprocessing options:\n  -j commands      execute pulsar shell preprocessing commands\n  -J script        execute pulsar shell preprocessing script\n\nOutput options:\n  -m               modify (overwrite) the original file\n  -e ext           write files with a new extension\n  -O path          write files to a new directory\n\nManual zapping options:\n  -I               Zero weight the intersection of -[wW] and -[zZk]\n  -k filename      Zero weight chans listed in this kill file\n  -B \"a b\"         Zap pulse phase bins between a and b inclusive\n  -z \"a b c ...\"   Zero weight these particular channels\n  -Z \"a b\"         Zero weight chans between a & b inclusive\n  -f \"a b c ...\"   Zero weight channels with these frequencies (MHz)\n  -F \"a b\"         Zero weight this frequency range, inclusive (MHz)\n  -x \"a b c ...\"   Delete all sub-integrations except these\n  -X \"a b\"         Delete all sub-ints except a to b inclusive\n  -E percent       Zero weight this much of each band edge\n  -s \"a b c ...\"   Delete these sub-integrations\n  -S \"a b\"         Delete sub-ints between a & b inclusive\n  -w \"a b c ...\"   Zero weight these sub-integrations\n  -W \"a b\"         Zero weight sub-ints between a & b inclusive\n  -p \"p i\"         Interpolate over every p-th phase bin, start at i\n  -poln 0/1        Delete the specified polarization\n\nAutomatic zapping algorithms:\n  -r               Zap channels using median smoothed difference\n  -R size          Set the size of the median smoothing window\n  -l subint        Mow the lawn of the specified subint\n  -L               Mow the lawn of all subints\n  -d               Zero weight chans using mean offset rejection\n  -C cutoff        Zero weight chans based on S/N (std optional)\n  -P stdfile       Use this standard profile\n  -o cutoff        Zero weight subints with negative dropouts\n  -8               Fix ATNF WBCORR 8 bin problem (see also -p)\n  -b               Remove variable baseline\n\nThe format of the kill file used with the -k option is simply\na list of channel numbers, separated by white space\n\nThe cutoff S/N value used with -C is largely arbitrary. You will\nneed to experiment to find the best value for your archives\n\nSee http://psrchive.sourceforge.net/manuals/paz for more details \n\n\n",
+      "help_available": true
+    },
+    {
+      "desc": "combine archives (time / freq)",
+      "long": "Concatenate multiple archives into one. The default is to append in time; -F appends in frequency.",
+      "examples": [
+        {
+          "t": "Combine two epochs",
+          "c": "psradd -o sum.ar ep1.ar ep2.ar"
+        }
+      ],
+      "related": [
+        "pam",
+        "psrplot"
+      ],
+      "name": "psradd",
+      "cat": "modify",
+      "usage": "psradd [options] filename[s]",
+      "flags": [
+        {
+          "k": "-q",
+          "v": "quiet mode"
+        },
+        {
+          "k": "-v",
+          "v": "verbose mode"
+        },
+        {
+          "k": "-V",
+          "v": "very verbose mode"
+        },
+        {
+          "k": "-M",
+          "v": "metafile contains list of archive filenames"
+        },
+        {
+          "k": "-config",
+          "v": "configuration file"
+        },
+        {
+          "k": "-j",
+          "v": "execute pulsar shell preprocessing commands"
+        },
+        {
+          "k": "-J",
+          "v": "execute pulsar shell preprocessing script"
+        },
+        {
+          "k": "-e",
+          "v": "write files with a new extension"
+        },
+        {
+          "k": "-O",
+          "v": "write files to a new directory"
+        },
+        {
+          "k": "-o",
+          "v": "output result to 'fname'"
+        },
+        {
+          "k": "-E",
+          "v": "Load and install new ephemeris from 'f.eph'"
+        },
+        {
+          "k": "-T",
+          "v": "Tscrunch result after each new file added"
+        },
+        {
+          "k": "-tsub",
+          "v": "Tscrunch subints to this length after each new file added"
+        },
+        {
+          "k": "-R",
+          "v": "Append data in the frequency direction"
+        },
+        {
+          "k": "-m",
+          "v": "Patch missing sub-integrations: domain = time or phase"
+        },
+        {
+          "k": "-n",
+          "v": "Patch missing frequency channels"
+        },
+        {
+          "k": "-inplace",
+          "v": "Append archives to the specified file"
+        },
+        {
+          "k": "-P",
+          "v": "Phase align archive with total before adding"
+        },
+        {
+          "k": "-const_phase",
+          "v": "Leave amplitudes alone, but update metadata"
+        },
+        {
+          "k": "-phath",
+          "v": "Omit data if phase offset from total > phath"
+        },
+        {
+          "k": "-L",
+          "v": "Log results in <source>.log"
+        },
+        {
+          "k": "-t",
+          "v": "Test mode: make no changes to file system"
+        },
+        {
+          "k": "-F",
+          "v": "Force append against all conventional wisdom"
+        },
+        {
+          "k": "-r",
+          "v": "Add archives only with this centre frequency"
+        },
+        {
+          "k": "-z",
+          "v": "Only add archives that have integration length > 0"
+        },
+        {
+          "k": "-Z",
+          "v": "Only add archives that are time (+/- 0.5) seconds long"
+        },
+        {
+          "k": "-ip",
+          "v": "Do not apply model, ignore phase alignment"
+        },
+        {
+          "k": "-C",
+          "v": "... CAL phase changes by >= turns"
+        },
+        {
+          "k": "-D",
+          "v": "... next archive is from different 'sec' division of MJD"
+        },
+        {
+          "k": "-G",
+          "v": "... time to next archive > 'sec' seconds"
+        },
+        {
+          "k": "-g",
+          "v": "... time spanned exceeds 'sec' seconds"
+        },
+        {
+          "k": "-I",
+          "v": "... integration length exceeds 'sec' seconds"
+        },
+        {
+          "k": "-S",
+          "v": "... signal-to-noise ratio exceeds 's/n'"
+        },
+        {
+          "k": "-exp",
+          "v": "... \"condition\" is true"
+        },
+        {
+          "k": "-autoT",
+          "v": "Disable tscrunch before unloading"
+        }
+      ],
+      "help_raw": "\npsradd - combines archives together\n\nusage: psradd [options] filename[s] \n\nwhere options are:\n\n  -h,-help            print this help page\n  -i,-version         version information\n  -q                  quiet mode\n  -v                  verbose mode\n  -V                  very verbose mode\n  -M metafile         metafile contains list of archive filenames\n  -config file        configuration file\n\nPreprocessing options:\n  -j commands         execute pulsar shell preprocessing commands\n  -J script           execute pulsar shell preprocessing script\n\nOutput options:\n  -e ext              write files with a new extension\n  -O path             write files to a new directory\n  -o fname            output result to 'fname'\n\nGeneral options:\n  -E f.eph            Load and install new ephemeris from 'f.eph'\n  -T                  Tscrunch result after each new file added\n  -tsub seconds       Tscrunch subints to this length after each new file added\n  -R                  Append data in the frequency direction\n  -m domain           Patch missing sub-integrations: domain = time or phase\n  -n                  Patch missing frequency channels\n  -inplace filename   Append archives to the specified file\n  -P                  Phase align archive with total before adding\n  -const_phase        Leave amplitudes alone, but update metadata\n  -phath turns        Omit data if phase offset from total > phath\n  -L                  Log results in <source>.log\n  -t                  Test mode: make no changes to file system\n\nRestrictions:\n  -F                  Force append against all conventional wisdom\n  -r freq             Add archives only with this centre frequency\n  -z                  Only add archives that have integration length > 0\n  -Z time             Only add archives that are time (+/- 0.5) seconds long\n  -ip                 Do not apply model, ignore phase alignment\n\nAUTO ADD: tscrunch and unload when ...\n  -C turns            ... CAL phase changes by >= turns\n  -D sec              ... next archive is from different 'sec' division of MJD\n  -G sec              ... time to next archive > 'sec' seconds\n  -g sec              ... time spanned exceeds 'sec' seconds\n  -I sec              ... integration length exceeds 'sec' seconds\n  -S s/n              ... signal-to-noise ratio exceeds 's/n'\n  -exp condition      ... \"condition\" is true\n  -autoT              Disable tscrunch before unloading\n\nNote: AUTO ADD options are incompatible with -o and -T\n\nSee http://psrchive.sourceforge.net/manuals/psradd for more details \n\n\n",
+      "help_available": true
+    },
+    {
+      "desc": "produce times of arrival",
+      "long": "Cross-correlate an observation against a standard profile (template) and emit a TOA in tempo2 or pint format.",
+      "examples": [
+        {
+          "t": "Generate TOA",
+          "c": "pat -s template.std file.ar > toa.tim"
+        }
+      ],
+      "related": [
+        "paas",
+        "psrsmooth"
+      ],
+      "name": "pat",
+      "cat": "timing",
+      "usage": "pat [options] filenames",
+      "flags": [
+        {
+          "k": "-q",
+          "v": "Quiet mode"
+        },
+        {
+          "k": "-v",
+          "v": "Verbose mode"
+        },
+        {
+          "k": "-V",
+          "v": "Very verbose mode"
+        },
+        {
+          "k": "-i",
+          "v": "Show revision information"
+        },
+        {
+          "k": "-M",
+          "v": "List of archive filenames in metafile"
+        },
+        {
+          "k": "-F",
+          "v": "Frequency scrunch before fitting"
+        },
+        {
+          "k": "-T",
+          "v": "Time scrunch before fitting"
+        },
+        {
+          "k": "-j",
+          "v": "Preprocessing job[s]"
+        },
+        {
+          "k": "-J",
+          "v": "Multiple preprocessing jobs in 'jobs' file"
+        },
+        {
+          "k": "-x",
+          "v": "Disable default preprocessing"
+        },
+        {
+          "k": "-a",
+          "v": "Automatically select standard from specified group"
+        },
+        {
+          "k": "-c",
+          "v": "Choose the maximum harmonic"
+        },
+        {
+          "k": "-n",
+          "v": "Use up to the specified number of harmonics"
+        },
+        {
+          "k": "-P",
+          "v": "Do not fscrunch the standard (frequency-dependent template)"
+        },
+        {
+          "k": "-I",
+          "v": "Output nsubband TOAs with delta-DM (implies -P)"
+        },
+        {
+          "k": "-D",
+          "v": "Denoise standard"
+        },
+        {
+          "k": "-d",
+          "v": "Output only positively delayed arrival times"
+        },
+        {
+          "k": "-e",
+          "v": "Estimator configuration option[s]"
+        },
+        {
+          "k": "-E",
+          "v": "Estimator configuration options in 'cfg' text file"
+        },
+        {
+          "k": "-g",
+          "v": "Gaussian model fitting"
+        },
+        {
+          "k": "-s",
+          "v": "Location of standard profile"
+        },
+        {
+          "k": "-S",
+          "v": "Zap harmonics due to periodic spikes in profile"
+        },
+        {
+          "k": "-p",
+          "v": "Enable matrix template matching"
+        },
+        {
+          "k": "-o",
+          "v": "Output best-fit matrix model parameters"
+        },
+        {
+          "k": "-A",
+          "v": "Select shift algorithm [default: PGS]"
+        },
+        {
+          "k": "-m",
+          "v": "Load a component model as output by paas"
+        },
+        {
+          "k": "-G",
+          "v": "Format/flag separator char for -f [default: space]"
+        },
+        {
+          "k": "-r",
+          "v": "Print reference phase and dt"
+        },
+        {
+          "k": "-R",
+          "v": "Print only the phase shift and error in turns"
+        },
+        {
+          "k": "-u",
+          "v": "Print as pat-like format smjd + dt"
+        },
+        {
+          "k": "-b",
+          "v": "Output profile residuals"
+        },
+        {
+          "k": "-K",
+          "v": "Specify plot device"
+        },
+        {
+          "k": "-t",
+          "v": "Plot template, profile and difference"
+        }
+      ],
+      "help_raw": "pat - Pulsar::Archive timing \nUsage: pat [options] filenames \n  -q               Quiet mode \n  -v               Verbose mode \n  -V               Very verbose mode \n  -i               Show revision information \n  -M metafile      List of archive filenames in metafile \n\nPreprocessing options:\n  -F               Frequency scrunch before fitting \n  -T               Time scrunch before fitting \n  -j job1[,jobN]   Preprocessing job[s] \n  -J jobs          Multiple preprocessing jobs in 'jobs' file \n  -x               Disable default preprocessing \n\nFitting options:\n  -a stdfiles      Automatically select standard from specified group\n  -c               Choose the maximum harmonic \n  -n harmonics     Use up to the specified number of harmonics \n  -P               Do not fscrunch the standard (frequency-dependent template)\n  -I nsubband      Output nsubband TOAs with delta-DM (implies -P)\n  -D               Denoise standard \n  -d               Output only positively delayed arrival times \n  -e cfg1[,cfgN]   Estimator configuration option[s] \n  -E cfg           Estimator configuration options in 'cfg' text file \n  -g datafile      Gaussian model fitting \n  -P               Enable frequency-dependent template matching \n  -s stdfile       Location of standard profile \n  -S period        Zap harmonics due to periodic spikes in profile \n                   (use of this option implies SIS) \n\nMatrix template matching options: \n  -p               Enable matrix template matching \n  -o               Output best-fit matrix model parameters \n\nAlgorithm Selection:\n  -A name          Select shift algorithm [default: PGS] \n                   PGS = Fourier phase gradient \n                   GIS = Gaussian interpolation \n                   PIS = Parabolic interpolation \n                   ZPS = Zero pad interpolation \n                   SIS = Sinc interpolation of cross-corration function\n                   FDM = Fourier domain with Markov chain Monte Carlo \n                   COF = Centre of Flux \n                   RVM = Rotating Vector Model magnetic meridian \n\n  -m filename      Load a component model as output by paas \n\nOutput options:\n  -f \"fmt <flags>\" Select output format [default: parkes]\n                   Available formats: parkes tempo2, itoa, princeton \n                   For tempo2, <flags> include i = display instrument \n                                               r = display receiver   \n                                            IPTA = all IPTA-format flags\n  -G char          Format/flag separator char for -f [default: space]\n  -C \"<options>\"   Select vap-like options to be displayed on output \n  -C \"<subint> <chan>\" Print subint and/or channel                    \n  -X \"text\"        Extra TOA-line text to add (if using tempo2 format)\n  -r               Print reference phase and dt \n  -R               Print only the phase shift and error in turns \n  -u               Print as pat-like format smjd + dt \n  -b               Output profile residuals \n\nPlotting options (if compiled with pgplot):\n  -K               Specify plot device\n  -t               Plot template, profile and difference \n\nSee http://psrchive.sourceforge.net/manuals/pat for more details\n\n\n",
+      "help_available": true
+    },
+    {
+      "desc": "fit gaussians \u2192 template",
+      "long": "Fit a sum of Gaussian components to a high-S/N profile. The output noise-free model becomes the timing template.",
+      "examples": [
+        {
+          "t": "Iteratively fit",
+          "c": "paas -i guess.txt -W file.ar"
+        }
+      ],
+      "related": [
+        "psrsmooth",
+        "pat"
+      ],
+      "name": "paas",
+      "cat": "template",
+      "usage": "paas [options] archive",
+      "flags": [
+        {
+          "k": "-r",
+          "v": "Read model from file        [Default: use empty model]"
+        },
+        {
+          "k": "-w",
+          "v": "Write model to file         [Default: paas.m]"
+        },
+        {
+          "k": "-S",
+          "v": "Report width as standard deviation instead of concentration"
+        },
+        {
+          "k": "-f",
+          "v": "Fit model to pulse profile"
+        },
+        {
+          "k": "-L",
+          "v": "log(height) -> force all component heights to be > 0"
+        },
+        {
+          "k": "-F",
+          "v": "Set parameters in/out of fit, e.g. -F 011101 fits only"
+        },
+        {
+          "k": "-W",
+          "v": "Fit derivative of profile instead (i.e. weight by harm. num.)"
+        },
+        {
+          "k": "-t",
+          "v": "Delta_rms/rms fit convergence criterion [Default: 1e-6]"
+        },
+        {
+          "k": "-d",
+          "v": "Plot results on specified PGPLOT device"
+        },
+        {
+          "k": "-D",
+          "v": "Plot results on PGPLOT device /xs"
+        },
+        {
+          "k": "-l",
+          "v": "Plot with lines instead of steps"
+        },
+        {
+          "k": "-b",
+          "v": "Sum groups of \"factor\" adjacent bins before plotting results"
+        },
+        {
+          "k": "-s",
+          "v": "Write analytic standard to given filename [Default: paas.std]"
+        },
+        {
+          "k": "-i",
+          "v": "Interactively select components"
+        },
+        {
+          "k": "-C",
+          "v": "Centre profile using ephemeris"
+        },
+        {
+          "k": "-p",
+          "v": "Rotate profile to place peak at bin 0"
+        },
+        {
+          "k": "-P",
+          "v": "Fix the relative phase of the components as in pat"
+        },
+        {
+          "k": "-R",
+          "v": "Rotate profile by specified number of turns"
+        },
+        {
+          "k": "-z",
+          "v": "Zoom in on pulse phase region"
+        },
+        {
+          "k": "-a",
+          "v": "After loading a model, rotate it to align to profile"
+        },
+        {
+          "k": "-j",
+          "v": "Output details to given filename    [Default: paas.txt]"
+        }
+      ],
+      "help_raw": "paas: Pulsar archive analytic standard maker\nUsage: paas [options] archive\nInput: an archive [and optionally a model]\nOutput: lekkere chocolade eiren\nOptions:  \n  -r filename   Read model from file        [Default: use empty model]\n  -w filename   Write model to file         [Default: paas.m] \n  -S            Report width as standard deviation instead of concentration \n  -c \"a b c\"    Add component (a=centre, b=concentration, d=height)\n  -f            Fit model to pulse profile  \n  -L            log(height) -> force all component heights to be > 0 \n  -F flags      Set parameters in/out of fit, e.g. -F 011101 fits only\n                   for concentration_1, height_1, centre_2 and height_2\n                   [Default: fit all parameters]\n  -W            Fit derivative of profile instead (i.e. weight by harm. num.)\n  -t threshold  Delta_rms/rms fit convergence criterion [Default: 1e-6]\n  -d device     Plot results on specified PGPLOT device\n  -D            Plot results on PGPLOT device /xs\n  -l            Plot with lines instead of steps\n  -b factor     Sum groups of \"factor\" adjacent bins before plotting results\n  -s filename   Write analytic standard to given filename [Default: paas.std]\n  -i            Interactively select components \n  -C            Centre profile using ephemeris\n  -p            Rotate profile to place peak at bin 0\n  -P            Fix the relative phase of the components as in pat \n  -R phase      Rotate profile by specified number of turns\n  -z ph1,ph2    Zoom in on pulse phase region \n  -a            After loading a model, rotate it to align to profile\n  -j filename   Output details to given filename    [Default: paas.txt]\n\n",
+      "help_available": true
+    },
+    {
+      "desc": "wavelet smooth to template",
+      "long": "Wavelet-based smoothing of a high-S/N profile to produce a low-noise standard. Faster than paas when the profile is well-resolved.",
+      "examples": [
+        {
+          "t": "Smooth to .sm",
+          "c": "psrsmooth -W file.FT"
+        }
+      ],
+      "related": [
+        "paas",
+        "pat"
+      ],
+      "name": "psrsmooth",
+      "cat": "template",
+      "usage": "psrsmooth [options] filename[s]",
+      "flags": [
+        {
+          "k": "-q",
+          "v": "quiet mode"
+        },
+        {
+          "k": "-v",
+          "v": "verbose mode"
+        },
+        {
+          "k": "-V",
+          "v": "very verbose mode"
+        },
+        {
+          "k": "-M",
+          "v": "metafile contains list of archive filenames"
+        },
+        {
+          "k": "-config",
+          "v": "configuration file"
+        },
+        {
+          "k": "-W",
+          "v": "Use Wavelet smoothing (default Sinc)"
+        },
+        {
+          "k": "-t",
+          "v": "* Use specified wavelet type (default UD8)"
+        },
+        {
+          "k": "-c",
+          "v": "* Set wavelet cutoff factor (default 1.3)"
+        },
+        {
+          "k": "-n",
+          "v": "Normalize smoothed profile"
+        },
+        {
+          "k": "-e",
+          "v": "Append extention to output (default .sm)"
+        },
+        {
+          "k": "-H",
+          "v": "Only print the smoothed number of harmonics"
+        }
+      ],
+      "help_raw": "\npsrsmooth - Denoise profiles using adaptive smoothing\n\nusage: psrsmooth [options] filename[s] \n\nwhere options are:\n\n  -h,-help       print this help page\n  -i,-version    version information\n  -q             quiet mode\n  -v             verbose mode\n  -V             very verbose mode\n  -M metafile    metafile contains list of archive filenames\n  -config file   configuration file\n  -W             Use Wavelet smoothing (default Sinc)\n  -t type      * Use specified wavelet type (default UD8)\n  -c factor    * Set wavelet cutoff factor (default 1.3)\n  -n             Normalize smoothed profile\n  -e ext         Append extention to output (default .sm)\n  -H             Only print the smoothed number of harmonics\n\nOptions marked with '*' have extra help available via '-help=option'.\n\n\n",
+      "help_available": true
+    },
+    {
+      "desc": "read & set archive metadata",
+      "long": "Print or modify header parameters of an archive: source name, DM, RM, ephemeris, observation type.",
+      "examples": [
+        {
+          "t": "Set the DM",
+          "c": "psredit -c \"dm=12.345\" file.ar"
+        }
+      ],
+      "related": [
+        "vap"
+      ],
+      "name": "psredit",
+      "cat": "meta",
+      "usage": "psredit [options] filename[s]",
+      "flags": [
+        {
+          "k": "-q",
+          "v": "quiet mode"
+        },
+        {
+          "k": "-v",
+          "v": "verbose mode"
+        },
+        {
+          "k": "-V",
+          "v": "very verbose mode"
+        },
+        {
+          "k": "-M",
+          "v": "metafile contains list of archive filenames"
+        },
+        {
+          "k": "-config",
+          "v": "configuration file"
+        },
+        {
+          "k": "-m",
+          "v": "modify (overwrite) the original file"
+        },
+        {
+          "k": "-e",
+          "v": "write files with a new extension"
+        },
+        {
+          "k": "-O",
+          "v": "write files to a new directory"
+        },
+        {
+          "k": "-c",
+          "v": "one or more commands, separated by commas"
+        },
+        {
+          "k": "-C",
+          "v": "read commands from file"
+        },
+        {
+          "k": "-a",
+          "v": "one or more extensions to be added, separated by commas"
+        },
+        {
+          "k": "-r",
+          "v": "one or more extensions to be removed, separated by commas"
+        },
+        {
+          "k": "-H",
+          "v": "more detailed help"
+        },
+        {
+          "k": "-Q",
+          "v": "do not prefix output with 'keyword='"
+        },
+        {
+          "k": "-d",
+          "v": "separate elements of a container using delimiter"
+        }
+      ],
+      "help_raw": "\npsredit - query and/or set archive attributes\n\nusage: psredit [options] filename[s] \n\nwhere options are:\n\n  -h,-help          print this help page\n  -i,-version       version information\n  -q                quiet mode\n  -v                verbose mode\n  -V                very verbose mode\n  -M metafile       metafile contains list of archive filenames\n  -config file      configuration file\n\nOutput options:\n  -m                modify (overwrite) the original file\n  -e ext            write files with a new extension\n  -O path           write files to a new directory\n\n  -c command[s]     one or more commands, separated by commas\n  -C filename       read commands from file\n  -a extension[s]   one or more extensions to be added, separated by commas\n  -r extension[s]   one or more extensions to be removed, separated by commas\n  -H                more detailed help\n  -Q                do not prefix output with 'keyword='\n  -d delim          separate elements of a container using delimiter\n\nSee http://psrchive.sourceforge.net/manuals/psredit for more details \n\n\n",
+      "help_available": true
+    },
+    {
+      "desc": "compute archive statistics",
+      "long": "Compute summary statistics \u2014 S/N, weights, on-pulse window \u2014 and print them in machine-readable form.",
+      "examples": [
+        {
+          "t": "S/N of the cleaned profile",
+          "c": "psrstat -jFT -c snr file.ar"
+        }
+      ],
+      "related": [
+        "psrplot"
+      ],
+      "name": "psrstat",
+      "cat": "analyze",
+      "usage": "psrstat [options] filename[s]",
+      "flags": [
+        {
+          "k": "-q",
+          "v": "quiet mode"
+        },
+        {
+          "k": "-v",
+          "v": "verbose mode"
+        },
+        {
+          "k": "-V",
+          "v": "very verbose mode"
+        },
+        {
+          "k": "-M",
+          "v": "metafile contains list of archive filenames"
+        },
+        {
+          "k": "-config",
+          "v": "configuration file"
+        },
+        {
+          "k": "-j",
+          "v": "execute pulsar shell preprocessing commands"
+        },
+        {
+          "k": "-J",
+          "v": "execute pulsar shell preprocessing script"
+        },
+        {
+          "k": "-c",
+          "v": "* expressions to be evaluated and printed"
+        },
+        {
+          "k": "-C",
+          "v": "read expressions to be evaluated from file"
+        },
+        {
+          "k": "-Q",
+          "v": "do not prefix output with 'keyword='"
+        },
+        {
+          "k": "-d",
+          "v": "separate elements of a container using delimiter"
+        }
+      ],
+      "help_raw": "\npsrstat - prints pulsar attributes and statistics\n\nusage: psrstat [options] filename[s] \n\nwhere options are:\n\n  -h,-help          print this help page\n  -i,-version       version information\n  -q                quiet mode\n  -v                verbose mode\n  -V                very verbose mode\n  -M metafile       metafile contains list of archive filenames\n  -config file      configuration file\n\nPreprocessing options:\n  -j commands       execute pulsar shell preprocessing commands\n  -J script         execute pulsar shell preprocessing script\n\n  -c exp[s]       * expressions to be evaluated and printed\n  -C filename       read expressions to be evaluated from file\n  -l name=<range> * loop over the range of the named parameter\n  -Q                do not prefix output with 'keyword='\n  -d delim          separate elements of a container using delimiter\n\nOptions marked with '*' have extra help available via '-help=option'.\n\nMultiple expressions and/or index ranges may be specified by using \nthe -c and/or -l options multiple times. \n\nFor the complete list of all available parameters in an archive, \nrun \"psrstat <filename>\" without any command line options.\n\nSee http://psrchive.sourceforge.net/manuals/psrstat for more details \n\n\n",
+      "help_available": true
+    },
+    {
+      "desc": "one-line archive summaries",
+      "long": "Print compact summaries of archive headers \u2014 one line per file. The first stop when inspecting a directory of `.ar` files.",
+      "examples": [
+        {
+          "t": "Length & DM table",
+          "c": "vap -c \"length,dm\" *.ar"
+        }
+      ],
+      "related": [
+        "psredit"
+      ],
+      "name": "vap",
+      "cat": "meta",
+      "usage": "",
+      "flags": [
+        {
+          "k": "-c",
+          "v": "comma-separated keys to print"
+        },
+        {
+          "k": "-n",
+          "v": "no header row"
+        }
+      ],
+      "help_raw": "A program for getting Pulsar::Archive attributes\nUsage:\n     vap -c PAR [-c PAR ...] [-E] [-p] filenames\nWhere:\n\nPAR is a string containing one or more parameter names, separated by\n    commas.\n    If any whitespace is required, then the string containing it must\n    be enclosed in quotation marks. Multiple parameters may also be\n    specified by using multiple -c options.\n\n    vap -c name,freq\n\n    will print the source name and centre frequency.\n    Note that parameter names are case insensitive.\n    For a full list of parameter names, type \"vap -H\"\n\n-n  suppress outputting headers when doing -c\n\n-E  is used to print the most recent ephemeris in an archive\n\n-p  is used to print the set of polynomial coefficients\n\n-P  print the processing history as comma-separated values\n-M  extract list of files from metafile\n\n-R  show relative path names\n\n-s  show the extensions present in an archive\n\n-f  format the output into a table with aligned columns and headers\n    (overrides -n)\n\n\n\n",
+      "help_available": true
+    },
+    {
+      "desc": "polarisation calibration",
+      "long": "Apply calibration solutions (Jones matrices) to convert raw Stokes into the on-sky polarisation state.",
+      "examples": [
+        {
+          "t": "Apply calibration",
+          "c": "pac -P pulsar.fluxcal -e calib file.ar"
+        }
+      ],
+      "related": [
+        "pcm"
+      ],
+      "name": "pac",
+      "cat": "calib",
+      "usage": "pac [options] filenames",
+      "flags": [
+        {
+          "k": "-q",
+          "v": "Quiet mode"
+        },
+        {
+          "k": "-v",
+          "v": "Verbose mode"
+        },
+        {
+          "k": "-V",
+          "v": "Very verbose mode"
+        },
+        {
+          "k": "-d",
+          "v": "Read calibration database summary"
+        },
+        {
+          "k": "-p",
+          "v": "Search for CAL files in the specified path"
+        },
+        {
+          "k": "-u",
+          "v": "Add to file extensions recognized in search"
+        },
+        {
+          "k": "-w",
+          "v": "Write a new database summary file"
+        },
+        {
+          "k": "-W",
+          "v": "Create database from calibrators listed in metafiles"
+        },
+        {
+          "k": "-k",
+          "v": "Output database to filename"
+        },
+        {
+          "k": "-l",
+          "v": "Cache last calibrator"
+        },
+        {
+          "k": "-A",
+          "v": "Use the calibrator in filename, as output by pcm/pacv"
+        },
+        {
+          "k": "-C",
+          "v": "Use the specified model of the calibrator solution"
+        },
+        {
+          "k": "-r",
+          "v": "Use the specified receiver parameters file"
+        },
+        {
+          "k": "-s",
+          "v": "Use the Polar Model"
+        },
+        {
+          "k": "-I",
+          "v": "Correct ionospheric Faraday rotation using IRI"
+        },
+        {
+          "k": "-i",
+          "v": "Perform the inverse of calibration"
+        },
+        {
+          "k": "-x",
+          "v": "Derive calibrator Stokes parameters from fluxcal data"
+        },
+        {
+          "k": "-y",
+          "v": "Always trust the Pointing::feed_angle attribute"
+        },
+        {
+          "k": "-K",
+          "v": "Reject outliers when computing CAL levels"
+        },
+        {
+          "k": "-S",
+          "v": "Enable calibration of D"
+        },
+        {
+          "k": "-N",
+          "v": "Disable calibration of Phi (backend)"
+        },
+        {
+          "k": "-P",
+          "v": "Disable absolute flux calibration"
+        },
+        {
+          "k": "-R",
+          "v": "Disable calibration of G (applies only when -A is used)"
+        },
+        {
+          "k": "-X",
+          "v": "Disable calibration of GD"
+        },
+        {
+          "k": "-U",
+          "v": "Disable calibration of CP (frontend)"
+        },
+        {
+          "k": "-Q",
+          "v": "Replace GD with the Jones matrices, J(t,f) in filename"
+        },
+        {
+          "k": "-Y",
+          "v": "Replace P with the Jones matrices, J(t,f) in filename"
+        },
+        {
+          "k": "-B",
+          "v": "Fix the off-pulse baseline statistics"
+        },
+        {
+          "k": "-D",
+          "v": "Fix the reference degree of polarization"
+        },
+        {
+          "k": "-m",
+          "v": "Use only calibrator before|after observation"
+        },
+        {
+          "k": "-T",
+          "v": "Take closest time (no maximum interval)"
+        },
+        {
+          "k": "-c",
+          "v": "Take closest sky coordinates (no maximum distance)"
+        },
+        {
+          "k": "-Z",
+          "v": "Do not try to match instruments"
+        },
+        {
+          "k": "-F",
+          "v": "Do not try to match frequencies"
+        },
+        {
+          "k": "-b",
+          "v": "Do not try to match bandwidths"
+        },
+        {
+          "k": "-o",
+          "v": "Allow opposite sidebands"
+        },
+        {
+          "k": "-a",
+          "v": "Per-channel matching"
+        },
+        {
+          "k": "-g",
+          "v": "Fscrunch data to match number of channels of calibrator"
+        },
+        {
+          "k": "-L",
+          "v": "Print verbose matching information"
+        },
+        {
+          "k": "-f",
+          "v": "Override flux calibration flag"
+        },
+        {
+          "k": "-G",
+          "v": "Normalize profile weights by absolute gain"
+        },
+        {
+          "k": "-e",
+          "v": "Extension added to output filenames (default .calib)"
+        },
+        {
+          "k": "-J",
+          "v": "Multiple preprocessing jobs in 'jobs' file"
+        },
+        {
+          "k": "-M",
+          "v": "File from which input filenames are read"
+        },
+        {
+          "k": "-n",
+          "v": "Flip the sign of Stokes Q, U, or V"
+        },
+        {
+          "k": "-O",
+          "v": "Path to which output files are written"
+        }
+      ],
+      "help_raw": "Calibrates polarization, based on the model described in van Straten (2025). \nWhere the instrumental response, M = Phi G D C P F (equation 43), \npac calibrates Phi G D C and P, where \n Phi is the phase convention correction \n   G is the complex receiver gain matrix \n   D [optional] describes deviations from an ideal feed (enabled by -S) \n   C is the nominal feed response \n   P is the projection to the celestial sphere \n\nUsage: pac [options] filenames\n  -q             Quiet mode\n  -v             Verbose mode\n  -V             Very verbose mode\n\nDatabase options: \n  -d database    Read calibration database summary \n  -p path        Search for CAL files in the specified path \n  -u ext         Add to file extensions recognized in search \n                 (defaults: .cf .pcal .fcal .pfit) \n  -w             Write a new database summary file \n  -W             Create database from calibrators listed in metafiles \n  -k filename    Output database to filename \n  -l             Cache last calibrator\n\nCalibrator options: \n  -A filename    Use the calibrator in filename, as output by pcm/pacv \n  -C model       Use the specified model of the calibrator solution \n  -r filename    Use the specified receiver parameters file \n  -s             Use the Polar Model \n  -I             Correct ionospheric Faraday rotation using IRI \n  -i             Perform the inverse of calibration \n  -x             Derive calibrator Stokes parameters from fluxcal data\n  -y             Always trust the Pointing::feed_angle attribute \n  -K sigma       Reject outliers when computing CAL levels \n\nCalibrator switches: \n  -S             Enable calibration of D \n  -N             Disable calibration of Phi (backend) \n  -P             Disable absolute flux calibration \n  -R             Disable calibration of G (applies only when -A is used) \n  -X             Disable calibration of GD \n  -U             Disable calibration of CP (frontend) \n  -Q filename    Replace GD with the Jones matrices, J(t,f) in filename \n  -Y filename    Replace P with the Jones matrices, J(t,f) in filename \n\nRough Alignment options [not recommended]: \n  -B             Fix the off-pulse baseline statistics \n  -D             Fix the reference degree of polarization \n\nMatching options: \n  -m [b|a]       Use only calibrator before|after observation \n  -T             Take closest time (no maximum interval) \n  -c             Take closest sky coordinates (no maximum distance) \n  -Z             Do not try to match instruments \n  -F             Do not try to match frequencies \n  -b             Do not try to match bandwidths \n  -o             Allow opposite sidebands \n  -a             Per-channel matching \n  -g             Fscrunch data to match number of channels of calibrator \n  -L             Print verbose matching information \n\nExperimental options: \n  -f             Override flux calibration flag \n  -G             Normalize profile weights by absolute gain \n\nInput/Output options: \n  -e ext         Extension added to output filenames (default .calib) \n  -j job1[,jobN] Preprocessing job[s] \n  -J jobs        Multiple preprocessing jobs in 'jobs' file \n  -M meta        File from which input filenames are read \n  -n [q|u|v]     Flip the sign of Stokes Q, U, or V \n  -O path        Path to which output files are written \n\nSee http://psrchive.sourceforge.net/manuals/pac for more details\n\n\n",
+      "help_available": true
+    },
+    {
+      "desc": "calibration coefficients fitter",
+      "long": "Fit a Mueller-matrix calibration model from a set of noise-diode observations.",
+      "examples": [
+        {
+          "t": "Fit from a cal set",
+          "c": "pcm -o cal.dat cal_*.ar"
+        }
+      ],
+      "related": [
+        "pac"
+      ],
+      "name": "pcm",
+      "cat": "calib",
+      "usage": "pcm [options] filename[s]",
+      "flags": [
+        {
+          "k": "-M",
+          "v": "metafile contains list of archive filenames"
+        },
+        {
+          "k": "-config",
+          "v": "configuration file"
+        },
+        {
+          "k": "-j",
+          "v": "execute pulsar shell preprocessing commands"
+        },
+        {
+          "k": "-J",
+          "v": "execute pulsar shell preprocessing script"
+        },
+        {
+          "k": "-V",
+          "v": "set verbosity level [0->4]"
+        },
+        {
+          "k": "-A",
+          "v": "set the output archive class name"
+        },
+        {
+          "k": "-O",
+          "v": "set directory to which outputs are written"
+        },
+        {
+          "k": "-out",
+          "v": "set cal solution output filename (default=pcm.fits)"
+        },
+        {
+          "k": "-N",
+          "v": "do not unload calibrated data files"
+        },
+        {
+          "k": "-normalize",
+          "v": "normalize output Stokes parameters by total invariant interval"
+        },
+        {
+          "k": "-noplots",
+          "v": "do not plot chosen.ps and onpulse.ps"
+        },
+        {
+          "k": "-C",
+          "v": "filename with list of calibrator files"
+        },
+        {
+          "k": "-d",
+          "v": "add file to list of calibrator databases"
+        },
+        {
+          "k": "-W",
+          "v": "filename with list of other data files to be calibrated"
+        },
+        {
+          "k": "-F",
+          "v": "use flux calibrators within days of pulsar data mid-time"
+        },
+        {
+          "k": "-L",
+          "v": "use reference sources within hours of pulsar data mid-time"
+        },
+        {
+          "k": "-w",
+          "v": "continue if no calibrators are found"
+        },
+        {
+          "k": "-fa",
+          "v": "always trust the pointing:fa (feed angle) attribute"
+        },
+        {
+          "k": "-va",
+          "v": "always trust the pointing:va (vertical/parallactic angle) attribute"
+        },
+        {
+          "k": "-Z",
+          "v": "ignore the sky coordinates of PolnCal observations"
+        },
+        {
+          "k": "-solution",
+          "v": "load previous solution from 'file' as first guess"
+        },
+        {
+          "k": "-fix",
+          "v": "hold specified parameters fixed"
+        },
+        {
+          "k": "-K",
+          "v": "Reject outliers when computing CAL levels"
+        },
+        {
+          "k": "-calI",
+          "v": "Minimum significance of CAL intensity"
+        },
+        {
+          "k": "-calp",
+          "v": "Minimum degree of polarization of CAL"
+        },
+        {
+          "k": "-step",
+          "v": "Insert steps where adjacent CAL levels differ"
+        },
+        {
+          "k": "-m",
+          "v": "receiver model name: e.g. bri00e19 or van04e18 [default]"
+        },
+        {
+          "k": "-e",
+          "v": "add measurement equation configuration option"
+        },
+        {
+          "k": "-E",
+          "v": "load measurement equation configuration options"
+        },
+        {
+          "k": "-I",
+          "v": "load impurity transformation from file"
+        },
+        {
+          "k": "-P",
+          "v": "load projection transformations from file"
+        },
+        {
+          "k": "-projection",
+          "v": "load projection model configuration from YAML file"
+        },
+        {
+          "k": "-repara",
+          "v": "reparallactify the input data"
+        },
+        {
+          "k": "-iono",
+          "v": "ionospheric Faraday rotation measure"
+        },
+        {
+          "k": "-l",
+          "v": "solver: MEAL [default] or GSL"
+        },
+        {
+          "k": "-t",
+          "v": "solve using ncore threads"
+        },
+        {
+          "k": "-x",
+          "v": "estimate calibrator Stokes parameters using fluxcal"
+        },
+        {
+          "k": "-Q",
+          "v": "reference source coupled after frontend"
+        },
+        {
+          "k": "-R",
+          "v": "retry solving channels with reduced chisq above gof"
+        },
+        {
+          "k": "-X",
+          "v": "flag invalid channels with reduced chisq above gof"
+        },
+        {
+          "k": "-D",
+          "v": "enable diagnostic: name=report,guess,residual,result,total,invint"
+        },
+        {
+          "k": "-U",
+          "v": "* model PAR with a unique value for each CAL"
+        },
+        {
+          "k": "-u",
+          "v": "* model PAR with a step at each CAL"
+        },
+        {
+          "k": "-i",
+          "v": "* model PAR with a step at the given epoch (MJD)"
+        },
+        {
+          "k": "-o",
+          "v": "* model PAR as polyomial of order N"
+        },
+        {
+          "k": "-B",
+          "v": "* set the phase bin selection policy: int, pol, orth, inv"
+        },
+        {
+          "k": "-c",
+          "v": "choose best input states from observation in file"
+        },
+        {
+          "k": "-b",
+          "v": "add phase bin to constraints"
+        },
+        {
+          "k": "-n",
+          "v": "set the number of phase bins to choose as input states"
+        },
+        {
+          "k": "-a",
+          "v": "set the threshold for testing input data phase alignment"
+        },
+        {
+          "k": "-noalign",
+          "v": "disable phase alignment using Archive::centre"
+        },
+        {
+          "k": "-s",
+          "v": "normalize Stokes parameters by total invariant interval"
+        },
+        {
+          "k": "-g",
+          "v": "unique absolute gain for each pulsar observation [DEVEL]"
+        },
+        {
+          "k": "-r",
+          "v": "enforce physically realizable Stokes parameters [DEVEL]"
+        },
+        {
+          "k": "-q",
+          "v": "assume that CAL Stokes Q = 0 (linear feeds only)"
+        },
+        {
+          "k": "-v",
+          "v": "assume that CAL Stokes V = 0 (linear feeds only)"
+        },
+        {
+          "k": "-k",
+          "v": "assume that the receptors have equal ellipticities"
+        },
+        {
+          "k": "-z",
+          "v": "assume that the off-pulse baseline has zero Stokes V"
+        },
+        {
+          "k": "-Y",
+          "v": "model the difference between FluxCal-On and FluxCal-Off"
+        },
+        {
+          "k": "-f",
+          "v": "model each FluxCal with unique Stokes parameters"
+        },
+        {
+          "k": "-T",
+          "v": "assume Stokes V [b]oost and/or [r]otation is not degenerate"
+        },
+        {
+          "k": "-S",
+          "v": "add filename of calibrated standard"
+        },
+        {
+          "k": "-G",
+          "v": "fscrunch data to match number of channels of standard"
+        },
+        {
+          "k": "-H",
+          "v": "automatically choose the number of harmonics"
+        }
+      ],
+      "help_raw": "\npcm - polarimetric calibration modelling\n\nusage: pcm [options] filename[s] \n\nwhere options are:\n\n  -h,-help           print this help page\n  -i,-version        version information\n  -M metafile        metafile contains list of archive filenames\n  -config file       configuration file\n\nPreprocessing options:\n  -j commands        execute pulsar shell preprocessing commands\n  -J script          execute pulsar shell preprocessing script\n  -V level           set verbosity level [0->4]\n\nOutput options:\n  -A class           set the output archive class name\n  -O path            set directory to which outputs are written\n  -out fname         set cal solution output filename (default=pcm.fits)\n  -N                 do not unload calibrated data files\n  -normalize         normalize output Stokes parameters by total invariant interval\n  -noplots           do not plot chosen.ps and onpulse.ps\n\nInput options:\n  -C file            filename with list of calibrator files\n  -d file            add file to list of calibrator databases\n  -W file            filename with list of other data files to be calibrated\n  -F days            use flux calibrators within days of pulsar data mid-time\n  -L hours           use reference sources within hours of pulsar data mid-time\n  -w                 continue if no calibrators are found\n  -fa                always trust the pointing:fa (feed angle) attribute\n  -va                always trust the pointing:va (vertical/parallactic angle) attribute\n  -Z                 ignore the sky coordinates of PolnCal observations\n  -solution file     load previous solution from 'file' as first guess\n  -fix i,j,k         hold specified parameters fixed\n\nOutlier and step detection options:\n  -K sigma           Reject outliers when computing CAL levels\n  -calI sigma        Minimum significance of CAL intensity\n  -calp frac         Minimum degree of polarization of CAL\n  -step sigma        Insert steps where adjacent CAL levels differ\n\nGeneral model configuration options:\n  -m model           receiver model name: e.g. bri00e19 or van04e18 [default]\n  -e cmd             add measurement equation configuration option\n  -E file            load measurement equation configuration options\n  -I file            load impurity transformation from file\n  -P file            load projection transformations from file\n  -projection file   load projection model configuration from YAML file\n  -repara            reparallactify the input data\n  -iono rm           ionospheric Faraday rotation measure\n  -l solver          solver: MEAL [default] or GSL\n  -t ncore           solve using ncore threads\n  -x                 estimate calibrator Stokes parameters using fluxcal\n  -Q                 reference source coupled after frontend\n  -R gof             retry solving channels with reduced chisq above gof\n  -X gof             flag invalid channels with reduced chisq above gof\n  -D name            enable diagnostic: name=report,guess,residual,result,total,invint\n\nMEM: Measurement Equation Modeling \n  -- observations of an unknown source (van Straten 2004)\n\n  -U PAR           * model PAR with a unique value for each CAL\n  -u PAR[:W]       * model PAR with a step at each CAL\n  -i PAR:MJD       * model PAR with a step at the given epoch (MJD)\n  -o PAR:N         * model PAR as polyomial of order N\n  -B choose        * set the phase bin selection policy: int, pol, orth, inv\n  -c file            choose best input states from observation in file\n  -b nbin            add phase bin to constraints\n  -n nbin            set the number of phase bins to choose as input states\n  -a bins            set the threshold for testing input data phase alignment\n  -noalign           disable phase alignment using Archive::centre\n  -s                 normalize Stokes parameters by total invariant interval\n  -g                 unique absolute gain for each pulsar observation [DEVEL]\n  -r                 enforce physically realizable Stokes parameters [DEVEL]\n\nConstraints on degeneracy under commutation \n  -- See http://psrchive.sourceforge.net/manuals/pcm/degeneracy.shtml \n\n  -q                 assume that CAL Stokes Q = 0 (linear feeds only)\n  -v                 assume that CAL Stokes V = 0 (linear feeds only)\n  -k                 assume that the receptors have equal ellipticities\n  -z                 assume that the off-pulse baseline has zero Stokes V\n  -Y                 model the difference between FluxCal-On and FluxCal-Off\n  -f                 model each FluxCal with unique Stokes parameters\n  -T code            assume Stokes V [b]oost and/or [r]otation is not degenerate\n\nMETM: Measurement Equation Template Matching\n  -- observations of a known source as in van Straten (2013) \n\n  -S file            add filename of calibrated standard\n  -G                 fscrunch data to match number of channels of standard\n  -H                 automatically choose the number of harmonics\n  -n nharm           set the number of harmonics to use as input states\n  -1                 solve independently for each observation\n\nOptions marked with '*' have extra help available via '-help=option'.\n\nSee http://psrchive.sourceforge.net/manuals/pcm for more details \n\n\n",
+      "help_available": true
+    },
+    {
+      "desc": "flux density per sub-int / ch",
+      "long": "Cross-correlate against a template and report flux density per sub-integration / channel.",
+      "examples": [
+        {
+          "t": "Per-subint flux",
+          "c": "psrflux -s template.std file.ar"
+        }
+      ],
+      "related": [
+        "pat"
+      ],
+      "name": "psrflux",
+      "cat": "analyze",
+      "usage": "psrflux [options] filename[s]",
+      "flags": [
+        {
+          "k": "-q",
+          "v": "quiet mode"
+        },
+        {
+          "k": "-v",
+          "v": "verbose mode"
+        },
+        {
+          "k": "-V",
+          "v": "very verbose mode"
+        },
+        {
+          "k": "-M",
+          "v": "metafile contains list of archive filenames"
+        },
+        {
+          "k": "-config",
+          "v": "configuration file"
+        },
+        {
+          "k": "-j",
+          "v": "execute pulsar shell preprocessing commands"
+        },
+        {
+          "k": "-J",
+          "v": "execute pulsar shell preprocessing script"
+        },
+        {
+          "k": "-e",
+          "v": "Append extention to output (default .ds)"
+        },
+        {
+          "k": "-s",
+          "v": "Standard profile file"
+        },
+        {
+          "k": "-a",
+          "v": "Align standard with each profile separately"
+        },
+        {
+          "k": "-A",
+          "v": "No fit for profile alignment at all"
+        }
+      ],
+      "help_raw": "\npsrflux - Produce dynamic spectra from Archives\n\nusage: psrflux [options] filename[s] \n\nwhere options are:\n\n  -h,-help       print this help page\n  -i,-version    version information\n  -q             quiet mode\n  -v             verbose mode\n  -V             very verbose mode\n  -M metafile    metafile contains list of archive filenames\n  -config file   configuration file\n\nPreprocessing options:\n  -j commands    execute pulsar shell preprocessing commands\n  -J script      execute pulsar shell preprocessing script\n\nDynamic spectrum options:\n  -e ext         Append extention to output (default .ds)\n  -s std         Standard profile file\n  -a align       Align standard with each profile separately\n  -A noalign     No fit for profile alignment at all\n\n\n",
+      "help_available": true
+    }
+  ]
+}

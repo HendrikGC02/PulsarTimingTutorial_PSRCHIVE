@@ -1,0 +1,29 @@
+# PSRCHIVE archives live outside the repo (huge, regenerable, not source).
+# tools/generate_plots.sh expects them at ../archives_PSRCHIVE_Tutorial/
+# (override via $ARCH_DIR).
+archives/
+archives_PSRCHIVE_Tutorial/
+
+# Working / cache dirs from the plot generator.
+work/
+*.paz
+*.Tscr
+*.FT
+*.sm
+*.Cft
+
+# Stray output from earlier paz invocations that interpreted `-o` as path.
+-o/
+
+# Editor / OS detritus.
+.DS_Store
+*.swp
+__pycache__/
+*.pyc
+
+# Python venv created locally for dev (not the shared psrpy one).
+.venv/
+
+# Logs / crash dumps from the generator.
+/tmp/gen*.log
+core.*
