@@ -27,3 +27,4 @@ __pycache__/
 # Logs / crash dumps from the generator.
 /tmp/gen*.log
 core.*
+plots/SKIPPED.md.tmp

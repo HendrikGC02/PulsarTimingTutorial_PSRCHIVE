@@ -1,0 +1,348 @@
+{
+  "generated_at": "2026-05-11T19:54:20+10:00",
+  "psrchive_version": "PSRCHIVE 2025-10-31 b97dc74aa",
+  "entries": [
+    {
+      "path": "landing/residuals-example.png",
+      "archive": "J0437-4715",
+      "source": "archives/J0437-4715_2024-07-25-12:13:23_zap.ar  \u2192  pat  \u2192  tempo2",
+      "command": "pat -s J0437-4715.std -A FDM -f 'tempo2 IPTA' <ar> > .tim ; tempo2 -nobs 50000 -output general2 -f J0437-4715.par .tim -s '{sat} {pre} {err}' -nofit \u2192 matplotlib",
+      "sha256": "83384b9e395628e79ac016115348cc6e60a33f8fbe7b51f8bc61737ec96db738",
+      "size_bytes": 83989,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "landing/rfi-after.png",
+      "archive": "J0437-4715",
+      "source": "raw_added.ar  \u2192  paz -r",
+      "command": "paz -r -e paz raw_added.ar && psrplot -g 1200x800 -p freq -j D raw_added.paz -D landing/rfi-after.png/png",
+      "sha256": "ad91a550a1cfd7a999f0af1e6c1c24e25404096414cdb11c8a054bf993748ad7",
+      "size_bytes": 218056,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "landing/rfi-before.png",
+      "archive": "J0437-4715",
+      "source": "archives/J0437-4715_raw/*.ar  (psradd'd)",
+      "command": "psradd -o raw_added.ar archives/J0437-4715_raw/*.ar && psrplot -g 1200x800 -p freq -j D raw_added.ar -D landing/rfi-before.png/png",
+      "sha256": "aa26e7d4f9f7f94f357430cbec10038f99e60b95e3401b83ec49eeb0a3c6712c",
+      "size_bytes": 251704,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "landing/template-stack.png",
+      "archive": "J0437-4715",
+      "source": "pipelines/template+pat/template.std (smoothed)",
+      "command": "psrplot -g 1200x800 -p flux <smoothed-template>.sm -D landing/template-stack.png/png",
+      "sha256": "f0cb9f847a83108666e2a94a2e451fe215b3adea1e6868b1b60192fff751b5ac",
+      "size_bytes": 9365,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "pav/J0437-4715/dynamic__jd.png",
+      "archive": "J0437-4715",
+      "source": "archives/J0437-4715_2024-07-25-12:13:23_zap.ar",
+      "command": "pav -DFTp -j D archives/J0437-4715_2024-07-25-12:13:23_zap.ar -g plots/pav/J0437-4715/dynamic__jd.png/PNG",
+      "sha256": "b4ce2d956a1172661181ff5ccd5a0dbb013df9ab531bd5f50586583d16a02c24",
+      "size_bytes": 7809,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "pipelines/paz+pamFT+stokes/final.png",
+      "archive": "J0437-4715",
+      "source": "alias of scrunched",
+      "command": "cp scrunched.png final.png",
+      "sha256": "f2b4762b0cd5264fa84b46ecfae4729ceafbb9039a7c501efaa018002c4c5bff",
+      "size_bytes": 11373,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "pipelines/paz+pamFT+stokes/raw.png",
+      "archive": "J0437-4715",
+      "source": "raw_added.ar",
+      "command": "psrplot -g 1200x800 -p freq raw_added.ar -D pipelines/paz+pamFT+stokes/raw.png/png",
+      "sha256": "43dcbf620e6dbfdcb4f961e6a01d7417f2f22f45d21b115e90ab33915dc6869b",
+      "size_bytes": 254232,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "pipelines/paz+pamFT+stokes/scrunched.png",
+      "archive": "J0437-4715",
+      "source": "raw_added.paz.FT",
+      "command": "pam -FT -e FT raw_added.paz; psrplot -g 1200x800 -p stokes raw_added.paz.FT -D pipelines/paz+pamFT+stokes/scrunched.png/png",
+      "sha256": "f2b4762b0cd5264fa84b46ecfae4729ceafbb9039a7c501efaa018002c4c5bff",
+      "size_bytes": 11373,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "pipelines/paz+pamFT+stokes/zapped.png",
+      "archive": "J0437-4715",
+      "source": "raw_added.paz",
+      "command": "paz -r -e paz raw_added.ar; psrplot -g 1200x800 -p freq raw_added.paz -D pipelines/paz+pamFT+stokes/zapped.png/png",
+      "sha256": "1b31b351486a06874ce035c12e58f4189d6b3c6959adc3073eabbe26afb02abc",
+      "size_bytes": 218019,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "pipelines/psradd+pamT+psrplot/added-tscr__step3.png",
+      "archive": "J0437-4715",
+      "source": "added.ar Tscr",
+      "command": "pam -T -e Tscr added.ar; psrplot -g 1200x800 -p time -j F added.Tscr -D pipelines/psradd+pamT+psrplot/added-tscr__step3.png/png",
+      "sha256": "cbe290a98ef4fa56e84077d6126a90a1864dd34847002a96d962520fb73f903f",
+      "size_bytes": 9896,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "pipelines/psradd+pamT+psrplot/added__step2.png",
+      "archive": "J0437-4715",
+      "source": "ep1+ep2",
+      "command": "psradd -o added.ar ep1.ar ep2.ar; psrplot -g 1200x800 -p time -j F added.ar -D pipelines/psradd+pamT+psrplot/added__step2.png/png",
+      "sha256": "7a705711febaa2271a500b9de1c6b87c940ab8bdc9b6d10e42df28764ed75cec",
+      "size_bytes": 19742,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "pipelines/psradd+pamT+psrplot/ep1__step1.png",
+      "archive": "J0437-4715",
+      "source": "raw[0:16]",
+      "command": "psradd -o ep1.ar <first 16 raw subints>; psrplot -g 1200x800 -p time -j F ep1.ar -D pipelines/psradd+pamT+psrplot/ep1__step1.png/png",
+      "sha256": "d7931c2cefe665fbd7a9a44129c2fb26fe4d77373f436cfbaddb625da282766d",
+      "size_bytes": 14352,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "pipelines/psradd+pamT+psrplot/ep2__step1b.png",
+      "archive": "J0437-4715",
+      "source": "raw[16:33]",
+      "command": "psradd -o ep2.ar <remaining raw subints>; psrplot -g 1200x800 -p time -j F ep2.ar -D pipelines/psradd+pamT+psrplot/ep2__step1b.png/png",
+      "sha256": "ae894011472d323854dc76dc62a2cd17bb4005a56e2cf85d4e9ef6e1fa022755",
+      "size_bytes": 14546,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "pipelines/psradd+pamT+psrplot/final.png",
+      "archive": "J0437-4715",
+      "source": "alias of added-tscr__step3",
+      "command": "cp added-tscr__step3.png final.png",
+      "sha256": "cbe290a98ef4fa56e84077d6126a90a1864dd34847002a96d962520fb73f903f",
+      "size_bytes": 9896,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "pipelines/template+pat/profile.png",
+      "archive": "J0437-4715",
+      "source": "archives/J0437-4715_2024-07-25-12:13:23_zap.ar",
+      "command": "psrplot -g 1200x800 -p flux -j FT archives/J0437-4715_2024-07-25-12:13:23_zap.ar -D pipelines/template+pat/profile.png/png",
+      "sha256": "91a2198cd832573075f09c130dd4f0c7c666839d1fcb65fc5e8ab9bab5c09d5c",
+      "size_bytes": 9437,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "pipelines/template+pat/residual.png",
+      "archive": "J0437-4715",
+      "source": "pat + tempo2",
+      "command": "pat -s template.std -A FDM <ar> > toas.tim; tempo2 -nobs 50000 -nofit -output general2 -f .par toas.tim \u2192 matplotlib",
+      "sha256": "fe1b1e568efbb5b4e8320da5ea51b691927d9d56a7a1e31f8769ee9e6bd27b13",
+      "size_bytes": 84889,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "pipelines/template+pat/template.png",
+      "archive": "J0437-4715",
+      "source": "pam -FT + psrsmooth -W",
+      "command": "pam -FT <ar>; psrsmooth -W <ar>.FT; psrplot -g 1200x800 -p flux <ar>.FT.sm -D pipelines/template+pat/template.png/png",
+      "sha256": "f0cb9f847a83108666e2a94a2e451fe215b3adea1e6868b1b60192fff751b5ac",
+      "size_bytes": 9365,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "pipelines/template+pat/template.std",
+      "archive": "J0437-4715",
+      "source": "pam -FT + psrsmooth -W",
+      "command": "cp <ar>.FT.sm template.std",
+      "sha256": "97819e083ef7b4e231f8396787e7dd5aa04420374c27c16a68873fbff6c2e650",
+      "size_bytes": 63360,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "pipelines/template+pat/toa-text.txt",
+      "archive": "J0437-4715",
+      "source": "copy of toas.tim",
+      "command": "cp toas.tim toa-text.txt",
+      "sha256": "5ab36d857d9911c24d67a0ca3f500eef67417dd50b8b9a7c6884dcb49f4fa4ed",
+      "size_bytes": 9252598,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "pipelines/template+pat/toas.tim",
+      "archive": "J0437-4715",
+      "source": "pat against template.std",
+      "command": "pat -s template.std -A FDM -f 'tempo2 IPTA' <ar> > toas.tim",
+      "sha256": "5ab36d857d9911c24d67a0ca3f500eef67417dd50b8b9a7c6884dcb49f4fa4ed",
+      "size_bytes": 9252598,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "psrplot/J0437-4715/flux__jdft.png",
+      "archive": "J0437-4715",
+      "source": "archives/J0437-4715_2024-07-25-12:13:23_zap.ar",
+      "command": "psrplot -g 1200x800 -p flux -j DFT archives/J0437-4715_2024-07-25-12:13:23_zap.ar -D plots/psrplot/J0437-4715/flux__jdft.png/png",
+      "sha256": "30c56d8d343481289490f40bae2cbda1d7da0c5c34596041441a0140fbbb8475",
+      "size_bytes": 9371,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "psrplot/J0437-4715/flux__jft.png",
+      "archive": "J0437-4715",
+      "source": "archives/J0437-4715_2024-07-25-12:13:23_zap.ar",
+      "command": "psrplot -g 1200x800 -p flux -j FT archives/J0437-4715_2024-07-25-12:13:23_zap.ar -D plots/psrplot/J0437-4715/flux__jft.png/png",
+      "sha256": "91a2198cd832573075f09c130dd4f0c7c666839d1fcb65fc5e8ab9bab5c09d5c",
+      "size_bytes": 9437,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "psrplot/J0437-4715/freq__jd.png",
+      "archive": "J0437-4715",
+      "source": "archives/J0437-4715_2024-07-25-12:13:23_zap.ar",
+      "command": "psrplot -g 1200x800 -p freq -j D archives/J0437-4715_2024-07-25-12:13:23_zap.ar -D plots/psrplot/J0437-4715/freq__jd.png/png",
+      "sha256": "ee0130f8a47aa288d5683d7b5b197d2ce8aaf0fc97a59c693e8567a75b3a5c72",
+      "size_bytes": 293349,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "psrplot/J0437-4715/freq__raw.png",
+      "archive": "J0437-4715",
+      "source": "archives/J0437-4715_2024-07-25-12:13:23_zap.ar",
+      "command": "psrplot -g 1200x800 -p freq archives/J0437-4715_2024-07-25-12:13:23_zap.ar -D plots/psrplot/J0437-4715/freq__raw.png/png",
+      "sha256": "f723aa2c6d5967783cbc0ef184c73453dc73bdaa0578d7baa35efbe706aeaf87",
+      "size_bytes": 292781,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "psrplot/J0437-4715/pa__jdft.png",
+      "archive": "J0437-4715",
+      "source": "archives/J0437-4715_2024-07-25-12:13:23_zap.ar",
+      "command": "psrplot -g 1200x800 -p pa -j DFT archives/J0437-4715_2024-07-25-12:13:23_zap.ar -D plots/psrplot/J0437-4715/pa__jdft.png/png",
+      "sha256": "1f0e723aaf83d8ec13957f7dbebd2117ec4d8376a39ddd8cf78fe938e0d7b464",
+      "size_bytes": 12234,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "psrplot/J0437-4715/stokes__jdft.png",
+      "archive": "J0437-4715",
+      "source": "archives/J0437-4715_2024-07-25-12:13:23_zap.ar",
+      "command": "psrplot -g 1200x800 -p stokes -j DFT archives/J0437-4715_2024-07-25-12:13:23_zap.ar -D plots/psrplot/J0437-4715/stokes__jdft.png/png",
+      "sha256": "9c00a558c19aa216e72f94141e85bf26442df420e2b23404e7df0116997a9950",
+      "size_bytes": 10987,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "psrplot/J0437-4715/stokes__jft.png",
+      "archive": "J0437-4715",
+      "source": "archives/J0437-4715_2024-07-25-12:13:23_zap.ar",
+      "command": "psrplot -g 1200x800 -p stokes -j FT archives/J0437-4715_2024-07-25-12:13:23_zap.ar -D plots/psrplot/J0437-4715/stokes__jft.png/png",
+      "sha256": "42ea512826753477b49f272c305f269327da87cea05fb2976adf213fb3a08a3a",
+      "size_bytes": 10998,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "psrplot/J0437-4715/time__jdf.png",
+      "archive": "J0437-4715",
+      "source": "archives/J0437-4715_2024-07-25-12:13:23_zap.ar",
+      "command": "psrplot -g 1200x800 -p time -j DF archives/J0437-4715_2024-07-25-12:13:23_zap.ar -D plots/psrplot/J0437-4715/time__jdf.png/png",
+      "sha256": "649a10fb272acc5cdb6a1879b56767ad426dea0ec3ee9b2396993e1c3d2fabf2",
+      "size_bytes": 19502,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "psrplot/J0437-4715/time__jf.png",
+      "archive": "J0437-4715",
+      "source": "archives/J0437-4715_2024-07-25-12:13:23_zap.ar",
+      "command": "psrplot -g 1200x800 -p time -j F archives/J0437-4715_2024-07-25-12:13:23_zap.ar -D plots/psrplot/J0437-4715/time__jf.png/png",
+      "sha256": "ab16771bbbee0a23cb0d70c1e984bd80a1a66a79c53609207d3c7510dadab45f",
+      "size_bytes": 19485,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "psrplot/J1909-3744/flux__jdft.png",
+      "archive": "J1909-3744",
+      "source": "archives/J1909-3744_2024-07-25-00:04:55_zap.ar",
+      "command": "psrplot -g 1200x800 -p flux -j DFT archives/J1909-3744_2024-07-25-00:04:55_zap.ar -D plots/psrplot/J1909-3744/flux__jdft.png/png",
+      "sha256": "b8bf8cffdebdb4b2c7bd6e39939338786a4366d465d7b105dc4010bd4d412551",
+      "size_bytes": 10308,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "psrplot/J1909-3744/flux__jft.png",
+      "archive": "J1909-3744",
+      "source": "archives/J1909-3744_2024-07-25-00:04:55_zap.ar",
+      "command": "psrplot -g 1200x800 -p flux -j FT archives/J1909-3744_2024-07-25-00:04:55_zap.ar -D plots/psrplot/J1909-3744/flux__jft.png/png",
+      "sha256": "afce7e13b2e5c884b7af79bd2f895973e7afef5bfc59e4ac006c67c3ffe27c5b",
+      "size_bytes": 10447,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "psrplot/J1909-3744/freq__jd.png",
+      "archive": "J1909-3744",
+      "source": "archives/J1909-3744_2024-07-25-00:04:55_zap.ar",
+      "command": "psrplot -g 1200x800 -p freq -j D archives/J1909-3744_2024-07-25-00:04:55_zap.ar -D plots/psrplot/J1909-3744/freq__jd.png/png",
+      "sha256": "3188da98e4b396597c95a8b83986f0b0b285a2a541ea80f5ba63ef2be89aed6e",
+      "size_bytes": 343418,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "psrplot/J1909-3744/freq__raw.png",
+      "archive": "J1909-3744",
+      "source": "archives/J1909-3744_2024-07-25-00:04:55_zap.ar",
+      "command": "psrplot -g 1200x800 -p freq archives/J1909-3744_2024-07-25-00:04:55_zap.ar -D plots/psrplot/J1909-3744/freq__raw.png/png",
+      "sha256": "b660dd788fe64e89dfde421051435d5e3ba918cc8fb4fd91252418bc6e986e93",
+      "size_bytes": 341320,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "psrplot/J1909-3744/pa__jdft.png",
+      "archive": "J1909-3744",
+      "source": "archives/J1909-3744_2024-07-25-00:04:55_zap.ar",
+      "command": "psrplot -g 1200x800 -p pa -j DFT archives/J1909-3744_2024-07-25-00:04:55_zap.ar -D plots/psrplot/J1909-3744/pa__jdft.png/png",
+      "sha256": "4d59273809680b00a012eb324c5435f8a51293df41cf46595f067dedb5b6d285",
+      "size_bytes": 8072,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "psrplot/J1909-3744/stokes__jdft.png",
+      "archive": "J1909-3744",
+      "source": "archives/J1909-3744_2024-07-25-00:04:55_zap.ar",
+      "command": "psrplot -g 1200x800 -p stokes -j DFT archives/J1909-3744_2024-07-25-00:04:55_zap.ar -D plots/psrplot/J1909-3744/stokes__jdft.png/png",
+      "sha256": "61f78ed34c4939b05c16bafaa90c5338b4251e50f1e3362a756397843116866a",
+      "size_bytes": 10720,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "psrplot/J1909-3744/stokes__jft.png",
+      "archive": "J1909-3744",
+      "source": "archives/J1909-3744_2024-07-25-00:04:55_zap.ar",
+      "command": "psrplot -g 1200x800 -p stokes -j FT archives/J1909-3744_2024-07-25-00:04:55_zap.ar -D plots/psrplot/J1909-3744/stokes__jft.png/png",
+      "sha256": "73a6fdc14e89bcec3229fa14a822e2776d6570e28bb9a9f0489210ac5c92b50f",
+      "size_bytes": 10880,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "psrplot/J1909-3744/time__jdf.png",
+      "archive": "J1909-3744",
+      "source": "archives/J1909-3744_2024-07-25-00:04:55_zap.ar",
+      "command": "psrplot -g 1200x800 -p time -j DF archives/J1909-3744_2024-07-25-00:04:55_zap.ar -D plots/psrplot/J1909-3744/time__jdf.png/png",
+      "sha256": "90a7f1f1cc398372a2ae8aa00eaa4b2e3638d6be372689a408a5ab2fcc6b7919",
+      "size_bytes": 51596,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "psrplot/J1909-3744/time__jf.png",
+      "archive": "J1909-3744",
+      "source": "archives/J1909-3744_2024-07-25-00:04:55_zap.ar",
+      "command": "psrplot -g 1200x800 -p time -j F archives/J1909-3744_2024-07-25-00:04:55_zap.ar -D plots/psrplot/J1909-3744/time__jf.png/png",
+      "sha256": "41d7fc89db7322a56b70cecfe825dfb9d7ac76fde05503b61bcfedf8a4adae5f",
+      "size_bytes": 52049,
+      "generated_at": "2026-05-11T19:54:20+10:00"
+    }
+  ]
+}
