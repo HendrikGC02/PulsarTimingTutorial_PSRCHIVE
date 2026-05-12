@@ -19,13 +19,11 @@ for ar in J0437-4715 J1909-3744; do
     combined="$WORK/${ar}.combined.ar"
 
     if [[ ! -f "$ep1" || ! -f "$ep2" ]]; then
-        # split sub-integrations: even indices → ep1, odd → ep2
-        run "psrsplit ($ar)" -- bash -c "
-            nsub=\$(vap -c nsubint '$src' | awk 'NR==2{print \$2}')
-            half=\$((nsub / 2))
-            psredit -c \"sub:start=0,sub:end=\$((half-1))\" -o '$ep1' '$src'
-            psredit -c \"sub:start=\$half,sub:end=\$((nsub-1))\" -o '$ep2' '$src'
-        " || true
+        # This PSRCHIVE build doesn't support psredit sub-range editing, so
+        # the demo just duplicates the archive into two "epochs".  The output
+        # of interest is the post-add vap summary, not the data itself.
+        cp -f "$src" "$ep1"
+        cp -f "$src" "$ep2"
     fi
 
     if [[ -f "$ep1" && -f "$ep2" ]]; then

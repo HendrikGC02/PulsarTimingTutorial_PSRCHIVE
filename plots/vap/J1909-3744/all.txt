@@ -1,0 +1,2 @@
+filename   name   mjd   length   bw   freq   nchan   nbin   nsubint   npol   dm   rm   telescop   site
+J1909-3744_2024-07-25-00:04:55_zap.ar   J1909-3744   60516.003426   504.000   856.000   1283.582   1024   1024   INVALID   4   10.390112   -0.674   MeerKAT   INVALID

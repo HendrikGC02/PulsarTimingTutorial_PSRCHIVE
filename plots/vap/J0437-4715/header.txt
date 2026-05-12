@@ -1,0 +1,2 @@
+filename   name   nbin   nchan   nsubint   length   bw
+J0437-4715_2024-07-25-12:13:23_zap.ar   J0437-4715   1024   1024   INVALID   248.000   856.000

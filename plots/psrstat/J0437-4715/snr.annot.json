@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "spans": [
+    {
+      "line": 0,
+      "start": 143,
+      "end": 146,
+      "label": "metric name \u2014 value is 18281.345703125",
+      "kind": "field"
+    },
+    {
+      "line": 0,
+      "start": 147,
+      "end": 162,
+      "label": "value of snr",
+      "kind": "field"
+    },
+    {
+      "line": 0,
+      "start": 163,
+      "end": 170,
+      "label": "metric name \u2014 value is 3462.25174069095",
+      "kind": "field"
+    },
+    {
+      "line": 0,
+      "start": 171,
+      "end": 187,
+      "label": "value of off:avg",
+      "kind": "field"
+    },
+    {
+      "line": 0,
+      "start": 188,
+      "end": 195,
+      "label": "metric name \u2014 value is 0.276528759354824",
+      "kind": "field"
+    },
+    {
+      "line": 0,
+      "start": 196,
+      "end": 213,
+      "label": "value of off:rms",
+      "kind": "field"
+    }
+  ]
+}

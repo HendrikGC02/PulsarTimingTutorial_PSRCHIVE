@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "spans": [
+    {
+      "line": 0,
+      "start": 143,
+      "end": 155,
+      "label": "metric name \u2014 value is -",
+      "kind": "field"
+    },
+    {
+      "line": 0,
+      "start": 156,
+      "end": 157,
+      "label": "value of all:bin:mean",
+      "kind": "field"
+    }
+  ]
+}

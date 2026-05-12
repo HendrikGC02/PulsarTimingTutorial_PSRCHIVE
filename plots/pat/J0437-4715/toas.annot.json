@@ -1,0 +1,1181 @@
+{
+  "version": 1,
+  "spans": [
+    {
+      "line": 1,
+      "start": 0,
+      "end": 142,
+      "label": "archive (path or filename) the TOA was generated from",
+      "kind": "filename"
+    },
+    {
+      "line": 1,
+      "start": 143,
+      "end": 153,
+      "label": "centre frequency of this TOA in MHz",
+      "kind": "frequency"
+    },
+    {
+      "line": 1,
+      "start": 154,
+      "end": 175,
+      "label": "Modified Julian Date \u2014 integer days + fractional day",
+      "kind": "mjd"
+    },
+    {
+      "line": 1,
+      "start": 178,
+      "end": 183,
+      "label": "1-sigma TOA uncertainty in microseconds",
+      "kind": "error"
+    },
+    {
+      "line": 1,
+      "start": 185,
+      "end": 192,
+      "label": "observatory code (telescope where this TOA was taken)",
+      "kind": "observatory"
+    },
+    {
+      "line": 1,
+      "start": 194,
+      "end": 201,
+      "label": "-fe flag \u2014 value: KAT",
+      "kind": "flag"
+    },
+    {
+      "line": 1,
+      "start": 202,
+      "end": 210,
+      "label": "-be flag \u2014 value: MKBF",
+      "kind": "flag"
+    },
+    {
+      "line": 1,
+      "start": 211,
+      "end": 222,
+      "label": "-f flag \u2014 value: KAT_MKBF",
+      "kind": "flag"
+    },
+    {
+      "line": 1,
+      "start": 223,
+      "end": 233,
+      "label": "-bw flag \u2014 value: 0.8359",
+      "kind": "flag"
+    },
+    {
+      "line": 1,
+      "start": 234,
+      "end": 241,
+      "label": "-tobs flag \u2014 value: 8",
+      "kind": "flag"
+    },
+    {
+      "line": 1,
+      "start": 242,
+      "end": 382,
+      "label": "-tmplt flag \u2014 value: /fred/oz005/users/hcombrin/PSRCHIVE_Tutorial/PulsarTimingTutorial_PSRCHIVE/../archives_PSRCHIVE_Tutorial/work/J0437-4715.template.std",
+      "kind": "flag"
+    },
+    {
+      "line": 1,
+      "start": 383,
+      "end": 392,
+      "label": "-gof flag \u2014 value: 4.13",
+      "kind": "flag"
+    },
+    {
+      "line": 1,
+      "start": 393,
+      "end": 403,
+      "label": "-nbin flag \u2014 value: 1024",
+      "kind": "flag"
+    },
+    {
+      "line": 1,
+      "start": 404,
+      "end": 410,
+      "label": "-nch flag \u2014 value: 1",
+      "kind": "flag"
+    },
+    {
+      "line": 2,
+      "start": 0,
+      "end": 142,
+      "label": "archive (path or filename) the TOA was generated from",
+      "kind": "filename"
+    },
+    {
+      "line": 2,
+      "start": 143,
+      "end": 153,
+      "label": "centre frequency of this TOA in MHz",
+      "kind": "frequency"
+    },
+    {
+      "line": 2,
+      "start": 154,
+      "end": 175,
+      "label": "Modified Julian Date \u2014 integer days + fractional day",
+      "kind": "mjd"
+    },
+    {
+      "line": 2,
+      "start": 178,
+      "end": 183,
+      "label": "1-sigma TOA uncertainty in microseconds",
+      "kind": "error"
+    },
+    {
+      "line": 2,
+      "start": 185,
+      "end": 192,
+      "label": "observatory code (telescope where this TOA was taken)",
+      "kind": "observatory"
+    },
+    {
+      "line": 2,
+      "start": 194,
+      "end": 201,
+      "label": "-fe flag \u2014 value: KAT",
+      "kind": "flag"
+    },
+    {
+      "line": 2,
+      "start": 202,
+      "end": 210,
+      "label": "-be flag \u2014 value: MKBF",
+      "kind": "flag"
+    },
+    {
+      "line": 2,
+      "start": 211,
+      "end": 222,
+      "label": "-f flag \u2014 value: KAT_MKBF",
+      "kind": "flag"
+    },
+    {
+      "line": 2,
+      "start": 223,
+      "end": 233,
+      "label": "-bw flag \u2014 value: 0.8359",
+      "kind": "flag"
+    },
+    {
+      "line": 2,
+      "start": 234,
+      "end": 241,
+      "label": "-tobs flag \u2014 value: 8",
+      "kind": "flag"
+    },
+    {
+      "line": 2,
+      "start": 242,
+      "end": 382,
+      "label": "-tmplt flag \u2014 value: /fred/oz005/users/hcombrin/PSRCHIVE_Tutorial/PulsarTimingTutorial_PSRCHIVE/../archives_PSRCHIVE_Tutorial/work/J0437-4715.template.std",
+      "kind": "flag"
+    },
+    {
+      "line": 2,
+      "start": 383,
+      "end": 392,
+      "label": "-gof flag \u2014 value: 3.83",
+      "kind": "flag"
+    },
+    {
+      "line": 2,
+      "start": 393,
+      "end": 403,
+      "label": "-nbin flag \u2014 value: 1024",
+      "kind": "flag"
+    },
+    {
+      "line": 2,
+      "start": 404,
+      "end": 410,
+      "label": "-nch flag \u2014 value: 1",
+      "kind": "flag"
+    },
+    {
+      "line": 3,
+      "start": 0,
+      "end": 142,
+      "label": "archive (path or filename) the TOA was generated from",
+      "kind": "filename"
+    },
+    {
+      "line": 3,
+      "start": 143,
+      "end": 153,
+      "label": "centre frequency of this TOA in MHz",
+      "kind": "frequency"
+    },
+    {
+      "line": 3,
+      "start": 154,
+      "end": 175,
+      "label": "Modified Julian Date \u2014 integer days + fractional day",
+      "kind": "mjd"
+    },
+    {
+      "line": 3,
+      "start": 178,
+      "end": 183,
+      "label": "1-sigma TOA uncertainty in microseconds",
+      "kind": "error"
+    },
+    {
+      "line": 3,
+      "start": 185,
+      "end": 192,
+      "label": "observatory code (telescope where this TOA was taken)",
+      "kind": "observatory"
+    },
+    {
+      "line": 3,
+      "start": 194,
+      "end": 201,
+      "label": "-fe flag \u2014 value: KAT",
+      "kind": "flag"
+    },
+    {
+      "line": 3,
+      "start": 202,
+      "end": 210,
+      "label": "-be flag \u2014 value: MKBF",
+      "kind": "flag"
+    },
+    {
+      "line": 3,
+      "start": 211,
+      "end": 222,
+      "label": "-f flag \u2014 value: KAT_MKBF",
+      "kind": "flag"
+    },
+    {
+      "line": 3,
+      "start": 223,
+      "end": 233,
+      "label": "-bw flag \u2014 value: 0.8359",
+      "kind": "flag"
+    },
+    {
+      "line": 3,
+      "start": 234,
+      "end": 241,
+      "label": "-tobs flag \u2014 value: 8",
+      "kind": "flag"
+    },
+    {
+      "line": 3,
+      "start": 242,
+      "end": 382,
+      "label": "-tmplt flag \u2014 value: /fred/oz005/users/hcombrin/PSRCHIVE_Tutorial/PulsarTimingTutorial_PSRCHIVE/../archives_PSRCHIVE_Tutorial/work/J0437-4715.template.std",
+      "kind": "flag"
+    },
+    {
+      "line": 3,
+      "start": 383,
+      "end": 392,
+      "label": "-gof flag \u2014 value: 4.28",
+      "kind": "flag"
+    },
+    {
+      "line": 3,
+      "start": 393,
+      "end": 403,
+      "label": "-nbin flag \u2014 value: 1024",
+      "kind": "flag"
+    },
+    {
+      "line": 3,
+      "start": 404,
+      "end": 410,
+      "label": "-nch flag \u2014 value: 1",
+      "kind": "flag"
+    },
+    {
+      "line": 4,
+      "start": 0,
+      "end": 142,
+      "label": "archive (path or filename) the TOA was generated from",
+      "kind": "filename"
+    },
+    {
+      "line": 4,
+      "start": 143,
+      "end": 153,
+      "label": "centre frequency of this TOA in MHz",
+      "kind": "frequency"
+    },
+    {
+      "line": 4,
+      "start": 154,
+      "end": 175,
+      "label": "Modified Julian Date \u2014 integer days + fractional day",
+      "kind": "mjd"
+    },
+    {
+      "line": 4,
+      "start": 178,
+      "end": 183,
+      "label": "1-sigma TOA uncertainty in microseconds",
+      "kind": "error"
+    },
+    {
+      "line": 4,
+      "start": 185,
+      "end": 192,
+      "label": "observatory code (telescope where this TOA was taken)",
+      "kind": "observatory"
+    },
+    {
+      "line": 4,
+      "start": 194,
+      "end": 201,
+      "label": "-fe flag \u2014 value: KAT",
+      "kind": "flag"
+    },
+    {
+      "line": 4,
+      "start": 202,
+      "end": 210,
+      "label": "-be flag \u2014 value: MKBF",
+      "kind": "flag"
+    },
+    {
+      "line": 4,
+      "start": 211,
+      "end": 222,
+      "label": "-f flag \u2014 value: KAT_MKBF",
+      "kind": "flag"
+    },
+    {
+      "line": 4,
+      "start": 223,
+      "end": 233,
+      "label": "-bw flag \u2014 value: 0.8359",
+      "kind": "flag"
+    },
+    {
+      "line": 4,
+      "start": 234,
+      "end": 241,
+      "label": "-tobs flag \u2014 value: 8",
+      "kind": "flag"
+    },
+    {
+      "line": 4,
+      "start": 242,
+      "end": 382,
+      "label": "-tmplt flag \u2014 value: /fred/oz005/users/hcombrin/PSRCHIVE_Tutorial/PulsarTimingTutorial_PSRCHIVE/../archives_PSRCHIVE_Tutorial/work/J0437-4715.template.std",
+      "kind": "flag"
+    },
+    {
+      "line": 4,
+      "start": 383,
+      "end": 392,
+      "label": "-gof flag \u2014 value: 4.47",
+      "kind": "flag"
+    },
+    {
+      "line": 4,
+      "start": 393,
+      "end": 403,
+      "label": "-nbin flag \u2014 value: 1024",
+      "kind": "flag"
+    },
+    {
+      "line": 4,
+      "start": 404,
+      "end": 410,
+      "label": "-nch flag \u2014 value: 1",
+      "kind": "flag"
+    },
+    {
+      "line": 5,
+      "start": 0,
+      "end": 142,
+      "label": "archive (path or filename) the TOA was generated from",
+      "kind": "filename"
+    },
+    {
+      "line": 5,
+      "start": 143,
+      "end": 153,
+      "label": "centre frequency of this TOA in MHz",
+      "kind": "frequency"
+    },
+    {
+      "line": 5,
+      "start": 154,
+      "end": 175,
+      "label": "Modified Julian Date \u2014 integer days + fractional day",
+      "kind": "mjd"
+    },
+    {
+      "line": 5,
+      "start": 178,
+      "end": 183,
+      "label": "1-sigma TOA uncertainty in microseconds",
+      "kind": "error"
+    },
+    {
+      "line": 5,
+      "start": 185,
+      "end": 192,
+      "label": "observatory code (telescope where this TOA was taken)",
+      "kind": "observatory"
+    },
+    {
+      "line": 5,
+      "start": 194,
+      "end": 201,
+      "label": "-fe flag \u2014 value: KAT",
+      "kind": "flag"
+    },
+    {
+      "line": 5,
+      "start": 202,
+      "end": 210,
+      "label": "-be flag \u2014 value: MKBF",
+      "kind": "flag"
+    },
+    {
+      "line": 5,
+      "start": 211,
+      "end": 222,
+      "label": "-f flag \u2014 value: KAT_MKBF",
+      "kind": "flag"
+    },
+    {
+      "line": 5,
+      "start": 223,
+      "end": 233,
+      "label": "-bw flag \u2014 value: 0.8359",
+      "kind": "flag"
+    },
+    {
+      "line": 5,
+      "start": 234,
+      "end": 241,
+      "label": "-tobs flag \u2014 value: 8",
+      "kind": "flag"
+    },
+    {
+      "line": 5,
+      "start": 242,
+      "end": 382,
+      "label": "-tmplt flag \u2014 value: /fred/oz005/users/hcombrin/PSRCHIVE_Tutorial/PulsarTimingTutorial_PSRCHIVE/../archives_PSRCHIVE_Tutorial/work/J0437-4715.template.std",
+      "kind": "flag"
+    },
+    {
+      "line": 5,
+      "start": 383,
+      "end": 392,
+      "label": "-gof flag \u2014 value: 4.55",
+      "kind": "flag"
+    },
+    {
+      "line": 5,
+      "start": 393,
+      "end": 403,
+      "label": "-nbin flag \u2014 value: 1024",
+      "kind": "flag"
+    },
+    {
+      "line": 5,
+      "start": 404,
+      "end": 410,
+      "label": "-nch flag \u2014 value: 1",
+      "kind": "flag"
+    },
+    {
+      "line": 6,
+      "start": 0,
+      "end": 142,
+      "label": "archive (path or filename) the TOA was generated from",
+      "kind": "filename"
+    },
+    {
+      "line": 6,
+      "start": 143,
+      "end": 153,
+      "label": "centre frequency of this TOA in MHz",
+      "kind": "frequency"
+    },
+    {
+      "line": 6,
+      "start": 154,
+      "end": 175,
+      "label": "Modified Julian Date \u2014 integer days + fractional day",
+      "kind": "mjd"
+    },
+    {
+      "line": 6,
+      "start": 178,
+      "end": 183,
+      "label": "1-sigma TOA uncertainty in microseconds",
+      "kind": "error"
+    },
+    {
+      "line": 6,
+      "start": 185,
+      "end": 192,
+      "label": "observatory code (telescope where this TOA was taken)",
+      "kind": "observatory"
+    },
+    {
+      "line": 6,
+      "start": 194,
+      "end": 201,
+      "label": "-fe flag \u2014 value: KAT",
+      "kind": "flag"
+    },
+    {
+      "line": 6,
+      "start": 202,
+      "end": 210,
+      "label": "-be flag \u2014 value: MKBF",
+      "kind": "flag"
+    },
+    {
+      "line": 6,
+      "start": 211,
+      "end": 222,
+      "label": "-f flag \u2014 value: KAT_MKBF",
+      "kind": "flag"
+    },
+    {
+      "line": 6,
+      "start": 223,
+      "end": 233,
+      "label": "-bw flag \u2014 value: 0.8359",
+      "kind": "flag"
+    },
+    {
+      "line": 6,
+      "start": 234,
+      "end": 241,
+      "label": "-tobs flag \u2014 value: 8",
+      "kind": "flag"
+    },
+    {
+      "line": 6,
+      "start": 242,
+      "end": 382,
+      "label": "-tmplt flag \u2014 value: /fred/oz005/users/hcombrin/PSRCHIVE_Tutorial/PulsarTimingTutorial_PSRCHIVE/../archives_PSRCHIVE_Tutorial/work/J0437-4715.template.std",
+      "kind": "flag"
+    },
+    {
+      "line": 6,
+      "start": 383,
+      "end": 392,
+      "label": "-gof flag \u2014 value: 4.13",
+      "kind": "flag"
+    },
+    {
+      "line": 6,
+      "start": 393,
+      "end": 403,
+      "label": "-nbin flag \u2014 value: 1024",
+      "kind": "flag"
+    },
+    {
+      "line": 6,
+      "start": 404,
+      "end": 410,
+      "label": "-nch flag \u2014 value: 1",
+      "kind": "flag"
+    },
+    {
+      "line": 7,
+      "start": 0,
+      "end": 142,
+      "label": "archive (path or filename) the TOA was generated from",
+      "kind": "filename"
+    },
+    {
+      "line": 7,
+      "start": 143,
+      "end": 153,
+      "label": "centre frequency of this TOA in MHz",
+      "kind": "frequency"
+    },
+    {
+      "line": 7,
+      "start": 154,
+      "end": 175,
+      "label": "Modified Julian Date \u2014 integer days + fractional day",
+      "kind": "mjd"
+    },
+    {
+      "line": 7,
+      "start": 178,
+      "end": 183,
+      "label": "1-sigma TOA uncertainty in microseconds",
+      "kind": "error"
+    },
+    {
+      "line": 7,
+      "start": 185,
+      "end": 192,
+      "label": "observatory code (telescope where this TOA was taken)",
+      "kind": "observatory"
+    },
+    {
+      "line": 7,
+      "start": 194,
+      "end": 201,
+      "label": "-fe flag \u2014 value: KAT",
+      "kind": "flag"
+    },
+    {
+      "line": 7,
+      "start": 202,
+      "end": 210,
+      "label": "-be flag \u2014 value: MKBF",
+      "kind": "flag"
+    },
+    {
+      "line": 7,
+      "start": 211,
+      "end": 222,
+      "label": "-f flag \u2014 value: KAT_MKBF",
+      "kind": "flag"
+    },
+    {
+      "line": 7,
+      "start": 223,
+      "end": 233,
+      "label": "-bw flag \u2014 value: 0.8359",
+      "kind": "flag"
+    },
+    {
+      "line": 7,
+      "start": 234,
+      "end": 241,
+      "label": "-tobs flag \u2014 value: 8",
+      "kind": "flag"
+    },
+    {
+      "line": 7,
+      "start": 242,
+      "end": 382,
+      "label": "-tmplt flag \u2014 value: /fred/oz005/users/hcombrin/PSRCHIVE_Tutorial/PulsarTimingTutorial_PSRCHIVE/../archives_PSRCHIVE_Tutorial/work/J0437-4715.template.std",
+      "kind": "flag"
+    },
+    {
+      "line": 7,
+      "start": 383,
+      "end": 392,
+      "label": "-gof flag \u2014 value: 4.15",
+      "kind": "flag"
+    },
+    {
+      "line": 7,
+      "start": 393,
+      "end": 403,
+      "label": "-nbin flag \u2014 value: 1024",
+      "kind": "flag"
+    },
+    {
+      "line": 7,
+      "start": 404,
+      "end": 410,
+      "label": "-nch flag \u2014 value: 1",
+      "kind": "flag"
+    },
+    {
+      "line": 8,
+      "start": 0,
+      "end": 142,
+      "label": "archive (path or filename) the TOA was generated from",
+      "kind": "filename"
+    },
+    {
+      "line": 8,
+      "start": 143,
+      "end": 153,
+      "label": "centre frequency of this TOA in MHz",
+      "kind": "frequency"
+    },
+    {
+      "line": 8,
+      "start": 154,
+      "end": 175,
+      "label": "Modified Julian Date \u2014 integer days + fractional day",
+      "kind": "mjd"
+    },
+    {
+      "line": 8,
+      "start": 178,
+      "end": 183,
+      "label": "1-sigma TOA uncertainty in microseconds",
+      "kind": "error"
+    },
+    {
+      "line": 8,
+      "start": 185,
+      "end": 192,
+      "label": "observatory code (telescope where this TOA was taken)",
+      "kind": "observatory"
+    },
+    {
+      "line": 8,
+      "start": 194,
+      "end": 201,
+      "label": "-fe flag \u2014 value: KAT",
+      "kind": "flag"
+    },
+    {
+      "line": 8,
+      "start": 202,
+      "end": 210,
+      "label": "-be flag \u2014 value: MKBF",
+      "kind": "flag"
+    },
+    {
+      "line": 8,
+      "start": 211,
+      "end": 222,
+      "label": "-f flag \u2014 value: KAT_MKBF",
+      "kind": "flag"
+    },
+    {
+      "line": 8,
+      "start": 223,
+      "end": 233,
+      "label": "-bw flag \u2014 value: 0.8359",
+      "kind": "flag"
+    },
+    {
+      "line": 8,
+      "start": 234,
+      "end": 241,
+      "label": "-tobs flag \u2014 value: 8",
+      "kind": "flag"
+    },
+    {
+      "line": 8,
+      "start": 242,
+      "end": 382,
+      "label": "-tmplt flag \u2014 value: /fred/oz005/users/hcombrin/PSRCHIVE_Tutorial/PulsarTimingTutorial_PSRCHIVE/../archives_PSRCHIVE_Tutorial/work/J0437-4715.template.std",
+      "kind": "flag"
+    },
+    {
+      "line": 8,
+      "start": 383,
+      "end": 392,
+      "label": "-gof flag \u2014 value: 4.52",
+      "kind": "flag"
+    },
+    {
+      "line": 8,
+      "start": 393,
+      "end": 403,
+      "label": "-nbin flag \u2014 value: 1024",
+      "kind": "flag"
+    },
+    {
+      "line": 8,
+      "start": 404,
+      "end": 410,
+      "label": "-nch flag \u2014 value: 1",
+      "kind": "flag"
+    },
+    {
+      "line": 9,
+      "start": 0,
+      "end": 142,
+      "label": "archive (path or filename) the TOA was generated from",
+      "kind": "filename"
+    },
+    {
+      "line": 9,
+      "start": 143,
+      "end": 153,
+      "label": "centre frequency of this TOA in MHz",
+      "kind": "frequency"
+    },
+    {
+      "line": 9,
+      "start": 154,
+      "end": 175,
+      "label": "Modified Julian Date \u2014 integer days + fractional day",
+      "kind": "mjd"
+    },
+    {
+      "line": 9,
+      "start": 178,
+      "end": 183,
+      "label": "1-sigma TOA uncertainty in microseconds",
+      "kind": "error"
+    },
+    {
+      "line": 9,
+      "start": 185,
+      "end": 192,
+      "label": "observatory code (telescope where this TOA was taken)",
+      "kind": "observatory"
+    },
+    {
+      "line": 9,
+      "start": 194,
+      "end": 201,
+      "label": "-fe flag \u2014 value: KAT",
+      "kind": "flag"
+    },
+    {
+      "line": 9,
+      "start": 202,
+      "end": 210,
+      "label": "-be flag \u2014 value: MKBF",
+      "kind": "flag"
+    },
+    {
+      "line": 9,
+      "start": 211,
+      "end": 222,
+      "label": "-f flag \u2014 value: KAT_MKBF",
+      "kind": "flag"
+    },
+    {
+      "line": 9,
+      "start": 223,
+      "end": 233,
+      "label": "-bw flag \u2014 value: 0.8359",
+      "kind": "flag"
+    },
+    {
+      "line": 9,
+      "start": 234,
+      "end": 241,
+      "label": "-tobs flag \u2014 value: 8",
+      "kind": "flag"
+    },
+    {
+      "line": 9,
+      "start": 242,
+      "end": 382,
+      "label": "-tmplt flag \u2014 value: /fred/oz005/users/hcombrin/PSRCHIVE_Tutorial/PulsarTimingTutorial_PSRCHIVE/../archives_PSRCHIVE_Tutorial/work/J0437-4715.template.std",
+      "kind": "flag"
+    },
+    {
+      "line": 9,
+      "start": 383,
+      "end": 392,
+      "label": "-gof flag \u2014 value: 4.21",
+      "kind": "flag"
+    },
+    {
+      "line": 9,
+      "start": 393,
+      "end": 403,
+      "label": "-nbin flag \u2014 value: 1024",
+      "kind": "flag"
+    },
+    {
+      "line": 9,
+      "start": 404,
+      "end": 410,
+      "label": "-nch flag \u2014 value: 1",
+      "kind": "flag"
+    },
+    {
+      "line": 10,
+      "start": 0,
+      "end": 142,
+      "label": "archive (path or filename) the TOA was generated from",
+      "kind": "filename"
+    },
+    {
+      "line": 10,
+      "start": 143,
+      "end": 153,
+      "label": "centre frequency of this TOA in MHz",
+      "kind": "frequency"
+    },
+    {
+      "line": 10,
+      "start": 154,
+      "end": 175,
+      "label": "Modified Julian Date \u2014 integer days + fractional day",
+      "kind": "mjd"
+    },
+    {
+      "line": 10,
+      "start": 178,
+      "end": 183,
+      "label": "1-sigma TOA uncertainty in microseconds",
+      "kind": "error"
+    },
+    {
+      "line": 10,
+      "start": 185,
+      "end": 192,
+      "label": "observatory code (telescope where this TOA was taken)",
+      "kind": "observatory"
+    },
+    {
+      "line": 10,
+      "start": 194,
+      "end": 201,
+      "label": "-fe flag \u2014 value: KAT",
+      "kind": "flag"
+    },
+    {
+      "line": 10,
+      "start": 202,
+      "end": 210,
+      "label": "-be flag \u2014 value: MKBF",
+      "kind": "flag"
+    },
+    {
+      "line": 10,
+      "start": 211,
+      "end": 222,
+      "label": "-f flag \u2014 value: KAT_MKBF",
+      "kind": "flag"
+    },
+    {
+      "line": 10,
+      "start": 223,
+      "end": 233,
+      "label": "-bw flag \u2014 value: 0.8359",
+      "kind": "flag"
+    },
+    {
+      "line": 10,
+      "start": 234,
+      "end": 241,
+      "label": "-tobs flag \u2014 value: 8",
+      "kind": "flag"
+    },
+    {
+      "line": 10,
+      "start": 242,
+      "end": 382,
+      "label": "-tmplt flag \u2014 value: /fred/oz005/users/hcombrin/PSRCHIVE_Tutorial/PulsarTimingTutorial_PSRCHIVE/../archives_PSRCHIVE_Tutorial/work/J0437-4715.template.std",
+      "kind": "flag"
+    },
+    {
+      "line": 10,
+      "start": 383,
+      "end": 392,
+      "label": "-gof flag \u2014 value: 4.77",
+      "kind": "flag"
+    },
+    {
+      "line": 10,
+      "start": 393,
+      "end": 403,
+      "label": "-nbin flag \u2014 value: 1024",
+      "kind": "flag"
+    },
+    {
+      "line": 10,
+      "start": 404,
+      "end": 410,
+      "label": "-nch flag \u2014 value: 1",
+      "kind": "flag"
+    },
+    {
+      "line": 11,
+      "start": 0,
+      "end": 142,
+      "label": "archive (path or filename) the TOA was generated from",
+      "kind": "filename"
+    },
+    {
+      "line": 11,
+      "start": 143,
+      "end": 153,
+      "label": "centre frequency of this TOA in MHz",
+      "kind": "frequency"
+    },
+    {
+      "line": 11,
+      "start": 154,
+      "end": 175,
+      "label": "Modified Julian Date \u2014 integer days + fractional day",
+      "kind": "mjd"
+    },
+    {
+      "line": 11,
+      "start": 178,
+      "end": 183,
+      "label": "1-sigma TOA uncertainty in microseconds",
+      "kind": "error"
+    },
+    {
+      "line": 11,
+      "start": 185,
+      "end": 192,
+      "label": "observatory code (telescope where this TOA was taken)",
+      "kind": "observatory"
+    },
+    {
+      "line": 11,
+      "start": 194,
+      "end": 201,
+      "label": "-fe flag \u2014 value: KAT",
+      "kind": "flag"
+    },
+    {
+      "line": 11,
+      "start": 202,
+      "end": 210,
+      "label": "-be flag \u2014 value: MKBF",
+      "kind": "flag"
+    },
+    {
+      "line": 11,
+      "start": 211,
+      "end": 222,
+      "label": "-f flag \u2014 value: KAT_MKBF",
+      "kind": "flag"
+    },
+    {
+      "line": 11,
+      "start": 223,
+      "end": 233,
+      "label": "-bw flag \u2014 value: 0.8359",
+      "kind": "flag"
+    },
+    {
+      "line": 11,
+      "start": 234,
+      "end": 241,
+      "label": "-tobs flag \u2014 value: 8",
+      "kind": "flag"
+    },
+    {
+      "line": 11,
+      "start": 242,
+      "end": 382,
+      "label": "-tmplt flag \u2014 value: /fred/oz005/users/hcombrin/PSRCHIVE_Tutorial/PulsarTimingTutorial_PSRCHIVE/../archives_PSRCHIVE_Tutorial/work/J0437-4715.template.std",
+      "kind": "flag"
+    },
+    {
+      "line": 11,
+      "start": 383,
+      "end": 392,
+      "label": "-gof flag \u2014 value: 5.06",
+      "kind": "flag"
+    },
+    {
+      "line": 11,
+      "start": 393,
+      "end": 403,
+      "label": "-nbin flag \u2014 value: 1024",
+      "kind": "flag"
+    },
+    {
+      "line": 11,
+      "start": 404,
+      "end": 410,
+      "label": "-nch flag \u2014 value: 1",
+      "kind": "flag"
+    },
+    {
+      "line": 12,
+      "start": 0,
+      "end": 142,
+      "label": "archive (path or filename) the TOA was generated from",
+      "kind": "filename"
+    },
+    {
+      "line": 12,
+      "start": 143,
+      "end": 153,
+      "label": "centre frequency of this TOA in MHz",
+      "kind": "frequency"
+    },
+    {
+      "line": 12,
+      "start": 154,
+      "end": 175,
+      "label": "Modified Julian Date \u2014 integer days + fractional day",
+      "kind": "mjd"
+    },
+    {
+      "line": 12,
+      "start": 178,
+      "end": 183,
+      "label": "1-sigma TOA uncertainty in microseconds",
+      "kind": "error"
+    },
+    {
+      "line": 12,
+      "start": 185,
+      "end": 192,
+      "label": "observatory code (telescope where this TOA was taken)",
+      "kind": "observatory"
+    },
+    {
+      "line": 12,
+      "start": 194,
+      "end": 201,
+      "label": "-fe flag \u2014 value: KAT",
+      "kind": "flag"
+    },
+    {
+      "line": 12,
+      "start": 202,
+      "end": 210,
+      "label": "-be flag \u2014 value: MKBF",
+      "kind": "flag"
+    },
+    {
+      "line": 12,
+      "start": 211,
+      "end": 222,
+      "label": "-f flag \u2014 value: KAT_MKBF",
+      "kind": "flag"
+    },
+    {
+      "line": 12,
+      "start": 223,
+      "end": 233,
+      "label": "-bw flag \u2014 value: 0.8359",
+      "kind": "flag"
+    },
+    {
+      "line": 12,
+      "start": 234,
+      "end": 241,
+      "label": "-tobs flag \u2014 value: 8",
+      "kind": "flag"
+    },
+    {
+      "line": 12,
+      "start": 242,
+      "end": 382,
+      "label": "-tmplt flag \u2014 value: /fred/oz005/users/hcombrin/PSRCHIVE_Tutorial/PulsarTimingTutorial_PSRCHIVE/../archives_PSRCHIVE_Tutorial/work/J0437-4715.template.std",
+      "kind": "flag"
+    },
+    {
+      "line": 12,
+      "start": 383,
+      "end": 392,
+      "label": "-gof flag \u2014 value: 4.84",
+      "kind": "flag"
+    },
+    {
+      "line": 12,
+      "start": 393,
+      "end": 403,
+      "label": "-nbin flag \u2014 value: 1024",
+      "kind": "flag"
+    },
+    {
+      "line": 12,
+      "start": 404,
+      "end": 410,
+      "label": "-nch flag \u2014 value: 1",
+      "kind": "flag"
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+filename   name   mjd   length   bw   freq   nchan   nbin   nsubint   npol   dm   rm   telescop   site
+J0437-4715_2024-07-25-12:13:23_zap.ar   J0437-4715   60516.509352   248.000   856.000   1283.582   1024   1024   INVALID   4   2.638490   0.155   MeerKAT   INVALID

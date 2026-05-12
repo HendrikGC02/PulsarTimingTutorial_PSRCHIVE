@@ -159,8 +159,18 @@ def main(argv):
     kind, in_path, out_path = argv[1], argv[2], argv[3]
     text = Path(in_path).read_text()
     if kind == "tim":
-        spans = [s for li, ln in enumerate(text.splitlines())
-                   for s in annot_tempo2_tim_line(ln, li)]
+        # The website only renders the first ~8 lines, and pat output is one
+        # TOA per (subint × channel) — hundreds of thousands of spans bloat
+        # the sidecar to >100MB.  Cap to the first N annotated rows.
+        TIM_ANNOT_LINES = 12
+        spans, kept = [], 0
+        for li, ln in enumerate(text.splitlines()):
+            row = annot_tempo2_tim_line(ln, li)
+            if row:
+                spans.extend(row)
+                kept += 1
+                if kept >= TIM_ANNOT_LINES:
+                    break
     elif kind == "vap":
         spans = annot_vap_table(text)
     elif kind == "psrstat":

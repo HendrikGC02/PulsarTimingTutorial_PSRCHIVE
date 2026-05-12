@@ -1,0 +1,2 @@
+filename   name   nbin   nchan   nsubint   npol   length   bw   dm
+J1909-3744.f128.ar   J1909-3744   1024   128   INVALID   4   504.000   856.000   10.390112

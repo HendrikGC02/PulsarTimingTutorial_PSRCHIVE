@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "spans": [
+    {
+      "line": 1,
+      "start": 0,
+      "end": 37,
+      "label": "filename \u2014 column from vap header",
+      "kind": "field"
+    },
+    {
+      "line": 1,
+      "start": 40,
+      "end": 50,
+      "label": "name \u2014 column from vap header",
+      "kind": "field"
+    },
+    {
+      "line": 1,
+      "start": 53,
+      "end": 65,
+      "label": "mjd \u2014 column from vap header",
+      "kind": "field"
+    },
+    {
+      "line": 1,
+      "start": 68,
+      "end": 75,
+      "label": "length \u2014 column from vap header",
+      "kind": "field"
+    },
+    {
+      "line": 1,
+      "start": 78,
+      "end": 85,
+      "label": "bw \u2014 column from vap header",
+      "kind": "field"
+    },
+    {
+      "line": 1,
+      "start": 88,
+      "end": 96,
+      "label": "freq \u2014 column from vap header",
+      "kind": "field"
+    },
+    {
+      "line": 1,
+      "start": 99,
+      "end": 103,
+      "label": "nchan \u2014 column from vap header",
+      "kind": "field"
+    },
+    {
+      "line": 1,
+      "start": 106,
+      "end": 110,
+      "label": "nbin \u2014 column from vap header",
+      "kind": "field"
+    },
+    {
+      "line": 1,
+      "start": 113,
+      "end": 120,
+      "label": "nsubint \u2014 column from vap header",
+      "kind": "field"
+    },
+    {
+      "line": 1,
+      "start": 123,
+      "end": 124,
+      "label": "npol \u2014 column from vap header",
+      "kind": "field"
+    },
+    {
+      "line": 1,
+      "start": 127,
+      "end": 136,
+      "label": "dm \u2014 column from vap header",
+      "kind": "field"
+    },
+    {
+      "line": 1,
+      "start": 139,
+      "end": 145,
+      "label": "rm \u2014 column from vap header",
+      "kind": "field"
+    },
+    {
+      "line": 1,
+      "start": 148,
+      "end": 155,
+      "label": "telescop \u2014 column from vap header",
+      "kind": "field"
+    },
+    {
+      "line": 1,
+      "start": 158,
+      "end": 165,
+      "label": "site \u2014 column from vap header",
+      "kind": "field"
+    }
+  ]
+}

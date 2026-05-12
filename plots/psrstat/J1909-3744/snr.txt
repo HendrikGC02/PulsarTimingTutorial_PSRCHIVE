@@ -1,0 +1,1 @@
+/fred/oz005/users/hcombrin/PSRCHIVE_Tutorial/PulsarTimingTutorial_PSRCHIVE/../archives_PSRCHIVE_Tutorial/J1909-3744_2024-07-25-00:04:55_zap.ar snr=198.625442504883 off:avg=3729.98186859527 off:rms=0.199301156532855

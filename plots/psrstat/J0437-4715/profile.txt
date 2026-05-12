@@ -1,0 +1,1 @@
+/fred/oz005/users/hcombrin/PSRCHIVE_Tutorial/PulsarTimingTutorial_PSRCHIVE/../archives_PSRCHIVE_Tutorial/J0437-4715_2024-07-25-12:13:23_zap.ar all:bin:mean=-

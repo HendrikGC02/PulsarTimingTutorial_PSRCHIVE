@@ -39,13 +39,418 @@
       "generated_at": "2026-05-11T19:54:20+10:00"
     },
     {
+      "path": "pam/J0437-4715/bscrunch-1024.meta.txt",
+      "archive": "J0437-4715",
+      "source": "vap of bscrunched",
+      "command": "vap -c \"name,nbin,nchan,nsubint,npol,length,bw,dm\" <result>.ar",
+      "sha256": "fa6ca7fe6005ca4b29f137c136384d6ee071bb6a4c949a77a58d3a6f5b713a1d",
+      "size_bytes": 159,
+      "generated_at": "2026-05-12T13:18:29+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/bscrunch-1024.png",
+      "archive": "J0437-4715",
+      "source": "pam --setnbin 1024",
+      "command": "pam --setnbin 1024 -e b1024 -u <dir> <src>; psrplot -g 1200x800 -p flux -jFT <result>.ar -D <png>/png",
+      "sha256": "6a83407be6530a374ad3c2f273c14b6a7d001be7e657853972044975e08c0225",
+      "size_bytes": 9433,
+      "generated_at": "2026-05-12T13:18:29+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/bscrunch-256.meta.txt",
+      "archive": "J0437-4715",
+      "source": "vap of bscrunched",
+      "command": "vap -c \"name,nbin,nchan,nsubint,npol,length,bw,dm\" <result>.ar",
+      "sha256": "e20b2e7f287554f1b29dd4d1306d8c565377edab1f2a1e1f5a2d897ae438c430",
+      "size_bytes": 157,
+      "generated_at": "2026-05-12T13:18:20+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/bscrunch-256.png",
+      "archive": "J0437-4715",
+      "source": "pam --setnbin 256",
+      "command": "pam --setnbin 256 -e b256 -u <dir> <src>; psrplot -g 1200x800 -p flux -jFT <result>.ar -D <png>/png",
+      "sha256": "97e98d29eeabb6839162f6f94ff80f8efc3dce379845379f46b80d57bfd0762c",
+      "size_bytes": 9360,
+      "generated_at": "2026-05-12T13:18:20+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/fscrunch-128.meta.txt",
+      "archive": "J0437-4715",
+      "source": "vap of fscrunched",
+      "command": "vap -c \"name,nbin,nchan,nsubint,npol,length,bw,dm\" <result>.ar",
+      "sha256": "2ad5110cbcdbed24066ffac30bc107e0de38a291c2e399d853f99539e7975ff2",
+      "size_bytes": 157,
+      "generated_at": "2026-05-12T13:17:52+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/fscrunch-128.png",
+      "archive": "J0437-4715",
+      "source": "pam --setnchn 128",
+      "command": "pam --setnchn 128 -e f128 -u <dir> <src>; psrplot -g 1200x800 -p freq <result>.ar -D <png>/png",
+      "sha256": "86e7f76ab1fdd72ecf2572d4be4a7a3613f9da8b782927831aa29f2cc799cba9",
+      "size_bytes": 71031,
+      "generated_at": "2026-05-12T13:17:52+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/fscrunch-32.meta.txt",
+      "archive": "J0437-4715",
+      "source": "vap of fscrunched",
+      "command": "vap -c \"name,nbin,nchan,nsubint,npol,length,bw,dm\" <result>.ar",
+      "sha256": "53fee10ca255f452d8b7dd0d6bb278e9dae1ec41c07bc36520e7411ddfd246b3",
+      "size_bytes": 155,
+      "generated_at": "2026-05-12T13:17:46+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/fscrunch-32.png",
+      "archive": "J0437-4715",
+      "source": "pam --setnchn 32",
+      "command": "pam --setnchn 32 -e f32 -u <dir> <src>; psrplot -g 1200x800 -p freq <result>.ar -D <png>/png",
+      "sha256": "53d33b12b110dc39b8595b3ffde424840be10934a6cd679f5267e11ec8ad8579",
+      "size_bytes": 23027,
+      "generated_at": "2026-05-12T13:17:46+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/fscrunch-8.meta.txt",
+      "archive": "J0437-4715",
+      "source": "vap of fscrunched",
+      "command": "vap -c \"name,nbin,nchan,nsubint,npol,length,bw,dm\" <result>.ar",
+      "sha256": "681381d196453844ecec790019b9af27883e8fb9f5967c4d12a190073b70e8f3",
+      "size_bytes": 153,
+      "generated_at": "2026-05-12T13:17:41+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/fscrunch-8.png",
+      "archive": "J0437-4715",
+      "source": "pam --setnchn 8",
+      "command": "pam --setnchn 8 -e f8 -u <dir> <src>; psrplot -g 1200x800 -p freq <result>.ar -D <png>/png",
+      "sha256": "4aa8ed844d267103cda0be9ce05cc9d552949994b7cbd24225d911299660cdc9",
+      "size_bytes": 11987,
+      "generated_at": "2026-05-12T13:17:41+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/tscrunch-1.meta.txt",
+      "archive": "J0437-4715",
+      "source": "vap of tscrunched",
+      "command": "vap -c \"name,nbin,nchan,nsubint,npol,length,bw,dm\" <result>.ar",
+      "sha256": "3f5e75eaf5a478fd9b4f40ce299d9edbc023c319e5a2f7b6217253322d36bb77",
+      "size_bytes": 156,
+      "generated_at": "2026-05-12T13:17:58+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/tscrunch-1.png",
+      "archive": "J0437-4715",
+      "source": "pam -T",
+      "command": "pam -T -e <ext> -u <dir> <src>; psrplot -g 1200x800 -p time <result>.ar -D <png>/png",
+      "sha256": "4f66dad189d392daaa1d533da152abfbf18f54a902c8fd8c31fe22123d88f45d",
+      "size_bytes": 7415,
+      "generated_at": "2026-05-12T13:17:58+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/tscrunch-16.meta.txt",
+      "archive": "J0437-4715",
+      "source": "vap of tscrunched",
+      "command": "vap -c \"name,nbin,nchan,nsubint,npol,length,bw,dm\" <result>.ar",
+      "sha256": "6798233413bfaa96fd0dad2df50d845f36c87a3bf0b919a2613f5fef7e9b608a",
+      "size_bytes": 157,
+      "generated_at": "2026-05-12T13:18:16+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/tscrunch-16.png",
+      "archive": "J0437-4715",
+      "source": "pam --setnsub 16",
+      "command": "pam --setnsub 16 -e <ext> -u <dir> <src>; psrplot -g 1200x800 -p time <result>.ar -D <png>/png",
+      "sha256": "ee08f71732e0e292284cb9cec0ae359a98269e28b6cd4905293d6960a78b0c75",
+      "size_bytes": 7226,
+      "generated_at": "2026-05-12T13:18:16+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/tscrunch-4.meta.txt",
+      "archive": "J0437-4715",
+      "source": "vap of tscrunched",
+      "command": "vap -c \"name,nbin,nchan,nsubint,npol,length,bw,dm\" <result>.ar",
+      "sha256": "46d25ec9ec1653a2f5eb7a376619a4c9184b6a3b5be90c4254d75cd09349b342",
+      "size_bytes": 156,
+      "generated_at": "2026-05-12T13:18:04+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/tscrunch-4.png",
+      "archive": "J0437-4715",
+      "source": "pam --setnsub 4",
+      "command": "pam --setnsub 4 -e <ext> -u <dir> <src>; psrplot -g 1200x800 -p time <result>.ar -D <png>/png",
+      "sha256": "6c65e80d0c40ff4e32e06daae8b7c111b92052728fd838c4d68c70017c0529a4",
+      "size_bytes": 7263,
+      "generated_at": "2026-05-12T13:18:04+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/bscrunch-1024.meta.txt",
+      "archive": "J1909-3744",
+      "source": "vap of bscrunched",
+      "command": "vap -c \"name,nbin,nchan,nsubint,npol,length,bw,dm\" <result>.ar",
+      "sha256": "bc6081027fc8421ccdf0298b2305e830869d48b372fe9d2fb7107e55e95ca34a",
+      "size_bytes": 160,
+      "generated_at": "2026-05-12T13:20:06+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/bscrunch-1024.png",
+      "archive": "J1909-3744",
+      "source": "pam --setnbin 1024",
+      "command": "pam --setnbin 1024 -e b1024 -u <dir> <src>; psrplot -g 1200x800 -p flux -jFT <result>.ar -D <png>/png",
+      "sha256": "c218b08c4861199791005ef565131f246e412e311f98b3f16dec8f6156311101",
+      "size_bytes": 10473,
+      "generated_at": "2026-05-12T13:20:06+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/bscrunch-256.meta.txt",
+      "archive": "J1909-3744",
+      "source": "vap of bscrunched",
+      "command": "vap -c \"name,nbin,nchan,nsubint,npol,length,bw,dm\" <result>.ar",
+      "sha256": "f95c4e1facb64910a393ea9a05e71564bc2b5cb34a09a628d32e779c3c954d5c",
+      "size_bytes": 158,
+      "generated_at": "2026-05-12T13:19:46+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/bscrunch-256.png",
+      "archive": "J1909-3744",
+      "source": "pam --setnbin 256",
+      "command": "pam --setnbin 256 -e b256 -u <dir> <src>; psrplot -g 1200x800 -p flux -jFT <result>.ar -D <png>/png",
+      "sha256": "77d5b18187e74db6eaacb823f2d53705d4a0668bb6eeabaf05c5fbbbf961cd5a",
+      "size_bytes": 8835,
+      "generated_at": "2026-05-12T13:19:46+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/fscrunch-128.meta.txt",
+      "archive": "J1909-3744",
+      "source": "vap of fscrunched",
+      "command": "vap -c \"name,nbin,nchan,nsubint,npol,length,bw,dm\" <result>.ar",
+      "sha256": "73fe1f648587127542e17e062a28a92793f7c7b7f45708e61df9079aba3e0927",
+      "size_bytes": 158,
+      "generated_at": "2026-05-12T13:19:02+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/fscrunch-128.png",
+      "archive": "J1909-3744",
+      "source": "pam --setnchn 128",
+      "command": "pam --setnchn 128 -e f128 -u <dir> <src>; psrplot -g 1200x800 -p freq <result>.ar -D <png>/png",
+      "sha256": "d726165a0393e8f3d1caf9c153ba4c7ceba3caee1031098efce80ce838dc989d",
+      "size_bytes": 95143,
+      "generated_at": "2026-05-12T13:19:02+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/fscrunch-32.meta.txt",
+      "archive": "J1909-3744",
+      "source": "vap of fscrunched",
+      "command": "vap -c \"name,nbin,nchan,nsubint,npol,length,bw,dm\" <result>.ar",
+      "sha256": "3dff781937aff8e16c13a59c55e827a84be159adf760386ef0c45b0bd4845d48",
+      "size_bytes": 156,
+      "generated_at": "2026-05-12T13:18:49+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/fscrunch-32.png",
+      "archive": "J1909-3744",
+      "source": "pam --setnchn 32",
+      "command": "pam --setnchn 32 -e f32 -u <dir> <src>; psrplot -g 1200x800 -p freq <result>.ar -D <png>/png",
+      "sha256": "85ab844f47c34646b0da59e7c85ebbb076d1f6668e11fb540c63f5f97f9e3310",
+      "size_bytes": 32513,
+      "generated_at": "2026-05-12T13:18:49+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/fscrunch-8.meta.txt",
+      "archive": "J1909-3744",
+      "source": "vap of fscrunched",
+      "command": "vap -c \"name,nbin,nchan,nsubint,npol,length,bw,dm\" <result>.ar",
+      "sha256": "24cdabd100d21e3bc124eb2b3b9f29aac6e37ac3b5abb1eaf4f3a44b6fcf87c7",
+      "size_bytes": 154,
+      "generated_at": "2026-05-12T13:18:39+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/fscrunch-8.png",
+      "archive": "J1909-3744",
+      "source": "pam --setnchn 8",
+      "command": "pam --setnchn 8 -e f8 -u <dir> <src>; psrplot -g 1200x800 -p freq <result>.ar -D <png>/png",
+      "sha256": "21647d738f273d02663dadadce6e40ccb85e37c5253c1d58cc62646c3f8089c4",
+      "size_bytes": 15201,
+      "generated_at": "2026-05-12T13:18:39+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/tscrunch-1.meta.txt",
+      "archive": "J1909-3744",
+      "source": "vap of tscrunched",
+      "command": "vap -c \"name,nbin,nchan,nsubint,npol,length,bw,dm\" <result>.ar",
+      "sha256": "d1447f7f6b78bcb93a0f90b405534a9a9b4bde4ddc3717d4773fc93fcf009c25",
+      "size_bytes": 157,
+      "generated_at": "2026-05-12T13:19:12+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/tscrunch-1.png",
+      "archive": "J1909-3744",
+      "source": "pam -T",
+      "command": "pam -T -e <ext> -u <dir> <src>; psrplot -g 1200x800 -p time <result>.ar -D <png>/png",
+      "sha256": "c56dd24dd1ccae9d6d27467ac83ed4b8e00c20e07e4be8a51c70e2332874e40a",
+      "size_bytes": 7412,
+      "generated_at": "2026-05-12T13:19:12+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/tscrunch-16.meta.txt",
+      "archive": "J1909-3744",
+      "source": "vap of tscrunched",
+      "command": "vap -c \"name,nbin,nchan,nsubint,npol,length,bw,dm\" <result>.ar",
+      "sha256": "58af83e457537a9750f9570838750c6a5c422f4b10b90df519d766ac98cfd40a",
+      "size_bytes": 158,
+      "generated_at": "2026-05-12T13:19:40+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/tscrunch-16.png",
+      "archive": "J1909-3744",
+      "source": "pam --setnsub 16",
+      "command": "pam --setnsub 16 -e <ext> -u <dir> <src>; psrplot -g 1200x800 -p time <result>.ar -D <png>/png",
+      "sha256": "c4a4171379822ec9853e33ec5e484e43a7764fa7242f1f74cff010c2372970b0",
+      "size_bytes": 7251,
+      "generated_at": "2026-05-12T13:19:40+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/tscrunch-4.meta.txt",
+      "archive": "J1909-3744",
+      "source": "vap of tscrunched",
+      "command": "vap -c \"name,nbin,nchan,nsubint,npol,length,bw,dm\" <result>.ar",
+      "sha256": "957c4d81181ee56c4e041b17c464f7df629c5c62d9df43c4a95417a3a60677e1",
+      "size_bytes": 157,
+      "generated_at": "2026-05-12T13:19:23+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/tscrunch-4.png",
+      "archive": "J1909-3744",
+      "source": "pam --setnsub 4",
+      "command": "pam --setnsub 4 -e <ext> -u <dir> <src>; psrplot -g 1200x800 -p time <result>.ar -D <png>/png",
+      "sha256": "b369c7dd1b6f9c4124d9e95c2a4c0cf54f2317cb357d2eefa3e66886864da297",
+      "size_bytes": 7276,
+      "generated_at": "2026-05-12T13:19:23+10:00"
+    },
+    {
+      "path": "pat/J0437-4715/toas.tim",
+      "archive": "J0437-4715",
+      "source": "pat \u2192 tempo2 IPTA",
+      "command": "pat -s <template>.std -A FDM -f 'tempo2 IPTA' <src> > <out>/toas.tim",
+      "sha256": "4585214e4b0df50006f9490817b7ccbd9594d417c472413b37c809c1e7017d9a",
+      "size_bytes": 11914618,
+      "generated_at": "2026-05-12T13:23:41+10:00"
+    },
+    {
+      "path": "pat/J1909-3744/toas.tim",
+      "archive": "J1909-3744",
+      "source": "pat \u2192 tempo2 IPTA",
+      "command": "pat -s <template>.std -A FDM -f 'tempo2 IPTA' <src> > <out>/toas.tim",
+      "sha256": "4b6539e050754cd3ef808c8aab3d6c5fde69ebc0fbbff9f5d70a5fa48e47d134",
+      "size_bytes": 23511379,
+      "generated_at": "2026-05-12T13:28:03+10:00"
+    },
+    {
       "path": "pav/J0437-4715/dynamic__jd.png",
       "archive": "J0437-4715",
-      "source": "archives/J0437-4715_2024-07-25-12:13:23_zap.ar",
-      "command": "pav -DFTp -j D archives/J0437-4715_2024-07-25-12:13:23_zap.ar -g plots/pav/J0437-4715/dynamic__jd.png/PNG",
+      "source": "J0437-4715_2024-07-25-12:13:23_zap.ar",
+      "command": "pav -DFTp -j D <src> -g <out>/PNG",
       "sha256": "b4ce2d956a1172661181ff5ccd5a0dbb013df9ab531bd5f50586583d16a02c24",
       "size_bytes": 7809,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-12T13:14:57+10:00"
+    },
+    {
+      "path": "pav/J0437-4715/stack__jd.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_2024-07-25-12:13:23_zap.ar",
+      "command": "pav -GTp -j D <src> -g <out>/PNG",
+      "sha256": "e79f2e8259d65eb9e062a4a90c4b7edc45b2aff4397965edcf837e2eee866a4c",
+      "size_bytes": 106918,
+      "generated_at": "2026-05-12T13:15:03+10:00"
+    },
+    {
+      "path": "pav/J1909-3744/dynamic__jd.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_2024-07-25-00:04:55_zap.ar",
+      "command": "pav -DFTp -j D <src> -g <out>/PNG",
+      "sha256": "9ed935a2036f26a542aaf4fc923602a77c14247da77260f15d51a898e1cf3444",
+      "size_bytes": 7718,
+      "generated_at": "2026-05-12T13:15:26+10:00"
+    },
+    {
+      "path": "pav/J1909-3744/stack__jd.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_2024-07-25-00:04:55_zap.ar",
+      "command": "pav -GTp -j D <src> -g <out>/PNG",
+      "sha256": "07abfa56d790560d7e11ef44f8a34743712b02c883fb7f1330ac7338441a59d7",
+      "size_bytes": 173880,
+      "generated_at": "2026-05-12T13:15:36+10:00"
+    },
+    {
+      "path": "paz/J0437-4715/auto.png",
+      "archive": "J0437-4715",
+      "source": "paz -r",
+      "command": "paz -r -e <ext> -O <dir> <src>; psrplot -g 1200x800 -p freq <r>.ar -D <out>/png",
+      "sha256": "fef58d1204403e07228b1907f98556d581a5afb238f223577d62edbb828fd439",
+      "size_bytes": 215019,
+      "generated_at": "2026-05-12T13:21:39+10:00"
+    },
+    {
+      "path": "paz/J0437-4715/badsub.png",
+      "archive": "J0437-4715",
+      "source": "paz -w \"0 5\"",
+      "command": "paz -w \"0 5\" -e <ext> -O <dir> <src>; psrplot -g 1200x800 -p time <r>.ar -D <out>/png",
+      "sha256": "40ac791d767d7a6ad6008ac72052c02fa705bd31e93f2c5967b02c6b136dc43c",
+      "size_bytes": 7269,
+      "generated_at": "2026-05-12T13:22:24+10:00"
+    },
+    {
+      "path": "paz/J0437-4715/freqrange.png",
+      "archive": "J0437-4715",
+      "source": "paz -F \"1200 1280\"",
+      "command": "paz -F \"1200 1280\" -e <ext> -O <dir> <src>; psrplot -g 1200x800 -p freq <r>.ar -D <out>/png",
+      "sha256": "541d404103557d9745a7964a7ddfc831e06c7859a82f78a3f6c2279ce712eaa9",
+      "size_bytes": 266224,
+      "generated_at": "2026-05-12T13:22:09+10:00"
+    },
+    {
+      "path": "paz/J0437-4715/manual-chans.png",
+      "archive": "J0437-4715",
+      "source": "paz -z \"100 101 102\"",
+      "command": "paz -z \"100 101 102\" -e <ext> -O <dir> <src>; psrplot -g 1200x800 -p freq <r>.ar -D <out>/png",
+      "sha256": "0dac5fed50d1b406585a297c33078e37e0a63d82a30b8c7f20bf4a3d2937be99",
+      "size_bytes": 292794,
+      "generated_at": "2026-05-12T13:21:54+10:00"
+    },
+    {
+      "path": "paz/J1909-3744/auto.png",
+      "archive": "J1909-3744",
+      "source": "paz -r",
+      "command": "paz -r -e <ext> -O <dir> <src>; psrplot -g 1200x800 -p freq <r>.ar -D <out>/png",
+      "sha256": "f0cb81c3367689c27b2bb28c567fa414575090bd79fcf512b382fa4dec702184",
+      "size_bytes": 256388,
+      "generated_at": "2026-05-12T13:22:56+10:00"
+    },
+    {
+      "path": "paz/J1909-3744/badsub.png",
+      "archive": "J1909-3744",
+      "source": "paz -w \"0 5\"",
+      "command": "paz -w \"0 5\" -e <ext> -O <dir> <src>; psrplot -g 1200x800 -p time <r>.ar -D <out>/png",
+      "sha256": "64a6a006b54cf4f1c9dd9ba7aa213e5ad700335925c9c0649bce68ce2c736ccf",
+      "size_bytes": 7306,
+      "generated_at": "2026-05-12T13:24:30+10:00"
+    },
+    {
+      "path": "paz/J1909-3744/freqrange.png",
+      "archive": "J1909-3744",
+      "source": "paz -F \"1200 1280\"",
+      "command": "paz -F \"1200 1280\" -e <ext> -O <dir> <src>; psrplot -g 1200x800 -p freq <r>.ar -D <out>/png",
+      "sha256": "88f60902cb3b550a34e8b9401b77aaedcb8e5d99bc622c6e84b4da0e2dbcbb2d",
+      "size_bytes": 321555,
+      "generated_at": "2026-05-12T13:23:59+10:00"
+    },
+    {
+      "path": "paz/J1909-3744/manual-chans.png",
+      "archive": "J1909-3744",
+      "source": "paz -z \"100 101 102\"",
+      "command": "paz -z \"100 101 102\" -e <ext> -O <dir> <src>; psrplot -g 1200x800 -p freq <r>.ar -D <out>/png",
+      "sha256": "a6cc8171f6c00d8604134f3cc6172a84ae46843091220e9f8df2d9510821ad63",
+      "size_bytes": 341351,
+      "generated_at": "2026-05-12T13:23:27+10:00"
     },
     {
       "path": "pipelines/paz+pamFT+stokes/final.png",
@@ -181,6 +586,24 @@
       "sha256": "5ab36d857d9911c24d67a0ca3f500eef67417dd50b8b9a7c6884dcb49f4fa4ed",
       "size_bytes": 9252598,
       "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "psradd/J0437-4715/combine.meta.txt",
+      "archive": "J0437-4715",
+      "source": "psradd ep1+ep2",
+      "command": "psradd -o <combined>.ar <ep1>.ar <ep2>.ar; vap -c \"name,nbin,...\" <combined>.ar",
+      "sha256": "4c46dd9774b63cb59d3eed6eef45e4d192c8701f807ce62b109ae902ba719356",
+      "size_bytes": 162,
+      "generated_at": "2026-05-12T13:28:04+10:00"
+    },
+    {
+      "path": "psradd/J1909-3744/combine.meta.txt",
+      "archive": "J1909-3744",
+      "source": "psradd ep1+ep2",
+      "command": "psradd -o <combined>.ar <ep1>.ar <ep2>.ar; vap -c \"name,nbin,...\" <combined>.ar",
+      "sha256": "779e581d097b86136f497f87c7ad9d6eeed8333b55600f4b5f82b4fc077cdcf8",
+      "size_bytes": 164,
+      "generated_at": "2026-05-12T13:28:34+10:00"
     },
     {
       "path": "psrplot/J0437-4715/flux__jdft.png",
@@ -343,6 +766,78 @@
       "sha256": "41d7fc89db7322a56b70cecfe825dfb9d7ac76fde05503b61bcfedf8a4adae5f",
       "size_bytes": 52049,
       "generated_at": "2026-05-11T19:54:20+10:00"
+    },
+    {
+      "path": "psrstat/J0437-4715/profile.txt",
+      "archive": "J0437-4715",
+      "source": "psrstat per-bin mean",
+      "command": "psrstat -jFTp -c \"all:bin:mean\" <src> > <out>/profile.txt",
+      "sha256": "6dfb6bdf03207f52303084c964d8f7298708e95cbb9819a6c6a71d62b23c853d",
+      "size_bytes": 158,
+      "generated_at": "2026-05-12T13:20:58+10:00"
+    },
+    {
+      "path": "psrstat/J0437-4715/snr.txt",
+      "archive": "J0437-4715",
+      "source": "psrstat snr",
+      "command": "psrstat -jFT -c \"snr,off:avg,off:rms\" <src> > <out>/snr.txt",
+      "sha256": "d4c63face1c7edaa55df47c0d3d3b1393098a1d79f3076b7c6e52ddad8cb1463",
+      "size_bytes": 214,
+      "generated_at": "2026-05-12T13:20:54+10:00"
+    },
+    {
+      "path": "psrstat/J1909-3744/profile.txt",
+      "archive": "J1909-3744",
+      "source": "psrstat per-bin mean",
+      "command": "psrstat -jFTp -c \"all:bin:mean\" <src> > <out>/profile.txt",
+      "sha256": "ac95d27689042d9c467031f61e99ab41321b0ec6873bbe5e32740d51a65be4a1",
+      "size_bytes": 158,
+      "generated_at": "2026-05-12T13:21:17+10:00"
+    },
+    {
+      "path": "psrstat/J1909-3744/snr.txt",
+      "archive": "J1909-3744",
+      "source": "psrstat snr",
+      "command": "psrstat -jFT -c \"snr,off:avg,off:rms\" <src> > <out>/snr.txt",
+      "sha256": "806c1477e1eccb55abffe0343ef672d114bd0c9954077c1b3dd107953d3cb9de",
+      "size_bytes": 215,
+      "generated_at": "2026-05-12T13:21:07+10:00"
+    },
+    {
+      "path": "vap/J0437-4715/all.txt",
+      "archive": "J0437-4715",
+      "source": "vap full",
+      "command": "vap -c \"name,mjd,length,bw,freq,nchan,nbin,nsubint,npol,dm,rm,telescop,site\" <src> > <out>/all.txt",
+      "sha256": "7937ea8c6047a339e31f77c86ee3a2662b8378a30bc57875e6859043337de6e3",
+      "size_bytes": 267,
+      "generated_at": "2026-05-12T13:20:48+10:00"
+    },
+    {
+      "path": "vap/J0437-4715/header.txt",
+      "archive": "J0437-4715",
+      "source": "vap compact",
+      "command": "vap -c \"name,nbin,nchan,nsubint,length,bw\" <src> > <out>/header.txt",
+      "sha256": "21ac5a67a1832bbc7e0c6f3194cac1ee3bc7cac131d9b99c2a3c26a51934ea7e",
+      "size_bytes": 150,
+      "generated_at": "2026-05-12T13:20:48+10:00"
+    },
+    {
+      "path": "vap/J1909-3744/all.txt",
+      "archive": "J1909-3744",
+      "source": "vap full",
+      "command": "vap -c \"name,mjd,length,bw,freq,nchan,nbin,nsubint,npol,dm,rm,telescop,site\" <src> > <out>/all.txt",
+      "sha256": "b28a132d696634467b5205542b5aced7d68be9ea0aa76b32afd056b10315502d",
+      "size_bytes": 269,
+      "generated_at": "2026-05-12T13:20:49+10:00"
+    },
+    {
+      "path": "vap/J1909-3744/header.txt",
+      "archive": "J1909-3744",
+      "source": "vap compact",
+      "command": "vap -c \"name,nbin,nchan,nsubint,length,bw\" <src> > <out>/header.txt",
+      "sha256": "e2a8446839b14f3cd59ca92783883f455a7578863b37cea0ef80cc75b6d2e445",
+      "size_bytes": 150,
+      "generated_at": "2026-05-12T13:20:49+10:00"
     }
   ]
 }

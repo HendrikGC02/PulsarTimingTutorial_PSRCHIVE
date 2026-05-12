@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "spans": [
+    {
+      "line": 1,
+      "start": 0,
+      "end": 18,
+      "label": "filename \u2014 column from vap header",
+      "kind": "field"
+    },
+    {
+      "line": 1,
+      "start": 21,
+      "end": 31,
+      "label": "name \u2014 column from vap header",
+      "kind": "field"
+    },
+    {
+      "line": 1,
+      "start": 34,
+      "end": 37,
+      "label": "nbin \u2014 column from vap header",
+      "kind": "field"
+    },
+    {
+      "line": 1,
+      "start": 40,
+      "end": 44,
+      "label": "nchan \u2014 column from vap header",
+      "kind": "field"
+    },
+    {
+      "line": 1,
+      "start": 47,
+      "end": 54,
+      "label": "nsubint \u2014 column from vap header",
+      "kind": "field"
+    },
+    {
+      "line": 1,
+      "start": 57,
+      "end": 58,
+      "label": "npol \u2014 column from vap header",
+      "kind": "field"
+    },
+    {
+      "line": 1,
+      "start": 61,
+      "end": 68,
+      "label": "length \u2014 column from vap header",
+      "kind": "field"
+    },
+    {
+      "line": 1,
+      "start": 71,
+      "end": 78,
+      "label": "bw \u2014 column from vap header",
+      "kind": "field"
+    },
+    {
+      "line": 1,
+      "start": 81,
+      "end": 90,
+      "label": "dm \u2014 column from vap header",
+      "kind": "field"
+    }
+  ]
+}
