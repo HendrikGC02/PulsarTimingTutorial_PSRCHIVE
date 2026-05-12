@@ -47,19 +47,23 @@
       "examples": [
         {
           "t": "Integrated profile",
-          "c": "psrplot -p flux -jFT file.ar"
+          "c": "psrplot -p flux -jFT file.ar",
+          "img": "plots/psrplot/J0437-4715/flux__jft.png"
         },
         {
           "t": "Phase \u00d7 freq, cleaned",
-          "c": "psrplot -p freq -jD file.ar"
+          "c": "psrplot -p freq -jD file.ar",
+          "img": "plots/psrplot/J0437-4715/freq__jd.png"
         },
         {
           "t": "Phase \u00d7 time",
-          "c": "psrplot -p time -jF file.ar"
+          "c": "psrplot -p time -jF file.ar",
+          "img": "plots/psrplot/J0437-4715/time__jf.png"
         },
         {
           "t": "Stokes I, Q, U, V",
-          "c": "psrplot -p stokes -jFT file.ar"
+          "c": "psrplot -p stokes -jFT file.ar",
+          "img": "plots/psrplot/J0437-4715/stokes__jft.png"
         },
         {
           "t": "Save to PNG",
@@ -183,7 +187,8 @@
       "examples": [
         {
           "t": "Dynamic spectrum",
-          "c": "pav -DFTp -j D file.ar"
+          "c": "pav -DFTp -j D file.ar",
+          "img": "plots/pav/J0437-4715/dynamic__jd.png"
         }
       ],
       "related": [
@@ -415,7 +420,8 @@
       "examples": [
         {
           "t": "Sum everything in time",
-          "c": "pam -T -e Tscr file.ar"
+          "c": "pam -T -e Tscr file.ar",
+          "img": "plots/pipelines/psradd+pamT+psrplot/added-tscr__step3.png"
         },
         {
           "t": "fscrunch by 4",
@@ -644,7 +650,8 @@
       "examples": [
         {
           "t": "Default zap \u2192 .zap",
-          "c": "paz -r -e zap file.ar"
+          "c": "paz -r -e zap file.ar",
+          "img": "plots/landing/rfi-after.png"
         }
       ],
       "related": [
@@ -753,7 +760,8 @@
       "examples": [
         {
           "t": "Combine two epochs",
-          "c": "psradd -o sum.ar ep1.ar ep2.ar"
+          "c": "psradd -o sum.ar ep1.ar ep2.ar",
+          "img": "plots/pipelines/psradd+pamT+psrplot/added__step2.png"
         }
       ],
       "related": [
@@ -914,7 +922,8 @@
       "examples": [
         {
           "t": "Generate TOA",
-          "c": "pat -s template.std file.ar > toa.tim"
+          "c": "pat -s template.std file.ar > toa.tim",
+          "img": "plots/landing/residuals-example.png"
         }
       ],
       "related": [
@@ -1172,7 +1181,8 @@
       "examples": [
         {
           "t": "Smooth to .sm",
-          "c": "psrsmooth -W file.FT"
+          "c": "psrsmooth -W file.FT",
+          "img": "plots/pipelines/template+pat/template.png"
         }
       ],
       "related": [

@@ -7,11 +7,60 @@ const { useEffect, useState, useMemo } = React;
 const V2_RPG_W = 1240;
 const V2_RPG_H = 1080;
 
+/* Tiny image-with-graceful-404 component for example thumbnails. */
+function ExampleThumb({ src, alt, onOpen }) {
+  const [ok, setOk] = useState(true);
+  if (!ok) return null;
+  return (
+    <button
+      onClick={onOpen}
+      title="click to enlarge"
+      style={{
+        marginTop: 10, padding: 0, border: "1px solid var(--ink-4)",
+        background: "#000", cursor: "zoom-in", borderRadius: 4,
+        display: "block", maxWidth: 280, lineHeight: 0,
+      }}>
+      <img src={src} alt={alt} onError={() => setOk(false)}
+           style={{ display: "block", maxWidth: "100%", maxHeight: 160 }} />
+    </button>
+  );
+}
+
+/* Full-screen lightbox.  Esc / backdrop-click to close. */
+function Lightbox({ src, caption, onClose }) {
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+  if (!src) return null;
+  return (
+    <div onClick={onClose}
+      style={{
+        position: "fixed", inset: 0, background: "rgba(0,0,0,.86)",
+        zIndex: 1000, display: "flex", flexDirection: "column",
+        alignItems: "center", justifyContent: "center", padding: 32,
+        cursor: "zoom-out",
+      }}>
+      {caption && (
+        <div className="sk-code" style={{ marginBottom: 14, fontSize: 12, maxWidth: 900, background: "#0d1714", color: "#cfe3d7" }}>
+          <span className="prompt" style={{ color: "#4dbb91" }}>$</span> {caption}
+        </div>
+      )}
+      <img src={src} alt="" style={{ maxWidth: "90vw", maxHeight: "80vh", boxShadow: "0 8px 40px rgba(0,0,0,.6)" }} />
+      <div style={{ marginTop: 12, color: "#9fbeae", fontFamily: "var(--font-mono)", fontSize: 11 }}>
+        click anywhere or press <kbd style={{ background:"#1f3a30", padding:"1px 5px", borderRadius:3, color:"#d5ecdd" }}>Esc</kbd> to close
+      </div>
+    </div>
+  );
+}
+
 function ReferenceV2() {
   const [data, setData] = useState(null);
   const [err, setErr] = useState(null);
   const [active, setActive] = useState("psrplot");
   const [q, setQ] = useState("");
+  const [lightbox, setLightbox] = useState(null); // { src, caption } | null
 
   useEffect(() => {
     fetch("data/commands.json")
@@ -137,6 +186,13 @@ function ReferenceV2() {
                     <div className="sk-code" style={{ marginTop: 6, fontSize: 11 }}>
                       <span className="prompt">$</span> {e.c}
                     </div>
+                    {e.img && (
+                      <ExampleThumb
+                        src={e.img}
+                        alt={e.t}
+                        onOpen={() => setLightbox({ src: e.img, caption: e.c })}
+                      />
+                    )}
                   </div>
                 ))}
               </div>
@@ -171,6 +227,11 @@ function ReferenceV2() {
         </div>
       </div>
       <SiteFooter data={data} />
+      <Lightbox
+        src={lightbox?.src}
+        caption={lightbox?.caption}
+        onClose={() => setLightbox(null)}
+      />
     </div>
   );
 }

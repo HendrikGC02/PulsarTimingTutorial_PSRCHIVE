@@ -81,26 +81,52 @@ function Annotate({ x, y, w = 110, h = 50, dir = "tl", label, color = "var(--gre
   );
 }
 
-// Diagram: pulse profile (squiggle on dark bg or paper)
-function PulseProfile({ w = 220, h = 80, dark = false, color = "var(--green)" }) {
+/* realisticProfile — returns intensity in [0,1] for phase in [0,1].
+   Modelled on a J0437-style MSP profile: a narrow main peak, a leading
+   shoulder, a trailing kink, and a faint scattering tail.  Used wherever
+   the tutorial shows "an integrated pulse profile" so it doesn't read as
+   a plain gaussian. */
+function realisticProfile(phase) {
+  // wrap into [0,1)
+  let p = phase - Math.floor(phase);
+  // Components (centre, sigma, amplitude).  Asymmetric: main peak narrow,
+  // shoulder slightly wider on the trailing side.
+  const G = (c, s, a) => a * Math.exp(-Math.pow((p - c) / s, 2));
+  let v = 0;
+  v += G(0.395, 0.018, 0.32); // leading shoulder
+  v += G(0.420, 0.013, 1.00); // main peak
+  v += G(0.448, 0.020, 0.58); // trailing shoulder
+  v += G(0.475, 0.030, 0.22); // soft trailing bump
+  // exponential scattering tail (only after main peak)
+  if (p > 0.42 && p < 0.62) {
+    v += 0.16 * Math.exp(-(p - 0.42) / 0.045);
+  }
+  // tiny interpulse around phase 0.92 (very low amplitude, optional)
+  v += G(0.915, 0.012, 0.06);
+  return Math.max(0, Math.min(1.0, v));
+}
+
+// Diagram: pulse profile (realistic asymmetric J0437-style shape)
+function PulseProfile({ w = 220, h = 80, dark = false, color = "var(--green)", noise = 0 }) {
+  const N = 200;
+  const baseline = h - 12;
+  const peak = 8;
+  const span = baseline - peak;
+  const pts = [];
+  for (let i = 0; i < N; i++) {
+    const phase = i / (N - 1);
+    let v = realisticProfile(phase);
+    if (noise > 0) v += (Math.sin(i * 13.7) + Math.cos(i * 27.1)) * 0.5 * noise;
+    v = Math.max(0, Math.min(1, v));
+    const x = 4 + (w - 8) * phase;
+    const y = baseline - v * span;
+    pts.push(`${i === 0 ? "M" : "L"} ${x.toFixed(2)} ${y.toFixed(2)}`);
+  }
   return (
     <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={{ display: "block" }}>
       {dark && <rect width={w} height={h} fill="var(--plot-bg)" />}
-      {/* baseline */}
-      <line x1="4" y1={h - 12} x2={w - 4} y2={h - 12} stroke={dark ? "#555" : "#999"} strokeWidth="1" strokeDasharray="3 3" />
-      {/* profile */}
-      <path
-        d={`M 4 ${h - 14}
-            L ${w * 0.30} ${h - 14}
-            C ${w * 0.34} ${h - 14}, ${w * 0.36} 8, ${w * 0.42} 8
-            C ${w * 0.46} 8, ${w * 0.48} ${h - 14}, ${w * 0.52} ${h - 14}
-            L ${w - 4} ${h - 14}`}
-        fill="none"
-        stroke={dark ? "#e08545" : color}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <line x1="4" y1={baseline} x2={w - 4} y2={baseline} stroke={dark ? "#555" : "#999"} strokeWidth="1" strokeDasharray="3 3" />
+      <path d={pts.join(" ")} fill="none" stroke={dark ? "#e08545" : color} strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -306,8 +332,24 @@ function SiteFooter({ data = null }) {
           </div>
         </div>
       </div>
+      {/* author byline */}
+      <div style={{
+        marginTop: 26, paddingTop: 14, borderTop: "1px dashed var(--ink-4)",
+        fontFamily: "var(--font-body)", fontSize: 13, color: "var(--ink-2)",
+        lineHeight: 1.55,
+      }}>
+        <div style={{ fontFamily: "var(--font-display)", fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: 1.4, color: "var(--ink-3)" }}>by</div>
+        <div style={{ marginTop: 4 }}>
+          <b>Hendrik Combrinck</b>
+          {" — "}
+          Swinburne University of Technology
+          {"; "}
+          <span style={{ color: "var(--ink-3)" }}>ARC Centre of Excellence for Gravitational Wave Discovery (OzGrav)</span>
+        </div>
+      </div>
+
       <div className="sk-row" style={{
-        marginTop: 28, paddingTop: 14, borderTop: "1px dashed var(--ink-4)",
+        marginTop: 14, paddingTop: 0,
         fontSize: 11.5, color: "var(--ink-3)", flexWrap: "wrap", gap: 14, alignItems: "center",
         fontFamily: "var(--font-body)",
       }}>
@@ -328,7 +370,7 @@ function SiteFooter({ data = null }) {
    DedispCurves — ν⁻² sweep before / after dedispersion
    A small animated diagram for the dedispersion section.
    ============================================================ */
-function DedispCurves({ w = 460, h = 240 }) {
+function DedispCurves({ w = 460, h = 240, showIntegrated = true }) {
   const [t, setT] = useState(0); // 0 = dispersed, 1 = dedispersed
   const [playing, setPlaying] = useState(false);
   useEffect(() => {
@@ -409,6 +451,61 @@ function DedispCurves({ w = 460, h = 240 }) {
           </text>
         </g>
       </svg>
+      {showIntegrated && (() => {
+        // Integrated profile: sum across frequency channels.
+        // When dispersed (t=0), the per-channel pulses are spread out in
+        // phase, so summing produces a broad, low-amplitude bump.
+        // When dedispersed (t=1), they all align and we recover the sharp
+        // realistic profile.
+        const IH = 72;          // panel height
+        const NPH = 240;        // phase samples
+        const NCH = 32;         // channels to sum
+        const baseline = IH - 12;
+        // build two profiles and interpolate
+        const dispBuf = new Array(NPH).fill(0);
+        const dedispBuf = new Array(NPH).fill(0);
+        for (let i = 0; i < NPH; i++) {
+          const phase = i / NPH;
+          // dedispersed = realisticProfile, each channel adds the same
+          dedispBuf[i] = realisticProfile(phase);
+          // dispersed = each channel shifted by f² * 0.28, summed
+          let s = 0;
+          for (let c = 0; c < NCH; c++) {
+            const f = (c + 0.5) / NCH;
+            const shifted = phase - f * f * 0.28;
+            s += realisticProfile(shifted);
+          }
+          dispBuf[i] = s / NCH; // mean (gives broad smeared shape)
+        }
+        // peak amplitude is much smaller when dispersed → normalise both
+        // to their own peak so the user sees the SHAPE collapse, but also
+        // show the actual S/N gain via a small caption.
+        const peakDisp = Math.max(...dispBuf);
+        const peakDed = Math.max(...dedispBuf);
+        const snrGain = peakDed / Math.max(0.001, peakDisp);
+        const pathFor = (buf) => {
+          const pts = [];
+          for (let i = 0; i < NPH; i++) {
+            const x = 36 + (w - 56) * (i / NPH);
+            // use lerp of dispBuf and dedispBuf based on t
+            const v = (1 - t) * dispBuf[i] + t * dedispBuf[i];
+            const norm = (1 - t) * peakDisp + t * peakDed;
+            const y = baseline - (v / Math.max(0.001, norm)) * (baseline - 8);
+            pts.push(`${i === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`);
+          }
+          return pts.join(" ");
+        };
+        return (
+          <svg width={w} height={IH} viewBox={`0 0 ${w} ${IH}`} style={{ display: "block", background: "var(--card-2)", borderRadius: 6, marginTop: 6 }}>
+            <line x1="36" y1={baseline} x2={w - 12} y2={baseline} stroke="var(--ink-4)" strokeWidth="0.8" strokeDasharray="2 2" />
+            <text x="40" y="16" fontSize="10" fontFamily="var(--font-mono)" fill="var(--ink-3)">integrated (Σ over freq)</text>
+            <path d={pathFor()} fill="none" stroke="var(--plot-warm)" strokeWidth="1.8" />
+            <text x={w - 14} y="16" textAnchor="end" fontSize="10" fontFamily="var(--font-mono)" fill="var(--green)">
+              peak × {(snrGain * (0.05 + 0.95 * t) + (1 - t) * 0).toFixed(1)} after dedispersion
+            </text>
+          </svg>
+        );
+      })()}
       <div className="sk-row" style={{ alignItems: "center", gap: 10, marginTop: 8 }}>
         <button
           onClick={() => { if (t >= 1) setT(0); setPlaying(p => !p); }}
@@ -515,5 +612,5 @@ function CalibPolar({ w = 460, h = 240 }) {
 
 Object.assign(window, {
   SiteHeader, SiteFooter, Annotate, PulseProfile, DataCube, PhaseFreqPlot, Residuals,
-  TerminalLine, ABTag, DedispCurves, CalibPolar,
+  TerminalLine, ABTag, DedispCurves, CalibPolar, heatColor, realisticProfile,
 });
