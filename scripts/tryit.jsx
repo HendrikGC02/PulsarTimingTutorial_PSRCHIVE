@@ -135,9 +135,10 @@ const CATALOG = [
     outKind: "image", blurb: "Older but ubiquitous: same data, terser flags.",
     options: [{ id: "view", label: "view", choices: [
       { id: "dynamic", cli: "-DFTp -j D", label: "dynamic spectrum"  },
-      { id: "profile", cli: "-SFTp -j D", label: "integrated profile" },
       { id: "stack",   cli: "-GTp  -j D", label: "subint stack"      },
-      { id: "stokes",  cli: "-SFTpd -j D", label: "stokes I,Q,U,V"    },
+      // pav -S* views (profile, stokes) need full-polarisation archives;
+      // the bundled reference archives are Stokes I only, so those views
+      // are unavailable here.  Re-add when an Iquv archive is in the set.
     ]}],
     defaults: { view: "dynamic" },
     artifact: (s, ar) => ({

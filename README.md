@@ -116,6 +116,11 @@ Two generators:
 All scripts are idempotent.  Failures are logged to `plots/SKIPPED.md`
 and the UI degrades gracefully when a precomputed file is missing.
 
+After both generators have run against a real PSRCHIVE install, the
+manifest tracks ~90 primary artifacts (images, text outputs, .tim files);
+the JSON annotation sidecars and intermediate pipeline files live next
+to them on disk but aren't separately manifested.
+
 ### Editing prose / diagrams
 
 Everything else is edited directly in the `.jsx` files and viewed in the
