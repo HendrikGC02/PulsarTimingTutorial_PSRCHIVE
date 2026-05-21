@@ -193,78 +193,144 @@ function DataCubeInteractive({ size = 280 }) {
   const FACE_ON  = "rgba(14,59,46,0.55)";
   const FACE_OFF = "rgba(14,59,46,0.06)";
 
-  // 2D "slice" projection that appears alongside when an axis is hovered.
-  // Each axis projects a different plane: phase → 1D profile, freq → freq×phase
-  // heatmap, time → time×phase heatmap, pol → 4 stacked profiles.
-  const sliceCells = useMemo(() => {
-    const rng = mulberry32(101);
+  // ----- 2D "slice" projection that appears alongside when an axis is hovered.
+  // Slices model what `psrplot` actually produces along each axis:
+  //   phase   → 1D integrated profile  (psrplot -p flux -j FT)
+  //   freq    → phase × freq heatmap   (psrplot -p freq -j DT)
+  //   time    → phase × time heatmap   (psrplot -p time -j DF)
+  //   pol     → stacked I,L,V profile with PA on top  (psrplot -p Scyl / pa)
+  const NX = 64, NY_F = 28, NY_T = 22;
+  // Use a realistic pulse profile rather than a generic gaussian.
+  const profileAt = (xIdx) => (typeof realisticProfile === "function")
+      ? realisticProfile(xIdx / NX)
+      : Math.exp(-Math.pow((xIdx - NX*0.42) / (NX*0.04), 2));
+
+  // phase × freq: pulse appears at SAME phase across all channels
+  // (dedispersed), brightness scales with frequency-dependent flux density
+  // (spectral index ≈ -1.5), with scintles patches per channel.
+  const freqCells = useMemo(() => {
+    const rng = mulberry32(17);
     const a = [];
-    for (let y = 0; y < 18; y++) for (let x = 0; x < 26; x++) {
-      const onPulse = x > 9 && x < 15;
-      const peak = Math.exp(-Math.pow((x - 12) / 1.8, 2));
-      const drift = onPulse ? 0.55 * peak * (0.65 + 0.5 * Math.sin(y * 0.55)) : 0;
-      a.push({ x, y, v: drift + rng() * 0.05 });
+    // per-channel scintle gain
+    const chanGain = Array.from({ length: NY_F }, (_, y) => {
+      const lowFreqBoost = (y / NY_F);             // y=0 high freq, y=NY_F-1 low freq
+      const scint = 0.55 + 0.45 * Math.sin(y * 0.9 + 0.3) * Math.sin(y * 0.31);
+      return Math.max(0.05, 0.4 + 1.1 * lowFreqBoost) * scint;
+    });
+    for (let y = 0; y < NY_F; y++) {
+      for (let x = 0; x < NX; x++) {
+        const sig = profileAt(x) * chanGain[y];
+        a.push({ x, y, v: sig + rng() * 0.025 });
+      }
     }
     return a;
   }, []);
-  const sliceProfile = useMemo(() =>
-    Array.from({ length: 26 }, (_, x) =>
-      0.85 * Math.exp(-Math.pow((x - 12) / 1.8, 2)) + 0.4 * Math.exp(-Math.pow((x - 15) / 1.2, 2))
-    ), []);
+
+  // phase × time: pulse at same phase across all subintegrations, brightness
+  // drifts slowly (calibration + scintillation), one faint dropout subint.
+  const timeCells = useMemo(() => {
+    const rng = mulberry32(43);
+    const a = [];
+    const subintGain = Array.from({ length: NY_T }, (_, y) => {
+      const slow = 0.7 + 0.3 * Math.sin(y * 0.35 + 0.6);
+      const drop = (y === 7) ? 0.15 : (y === 16 ? 0.35 : 1);
+      return slow * drop;
+    });
+    for (let y = 0; y < NY_T; y++) {
+      for (let x = 0; x < NX; x++) {
+        const sig = profileAt(x) * subintGain[y];
+        a.push({ x, y, v: sig + rng() * 0.025 });
+      }
+    }
+    return a;
+  }, []);
 
   function Slice() {
     if (!hl) return null;
-    const sw = 110, sh = 90;
-    const cellW = sw / 26, cellH = sh / 18;
-    const heat = (cells, peakColor) => (
-      <g>
-        {cells.map((c, i) => {
-          const [r, g, b] = heatColor(c.v);
-          return <rect key={i} x={c.x * cellW} y={c.y * cellH} width={cellW + 0.5} height={cellH + 0.5} fill={`rgb(${r},${g},${b})`} />;
-        })}
-      </g>
-    );
-    const profilePath = sliceProfile.map((v, i) => {
-      const x = (i / 25) * sw;
-      const y = sh - 4 - v * (sh - 10);
-      return `${i === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`;
-    }).join(" ");
-    const stokesPaths = ["I", "Q", "U", "V"].map((k, kI) => {
-      const shift = [0, 0.15, -0.08, -0.04][kI];
-      const scale = [1, 0.35, 0.22, 0.18][kI];
-      return sliceProfile.map((v, i) => {
-        const x = (i / 25) * sw;
-        const baseY = 12 + kI * (sh - 24) / 4;
-        const y = baseY - (v * scale + shift) * 8;
-        return `${i === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`;
-      }).join(" ");
-    });
-    const stokesColors = ["var(--green)", "#b86a3a", "#3a78b8", "#7a4fb8"];
+    const sw = 130, sh = 96;
+    const drawHeat = (cells, ny) => {
+      const cw = sw / NX, ch = sh / ny;
+      return (
+        <g>
+          {cells.map((c, i) => {
+            const [r, g, b] = heatColor(Math.min(1, c.v));
+            return <rect key={i} x={c.x * cw} y={c.y * ch} width={cw + 0.4} height={ch + 0.4} fill={`rgb(${r},${g},${b})`} />;
+          })}
+        </g>
+      );
+    };
 
-    let body, caption;
+    let body, caption, axes;
     if (hl === "phase") {
-      body = <g><rect width={sw} height={sh} fill="var(--paper-2)" /><path d={profilePath} fill="none" stroke="var(--green)" strokeWidth="1.6" /></g>;
-      caption = "1D profile (collapse freq + time)";
-    } else if (hl === "freq") {
-      body = <g><rect width={sw} height={sh} fill="#000" />{heat(sliceCells, "warm")}</g>;
-      caption = "phase × freq (sum over time)";
-    } else if (hl === "time") {
-      body = <g><rect width={sw} height={sh} fill="#000" />{heat(sliceCells.map(c => ({ ...c, v: c.v * (0.7 + 0.4 * Math.cos(c.y * 0.6)) })), "warm")}</g>;
-      caption = "phase × time (sum over freq)";
-    } else {
-      body = <g><rect width={sw} height={sh} fill="var(--paper-2)" />
-        {stokesPaths.map((d, i) => <path key={i} d={d} fill="none" stroke={stokesColors[i]} strokeWidth="1.4" />)}
-        {["I","Q","U","V"].map((k, i) => (
-          <text key={k} x={4} y={12 + i * (sh - 24) / 4 + 3} fontSize="9" fontFamily="var(--font-mono)" fill={stokesColors[i]}>{k}</text>
-        ))}
+      // 1D integrated profile.
+      const pts = [];
+      for (let i = 0; i < NX; i++) {
+        const x = (i / (NX - 1)) * sw;
+        const y = sh - 4 - profileAt(i) * (sh - 12);
+        pts.push(`${i === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`);
+      }
+      body = <g>
+        <rect width={sw} height={sh} fill="var(--paper-2)" />
+        <line x1="0" y1={sh - 4} x2={sw} y2={sh - 4} stroke="var(--ink-4)" strokeWidth="0.6" />
+        <path d={pts.join(" ")} fill="none" stroke="var(--green)" strokeWidth="1.6" />
       </g>;
-      caption = "Stokes I,Q,U,V profiles";
+      caption = "flux vs phase  (-j FT)";
+      axes = "↳ collapse freq + time";
+    } else if (hl === "freq") {
+      body = <g><rect width={sw} height={sh} fill="#000" />{drawHeat(freqCells, NY_F)}</g>;
+      caption = "phase × freq  (psrplot -p freq)";
+      axes = "↳ pulse at same phase, every channel";
+    } else if (hl === "time") {
+      body = <g><rect width={sw} height={sh} fill="#000" />{drawHeat(timeCells, NY_T)}</g>;
+      caption = "phase × time  (psrplot -p time)";
+      axes = "↳ pulse stable across subints";
+    } else { // pol
+      // Stacked profile: I solid, L dashed, V dotted; tiny PA scatter above.
+      const yMid = sh * 0.68;
+      const span = sh * 0.42;
+      const profPath = (scale, offset = 0) => {
+        const pts = [];
+        for (let i = 0; i < NX; i++) {
+          const x = (i / (NX - 1)) * sw;
+          const v = profileAt(i) * scale + offset;
+          const y = yMid - v * span;
+          pts.push(`${i === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`);
+        }
+        return pts.join(" ");
+      };
+      // small PA S-curve scatter at top of pol panel
+      const paPts = [];
+      for (let i = 0; i < NX; i++) {
+        const phase = i / NX;
+        if (profileAt(i) < 0.18) continue;
+        const dphi = (phase - 0.42) * 14;
+        const psi = Math.atan2(Math.sin(dphi), 0.25 - Math.cos(dphi)); // S-curve
+        const x = (i / (NX - 1)) * sw;
+        const y = 4 + (1 - (psi + Math.PI) / (2 * Math.PI)) * (sh * 0.22);
+        paPts.push(<circle key={i} cx={x} cy={y} r={0.9} fill="#c25a2c" />);
+      }
+      body = <g>
+        <rect width={sw} height={sh} fill="var(--paper-2)" />
+        <line x1="0" y1={sh * 0.26} x2={sw} y2={sh * 0.26} stroke="var(--ink-4)" strokeWidth="0.5" strokeDasharray="2 2" />
+        <line x1="0" y1={yMid} x2={sw} y2={yMid} stroke="var(--ink-4)" strokeWidth="0.5" />
+        {paPts}
+        <path d={profPath(1.0)} fill="none" stroke="var(--ink)" strokeWidth="1.6" />
+        <path d={profPath(0.55)} fill="none" stroke="#c0392b" strokeWidth="1.3" strokeDasharray="3 2" />
+        <path d={profPath(-0.32, 0.08)} fill="none" stroke="#2b6fc0" strokeWidth="1.3" strokeDasharray="1 2" />
+        <text x={4} y={sh * 0.24 - 2} fontSize="8" fontFamily="var(--font-mono)" fill="var(--ink-3)">P.A.</text>
+        <text x={sw - 4} y={yMid - span * 0.85} textAnchor="end" fontSize="8" fontFamily="var(--font-mono)" fill="var(--ink)">I</text>
+        <text x={sw - 4} y={yMid - span * 0.5} textAnchor="end" fontSize="8" fontFamily="var(--font-mono)" fill="#c0392b">L</text>
+        <text x={sw - 4} y={yMid + span * 0.25} textAnchor="end" fontSize="8" fontFamily="var(--font-mono)" fill="#2b6fc0">V</text>
+      </g>;
+      caption = "Stokes I, L, V + P.A.";
+      axes = "↳ the hidden 4th axis";
     }
     return (
-      <svg width={sw + 4} height={sh + 24} viewBox={`0 0 ${sw + 4} ${sh + 24}`} style={{ display: "block" }}>
+      <svg width={sw + 4} height={sh + 30} viewBox={`0 0 ${sw + 4} ${sh + 30}`} style={{ display: "block" }}>
         <rect x={1} y={1} width={sw + 2} height={sh + 2} fill="none" stroke="var(--green)" strokeWidth="1.2" />
         <g transform="translate(2, 2)">{body}</g>
-        <text x={(sw + 4) / 2} y={sh + 18} textAnchor="middle" fontSize="10" fontFamily="var(--font-body)" fill="var(--ink-3)">{caption}</text>
+        <text x={(sw + 4) / 2} y={sh + 14} textAnchor="middle" fontSize="10" fontFamily="var(--font-body)" fill="var(--ink-2)">{caption}</text>
+        <text x={(sw + 4) / 2} y={sh + 26} textAnchor="middle" fontSize="9" fontFamily="var(--font-hand)" fill="var(--ink-3)">{axes}</text>
       </svg>
     );
   }
@@ -272,7 +338,7 @@ function DataCubeInteractive({ size = 280 }) {
   return (
     <div style={{ userSelect: "none", touchAction: "none" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 14, justifyContent: "center" }}>
-      <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} onPointerDown={onDown} style={{ display: "block", cursor: dragRef.current ? "grabbing" : "grab", flex: "0 0 auto" }}>
+      <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} onPointerDown={onDown} style={{ display: "block", cursor: dragRef.current ? "grabbing" : "grab", flex: "0 0 auto", overflow: "visible" }}>
         <defs>
           <pattern id="dci-stripes" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
             <line x1="0" y1="0" x2="0" y2="6" stroke="rgba(14,59,46,.45)" strokeWidth="1.2" />
@@ -281,20 +347,69 @@ function DataCubeInteractive({ size = 280 }) {
             <circle cx="2" cy="2" r="1" fill="rgba(14,59,46,.5)" />
           </pattern>
         </defs>
-        {/* top = phase face */}
-        <path d={top}   fill={hl === "phase" ? FACE_ON : "url(#dci-dots)"} stroke="var(--ink)" strokeWidth="1.5" />
-        {/* right = freq face */}
-        <path d={right} fill={hl === "freq"  ? FACE_ON : "url(#dci-stripes)"} stroke="var(--ink)" strokeWidth="1.5" />
-        {/* left = time face */}
-        <path d={left}  fill={hl === "time"  ? FACE_ON : FACE_OFF} stroke="var(--ink)" strokeWidth="1.5" />
-        {/* pulse on the front edge */}
-        <path d={`M ${cx - dxL + 4} ${cy - 6} L ${cx - dxL + s * 0.5} ${cy - 6} L ${cx - dxL + s * 0.6} ${cy - 26} L ${cx - dxL + s * 0.72} ${cy - 6} L ${cx} ${cy + dy - 4}`}
-          fill="none" stroke="var(--plot-warm)" strokeWidth="1.8" />
+        {/* ghost cubes for the four Stokes parameters — they fan out from
+            under the main cube when the user hovers the pol chip, then
+            collapse back.  Drawn first so they live behind the main cube. */}
+        {(() => {
+          const polActive = hl === "pol";
+          // four positions: I (center, behind), Q/U/V fanned to the side
+          const stokes = [
+            { k: "I", color: "var(--ink)",   tx:  0, ty: 0,  delay: 0 },
+            { k: "Q", color: "#c0392b",      tx: 70, ty: 14, delay: 80 },
+            { k: "U", color: "#2b8c4b",      tx: 70, ty: -10, delay: 140 },
+            { k: "V", color: "#2b6fc0",      tx: 70, ty: 38, delay: 200 },
+          ];
+          return stokes.slice(1).map((sk) => {
+            const off = polActive ? 1 : 0;
+            const gx = sk.tx * off;
+            const gy = sk.ty * off;
+            const scale = polActive ? 0.62 : 1;
+            const op = polActive ? 0.85 : 0;
+            return (
+              <g key={sk.k}
+                 style={{
+                   transition: `transform 380ms cubic-bezier(.22,1,.36,1) ${sk.delay}ms, opacity 380ms ${sk.delay}ms`,
+                   transform: `translate(${gx}px, ${gy}px) scale(${scale})`,
+                   transformOrigin: `${cx}px ${cy}px`,
+                   opacity: op,
+                 }}>
+                <path d={top}   fill="rgba(255,255,255,.6)" stroke={sk.color} strokeWidth="1.2" />
+                <path d={right} fill="rgba(255,255,255,.4)" stroke={sk.color} strokeWidth="1.2" />
+                <path d={left}  fill="rgba(255,255,255,.25)" stroke={sk.color} strokeWidth="1.2" />
+                <text x={cx} y={cy - 2} textAnchor="middle" fontFamily="var(--font-mono)" fontSize="13" fontWeight="700" fill={sk.color}>{sk.k}</text>
+              </g>
+            );
+          });
+        })()}
+        {/* main cube */}
+        <g style={{
+              transition: "transform 380ms cubic-bezier(.22,1,.36,1)",
+              transform: hl === "pol" ? `translate(-12px, -8px) scale(0.92)` : "none",
+              transformOrigin: `${cx}px ${cy}px`,
+           }}>
+          {/* top = phase face */}
+          <path d={top}   fill={hl === "phase" ? FACE_ON : "url(#dci-dots)"} stroke="var(--ink)" strokeWidth="1.5" />
+          {/* right = freq face */}
+          <path d={right} fill={hl === "freq"  ? FACE_ON : "url(#dci-stripes)"} stroke="var(--ink)" strokeWidth="1.5" />
+          {/* left = time face */}
+          <path d={left}  fill={hl === "time"  ? FACE_ON : FACE_OFF} stroke="var(--ink)" strokeWidth="1.5" />
+          {/* pulse on the front edge */}
+          <path d={`M ${cx - dxL + 4} ${cy - 6} L ${cx - dxL + s * 0.5} ${cy - 6} L ${cx - dxL + s * 0.6} ${cy - 26} L ${cx - dxL + s * 0.72} ${cy - 6} L ${cx} ${cy + dy - 4}`}
+            fill="none" stroke="var(--plot-warm)" strokeWidth="1.8" />
+          {hl === "pol" && (
+            <text x={cx} y={cy - 2} textAnchor="middle" fontFamily="var(--font-mono)" fontSize="13" fontWeight="700" fill="var(--ink)">I</text>
+          )}
+        </g>
         <text x={cx + dx + 4}  y={cy - dz / 2}     fontSize="13" fontFamily="var(--font-mono)" fill="var(--green)">freq</text>
         <text x={cx - dxL - 36} y={cy - dz / 2}    fontSize="13" fontFamily="var(--font-mono)" fill="var(--green)">time</text>
         <text x={cx - 18}      y={cy - dz - dy - 6} fontSize="13" fontFamily="var(--font-mono)" fill="var(--green)">phase</text>
+        {hl === "pol" && (
+          <text x={cx + 70} y={cy + dy + 22} textAnchor="middle" fontSize="10" fontFamily="var(--font-hand)" fill="var(--ink-3)">
+            pol is a 4th axis — one cube per Stokes parameter
+          </text>
+        )}
       </svg>
-      <div style={{ width: 120, minHeight: 116, display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ width: 150, minHeight: 130, display: "flex", alignItems: "center", justifyContent: "center" }}>
         {hl ? <Slice /> : <div style={{ fontFamily: "var(--font-body)", fontSize: 11, color: "var(--ink-4)", textAlign: "center", padding: 8, border: "1px dashed var(--ink-4)", borderRadius: 6 }}>hover a chip<br/>to project a slice</div>}
       </div>
       </div>

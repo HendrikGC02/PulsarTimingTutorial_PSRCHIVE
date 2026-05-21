@@ -9,13 +9,13 @@
    ============================================================ */
 
 const V2_LANDING_W = 1240;
-const V2_LANDING_H = 3650;  // give breathing room for taller step sections
+const V2_LANDING_H = 4050;  // give breathing room for taller step sections + contact/adjacent
 
 const PIPELINE = [
   { n: "01", t: "Pulsar & profile", short: "fold rotations" },
   { n: "02", t: "Data cube",        short: "4-D archive" },
   { n: "03", t: "Dedisperse",       short: "remove ν⁻² delay" },
-  { n: "04", t: "Zap RFI",          short: "paz · clfd" },
+  { n: "04", t: "Zap RFI",          short: "paz · psrzap" },
   { n: "05", t: "Calibrate",        short: "pac · pcm" },
   { n: "06", t: "Scrunch",          short: "pam -T/-F/-B" },
   { n: "07", t: "Template",         short: "paas · psrsmooth" },
@@ -177,15 +177,14 @@ function LandingV2() {
       <div style={{ padding: "70px 160px" }}>
         <StepHeader idx={3} title="Zapping radio frequency interference" />
         <div style={{ fontSize: 15.5, lineHeight: 1.65, color: "var(--ink-2)", maxWidth: 820 }}>
-          Satellites, microwaves, that one bored undergrad — corrupt channels and sub-integrations. <b>paz</b>,
-          <b> clfd</b>, or a careful manual zap mark them as zero-weight so they don't contaminate the average.
+          Satellites, microwaves, that one bored undergrad — corrupt channels and sub-integrations. <b>paz</b>
+          {" "}or a careful manual zap with <b>psrzap</b> mark them as zero-weight so they don't contaminate the average.
         </div>
         <div className="sk-box" style={{ marginTop: 18, padding: 12 }}>
           <RfiMorph w={1080} h={300} />
         </div>
-        <div className="sk-row sk-gap-8" style={{ marginTop: 14 }}>
+        <div className="sk-row sk-gap-8" style={{ marginTop: 14, flexWrap: "wrap" }}>
           <span className="sk-chip green">paz</span>
-          <span className="sk-chip green">clfd</span>
           <span className="sk-chip green">psrzap (manual)</span>
           <span style={{ marginLeft: "auto" }} className="sk-label">try this in playground →</span>
         </div>
@@ -272,13 +271,17 @@ function LandingV2() {
               const peak = 16;
               const span = baseline - peak;
               const shift = 0.015; // observation lags template by Δφ
-              const phasePath = (off) => {
+              // Deterministic noise so the path is stable across renders.
+              const noiseAt = (i) =>
+                (Math.sin(i * 12.9898) * 43758.5453) % 1 - 0.5;
+              const phasePath = (off, noisy = false) => {
                 const pts = [];
                 for (let i = 0; i < NP; i++) {
                   const phase = i / NP;
-                  const v = (typeof realisticProfile === "function")
+                  let v = (typeof realisticProfile === "function")
                     ? realisticProfile(phase + off)
                     : 0.85 * Math.exp(-Math.pow((phase + off - 0.42)/0.04, 2));
+                  if (noisy) v += noiseAt(i) * 0.18;
                   const x = 16 + (W - 30) * phase;
                   const y = baseline - v * span;
                   pts.push(`${i === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`);
@@ -317,6 +320,50 @@ function LandingV2() {
             What the cross-correlation is matching against in practice: a noise-free reference profile,
             built once from a high-S/N observation with <code>psrsmooth</code> or <code>paas</code> and reused
             for every TOA. The closer this template is to the truth, the smaller the residuals at the right.
+          </div>
+        </div>
+      </div>
+
+      {/* ---------- ADJACENT TOOLS (not part of PSRCHIVE) ---------- */}
+      <div style={{ padding: "30px 160px 10px" }}>
+        <div className="sk-box" style={{ padding: 22, background: "var(--card-2)" }}>
+          <span className="sk-accent" style={{ color: "var(--ink-3)" }}>adjacent tools — not part of PSRCHIVE</span>
+          <h3 className="sk-h3" style={{ marginTop: 6 }}>Useful neighbours you'll see in the wild</h3>
+          <div style={{ fontSize: 14, lineHeight: 1.6, color: "var(--ink-2)", marginTop: 8, maxWidth: 880 }}>
+            These show up in tutorials and pipelines next to PSRCHIVE but live in separate packages. They are mentioned
+            here so the names ring a bell — none of the flags or commands on this site come from them.
+          </div>
+          <div className="sk-row sk-gap-10" style={{ marginTop: 14, flexWrap: "wrap" }}>
+            <div className="sk-chip" style={{ borderStyle: "dashed" }}><b>pdmp</b> — DM &amp; period search / SNR optimiser (sigproc / dspsr companion)</div>
+            <div className="sk-chip" style={{ borderStyle: "dashed" }}><b>tempo2 / PINT</b> — pulsar timing model fitter, consumes the <code>.tim</code> from <code>pat</code></div>
+            <div className="sk-chip" style={{ borderStyle: "dashed" }}><b>dspsr</b> — folds raw voltages into the archives PSRCHIVE then reads</div>
+          </div>
+        </div>
+      </div>
+
+      {/* ---------- CONTACT ---------- */}
+      <div style={{ padding: "30px 160px 10px" }} id="contact">
+        <div className="sk-box" style={{ padding: 26 }}>
+          <span className="sk-accent green">contact</span>
+          <h3 className="sk-h2" style={{ marginTop: 6 }}>Questions, corrections, suggestions?</h3>
+          <div style={{ fontSize: 15, lineHeight: 1.6, color: "var(--ink-2)", marginTop: 10, maxWidth: 720 }}>
+            This site is a teaching aid I (Hendrik) maintain in my spare time. If something on the page is wrong,
+            unclear, or missing, please get in touch — feedback from real users is the only way it gets better.
+          </div>
+          <div className="sk-row sk-gap-10" style={{ marginTop: 16, flexWrap: "wrap" }}>
+            <a href="mailto:hgcombrinck@gmail.com" className="sk-btn green"
+               style={{ textDecoration: "none", fontFamily: "var(--font-display)", fontSize: 14, fontWeight: 500 }}>
+              ✉ hgcombrinck@gmail.com
+            </a>
+            <a href="https://github.com/hendrikgc02/PulsarTimingTutorial_PSRCHIVE/issues"
+               target="_blank" rel="noreferrer" className="sk-btn ghost"
+               style={{ textDecoration: "none", fontFamily: "var(--font-display)", fontSize: 14, fontWeight: 500, color: "var(--ink)" }}>
+              ↗ open an issue on GitHub
+            </a>
+          </div>
+          <div style={{ marginTop: 12, fontSize: 12, color: "var(--ink-3)", fontFamily: "var(--font-body)" }}>
+            For private questions email is fine; for anything others would benefit from seeing the answer to (a typo, a
+            confusing diagram, a missing example), prefer the GitHub issue tracker.
           </div>
         </div>
       </div>

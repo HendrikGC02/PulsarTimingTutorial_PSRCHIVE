@@ -3,13 +3,81 @@
   "psrchive_version": "PSRCHIVE 2025-10-31 b97dc74aa",
   "entries": [
     {
+      "path": "dynspec/J0437-4715/dynspec.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "psrplot -p b -jDB -x -lpol=0 <src>",
+      "sha256": "ee196067d9a87d897a9d9ce70edf3d10e366088874d65e9b5301a1bdddbfaaf9",
+      "size_bytes": 10918,
+      "generated_at": "2026-05-20T17:42:58+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.7,
+        "entropy": 0.27,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "dynspec/J0437-4715/dynspec__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "psrplot -p b -jDB -x -lpol=0 <src>",
+      "sha256": "dc966bd79c41e2b3eec15ce22f3e2d7f8380fbec87dae589328f190a9e730725",
+      "size_bytes": 8508,
+      "generated_at": "2026-05-20T17:43:02+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 8.3,
+        "entropy": 0.11,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "dynspec/J1909-3744/dynspec.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "psrplot -p b -jDB -x -lpol=0 <src>",
+      "sha256": "a0462b441b7a6a62556c367fec1c3846418590fe9506b8daba94a1f1ff993551",
+      "size_bytes": 11310,
+      "generated_at": "2026-05-20T17:43:08+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 11.0,
+        "entropy": 0.3,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "dynspec/J1909-3744/dynspec__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "psrplot -p b -jDB -x -lpol=0 <src>",
+      "sha256": "8e91e21541ac1a4b524d088ed61a6d1de3e03b49c098bb37a367d5b42586bc94",
+      "size_bytes": 8808,
+      "generated_at": "2026-05-20T17:43:14+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 8.6,
+        "entropy": 0.09,
+        "inner_pct": 0.0
+      }
+    },
+    {
       "path": "landing/residuals-example.png",
       "archive": "J0437-4715",
       "source": "archives/J0437-4715_2024-07-25-12:13:23_zap.ar  \u2192  pat  \u2192  tempo2",
       "command": "pat -s J0437-4715.std -A FDM -f 'tempo2 IPTA' <ar> > .tim ; tempo2 -nobs 50000 -output general2 -f J0437-4715.par .tim -s '{sat} {pre} {err}' -nofit \u2192 matplotlib",
       "sha256": "83384b9e395628e79ac016115348cc6e60a33f8fbe7b51f8bc61737ec96db738",
       "size_bytes": 83989,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 82.0,
+        "entropy": 0.75,
+        "inner_pct": 11.86
+      }
     },
     {
       "path": "landing/rfi-after.png",
@@ -18,7 +86,13 @@
       "command": "paz -r -e paz raw_added.ar && psrplot -g 1200x800 -p freq -j D raw_added.paz -D landing/rfi-after.png/png",
       "sha256": "ad91a550a1cfd7a999f0af1e6c1c24e25404096414cdb11c8a054bf993748ad7",
       "size_bytes": 218056,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 212.9,
+        "entropy": 0.83,
+        "inner_pct": 46.38
+      }
     },
     {
       "path": "landing/rfi-before.png",
@@ -27,7 +101,13 @@
       "command": "psradd -o raw_added.ar archives/J0437-4715_raw/*.ar && psrplot -g 1200x800 -p freq -j D raw_added.ar -D landing/rfi-before.png/png",
       "sha256": "aa26e7d4f9f7f94f357430cbec10038f99e60b95e3401b83ec49eeb0a3c6712c",
       "size_bytes": 251704,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 245.8,
+        "entropy": 0.97,
+        "inner_pct": 99.7
+      }
     },
     {
       "path": "landing/template-stack.png",
@@ -36,7 +116,914 @@
       "command": "psrplot -g 1200x800 -p flux <smoothed-template>.sm -D landing/template-stack.png/png",
       "sha256": "f0cb9f847a83108666e2a94a2e451fe215b3adea1e6868b1b60192fff751b5ac",
       "size_bytes": 9365,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 9.1,
+        "entropy": 0.07,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pam/J0437-4715/D.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "140a6ad210940b1de3c9262870ec5748c5612592ba2d11fb54d4341bc6738884",
+      "size_bytes": 110,
+      "generated_at": "2026-05-20T17:17:33+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/D.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -D <src> ; psrplot -p freq -j D <out>",
+      "sha256": "99d7be0b45f14d8b3d15c55a2b3a82b908bebb73be1315f2d4318e5ed48fe548",
+      "size_bytes": 293338,
+      "generated_at": "2026-05-20T17:17:33+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 286.5,
+        "entropy": 1.11,
+        "inner_pct": 65.11
+      }
+    },
+    {
+      "path": "pam/J0437-4715/D__dirty.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "c30b5597e5c32ecd612e03740d09cf9d2ac0017dd48935a08abb7636a84d2f5b",
+      "size_bytes": 117,
+      "generated_at": "2026-05-20T17:20:30+10:00",
+      "dirty": true
+    },
+    {
+      "path": "pam/J0437-4715/D__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pam -D <src> ; psrplot -p freq -j D <out>",
+      "sha256": "b3beeb79cf999adacf10ed18345028c131e2608cb4f581458e612a9d2e6bac46",
+      "size_bytes": 251711,
+      "generated_at": "2026-05-20T17:20:30+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 245.8,
+        "entropy": 0.97,
+        "inner_pct": 99.7
+      }
+    },
+    {
+      "path": "pam/J0437-4715/FD.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "c9fd3457d4866626f0ccbe309652c14c79a87fe045488322734f612ce2465f19",
+      "size_bytes": 108,
+      "generated_at": "2026-05-20T17:18:57+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/FD__dirty.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "5cc4ea7ec8fb7c07f48b76c0d38bde1de0a15564a14e927c97460e813082fdb3",
+      "size_bytes": 115,
+      "generated_at": "2026-05-20T17:21:01+10:00",
+      "dirty": true
+    },
+    {
+      "path": "pam/J0437-4715/FTD__nchan16__nsub1.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "26fd2c795efbce413bff4be5ebda71237e7bd4d326c68d511f92fd4d229145af",
+      "size_bytes": 125,
+      "generated_at": "2026-05-20T17:19:19+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/FTD__nchan16__nsub1.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -F -D -T --setnchn 16 --setnsub 1 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "2fb8c26f1f094edf82693cb2599d8839f60b9c160b1ef9f2d032df91d96c23cd",
+      "size_bytes": 13379,
+      "generated_at": "2026-05-20T17:19:18+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 13.1,
+        "entropy": 0.95,
+        "inner_pct": 10.37
+      }
+    },
+    {
+      "path": "pam/J0437-4715/FTD__nchan16__nsub2.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "2cef5cc91797f7f7d40d07bb1562e2387f81086227d78e65dc354972364aaac4",
+      "size_bytes": 125,
+      "generated_at": "2026-05-20T17:19:24+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/FTD__nchan16__nsub2.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -F -D -T --setnchn 16 --setnsub 2 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "e04d5be69dbdd373c27930af55a9d9735e4866aeeb7caf502ad8e8494a215675",
+      "size_bytes": 14102,
+      "generated_at": "2026-05-20T17:19:24+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 13.8,
+        "entropy": 0.95,
+        "inner_pct": 10.28
+      }
+    },
+    {
+      "path": "pam/J0437-4715/FTD__nchan16__nsub4.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "f637577b57634e1bb900833a96bf87e85957dff02f4b1725f6f4ccfcee8febb8",
+      "size_bytes": 125,
+      "generated_at": "2026-05-20T17:19:30+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/FTD__nchan16__nsub4.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -F -D -T --setnchn 16 --setnsub 4 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "efe2c8577a864be0f17dc2136dda0c0e66cfd740e70e0841c0b916d68dcdde28",
+      "size_bytes": 14848,
+      "generated_at": "2026-05-20T17:19:30+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 14.5,
+        "entropy": 0.95,
+        "inner_pct": 10.27
+      }
+    },
+    {
+      "path": "pam/J0437-4715/FTD__nchan32__nsub1.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "a76b43247da726fe8b112d301b4b6014e7d9a94154f47e9c6fc226c5618ddfd5",
+      "size_bytes": 125,
+      "generated_at": "2026-05-20T17:19:02+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/FTD__nchan32__nsub1.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -F -D -T --setnchn 32 --setnsub 1 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "6a6bd7f222ec085d38e2cfce1bdb4e8f87fce3f1f89f7fe7b5ea36724019c6a7",
+      "size_bytes": 17241,
+      "generated_at": "2026-05-20T17:19:02+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 16.8,
+        "entropy": 0.87,
+        "inner_pct": 9.17
+      }
+    },
+    {
+      "path": "pam/J0437-4715/FTD__nchan32__nsub2.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "979f1df05273f495c8c051861b1b950d80a12811a50cee20d17616f2e3a36946",
+      "size_bytes": 125,
+      "generated_at": "2026-05-20T17:19:08+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/FTD__nchan32__nsub2.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -F -D -T --setnchn 32 --setnsub 2 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "103fd180d5cae981c933bae864491e0e90b786f30b2ede3992af9a64fa510801",
+      "size_bytes": 18217,
+      "generated_at": "2026-05-20T17:19:08+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 17.8,
+        "entropy": 0.86,
+        "inner_pct": 9.13
+      }
+    },
+    {
+      "path": "pam/J0437-4715/FTD__nchan32__nsub4.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "c204d63a813411e51f5adaf0605f7dee55473a995b9468cedcac34bc6bf69f21",
+      "size_bytes": 125,
+      "generated_at": "2026-05-20T17:19:13+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/FTD__nchan32__nsub4.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -F -D -T --setnchn 32 --setnsub 4 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "7e2648092720c83fbb01342a6792df7376e4c7a7b300ebca2eacd1768e435906",
+      "size_bytes": 18994,
+      "generated_at": "2026-05-20T17:19:13+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 18.5,
+        "entropy": 0.87,
+        "inner_pct": 9.28
+      }
+    },
+    {
+      "path": "pam/J0437-4715/FTD__nchan8__nsub1.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "d699499860e64b557d56da77ae35c4b420b74a51b654ee6aa745fdb3b580cbd6",
+      "size_bytes": 123,
+      "generated_at": "2026-05-20T17:19:35+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/FTD__nchan8__nsub1.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -F -D -T --setnchn 8 --setnsub 1 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "8bd479ef222c5095b6f861b49bf3af2fa6d3a940b59294619a3c2f30145cfdca",
+      "size_bytes": 11140,
+      "generated_at": "2026-05-20T17:19:35+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.9,
+        "entropy": 1.04,
+        "inner_pct": 11.27
+      }
+    },
+    {
+      "path": "pam/J0437-4715/FTD__nchan8__nsub2.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "735078c6644be59468bbbdf5872d59c713a8f789fc7ab3b60c195aed222cf69d",
+      "size_bytes": 123,
+      "generated_at": "2026-05-20T17:19:41+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/FTD__nchan8__nsub2.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -F -D -T --setnchn 8 --setnsub 2 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "cbbe0500537a142a8834719d3a149c2bd52a6eac9aa1a5344dd9082ef1417ebd",
+      "size_bytes": 11374,
+      "generated_at": "2026-05-20T17:19:41+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 11.1,
+        "entropy": 1.03,
+        "inner_pct": 11.03
+      }
+    },
+    {
+      "path": "pam/J0437-4715/FTD__nchan8__nsub4.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "1ef92089cc076d9086e6e79590dad07f50d477acffca3190295d9cbac27cd8b3",
+      "size_bytes": 123,
+      "generated_at": "2026-05-20T17:19:46+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/FTD__nchan8__nsub4.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -F -D -T --setnchn 8 --setnsub 4 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "810b46775785828734db150eab6b6524d097bf2252c7215e1a829ef7e71ee19a",
+      "size_bytes": 11798,
+      "generated_at": "2026-05-20T17:19:46+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 11.5,
+        "entropy": 1.04,
+        "inner_pct": 11.17
+      }
+    },
+    {
+      "path": "pam/J0437-4715/FT__nchan16__nsub1.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "b6e70abb5443d857abf7c9fe90f48d0c692f6707ee9dba58b16f7003d87f1a7e",
+      "size_bytes": 124,
+      "generated_at": "2026-05-20T17:18:25+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/FT__nchan16__nsub1.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -F -T --setnchn 16 --setnsub 1 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "778eb0c35893986c0185b5829777fa7385327727f9c1b8628c01c64b4496325d",
+      "size_bytes": 13357,
+      "generated_at": "2026-05-20T17:18:25+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 13.0,
+        "entropy": 0.95,
+        "inner_pct": 10.37
+      }
+    },
+    {
+      "path": "pam/J0437-4715/FT__nchan16__nsub2.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "2dd6e979422af6ddbbd7b6b155df997b69df781168d6f99e4619290771ec9830",
+      "size_bytes": 124,
+      "generated_at": "2026-05-20T17:18:30+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/FT__nchan16__nsub2.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -F -T --setnchn 16 --setnsub 2 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "bfe15f5bc6d11e88bac8edd826936f4e0f9c9557fd6118f14978c5e72cbc828e",
+      "size_bytes": 14070,
+      "generated_at": "2026-05-20T17:18:30+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 13.7,
+        "entropy": 0.95,
+        "inner_pct": 10.28
+      }
+    },
+    {
+      "path": "pam/J0437-4715/FT__nchan16__nsub4.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "a7a9518c29beb2213414af15bf62d3b035b565b65ec3163093860b6827423048",
+      "size_bytes": 124,
+      "generated_at": "2026-05-20T17:18:36+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/FT__nchan16__nsub4.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -F -T --setnchn 16 --setnsub 4 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "4e909233da97d6c0abc84bc8f2c5835b015191c8112d49281baf0bff2697e213",
+      "size_bytes": 14821,
+      "generated_at": "2026-05-20T17:18:35+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 14.5,
+        "entropy": 0.95,
+        "inner_pct": 10.27
+      }
+    },
+    {
+      "path": "pam/J0437-4715/FT__nchan32__nsub1.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "d235284157129253e3ee276e0e6681716ac7f4defcc10dff17288680335b326d",
+      "size_bytes": 124,
+      "generated_at": "2026-05-20T17:18:09+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/FT__nchan32__nsub1.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -F -T --setnchn 32 --setnsub 1 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "4a0537614e6da6a0e9346f9af29a8e742b44963db041c28b84e6e20d2f7e59f2",
+      "size_bytes": 17179,
+      "generated_at": "2026-05-20T17:18:09+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 16.8,
+        "entropy": 0.87,
+        "inner_pct": 9.18
+      }
+    },
+    {
+      "path": "pam/J0437-4715/FT__nchan32__nsub2.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "e056ab538c978b276535c6702d8dd3a06bc8c23118e61d621d706495ebba0fa2",
+      "size_bytes": 124,
+      "generated_at": "2026-05-20T17:18:14+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/FT__nchan32__nsub2.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -F -T --setnchn 32 --setnsub 2 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "bf3ec0d31f3358c23be377774fc5a4e0b414a72f64e0eeb0a4adcd54ff859e31",
+      "size_bytes": 18200,
+      "generated_at": "2026-05-20T17:18:14+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 17.8,
+        "entropy": 0.86,
+        "inner_pct": 9.13
+      }
+    },
+    {
+      "path": "pam/J0437-4715/FT__nchan32__nsub4.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "7b52dae5cbe448f9c5d4b39e088b0045959e74cc0acb5a83b97a343f3443cf82",
+      "size_bytes": 124,
+      "generated_at": "2026-05-20T17:18:20+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/FT__nchan32__nsub4.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -F -T --setnchn 32 --setnsub 4 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "a5c7ae83cac27ede76e3b25ae750bce1720db5377474fe0151c16d61a4d90e7d",
+      "size_bytes": 18963,
+      "generated_at": "2026-05-20T17:18:19+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 18.5,
+        "entropy": 0.87,
+        "inner_pct": 9.28
+      }
+    },
+    {
+      "path": "pam/J0437-4715/FT__nchan8__nsub1.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "8390e8b6d782e9f0456990da58e2b5ea20c6929f61cc1590f7f3290bc111da65",
+      "size_bytes": 122,
+      "generated_at": "2026-05-20T17:18:41+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/FT__nchan8__nsub1.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -F -T --setnchn 8 --setnsub 1 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "440c0b2a77339c1bf306802e9f46e4fc277aab71805e150b900187747607d565",
+      "size_bytes": 11159,
+      "generated_at": "2026-05-20T17:18:41+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.9,
+        "entropy": 1.04,
+        "inner_pct": 11.27
+      }
+    },
+    {
+      "path": "pam/J0437-4715/FT__nchan8__nsub2.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "6e2e2cbd6919bf113237b064d93536fb923995fa9998dcfc0d914c9e36ea5bf0",
+      "size_bytes": 122,
+      "generated_at": "2026-05-20T17:18:46+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/FT__nchan8__nsub2.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -F -T --setnchn 8 --setnsub 2 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "5b432ee7e68f44b154d5f9a292bc0352d38d74b7498bdd9e5933374ad3cb08ba",
+      "size_bytes": 11392,
+      "generated_at": "2026-05-20T17:18:46+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 11.1,
+        "entropy": 1.03,
+        "inner_pct": 11.03
+      }
+    },
+    {
+      "path": "pam/J0437-4715/FT__nchan8__nsub4.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "74c0f7e825db7b9ff8745b20a0c991bbbb50d6b454b14d40b6a4542b1a1c6d09",
+      "size_bytes": 122,
+      "generated_at": "2026-05-20T17:18:52+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/FT__nchan8__nsub4.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -F -T --setnchn 8 --setnsub 4 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "45758e23c968659388580c4811c7c4cd3640d6685f70a4cd080738f80d5a7305",
+      "size_bytes": 11817,
+      "generated_at": "2026-05-20T17:18:51+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 11.5,
+        "entropy": 1.04,
+        "inner_pct": 11.17
+      }
+    },
+    {
+      "path": "pam/J0437-4715/F__nchan116.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "fbd34178671c6194b50f060cc9c14e658ca064b23d4287bc69d0c77fd6a7d366",
+      "size_bytes": 120,
+      "generated_at": "2026-05-20T17:17:00+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/F__nchan116.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -F --setnchn 116 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "63991f052c7d857f7a97d8deeabb3ab1d6a379951c2659d61090a58db99e2dfa",
+      "size_bytes": 293350,
+      "generated_at": "2026-05-20T17:17:00+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 286.5,
+        "entropy": 1.11,
+        "inner_pct": 65.11
+      }
+    },
+    {
+      "path": "pam/J0437-4715/F__nchan116__dirty.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "658b20460379b9a2e213393f12a82df85213361c761995a72c3df7fd3a3641c0",
+      "size_bytes": 127,
+      "generated_at": "2026-05-20T17:20:00+10:00",
+      "dirty": true
+    },
+    {
+      "path": "pam/J0437-4715/F__nchan116__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pam -F --setnchn 116 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "16717029edbafff5c39e2550d729b3f782955ae626bb2c9f9bbea8144c2fdf7f",
+      "size_bytes": 251666,
+      "generated_at": "2026-05-20T17:20:00+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 245.8,
+        "entropy": 0.97,
+        "inner_pct": 99.7
+      }
+    },
+    {
+      "path": "pam/J0437-4715/F__nchan16.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "ded3b8e59e2390790977cf46b21829876f39795b1c8722839a5441180e86947d",
+      "size_bytes": 117,
+      "generated_at": "2026-05-20T17:17:10+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/F__nchan16.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -F --setnchn 16 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "d111faea942816e4a2a13a10c8010ecfb5c004d059068bf36fe85cb5067a3009",
+      "size_bytes": 15496,
+      "generated_at": "2026-05-20T17:17:10+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 15.1,
+        "entropy": 1.0,
+        "inner_pct": 11.12
+      }
+    },
+    {
+      "path": "pam/J0437-4715/F__nchan16__dirty.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "76167e421fd91ec01bd1dcb9f4b82a33cd92c8e5f24f5f24778922aa31ad639c",
+      "size_bytes": 124,
+      "generated_at": "2026-05-20T17:20:08+10:00",
+      "dirty": true
+    },
+    {
+      "path": "pam/J0437-4715/F__nchan16__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pam -F --setnchn 16 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "1f4c2c620e24acf512db82334b4ff9db8163759ada616e4a6bb6d76d165fc8d7",
+      "size_bytes": 15726,
+      "generated_at": "2026-05-20T17:20:08+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 15.4,
+        "entropy": 0.94,
+        "inner_pct": 10.37
+      }
+    },
+    {
+      "path": "pam/J0437-4715/F__nchan32.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "6b1d8ab88d0ea3a1cf86c5d44df4ea4917954bbb14f15b6f5ff80eda1a36af42",
+      "size_bytes": 117,
+      "generated_at": "2026-05-20T17:17:05+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/F__nchan32.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -F --setnchn 32 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "b398ed88cab99202a3efede1de6ed144303a6573e32277d696b0dd7ad23a0141",
+      "size_bytes": 22918,
+      "generated_at": "2026-05-20T17:17:05+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 22.4,
+        "entropy": 0.93,
+        "inner_pct": 10.2
+      }
+    },
+    {
+      "path": "pam/J0437-4715/F__nchan32__dirty.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "173e1dfac731854108eaaa02e782c05b4a9eecf501f23f5c547d277d84439b3c",
+      "size_bytes": 124,
+      "generated_at": "2026-05-20T17:20:04+10:00",
+      "dirty": true
+    },
+    {
+      "path": "pam/J0437-4715/F__nchan32__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pam -F --setnchn 32 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "4a7e7a855a7f438ecd70ee8fc6cdf68f425302400a09e0b884dad8726a934bea",
+      "size_bytes": 23766,
+      "generated_at": "2026-05-20T17:20:04+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 23.2,
+        "entropy": 1.14,
+        "inner_pct": 13.09
+      }
+    },
+    {
+      "path": "pam/J0437-4715/F__nchan8.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "a4973002186267039bde9ca48cc4d5655adcd873e81d95188de2bef9076b2776",
+      "size_bytes": 115,
+      "generated_at": "2026-05-20T17:17:15+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/F__nchan8.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -F --setnchn 8 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "131877abaccb98dff74262705cbec5accf65da6fda6f062cf524a06dfe2c7413",
+      "size_bytes": 11917,
+      "generated_at": "2026-05-20T17:17:15+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 11.6,
+        "entropy": 1.07,
+        "inner_pct": 11.87
+      }
+    },
+    {
+      "path": "pam/J0437-4715/F__nchan8__dirty.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "6c131566174f125701cfd7017f9bcdc6f613096e355dc85b82f9b17c61e151d5",
+      "size_bytes": 122,
+      "generated_at": "2026-05-20T17:20:11+10:00",
+      "dirty": true
+    },
+    {
+      "path": "pam/J0437-4715/F__nchan8__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pam -F --setnchn 8 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "7dd788cdb154cfbd7668a2311611eebe886010131c8cce8e6da69e845eb869d3",
+      "size_bytes": 12301,
+      "generated_at": "2026-05-20T17:20:11+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 12.0,
+        "entropy": 1.04,
+        "inner_pct": 11.24
+      }
+    },
+    {
+      "path": "pam/J0437-4715/P.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "7b24134e419b5e0c1626a56f829a54e504e621b0f3309025256729b555ff50b4",
+      "size_bytes": 110,
+      "generated_at": "2026-05-20T17:18:03+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/P.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -p <src> ; psrplot -p freq -j D <out>",
+      "sha256": "1552af36a4b01a68b00454043df39a383531c3713633a6200381225fa39948f6",
+      "size_bytes": 280768,
+      "generated_at": "2026-05-20T17:18:03+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 274.2,
+        "entropy": 1.61,
+        "inner_pct": 26.52
+      }
+    },
+    {
+      "path": "pam/J0437-4715/P__dirty.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "803e523e7a3fd485d8946f62777d6431aba34bfc072922826502453e5c9d4cc4",
+      "size_bytes": 117,
+      "generated_at": "2026-05-20T17:20:57+10:00",
+      "dirty": true
+    },
+    {
+      "path": "pam/J0437-4715/P__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pam -p <src> ; psrplot -p freq -j D <out>",
+      "sha256": "644381f1933c94dd4e54e718c0b3e1d11a4ee38b1b8f08ac85dcc3090018e03c",
+      "size_bytes": 208053,
+      "generated_at": "2026-05-20T17:20:57+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 203.2,
+        "entropy": 0.94,
+        "inner_pct": 99.7
+      }
+    },
+    {
+      "path": "pam/J0437-4715/T__nsub1.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "0056918d0d9244b01e9abfa08c897d67f06767039ae6165c731a2f052d93b559",
+      "size_bytes": 116,
+      "generated_at": "2026-05-20T17:17:38+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/T__nsub1.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -T --setnsub 1 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "be4375031c443a9201e107a5642213a150ad72c8bff6ce6ecc968feb21968fd4",
+      "size_bytes": 186567,
+      "generated_at": "2026-05-20T17:17:38+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 182.2,
+        "entropy": 0.9,
+        "inner_pct": 9.91
+      }
+    },
+    {
+      "path": "pam/J0437-4715/T__nsub1__dirty.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "cd2368c644b2ae181d0165140b049d60f3e4ac61e5ada9d241472f2e38d0dc39",
+      "size_bytes": 123,
+      "generated_at": "2026-05-20T17:20:35+10:00",
+      "dirty": true
+    },
+    {
+      "path": "pam/J0437-4715/T__nsub1__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pam -T --setnsub 1 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "2e781e9e979d1877a9d21341ebc48eeccd11297d4b5a7213a2326340b8f7b2d6",
+      "size_bytes": 179796,
+      "generated_at": "2026-05-20T17:20:34+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 175.6,
+        "entropy": 1.11,
+        "inner_pct": 99.61
+      }
+    },
+    {
+      "path": "pam/J0437-4715/T__nsub2.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "dd1eff4b18b4c16bf6440098c783399084d706f81ea31e5a16d2cc28a6573663",
+      "size_bytes": 116,
+      "generated_at": "2026-05-20T17:17:44+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/T__nsub2.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -T --setnsub 2 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "8c8e4aad0cc93faf756829539ca92136b0a8605562c12255206d726a19529a71",
+      "size_bytes": 205086,
+      "generated_at": "2026-05-20T17:17:44+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 200.3,
+        "entropy": 0.93,
+        "inner_pct": 10.39
+      }
+    },
+    {
+      "path": "pam/J0437-4715/T__nsub2__dirty.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "a1d8684ad4494f9d71f8ea444cadee54435ca0ee6d5f43cd92964f522bfcebef",
+      "size_bytes": 123,
+      "generated_at": "2026-05-20T17:20:39+10:00",
+      "dirty": true
+    },
+    {
+      "path": "pam/J0437-4715/T__nsub2__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pam -T --setnsub 2 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "b5202799148ac8b6290c4455fdf42cb460ca8c66660453f9071cad97a7a3a7a7",
+      "size_bytes": 195597,
+      "generated_at": "2026-05-20T17:20:39+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 191.0,
+        "entropy": 1.36,
+        "inner_pct": 99.66
+      }
+    },
+    {
+      "path": "pam/J0437-4715/T__nsub4.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "e78169e5f84495f46a9fdbfbd69a96fd3ee254eb0901356bffa5cfc4d08f6d0a",
+      "size_bytes": 116,
+      "generated_at": "2026-05-20T17:17:52+10:00"
+    },
+    {
+      "path": "pam/J0437-4715/T__nsub4.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam -T --setnsub 4 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "bce8546bc3cf86470dd4df5df8eaf234f0a3d472c68ff242a0f99914470f5130",
+      "size_bytes": 230894,
+      "generated_at": "2026-05-20T17:17:52+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 225.5,
+        "entropy": 1.02,
+        "inner_pct": 11.72
+      }
+    },
+    {
+      "path": "pam/J0437-4715/T__nsub4__dirty.meta.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "d6e22352f6f30a020abb4af3e6ca3530343748c35f49e6cb76aa61139d6b5e7d",
+      "size_bytes": 123,
+      "generated_at": "2026-05-20T17:20:45+10:00",
+      "dirty": true
+    },
+    {
+      "path": "pam/J0437-4715/T__nsub4__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pam -T --setnsub 4 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "73af56403fc9d0a97d3fa1575254e145aaca41c0247e7a32ae9522d3ce74951e",
+      "size_bytes": 219461,
+      "generated_at": "2026-05-20T17:20:45+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 214.3,
+        "entropy": 1.11,
+        "inner_pct": 99.68
+      }
     },
     {
       "path": "pam/J0437-4715/bscrunch-1024.meta.txt",
@@ -54,7 +1041,13 @@
       "command": "pam --setnbin 1024 -e b1024 -u <dir> <src>; psrplot -g 1200x800 -p flux -jFT <result>.ar -D <png>/png",
       "sha256": "6a83407be6530a374ad3c2f273c14b6a7d001be7e657853972044975e08c0225",
       "size_bytes": 9433,
-      "generated_at": "2026-05-12T13:18:29+10:00"
+      "generated_at": "2026-05-12T13:18:29+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 9.2,
+        "entropy": 0.07,
+        "inner_pct": 0.0
+      }
     },
     {
       "path": "pam/J0437-4715/bscrunch-256.meta.txt",
@@ -72,7 +1065,13 @@
       "command": "pam --setnbin 256 -e b256 -u <dir> <src>; psrplot -g 1200x800 -p flux -jFT <result>.ar -D <png>/png",
       "sha256": "97e98d29eeabb6839162f6f94ff80f8efc3dce379845379f46b80d57bfd0762c",
       "size_bytes": 9360,
-      "generated_at": "2026-05-12T13:18:20+10:00"
+      "generated_at": "2026-05-12T13:18:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 9.1,
+        "entropy": 0.07,
+        "inner_pct": 0.0
+      }
     },
     {
       "path": "pam/J0437-4715/fscrunch-128.meta.txt",
@@ -90,7 +1089,13 @@
       "command": "pam --setnchn 128 -e f128 -u <dir> <src>; psrplot -g 1200x800 -p freq <result>.ar -D <png>/png",
       "sha256": "86e7f76ab1fdd72ecf2572d4be4a7a3613f9da8b782927831aa29f2cc799cba9",
       "size_bytes": 71031,
-      "generated_at": "2026-05-12T13:17:52+10:00"
+      "generated_at": "2026-05-12T13:17:52+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 69.4,
+        "entropy": 1.05,
+        "inner_pct": 12.14
+      }
     },
     {
       "path": "pam/J0437-4715/fscrunch-32.meta.txt",
@@ -108,7 +1113,13 @@
       "command": "pam --setnchn 32 -e f32 -u <dir> <src>; psrplot -g 1200x800 -p freq <result>.ar -D <png>/png",
       "sha256": "53d33b12b110dc39b8595b3ffde424840be10934a6cd679f5267e11ec8ad8579",
       "size_bytes": 23027,
-      "generated_at": "2026-05-12T13:17:46+10:00"
+      "generated_at": "2026-05-12T13:17:46+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 22.5,
+        "entropy": 0.95,
+        "inner_pct": 10.4
+      }
     },
     {
       "path": "pam/J0437-4715/fscrunch-8.meta.txt",
@@ -126,7 +1137,13 @@
       "command": "pam --setnchn 8 -e f8 -u <dir> <src>; psrplot -g 1200x800 -p freq <result>.ar -D <png>/png",
       "sha256": "4aa8ed844d267103cda0be9ce05cc9d552949994b7cbd24225d911299660cdc9",
       "size_bytes": 11987,
-      "generated_at": "2026-05-12T13:17:41+10:00"
+      "generated_at": "2026-05-12T13:17:41+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 11.7,
+        "entropy": 1.08,
+        "inner_pct": 11.97
+      }
     },
     {
       "path": "pam/J0437-4715/tscrunch-1.meta.txt",
@@ -144,7 +1161,13 @@
       "command": "pam -T -e <ext> -u <dir> <src>; psrplot -g 1200x800 -p time <result>.ar -D <png>/png",
       "sha256": "4f66dad189d392daaa1d533da152abfbf18f54a902c8fd8c31fe22123d88f45d",
       "size_bytes": 7415,
-      "generated_at": "2026-05-12T13:17:58+10:00"
+      "generated_at": "2026-05-12T13:17:58+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.2,
+        "entropy": 0.03,
+        "inner_pct": 0.0
+      }
     },
     {
       "path": "pam/J0437-4715/tscrunch-16.meta.txt",
@@ -162,7 +1185,13 @@
       "command": "pam --setnsub 16 -e <ext> -u <dir> <src>; psrplot -g 1200x800 -p time <result>.ar -D <png>/png",
       "sha256": "ee08f71732e0e292284cb9cec0ae359a98269e28b6cd4905293d6960a78b0c75",
       "size_bytes": 7226,
-      "generated_at": "2026-05-12T13:18:16+10:00"
+      "generated_at": "2026-05-12T13:18:16+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.1,
+        "entropy": 0.03,
+        "inner_pct": 0.0
+      }
     },
     {
       "path": "pam/J0437-4715/tscrunch-4.meta.txt",
@@ -180,7 +1209,914 @@
       "command": "pam --setnsub 4 -e <ext> -u <dir> <src>; psrplot -g 1200x800 -p time <result>.ar -D <png>/png",
       "sha256": "6c65e80d0c40ff4e32e06daae8b7c111b92052728fd838c4d68c70017c0529a4",
       "size_bytes": 7263,
-      "generated_at": "2026-05-12T13:18:04+10:00"
+      "generated_at": "2026-05-12T13:18:04+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.1,
+        "entropy": 0.03,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pam/J1909-3744/D.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "4ac8c63d87f26805572fded84afc543a749ca00b31b86c9d9b71e8d6f8920ce3",
+      "size_bytes": 110,
+      "generated_at": "2026-05-20T17:22:33+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/D.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -D <src> ; psrplot -p freq -j D <out>",
+      "sha256": "dfbf85f6e8668ac6009c049e25f900e2cf959eedffdca18aabc1e4cb74ea8bcb",
+      "size_bytes": 343418,
+      "generated_at": "2026-05-20T17:22:33+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 335.4,
+        "entropy": 2.79,
+        "inner_pct": 99.69
+      }
+    },
+    {
+      "path": "pam/J1909-3744/D__dirty.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "8c3ce43e92e2b55912eceed39caade92ec70f466dfeceaeb0876d090aadc1a3f",
+      "size_bytes": 117,
+      "generated_at": "2026-05-20T17:28:12+10:00",
+      "dirty": true
+    },
+    {
+      "path": "pam/J1909-3744/D__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pam -D <src> ; psrplot -p freq -j D <out>",
+      "sha256": "736d5f1581c07b1c3968532a3167be3063b79960ab7f16feaa8b7369b8bf3d89",
+      "size_bytes": 170139,
+      "generated_at": "2026-05-20T17:28:12+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 166.2,
+        "entropy": 1.12,
+        "inner_pct": 99.7
+      }
+    },
+    {
+      "path": "pam/J1909-3744/FD.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "493c3a4697b3df88570ea04cb24feaa97f2b931e717d977889560f069ada4ddd",
+      "size_bytes": 108,
+      "generated_at": "2026-05-20T17:25:12+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/FD__dirty.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "0f28035f9f090cbc159da03f06486e27ed9d66f1cc1a87c79c4622eff89cf2e4",
+      "size_bytes": 115,
+      "generated_at": "2026-05-20T17:29:07+10:00",
+      "dirty": true
+    },
+    {
+      "path": "pam/J1909-3744/FTD__nchan16__nsub1.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "b7ef537842107b569df3a8d47558189554a45ae1b46cd899779f0208f4f4af75",
+      "size_bytes": 125,
+      "generated_at": "2026-05-20T17:25:54+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/FTD__nchan16__nsub1.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -F -D -T --setnchn 16 --setnsub 1 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "131d5136e47414c671c68ed6ae38b4a0e0dc52ed159364729bdd0094764a5fa4",
+      "size_bytes": 17794,
+      "generated_at": "2026-05-20T17:25:54+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 17.4,
+        "entropy": 0.43,
+        "inner_pct": 2.3
+      }
+    },
+    {
+      "path": "pam/J1909-3744/FTD__nchan16__nsub2.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "1aa5a8a94e23821b437bf178315fbf0ced32031a8c4b50ac5e580afaa2b7fe4a",
+      "size_bytes": 125,
+      "generated_at": "2026-05-20T17:26:05+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/FTD__nchan16__nsub2.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -F -D -T --setnchn 16 --setnsub 2 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "c151caa0e65d89b1736898f760d1fa246a6b03914f987527dd056273c245152f",
+      "size_bytes": 18213,
+      "generated_at": "2026-05-20T17:26:05+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 17.8,
+        "entropy": 1.15,
+        "inner_pct": 12.77
+      }
+    },
+    {
+      "path": "pam/J1909-3744/FTD__nchan16__nsub4.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "82cf9ec2023ce29abbd3e8f69773ba4f2209aa288be920b407cf907d80868dbe",
+      "size_bytes": 125,
+      "generated_at": "2026-05-20T17:26:15+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/FTD__nchan16__nsub4.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -F -D -T --setnchn 16 --setnsub 4 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "e58c0b7ab0a193025c15a84a351ee117a9dd61f4a0de1e866df3b80a7434be82",
+      "size_bytes": 18644,
+      "generated_at": "2026-05-20T17:26:15+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 18.2,
+        "entropy": 1.01,
+        "inner_pct": 36.33
+      }
+    },
+    {
+      "path": "pam/J1909-3744/FTD__nchan32__nsub1.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "d99c471d7d598223f72b653239cf925f4bda9327a2987ca38d1a1e9306e73f26",
+      "size_bytes": 125,
+      "generated_at": "2026-05-20T17:25:22+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/FTD__nchan32__nsub1.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -F -D -T --setnchn 32 --setnsub 1 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "d3bb8878c4e0d3a5beaa9c78e2007c72869edc6271cf4a583812a60b7914a34a",
+      "size_bytes": 26795,
+      "generated_at": "2026-05-20T17:25:22+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 26.2,
+        "entropy": 1.05,
+        "inner_pct": 5.47
+      }
+    },
+    {
+      "path": "pam/J1909-3744/FTD__nchan32__nsub2.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "d3d43d6ce4786b8290cc540d034ebfa8163a9d6a2f83279d3b7033ba81c6d9e0",
+      "size_bytes": 125,
+      "generated_at": "2026-05-20T17:25:33+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/FTD__nchan32__nsub2.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -F -D -T --setnchn 32 --setnsub 2 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "8d914bf4bfbb1d958154433e11fd44c6372498968846a073b4ee9761b0b4d1cd",
+      "size_bytes": 27626,
+      "generated_at": "2026-05-20T17:25:33+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 27.0,
+        "entropy": 0.68,
+        "inner_pct": 63.7
+      }
+    },
+    {
+      "path": "pam/J1909-3744/FTD__nchan32__nsub4.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "caddb0b9140cc0a6f95defa8ce958b94bb545a5d96ade8df1f9f91459d2f644e",
+      "size_bytes": 125,
+      "generated_at": "2026-05-20T17:25:44+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/FTD__nchan32__nsub4.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -F -D -T --setnchn 32 --setnsub 4 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "ca13864d3d23f12bad57e2497699513261cf4368b4e94bbd9c0919e2591229a1",
+      "size_bytes": 28578,
+      "generated_at": "2026-05-20T17:25:44+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 27.9,
+        "entropy": 1.07,
+        "inner_pct": 83.87
+      }
+    },
+    {
+      "path": "pam/J1909-3744/FTD__nchan8__nsub1.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "daf65304b93573900893a6a3d826a8a8109e66cdfba9a65eeeaca28c554bd4a6",
+      "size_bytes": 123,
+      "generated_at": "2026-05-20T17:26:26+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/FTD__nchan8__nsub1.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -F -D -T --setnchn 8 --setnsub 1 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "51212fbacc53d169a10fda7e0744b20601a98857e78fa93b167c3da80a563e9d",
+      "size_bytes": 13523,
+      "generated_at": "2026-05-20T17:26:26+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 13.2,
+        "entropy": 0.46,
+        "inner_pct": 2.78
+      }
+    },
+    {
+      "path": "pam/J1909-3744/FTD__nchan8__nsub2.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "932d48bf533350d1c9b01e62ff10f13c8df3f04b5e63947f0787a91830d5fbb5",
+      "size_bytes": 123,
+      "generated_at": "2026-05-20T17:26:37+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/FTD__nchan8__nsub2.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -F -D -T --setnchn 8 --setnsub 2 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "f9f42c5ee4773db8d202ac096e8d254c25a0257ca36569fe8c488e26041914b4",
+      "size_bytes": 13793,
+      "generated_at": "2026-05-20T17:26:37+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 13.5,
+        "entropy": 1.16,
+        "inner_pct": 8.63
+      }
+    },
+    {
+      "path": "pam/J1909-3744/FTD__nchan8__nsub4.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "20651a69c0069550c4346e9e0bafaf8236390fad17f7e8eab75a046cbe50ff5f",
+      "size_bytes": 123,
+      "generated_at": "2026-05-20T17:26:47+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/FTD__nchan8__nsub4.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -F -D -T --setnchn 8 --setnsub 4 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "fe0a47e427cc30359970c8fdce148ded6b75ab26037596e689fb66477350ae39",
+      "size_bytes": 14013,
+      "generated_at": "2026-05-20T17:26:47+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 13.7,
+        "entropy": 1.19,
+        "inner_pct": 27.23
+      }
+    },
+    {
+      "path": "pam/J1909-3744/FT__nchan16__nsub1.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "71d5962c208b6758508675612cb17d1ee993f497737ebd1639ba0bbd72433230",
+      "size_bytes": 124,
+      "generated_at": "2026-05-20T17:24:10+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/FT__nchan16__nsub1.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -F -T --setnchn 16 --setnsub 1 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "5ca393d4472917f30fa60d55b6b89d155578382345d12f331c240f235f1c62f7",
+      "size_bytes": 17715,
+      "generated_at": "2026-05-20T17:24:10+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 17.3,
+        "entropy": 0.43,
+        "inner_pct": 2.3
+      }
+    },
+    {
+      "path": "pam/J1909-3744/FT__nchan16__nsub2.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "18187c251ad2cd4dfc144e8e04b0e209ad8a2afb1aafc442d54d502634690696",
+      "size_bytes": 124,
+      "generated_at": "2026-05-20T17:24:20+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/FT__nchan16__nsub2.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -F -T --setnchn 16 --setnsub 2 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "247e56c82403ed91dade1eea55c4b4891a14937348ce0dfe905cd8563cfc0496",
+      "size_bytes": 18147,
+      "generated_at": "2026-05-20T17:24:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 17.7,
+        "entropy": 1.15,
+        "inner_pct": 12.77
+      }
+    },
+    {
+      "path": "pam/J1909-3744/FT__nchan16__nsub4.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "ed2b44d585a1eb0c653bfd73b8f1b4fb180894d1080426f0327e1847411b3f67",
+      "size_bytes": 124,
+      "generated_at": "2026-05-20T17:24:30+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/FT__nchan16__nsub4.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -F -T --setnchn 16 --setnsub 4 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "dc40d55c100016aa9a4bdfde7d4bf823bf783582649970f7cc8b9b97d4ae04ff",
+      "size_bytes": 18578,
+      "generated_at": "2026-05-20T17:24:30+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 18.1,
+        "entropy": 1.01,
+        "inner_pct": 36.35
+      }
+    },
+    {
+      "path": "pam/J1909-3744/FT__nchan32__nsub1.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "91be08cea63ee209fb2ef280629d0cd0c6d0fd1306335e49f8287eee331c6eb0",
+      "size_bytes": 124,
+      "generated_at": "2026-05-20T17:23:38+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/FT__nchan32__nsub1.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -F -T --setnchn 32 --setnsub 1 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "9442f488d45aa3564259202d2a82c5612fd9071f7a8e5255ae0f2b677adffd00",
+      "size_bytes": 26750,
+      "generated_at": "2026-05-20T17:23:38+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 26.1,
+        "entropy": 1.04,
+        "inner_pct": 5.43
+      }
+    },
+    {
+      "path": "pam/J1909-3744/FT__nchan32__nsub2.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "27cd5391f39be17878df01c67537286298d3b96fe061aa130480cbb26815130d",
+      "size_bytes": 124,
+      "generated_at": "2026-05-20T17:23:49+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/FT__nchan32__nsub2.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -F -T --setnchn 32 --setnsub 2 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "e1c5fa2f60cd0f940c79e104ba01017d4eaef6c34c6752d60439ddbc8f315205",
+      "size_bytes": 27553,
+      "generated_at": "2026-05-20T17:23:49+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 26.9,
+        "entropy": 0.68,
+        "inner_pct": 63.68
+      }
+    },
+    {
+      "path": "pam/J1909-3744/FT__nchan32__nsub4.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "d27b8b8bce8db78a3c62513e0fd8c3b72c56a1d8ffd652ca440eef0778ee77af",
+      "size_bytes": 124,
+      "generated_at": "2026-05-20T17:24:00+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/FT__nchan32__nsub4.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -F -T --setnchn 32 --setnsub 4 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "a8eba972eb48304dca859dad547e578029f43fdb4ab0c25a943f70139d7413b8",
+      "size_bytes": 28511,
+      "generated_at": "2026-05-20T17:24:00+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 27.8,
+        "entropy": 1.07,
+        "inner_pct": 83.87
+      }
+    },
+    {
+      "path": "pam/J1909-3744/FT__nchan8__nsub1.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "d91849832444cbe402ae3deadf0f605c16c2cd62d911315068d853d35fbb66eb",
+      "size_bytes": 122,
+      "generated_at": "2026-05-20T17:24:40+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/FT__nchan8__nsub1.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -F -T --setnchn 8 --setnsub 1 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "fa66d9c00308be4e8eb9eaa678be6f37be828eaa699bb2d0fef10968832f08e3",
+      "size_bytes": 13563,
+      "generated_at": "2026-05-20T17:24:40+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 13.2,
+        "entropy": 0.46,
+        "inner_pct": 2.78
+      }
+    },
+    {
+      "path": "pam/J1909-3744/FT__nchan8__nsub2.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "6b9e07d6cde94c5b8807f13c64f4433fba82e4c235458e6da2021ea3d1a529c5",
+      "size_bytes": 122,
+      "generated_at": "2026-05-20T17:24:50+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/FT__nchan8__nsub2.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -F -T --setnchn 8 --setnsub 2 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "43c7d776085036f9f06c1cfaceba8744838347771c98be63ca40477226c6b06f",
+      "size_bytes": 13830,
+      "generated_at": "2026-05-20T17:24:50+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 13.5,
+        "entropy": 1.16,
+        "inner_pct": 8.63
+      }
+    },
+    {
+      "path": "pam/J1909-3744/FT__nchan8__nsub4.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "40305c10d7c10d2cd2156f4ba87bb32422ff1fce48988ec443e824d581cf6ebc",
+      "size_bytes": 122,
+      "generated_at": "2026-05-20T17:25:01+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/FT__nchan8__nsub4.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -F -T --setnchn 8 --setnsub 4 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "ccd0e1a79b77998f8e5522973959bcc10c54da0cfcde0c96cf89116f5f94d6b1",
+      "size_bytes": 14052,
+      "generated_at": "2026-05-20T17:25:01+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 13.7,
+        "entropy": 1.19,
+        "inner_pct": 27.2
+      }
+    },
+    {
+      "path": "pam/J1909-3744/F__nchan116.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "44be200d1457f3aa1f6706b391dd4a5054afa6e9218c056e5f96e756023d0917",
+      "size_bytes": 120,
+      "generated_at": "2026-05-20T17:21:26+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/F__nchan116.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -F --setnchn 116 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "a14121ec37269e61cda1dc94b8f9e3c66de89ec4b1fa270ab0408888c067003c",
+      "size_bytes": 343426,
+      "generated_at": "2026-05-20T17:21:26+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 335.4,
+        "entropy": 2.79,
+        "inner_pct": 99.69
+      }
+    },
+    {
+      "path": "pam/J1909-3744/F__nchan116__dirty.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "dd9138260ec7df89708a874c058b6850849644b15981f7128a09f87fc60133de",
+      "size_bytes": 127,
+      "generated_at": "2026-05-20T17:27:14+10:00",
+      "dirty": true
+    },
+    {
+      "path": "pam/J1909-3744/F__nchan116__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pam -F --setnchn 116 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "aa16beef3b7f27e19abae14e2879be81b6f05b2ef96c69e80a87e622e44c0269",
+      "size_bytes": 170058,
+      "generated_at": "2026-05-20T17:27:14+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 166.1,
+        "entropy": 1.12,
+        "inner_pct": 99.7
+      }
+    },
+    {
+      "path": "pam/J1909-3744/F__nchan16.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "a1d003b70984c57eb3cfba9e63a3eeb8d3b04803dbde880a4436c1075dc7a398",
+      "size_bytes": 117,
+      "generated_at": "2026-05-20T17:21:47+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/F__nchan16.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -F --setnchn 16 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "9b8627a6ccef328a76a34287c6e031a5d83d2f09167436d7030668eaec60a0d5",
+      "size_bytes": 20756,
+      "generated_at": "2026-05-20T17:21:47+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 20.3,
+        "entropy": 2.85,
+        "inner_pct": 99.1
+      }
+    },
+    {
+      "path": "pam/J1909-3744/F__nchan16__dirty.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "7466aecb27398ec1354a2b3fe44fc2e9a38abe3b16b335bb7a85c2129fb78b68",
+      "size_bytes": 124,
+      "generated_at": "2026-05-20T17:27:28+10:00",
+      "dirty": true
+    },
+    {
+      "path": "pam/J1909-3744/F__nchan16__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pam -F --setnchn 16 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "f2d9ff2d3070de5b2db5a46b6dd4e77a23f520a4cc9efb1e58539d794d584465",
+      "size_bytes": 18727,
+      "generated_at": "2026-05-20T17:27:28+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 18.3,
+        "entropy": 1.46,
+        "inner_pct": 99.57
+      }
+    },
+    {
+      "path": "pam/J1909-3744/F__nchan32.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "b6f6915d40455148fe2cfb95db4088f0f3c325a9b3ce5ba84f0225e8fe4914c0",
+      "size_bytes": 117,
+      "generated_at": "2026-05-20T17:21:37+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/F__nchan32.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -F --setnchn 32 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "b8182e7f4f617667afdc53673b6f9a722934dedd6e80ade1afa44e48e6bb88e0",
+      "size_bytes": 32611,
+      "generated_at": "2026-05-20T17:21:37+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 31.8,
+        "entropy": 3.08,
+        "inner_pct": 99.58
+      }
+    },
+    {
+      "path": "pam/J1909-3744/F__nchan32__dirty.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "507a012d725fce017a13fe8ca30ee299f46413df3a1861bd3e302ba62019e0af",
+      "size_bytes": 124,
+      "generated_at": "2026-05-20T17:27:21+10:00",
+      "dirty": true
+    },
+    {
+      "path": "pam/J1909-3744/F__nchan32__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pam -F --setnchn 32 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "a7f49872af3c94d7853a61c8760a1bc94b1a998ede538261f9a294efd082e76e",
+      "size_bytes": 25831,
+      "generated_at": "2026-05-20T17:27:21+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 25.2,
+        "entropy": 1.29,
+        "inner_pct": 99.63
+      }
+    },
+    {
+      "path": "pam/J1909-3744/F__nchan8.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "6e23cf74ed45cc3c40aec11ffffb7fe40f5fa8de20af54d72bedc0c023a0220f",
+      "size_bytes": 115,
+      "generated_at": "2026-05-20T17:21:57+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/F__nchan8.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -F --setnchn 8 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "1ebf5e4a9b3f52bb3f4f04aa7d570fa3e94a9db10be6905284e62c5dc22bed31",
+      "size_bytes": 15173,
+      "generated_at": "2026-05-20T17:21:57+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 14.8,
+        "entropy": 2.92,
+        "inner_pct": 98.57
+      }
+    },
+    {
+      "path": "pam/J1909-3744/F__nchan8__dirty.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "743272ca5c9ecdd1b0aeb2c2d635963f5fd7e901338e15b1cdd24a83f0460a69",
+      "size_bytes": 122,
+      "generated_at": "2026-05-20T17:27:35+10:00",
+      "dirty": true
+    },
+    {
+      "path": "pam/J1909-3744/F__nchan8__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pam -F --setnchn 8 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "533de6e9595cc95f0a1ddf0f2a2f9377b1f01615e7e7e318c5b16d9ac205b3b2",
+      "size_bytes": 14468,
+      "generated_at": "2026-05-20T17:27:35+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 14.1,
+        "entropy": 2.0,
+        "inner_pct": 99.43
+      }
+    },
+    {
+      "path": "pam/J1909-3744/P.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "223e7ee77ebd48b53869f5004eb2e246313993a9ea62773baa6b7c712b756512",
+      "size_bytes": 110,
+      "generated_at": "2026-05-20T17:23:28+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/P.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -p <src> ; psrplot -p freq -j D <out>",
+      "sha256": "ddc5f8bc22139c0efb8dfbe4f285e88fb3ec0a05a9e0f7f15d935de9f999d424",
+      "size_bytes": 341957,
+      "generated_at": "2026-05-20T17:23:28+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 333.9,
+        "entropy": 2.88,
+        "inner_pct": 99.69
+      }
+    },
+    {
+      "path": "pam/J1909-3744/P__dirty.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "0a48ff3b8923b90903ab8e973f4fee79ebd6a53944ef455e7019eb8527dbed4d",
+      "size_bytes": 117,
+      "generated_at": "2026-05-20T17:29:00+10:00",
+      "dirty": true
+    },
+    {
+      "path": "pam/J1909-3744/P__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pam -p <src> ; psrplot -p freq -j D <out>",
+      "sha256": "f99d27da8c228a17b0faa43058b9f2734b33aa122fcce422425266fda27099ea",
+      "size_bytes": 156855,
+      "generated_at": "2026-05-20T17:29:00+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 153.2,
+        "entropy": 0.28,
+        "inner_pct": 99.7
+      }
+    },
+    {
+      "path": "pam/J1909-3744/T__nsub1.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "e15f411d46bfd914bd7dd14fd9adde7f5a1910f8feded756b3bf50c12c4238e0",
+      "size_bytes": 116,
+      "generated_at": "2026-05-20T17:22:43+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/T__nsub1.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -T --setnsub 1 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "f0df7087a941b94cb3091a5d1b41e0017faa18cc920b209c63f65b5bb5c8a9b7",
+      "size_bytes": 313340,
+      "generated_at": "2026-05-20T17:22:43+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 306.0,
+        "entropy": 2.09,
+        "inner_pct": 99.67
+      }
+    },
+    {
+      "path": "pam/J1909-3744/T__nsub1__dirty.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "94b43ffd39febc06b4e412bb229f53c926a28c3964196f4c5bcce1f2615139ca",
+      "size_bytes": 123,
+      "generated_at": "2026-05-20T17:28:20+10:00",
+      "dirty": true
+    },
+    {
+      "path": "pam/J1909-3744/T__nsub1__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pam -T --setnsub 1 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "dceeb9264c7b60394052e009170489c248bcee5f901af76e801a65b912d313c9",
+      "size_bytes": 291101,
+      "generated_at": "2026-05-20T17:28:20+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 284.3,
+        "entropy": 1.13,
+        "inner_pct": 99.7
+      }
+    },
+    {
+      "path": "pam/J1909-3744/T__nsub2.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "adffa19a9ccffe66767add3cfdbb75a131186d7c81ab03fd33669d3d7bc5f23f",
+      "size_bytes": 116,
+      "generated_at": "2026-05-20T17:22:54+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/T__nsub2.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -T --setnsub 2 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "e9680aaff4c2bfe6ac785e5842de5539ca868e8b289e36d0166eeb584ca2f6bf",
+      "size_bytes": 326112,
+      "generated_at": "2026-05-20T17:22:54+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 318.5,
+        "entropy": 2.47,
+        "inner_pct": 99.67
+      }
+    },
+    {
+      "path": "pam/J1909-3744/T__nsub2__dirty.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "acbe5665db1573afae42db13b2c507687f2f91bb84306b41eb2fc6aef5b4c569",
+      "size_bytes": 123,
+      "generated_at": "2026-05-20T17:28:28+10:00",
+      "dirty": true
+    },
+    {
+      "path": "pam/J1909-3744/T__nsub2__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pam -T --setnsub 2 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "380494f0c945cc8b43616c86fbe5ed8992e0e1d757796e7216901d0981f5f5e2",
+      "size_bytes": 272993,
+      "generated_at": "2026-05-20T17:28:28+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 266.6,
+        "entropy": 0.91,
+        "inner_pct": 99.7
+      }
+    },
+    {
+      "path": "pam/J1909-3744/T__nsub4.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "282bb501488d84f63b670e1c85a3e0fd7c306d953b078bd913dc07072e55fd0a",
+      "size_bytes": 116,
+      "generated_at": "2026-05-20T17:23:06+10:00"
+    },
+    {
+      "path": "pam/J1909-3744/T__nsub4.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam -T --setnsub 4 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "ad47c542e1bf4c1109a9817bbbbb27dc72555f969353ada4c4fbb53bc714dbd2",
+      "size_bytes": 332388,
+      "generated_at": "2026-05-20T17:23:06+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 324.6,
+        "entropy": 2.62,
+        "inner_pct": 99.7
+      }
+    },
+    {
+      "path": "pam/J1909-3744/T__nsub4__dirty.meta.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "vap -c 'nchan nsub nbin npol freq bw' <pam-result>",
+      "sha256": "7f23bac98d5708c95ba7b9652aac7eaa10ee4f0b035693b2b5f6846ad9b565fb",
+      "size_bytes": 123,
+      "generated_at": "2026-05-20T17:28:37+10:00",
+      "dirty": true
+    },
+    {
+      "path": "pam/J1909-3744/T__nsub4__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pam -T --setnsub 4 <src> ; psrplot -p freq -j D <out>",
+      "sha256": "c35f43eab21fc18587f1118e3c8da95dd79d85413b55f7ec834948b7a74fe0d2",
+      "size_bytes": 244435,
+      "generated_at": "2026-05-20T17:28:37+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 238.7,
+        "entropy": 1.0,
+        "inner_pct": 99.7
+      }
     },
     {
       "path": "pam/J1909-3744/bscrunch-1024.meta.txt",
@@ -198,7 +2134,13 @@
       "command": "pam --setnbin 1024 -e b1024 -u <dir> <src>; psrplot -g 1200x800 -p flux -jFT <result>.ar -D <png>/png",
       "sha256": "c218b08c4861199791005ef565131f246e412e311f98b3f16dec8f6156311101",
       "size_bytes": 10473,
-      "generated_at": "2026-05-12T13:20:06+10:00"
+      "generated_at": "2026-05-12T13:20:06+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.2,
+        "entropy": 0.14,
+        "inner_pct": 0.0
+      }
     },
     {
       "path": "pam/J1909-3744/bscrunch-256.meta.txt",
@@ -216,7 +2158,13 @@
       "command": "pam --setnbin 256 -e b256 -u <dir> <src>; psrplot -g 1200x800 -p flux -jFT <result>.ar -D <png>/png",
       "sha256": "77d5b18187e74db6eaacb823f2d53705d4a0668bb6eeabaf05c5fbbbf961cd5a",
       "size_bytes": 8835,
-      "generated_at": "2026-05-12T13:19:46+10:00"
+      "generated_at": "2026-05-12T13:19:46+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 8.6,
+        "entropy": 0.08,
+        "inner_pct": 0.0
+      }
     },
     {
       "path": "pam/J1909-3744/fscrunch-128.meta.txt",
@@ -234,7 +2182,13 @@
       "command": "pam --setnchn 128 -e f128 -u <dir> <src>; psrplot -g 1200x800 -p freq <result>.ar -D <png>/png",
       "sha256": "d726165a0393e8f3d1caf9c153ba4c7ceba3caee1031098efce80ce838dc989d",
       "size_bytes": 95143,
-      "generated_at": "2026-05-12T13:19:02+10:00"
+      "generated_at": "2026-05-12T13:19:02+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 92.9,
+        "entropy": 3.07,
+        "inner_pct": 99.65
+      }
     },
     {
       "path": "pam/J1909-3744/fscrunch-32.meta.txt",
@@ -252,7 +2206,13 @@
       "command": "pam --setnchn 32 -e f32 -u <dir> <src>; psrplot -g 1200x800 -p freq <result>.ar -D <png>/png",
       "sha256": "85ab844f47c34646b0da59e7c85ebbb076d1f6668e11fb540c63f5f97f9e3310",
       "size_bytes": 32513,
-      "generated_at": "2026-05-12T13:18:49+10:00"
+      "generated_at": "2026-05-12T13:18:49+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 31.8,
+        "entropy": 3.07,
+        "inner_pct": 99.61
+      }
     },
     {
       "path": "pam/J1909-3744/fscrunch-8.meta.txt",
@@ -270,7 +2230,13 @@
       "command": "pam --setnchn 8 -e f8 -u <dir> <src>; psrplot -g 1200x800 -p freq <result>.ar -D <png>/png",
       "sha256": "21647d738f273d02663dadadce6e40ccb85e37c5253c1d58cc62646c3f8089c4",
       "size_bytes": 15201,
-      "generated_at": "2026-05-12T13:18:39+10:00"
+      "generated_at": "2026-05-12T13:18:39+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 14.8,
+        "entropy": 2.89,
+        "inner_pct": 98.23
+      }
     },
     {
       "path": "pam/J1909-3744/tscrunch-1.meta.txt",
@@ -288,7 +2254,13 @@
       "command": "pam -T -e <ext> -u <dir> <src>; psrplot -g 1200x800 -p time <result>.ar -D <png>/png",
       "sha256": "c56dd24dd1ccae9d6d27467ac83ed4b8e00c20e07e4be8a51c70e2332874e40a",
       "size_bytes": 7412,
-      "generated_at": "2026-05-12T13:19:12+10:00"
+      "generated_at": "2026-05-12T13:19:12+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.2,
+        "entropy": 0.03,
+        "inner_pct": 0.0
+      }
     },
     {
       "path": "pam/J1909-3744/tscrunch-16.meta.txt",
@@ -306,7 +2278,13 @@
       "command": "pam --setnsub 16 -e <ext> -u <dir> <src>; psrplot -g 1200x800 -p time <result>.ar -D <png>/png",
       "sha256": "c4a4171379822ec9853e33ec5e484e43a7764fa7242f1f74cff010c2372970b0",
       "size_bytes": 7251,
-      "generated_at": "2026-05-12T13:19:40+10:00"
+      "generated_at": "2026-05-12T13:19:40+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.1,
+        "entropy": 0.03,
+        "inner_pct": 0.0
+      }
     },
     {
       "path": "pam/J1909-3744/tscrunch-4.meta.txt",
@@ -324,7 +2302,13 @@
       "command": "pam --setnsub 4 -e <ext> -u <dir> <src>; psrplot -g 1200x800 -p time <result>.ar -D <png>/png",
       "sha256": "b369c7dd1b6f9c4124d9e95c2a4c0cf54f2317cb357d2eefa3e66886864da297",
       "size_bytes": 7276,
-      "generated_at": "2026-05-12T13:19:23+10:00"
+      "generated_at": "2026-05-12T13:19:23+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.1,
+        "entropy": 0.03,
+        "inner_pct": 0.0
+      }
     },
     {
       "path": "pat/J0437-4715/toas.tim",
@@ -345,13 +2329,840 @@
       "generated_at": "2026-05-12T13:28:03+10:00"
     },
     {
+      "path": "pav/J0437-4715/D_F.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -DF <src> -g <out>/PNG",
+      "sha256": "9639052ce3e1bad435879a64599a7cc0212fdadb7da35bf50793f20dce771b64",
+      "size_bytes": 8084,
+      "generated_at": "2026-05-20T17:01:27+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.9,
+        "entropy": 0.09,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/D_FT.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -DFT <src> -g <out>/PNG",
+      "sha256": "cbf575864075ce4579c04ba80db182e61e75954b6b886fdd447844b014430e88",
+      "size_bytes": 7816,
+      "generated_at": "2026-05-20T17:01:42+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.6,
+        "entropy": 0.09,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/D_FT__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -DFT <src> -g <out>/PNG",
+      "sha256": "66caf44bb5396e5a4ddcdae4cace7df13548b08bca151a7db50f42e491cd8ecf",
+      "size_bytes": 7724,
+      "generated_at": "2026-05-20T17:04:32+10:00",
+      "dirty": true,
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.5,
+        "entropy": 0.09,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/D_FTd.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -DFTd <src> -g <out>/PNG",
+      "sha256": "18d4f67d4bd6ae923cf13daf7b120c85e319b06bc9e224c0c04ff1a97abec82e",
+      "size_bytes": 7779,
+      "generated_at": "2026-05-20T17:01:57+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.6,
+        "entropy": 0.09,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/D_FTd__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -DFTd <src> -g <out>/PNG",
+      "sha256": "e3603cf398adbdd7d981347b8f2c7787fe19a15c358dbfe0b0d5c7d4538ea668",
+      "size_bytes": 7737,
+      "generated_at": "2026-05-20T17:04:43+10:00",
+      "dirty": true,
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.6,
+        "entropy": 0.09,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/D_F__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -DF <src> -g <out>/PNG",
+      "sha256": "a806658f030ac19e3a47c5db79e0fc4cdf85328464e68bab534e9b530094ca50",
+      "size_bytes": 8024,
+      "generated_at": "2026-05-20T17:04:20+10:00",
+      "dirty": true,
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.8,
+        "entropy": 0.1,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/D_Fd.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -DFd <src> -g <out>/PNG",
+      "sha256": "58cb98d876d35aec8660071c6ea626fe6eec24c232ce31e2f75d32ba2c0bcd54",
+      "size_bytes": 7980,
+      "generated_at": "2026-05-20T17:01:47+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.8,
+        "entropy": 0.09,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/D_Fd__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -DFd <src> -g <out>/PNG",
+      "sha256": "330a3c7bcf84c6f97d3efd6458a6f007a99f2d56167c6ff9cc0253639cf1d515",
+      "size_bytes": 8032,
+      "generated_at": "2026-05-20T17:04:35+10:00",
+      "dirty": true,
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.8,
+        "entropy": 0.1,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/D_T.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -DT <src> -g <out>/PNG",
+      "sha256": "35602784633ff8da1b5cab3e677dd1fdc6d63fd7aa988bb12680b73d986ee32e",
+      "size_bytes": 6676,
+      "generated_at": "2026-05-20T17:01:32+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 6.5,
+        "entropy": 0.05,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/D_T__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -DT <src> -g <out>/PNG",
+      "sha256": "e3c7755bf1763a18ddc83661525b0024f9fa3dd801d9e8231629a95a63b841aa",
+      "size_bytes": 8971,
+      "generated_at": "2026-05-20T17:04:23+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 8.8,
+        "entropy": 0.14,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/D_Td.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -DTd <src> -g <out>/PNG",
+      "sha256": "f8474b11ee8402c0c47928c292cbf0bd541fe1968c0ad2e70e2330ebf7c113b6",
+      "size_bytes": 6699,
+      "generated_at": "2026-05-20T17:01:52+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 6.5,
+        "entropy": 0.05,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/D_Td__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -DTd <src> -g <out>/PNG",
+      "sha256": "f9326b00bd2154ee800eab75f5a45589d1494f3c72ffc9ab0a55f469496367eb",
+      "size_bytes": 8976,
+      "generated_at": "2026-05-20T17:04:38+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 8.8,
+        "entropy": 0.14,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/D_bare.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -D <src> -g <out>/PNG",
+      "sha256": "6c5b2a1112dbca7a81097f2dd226c5b95015463f3cd1c281a64ef6b617ffa29b",
+      "size_bytes": 10268,
+      "generated_at": "2026-05-20T17:01:23+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.0,
+        "entropy": 0.37,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/D_bare__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -D <src> -g <out>/PNG",
+      "sha256": "8f1f926b582788b134e569649687aa8f8d14e97e3d7545012169aff675216255",
+      "size_bytes": 10419,
+      "generated_at": "2026-05-20T17:04:17+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.2,
+        "entropy": 0.38,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/D_d.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -Dd <src> -g <out>/PNG",
+      "sha256": "dda76131a0bbf02ee51c08ecb66c18fd10b8bdc054e5c843d4c221f8b8e72dee",
+      "size_bytes": 10465,
+      "generated_at": "2026-05-20T17:01:38+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.2,
+        "entropy": 0.36,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/D_d__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -Dd <src> -g <out>/PNG",
+      "sha256": "75bdd01fe0a54205546fa6944e2731bb939a60fb05157d0b940560658c3f6d49",
+      "size_bytes": 10613,
+      "generated_at": "2026-05-20T17:04:29+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.4,
+        "entropy": 0.39,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/D_p.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -Dp <src> -g <out>/PNG",
+      "sha256": "6d7d08357508b011fec424e0ea05ebc98758667c5edde2e3df063a70ab4869d5",
+      "size_bytes": 10043,
+      "generated_at": "2026-05-20T17:01:34+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 9.8,
+        "entropy": 0.32,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/D_p__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -Dp <src> -g <out>/PNG",
+      "sha256": "73e6c40299d3f52cc003e61cad97f8520e1a6c016343e00aab6dec5b04f65d32",
+      "size_bytes": 10205,
+      "generated_at": "2026-05-20T17:04:25+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.0,
+        "entropy": 0.36,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/D_pd.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -Dpd <src> -g <out>/PNG",
+      "sha256": "359ec6807d4d081223b6b4fc10904d8df1d12b8d739fd91016cabb5be876391d",
+      "size_bytes": 10274,
+      "generated_at": "2026-05-20T17:01:53+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.0,
+        "entropy": 0.32,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/D_pd__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -Dpd <src> -g <out>/PNG",
+      "sha256": "3aaa4bec00780b019903fb2d06306dfb7d4e1d0bc3e1eea75cfbef756d9e0717",
+      "size_bytes": 10314,
+      "generated_at": "2026-05-20T17:04:39+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.1,
+        "entropy": 0.36,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/G_T.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -GT <src> -g <out>/PNG",
+      "sha256": "c18cc0ad0c41274211ea405e29ba09f878aebbcdc34065029e402d3c9b458b34",
+      "size_bytes": 116423,
+      "generated_at": "2026-05-20T17:00:29+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 113.7,
+        "entropy": 0.93,
+        "inner_pct": 10.17
+      }
+    },
+    {
+      "path": "pav/J0437-4715/G_T__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -GT <src> -g <out>/PNG",
+      "sha256": "8184c469079fa9fbe04354264a9b31ac4d011b48ae1cc1e6bdc06af17426e625",
+      "size_bytes": 111119,
+      "generated_at": "2026-05-20T17:03:27+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 108.5,
+        "entropy": 1.27,
+        "inner_pct": 99.19
+      }
+    },
+    {
+      "path": "pav/J0437-4715/G_Td.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -GTd <src> -g <out>/PNG",
+      "sha256": "47456ca3cf54a6c19efcafa94919545cc2cee33309b303c14dd5a98d839a08f7",
+      "size_bytes": 116279,
+      "generated_at": "2026-05-20T17:01:06+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 113.6,
+        "entropy": 0.92,
+        "inner_pct": 9.96
+      }
+    },
+    {
+      "path": "pav/J0437-4715/G_Td__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -GTd <src> -g <out>/PNG",
+      "sha256": "cdf89b12e1770671960b2234f055a654df418f316e9970325e38bcf8210d9975",
+      "size_bytes": 111730,
+      "generated_at": "2026-05-20T17:04:00+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 109.1,
+        "entropy": 1.15,
+        "inner_pct": 99.17
+      }
+    },
+    {
+      "path": "pav/J0437-4715/G_bare.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -G <src> -g <out>/PNG",
+      "sha256": "cc686ead3781fb2ed1e3987687d22ea5a92f2cdffdb58e7912ecfde81e8da251",
+      "size_bytes": 178349,
+      "generated_at": "2026-05-20T17:00:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 174.2,
+        "entropy": 1.11,
+        "inner_pct": 82.8
+      }
+    },
+    {
+      "path": "pav/J0437-4715/G_bare__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -G <src> -g <out>/PNG",
+      "sha256": "ce39325ad5efa9abdfa159f7dbe09413ca5db6702137c9d644995026152e7f46",
+      "size_bytes": 155147,
+      "generated_at": "2026-05-20T17:03:20+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 151.5,
+        "entropy": 0.94,
+        "inner_pct": 99.25
+      }
+    },
+    {
+      "path": "pav/J0437-4715/G_d.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -Gd <src> -g <out>/PNG",
+      "sha256": "ea7c6112ebe45f74bdfe596ce1f5c47b457e3f8ba4807cefce128e1a9f569964",
+      "size_bytes": 178918,
+      "generated_at": "2026-05-20T17:00:51+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 174.7,
+        "entropy": 1.14,
+        "inner_pct": 65.01
+      }
+    },
+    {
+      "path": "pav/J0437-4715/G_d__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -Gd <src> -g <out>/PNG",
+      "sha256": "6bd6018070b0d88a0a9eafcfd25b1559af30eea292aa97dfd8d038798be56606",
+      "size_bytes": 153797,
+      "generated_at": "2026-05-20T17:03:50+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 150.2,
+        "entropy": 0.99,
+        "inner_pct": 99.24
+      }
+    },
+    {
+      "path": "pav/J0437-4715/G_p.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -Gp <src> -g <out>/PNG",
+      "sha256": "4f4faf8421650e0a2422bd13aecbfa2de345e2d67624ee2dce506be245d8e9b7",
+      "size_bytes": 171997,
+      "generated_at": "2026-05-20T17:00:39+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 168.0,
+        "entropy": 1.63,
+        "inner_pct": 26.66
+      }
+    },
+    {
+      "path": "pav/J0437-4715/G_p__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -Gp <src> -g <out>/PNG",
+      "sha256": "d1832e8bebea46285879e43eedca8f3ea1de4fe1228c29e43c2c04dcb267ee68",
+      "size_bytes": 130952,
+      "generated_at": "2026-05-20T17:03:37+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 127.9,
+        "entropy": 1.17,
+        "inner_pct": 99.24
+      }
+    },
+    {
+      "path": "pav/J0437-4715/G_pd.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -Gpd <src> -g <out>/PNG",
+      "sha256": "1ea117f6edf20ad216f73034991741e40e2660d76af5128ef12fc6cd70f665e3",
+      "size_bytes": 171904,
+      "generated_at": "2026-05-20T17:01:15+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 167.9,
+        "entropy": 1.63,
+        "inner_pct": 26.47
+      }
+    },
+    {
+      "path": "pav/J0437-4715/G_pd__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -Gpd <src> -g <out>/PNG",
+      "sha256": "ffbb1d41e3eb71d042b9f11bfc6fae6d16c9ecc1499dd7b4688bb26078806333",
+      "size_bytes": 127567,
+      "generated_at": "2026-05-20T17:04:11+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 124.6,
+        "entropy": 0.97,
+        "inner_pct": 99.24
+      }
+    },
+    {
+      "path": "pav/J0437-4715/Y_F.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -YF <src> -g <out>/PNG",
+      "sha256": "b2ce1c99263bfbd7bae105e420344d4ca13168b0813783aac87688b83cad0067",
+      "size_bytes": 14660,
+      "generated_at": "2026-05-20T17:02:13+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 14.3,
+        "entropy": 1.48,
+        "inner_pct": 19.7
+      }
+    },
+    {
+      "path": "pav/J0437-4715/Y_FT.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -YFT <src> -g <out>/PNG",
+      "sha256": "9884301c706aeae40f7dd1351338907cc9d8572167aa168bdf3fa6e0491fba40",
+      "size_bytes": 7737,
+      "generated_at": "2026-05-20T17:02:45+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 7.6,
+        "entropy": 1.5,
+        "inner_pct": 19.58
+      }
+    },
+    {
+      "path": "pav/J0437-4715/Y_FT__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -YFT <src> -g <out>/PNG",
+      "sha256": "9a396856672c47499630164ae9fcf3d4ffb348f16c01fb683d260d34dbeb58be",
+      "size_bytes": 7162,
+      "generated_at": "2026-05-20T17:05:27+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 7.0,
+        "entropy": 1.37,
+        "inner_pct": 18.41
+      }
+    },
+    {
+      "path": "pav/J0437-4715/Y_FTd.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -YFTd <src> -g <out>/PNG",
+      "sha256": "8259b6c29e14391172b385511375a4e30c30882b47493e96b28114e061daf978",
+      "size_bytes": 7729,
+      "generated_at": "2026-05-20T17:03:08+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 7.5,
+        "entropy": 1.5,
+        "inner_pct": 20.08
+      }
+    },
+    {
+      "path": "pav/J0437-4715/Y_FTd__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -YFTd <src> -g <out>/PNG",
+      "sha256": "9b52c7f65cdd1ec3980c46ee2100895cf2400d44d55854535e8849aed7a1257d",
+      "size_bytes": 7168,
+      "generated_at": "2026-05-20T17:05:50+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 7.0,
+        "entropy": 1.37,
+        "inner_pct": 18.41
+      }
+    },
+    {
+      "path": "pav/J0437-4715/Y_F__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -YF <src> -g <out>/PNG",
+      "sha256": "f27a1f5e9fb759f61c32d6a388f3c48b0d4cc5f362f4b09279d45d07f2f991b3",
+      "size_bytes": 15189,
+      "generated_at": "2026-05-20T17:04:57+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 14.8,
+        "entropy": 1.32,
+        "inner_pct": 17.69
+      }
+    },
+    {
+      "path": "pav/J0437-4715/Y_Fd.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -YFd <src> -g <out>/PNG",
+      "sha256": "1c0ceda794320744d5eb50be813f9edd40ac8ed8fc840625e1fe543da2e2c059",
+      "size_bytes": 14205,
+      "generated_at": "2026-05-20T17:02:49+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 13.9,
+        "entropy": 1.49,
+        "inner_pct": 19.82
+      }
+    },
+    {
+      "path": "pav/J0437-4715/Y_Fd__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -YFd <src> -g <out>/PNG",
+      "sha256": "c2bb54cf62db4c81947669daa441684245c05b62f7d3abcaaf4ab716c87ab00c",
+      "size_bytes": 15191,
+      "generated_at": "2026-05-20T17:05:32+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 14.8,
+        "entropy": 1.32,
+        "inner_pct": 17.69
+      }
+    },
+    {
+      "path": "pav/J0437-4715/Y_Fpd.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -YFpd <src> -g <out>/PNG",
+      "sha256": "13009897a3635d77ef4e4be6a92b460cd2031e4cf3fb0d39b7215e851bd459e6",
+      "size_bytes": 13050,
+      "generated_at": "2026-05-20T17:42:12+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 12.7,
+        "entropy": 1.37,
+        "inner_pct": 18.5
+      }
+    },
+    {
+      "path": "pav/J0437-4715/Y_T.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -YT <src> -g <out>/PNG",
+      "sha256": "7cff6e757e8df1fcd5f72ad7f246e443d32a9e584b35012abb594fd0ce6360a9",
+      "size_bytes": 7237,
+      "generated_at": "2026-05-20T17:02:18+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.1,
+        "entropy": 0.05,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/Y_T__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -YT <src> -g <out>/PNG",
+      "sha256": "4deb74af4a5d573d35505f5bcafc06d095791653ffa535e80a65e2ede10b4e93",
+      "size_bytes": 7518,
+      "generated_at": "2026-05-20T17:05:00+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 7.3,
+        "entropy": 1.89,
+        "inner_pct": 30.79
+      }
+    },
+    {
+      "path": "pav/J0437-4715/Y_Td.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -YTd <src> -g <out>/PNG",
+      "sha256": "94b76864b41bbf3120c8b724734e593c698c68137fb6220e5965d765103e5b9b",
+      "size_bytes": 7257,
+      "generated_at": "2026-05-20T17:02:54+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.1,
+        "entropy": 0.05,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/Y_Td__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -YTd <src> -g <out>/PNG",
+      "sha256": "dec1c5d7a2f805321850838e21f1d73a048ea2822363a2873179d73133f32b6f",
+      "size_bytes": 7518,
+      "generated_at": "2026-05-20T17:05:36+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 7.3,
+        "entropy": 1.87,
+        "inner_pct": 30.29
+      }
+    },
+    {
+      "path": "pav/J0437-4715/Y_bare.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -Y <src> -g <out>/PNG",
+      "sha256": "95110e458b5538cc87461676530398dceefd82477f4a63f60939eb0c1b3d91d4",
+      "size_bytes": 7198,
+      "generated_at": "2026-05-20T17:02:08+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.0,
+        "entropy": 0.05,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/Y_bare__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -Y <src> -g <out>/PNG",
+      "sha256": "e5b58e8796cf1dea65f6a425538d667057c5c653e0c751fb36d523ea7f06b3d9",
+      "size_bytes": 23802,
+      "generated_at": "2026-05-20T17:04:54+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 23.2,
+        "entropy": 2.35,
+        "inner_pct": 90.62
+      }
+    },
+    {
+      "path": "pav/J0437-4715/Y_d.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -Yd <src> -g <out>/PNG",
+      "sha256": "40e8218a16bbcc290e57f2b8322df294c449608f1cbe16f5cece5b7f4a3a71cf",
+      "size_bytes": 7184,
+      "generated_at": "2026-05-20T17:02:40+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.0,
+        "entropy": 0.05,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/Y_d__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -Yd <src> -g <out>/PNG",
+      "sha256": "afc68458ee79cd98b576c2ce252d000368cdf727ce200dffdf0819c947c1ab80",
+      "size_bytes": 23771,
+      "generated_at": "2026-05-20T17:05:23+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 23.2,
+        "entropy": 2.35,
+        "inner_pct": 91.6
+      }
+    },
+    {
+      "path": "pav/J0437-4715/Y_p.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -Yp <src> -g <out>/PNG",
+      "sha256": "410e5c18bc12a1e0e96c976f8925f26384b520bdb8c5f776faa67e8e306d1d83",
+      "size_bytes": 7199,
+      "generated_at": "2026-05-20T17:02:28+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.0,
+        "entropy": 0.05,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/Y_p__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -Yp <src> -g <out>/PNG",
+      "sha256": "6fef62ae97acce2d489ded3df7f62779ce1612df25bd823b7c43eadbbc92c10d",
+      "size_bytes": 24021,
+      "generated_at": "2026-05-20T17:05:11+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 23.5,
+        "entropy": 2.41,
+        "inner_pct": 87.56
+      }
+    },
+    {
+      "path": "pav/J0437-4715/Y_pd.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pav -Ypd <src> -g <out>/PNG",
+      "sha256": "aafdb35ec83aaae78a93f9e3f733b8f055cfbdb8d8e803199116bb32b133686d",
+      "size_bytes": 7185,
+      "generated_at": "2026-05-20T17:03:04+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.0,
+        "entropy": 0.05,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J0437-4715/Y_pd__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "pav -Ypd <src> -g <out>/PNG",
+      "sha256": "5ba7a6698ceb10826c368f6b7547c766b61bf1461db4a6efbec1621e9b111461",
+      "size_bytes": 23985,
+      "generated_at": "2026-05-20T17:05:47+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 23.4,
+        "entropy": 2.42,
+        "inner_pct": 88.13
+      }
+    },
+    {
       "path": "pav/J0437-4715/dynamic__jd.png",
       "archive": "J0437-4715",
       "source": "J0437-4715_2024-07-25-12:13:23_zap.ar",
       "command": "pav -DFTp -j D <src> -g <out>/PNG",
       "sha256": "b4ce2d956a1172661181ff5ccd5a0dbb013df9ab531bd5f50586583d16a02c24",
       "size_bytes": 7809,
-      "generated_at": "2026-05-12T13:14:57+10:00"
+      "generated_at": "2026-05-12T13:14:57+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.6,
+        "entropy": 0.09,
+        "inner_pct": 0.0
+      }
     },
     {
       "path": "pav/J0437-4715/stack__jd.png",
@@ -360,7 +3171,834 @@
       "command": "pav -GTp -j D <src> -g <out>/PNG",
       "sha256": "e79f2e8259d65eb9e062a4a90c4b7edc45b2aff4397965edcf837e2eee866a4c",
       "size_bytes": 106918,
-      "generated_at": "2026-05-12T13:15:03+10:00"
+      "generated_at": "2026-05-12T13:15:03+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 104.4,
+        "entropy": 0.96,
+        "inner_pct": 10.44
+      }
+    },
+    {
+      "path": "pav/J1909-3744/D_F.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -DF <src> -g <out>/PNG",
+      "sha256": "5fd1837839ccaabc9a2cb83fea8913d3c135cee7c5a40ed810e96f5e064720a0",
+      "size_bytes": 10631,
+      "generated_at": "2026-05-20T17:08:24+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.4,
+        "entropy": 0.48,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/D_FT.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -DFT <src> -g <out>/PNG",
+      "sha256": "f147c21826bfdbaba26631bb23b0fb948382f4c93a3fa048e56eef95be237412",
+      "size_bytes": 8710,
+      "generated_at": "2026-05-20T17:08:54+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 8.5,
+        "entropy": 0.17,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/D_FT__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -DFT <src> -g <out>/PNG",
+      "sha256": "5b22064ad43b48fe04f47684907041a0ac0c888fe1160152831af59dfeedd621",
+      "size_bytes": 9197,
+      "generated_at": "2026-05-20T17:14:23+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 9.0,
+        "entropy": 0.19,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/D_FTd.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -DFTd <src> -g <out>/PNG",
+      "sha256": "94bec5c4cf4781e772f6230a4c969cc5644f075279389bc5086be1f22ee699c9",
+      "size_bytes": 8543,
+      "generated_at": "2026-05-20T17:09:24+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 8.3,
+        "entropy": 0.17,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/D_FTd__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -DFTd <src> -g <out>/PNG",
+      "sha256": "29c10001abab7e24ecc7df261ec8e6795c92a9b8ea8d21347ea6424d995f2840",
+      "size_bytes": 9220,
+      "generated_at": "2026-05-20T17:14:43+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 9.0,
+        "entropy": 0.19,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/D_F__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -DF <src> -g <out>/PNG",
+      "sha256": "cfaac0b95151a70d7253046de44372c056e0f252cc5d1b01a8b2beeae2ea3610",
+      "size_bytes": 11268,
+      "generated_at": "2026-05-20T17:13:59+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 11.0,
+        "entropy": 0.74,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/D_Fd.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -DFd <src> -g <out>/PNG",
+      "sha256": "6e41af66879140a2726e0f0a425306d4e2741410bd1a5220308afeedb32ff83d",
+      "size_bytes": 10662,
+      "generated_at": "2026-05-20T17:09:03+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.4,
+        "entropy": 0.5,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/D_Fd__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -DFd <src> -g <out>/PNG",
+      "sha256": "0818085b17937f6c56fc041a3b0ea922a8d65458ed70d22805de8a5ca6a6a9b2",
+      "size_bytes": 11199,
+      "generated_at": "2026-05-20T17:14:29+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.9,
+        "entropy": 0.74,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/D_T.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -DT <src> -g <out>/PNG",
+      "sha256": "a412c0f1af154404b2da4a50b469fb71f02c2f5174d36a2b0d6c1c615219ca1f",
+      "size_bytes": 6679,
+      "generated_at": "2026-05-20T17:08:34+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 6.5,
+        "entropy": 0.05,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/D_T__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -DT <src> -g <out>/PNG",
+      "sha256": "495ac9d10769a1a4cfa6861ed934a602bbfda6623b005ae0327cf6c8d0007349",
+      "size_bytes": 11168,
+      "generated_at": "2026-05-20T17:14:05+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.9,
+        "entropy": 0.8,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/D_Td.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -DTd <src> -g <out>/PNG",
+      "sha256": "08086d013483f7ad9653d9cc375b6e5e6a5051cd4e1613e1e85e39d8e52076f0",
+      "size_bytes": 6653,
+      "generated_at": "2026-05-20T17:09:12+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 6.5,
+        "entropy": 0.05,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/D_Td__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -DTd <src> -g <out>/PNG",
+      "sha256": "7d348e2b3d0a1b73a2af0452526660bbb6a902cb1b3c06188738c065693226b5",
+      "size_bytes": 10935,
+      "generated_at": "2026-05-20T17:14:35+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.7,
+        "entropy": 0.72,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/D_bare.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -D <src> -g <out>/PNG",
+      "sha256": "36d75da2e949163ad3589a0cf1929fb54f1374a79bd9769b20118db4546db7d5",
+      "size_bytes": 11115,
+      "generated_at": "2026-05-20T17:08:15+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.9,
+        "entropy": 0.7,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/D_bare__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -D <src> -g <out>/PNG",
+      "sha256": "9ca98e388dac6453795d7290ca52280af9ad631ea663a16aa6a7c93eef2288fb",
+      "size_bytes": 11406,
+      "generated_at": "2026-05-20T17:13:53+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 11.1,
+        "entropy": 0.79,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/D_d.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -Dd <src> -g <out>/PNG",
+      "sha256": "a4ea46262793861e7fa4c7058eb5979cbcd34f290bd15aed8640f6f7df758c95",
+      "size_bytes": 11022,
+      "generated_at": "2026-05-20T17:08:45+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.8,
+        "entropy": 0.72,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/D_d__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -Dd <src> -g <out>/PNG",
+      "sha256": "ce05924360636732f51b30361cbde4d38326aa6ce0e4062b7c8dd974be03a0eb",
+      "size_bytes": 11266,
+      "generated_at": "2026-05-20T17:14:17+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 11.0,
+        "entropy": 0.72,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/D_p.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -Dp <src> -g <out>/PNG",
+      "sha256": "6615d35dc7456cdfc875c3aa3ab05148d9c8bc17bad222934ebe80fcf767392c",
+      "size_bytes": 10813,
+      "generated_at": "2026-05-20T17:08:38+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.6,
+        "entropy": 0.73,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/D_p__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -Dp <src> -g <out>/PNG",
+      "sha256": "a4344861b2bfac0dc07e7ac7c73e10f2b8046494af7b16a52d91cceb17703657",
+      "size_bytes": 11055,
+      "generated_at": "2026-05-20T17:14:09+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.8,
+        "entropy": 0.79,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/D_pd.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -Dpd <src> -g <out>/PNG",
+      "sha256": "0a6cec4ae869c26328455cc55d2ee4a7407f61d21f7492847ff06b859ddc5716",
+      "size_bytes": 11068,
+      "generated_at": "2026-05-20T17:09:15+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.8,
+        "entropy": 0.74,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/D_pd__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -Dpd <src> -g <out>/PNG",
+      "sha256": "765a9ad908d1e75b786cb1cfdd2f9bf010ddb8e52311597ab15863b2061a3d4a",
+      "size_bytes": 11254,
+      "generated_at": "2026-05-20T17:14:37+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 11.0,
+        "entropy": 0.79,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/G_T.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -GT <src> -g <out>/PNG",
+      "sha256": "19a27fdd32e46d2ef2f9d58fe70e60fd58fb2dbf361a4bfa22c96ff9b1962a1c",
+      "size_bytes": 192629,
+      "generated_at": "2026-05-20T17:06:30+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 188.1,
+        "entropy": 2.12,
+        "inner_pct": 99.18
+      }
+    },
+    {
+      "path": "pav/J1909-3744/G_T__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -GT <src> -g <out>/PNG",
+      "sha256": "9d6072c948b2328c8bbfff4d0f4a530120952883c88be88aa608a44d64a172ab",
+      "size_bytes": 177302,
+      "generated_at": "2026-05-20T17:12:18+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 173.1,
+        "entropy": 1.18,
+        "inner_pct": 99.25
+      }
+    },
+    {
+      "path": "pav/J1909-3744/G_Td.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -GTd <src> -g <out>/PNG",
+      "sha256": "08eb5442a9b2c0cf2a19ae5d9319ff0a76a19b52474d78827b1c3e49c1ac0fab",
+      "size_bytes": 191841,
+      "generated_at": "2026-05-20T17:07:42+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 187.3,
+        "entropy": 2.13,
+        "inner_pct": 99.21
+      }
+    },
+    {
+      "path": "pav/J1909-3744/G_Td__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -GTd <src> -g <out>/PNG",
+      "sha256": "917974ff0e05370c1df15e6e06c88d5e234fcda062a999a9ba112362a413a887",
+      "size_bytes": 177676,
+      "generated_at": "2026-05-20T17:13:22+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 173.5,
+        "entropy": 1.15,
+        "inner_pct": 99.25
+      }
+    },
+    {
+      "path": "pav/J1909-3744/G_bare.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -G <src> -g <out>/PNG",
+      "sha256": "3e320553f577a62b3f08bb3489c0cf43f16cbe8073c677af6c1438c5bb131d29",
+      "size_bytes": 206522,
+      "generated_at": "2026-05-20T17:06:12+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 201.7,
+        "entropy": 2.74,
+        "inner_pct": 99.24
+      }
+    },
+    {
+      "path": "pav/J1909-3744/G_bare__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -G <src> -g <out>/PNG",
+      "sha256": "a1323f9c0511e6a07c3d075beaf33c8a4694b3c7ab0b8f0e8fcfb8e6eca199e4",
+      "size_bytes": 103374,
+      "generated_at": "2026-05-20T17:12:05+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 101.0,
+        "entropy": 0.25,
+        "inner_pct": 99.24
+      }
+    },
+    {
+      "path": "pav/J1909-3744/G_d.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -Gd <src> -g <out>/PNG",
+      "sha256": "82da8bf23df55c1cf24a7e845720b3ceda6d3f91ed704258a15d49dc75657ca5",
+      "size_bytes": 207722,
+      "generated_at": "2026-05-20T17:07:14+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 202.9,
+        "entropy": 2.82,
+        "inner_pct": 99.24
+      }
+    },
+    {
+      "path": "pav/J1909-3744/G_d__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -Gd <src> -g <out>/PNG",
+      "sha256": "eecfe0858b4f4d687c988d54ece5634ddb9605cdd924ec26bd3722bd6e006929",
+      "size_bytes": 104650,
+      "generated_at": "2026-05-20T17:13:03+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 102.2,
+        "entropy": 1.15,
+        "inner_pct": 99.24
+      }
+    },
+    {
+      "path": "pav/J1909-3744/G_p.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -Gp <src> -g <out>/PNG",
+      "sha256": "5c235fdf705ac715d8d2839b173baecd9cdd79d63d0524611e4be4015a83d2fe",
+      "size_bytes": 204906,
+      "generated_at": "2026-05-20T17:06:50+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 200.1,
+        "entropy": 2.85,
+        "inner_pct": 99.24
+      }
+    },
+    {
+      "path": "pav/J1909-3744/G_p__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -Gp <src> -g <out>/PNG",
+      "sha256": "3cebcd955904b8c3a421b1d3059fd4e7b228d1b959fd99f4e9f62fedb67049de",
+      "size_bytes": 93317,
+      "generated_at": "2026-05-20T17:12:38+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 91.1,
+        "entropy": 0.35,
+        "inner_pct": 99.24
+      }
+    },
+    {
+      "path": "pav/J1909-3744/G_pd.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -Gpd <src> -g <out>/PNG",
+      "sha256": "ad860cfb254f1751e7007ffd0dc7ff83aaa2a862047f8bec2374061e21b7c3aa",
+      "size_bytes": 206972,
+      "generated_at": "2026-05-20T17:08:01+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 202.1,
+        "entropy": 2.91,
+        "inner_pct": 99.23
+      }
+    },
+    {
+      "path": "pav/J1909-3744/G_pd__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -Gpd <src> -g <out>/PNG",
+      "sha256": "1b3bf44036b311b385ff7937eea0d4477922c5b77809c70799310a8a5c9d2c60",
+      "size_bytes": 96538,
+      "generated_at": "2026-05-20T17:13:42+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 94.3,
+        "entropy": 0.31,
+        "inner_pct": 99.24
+      }
+    },
+    {
+      "path": "pav/J1909-3744/Y_F.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -YF <src> -g <out>/PNG",
+      "sha256": "76426299a5297e7949c07190d92daf93eece9b8ad8bd965eeb74dc722140e275",
+      "size_bytes": 37835,
+      "generated_at": "2026-05-20T17:09:54+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 36.9,
+        "entropy": 2.77,
+        "inner_pct": 98.47
+      }
+    },
+    {
+      "path": "pav/J1909-3744/Y_FT.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -YFT <src> -g <out>/PNG",
+      "sha256": "08b042d8fc6f52ad640439b4e50f963df5d4911990b57b222e9002616650776a",
+      "size_bytes": 7460,
+      "generated_at": "2026-05-20T17:10:56+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 7.3,
+        "entropy": 0.45,
+        "inner_pct": 3.68
+      }
+    },
+    {
+      "path": "pav/J1909-3744/Y_FT__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -YFT <src> -g <out>/PNG",
+      "sha256": "d45080a564af259db98ec0e4af17a89087cec6141a5aae6edad5f8a991b63ac7",
+      "size_bytes": 7443,
+      "generated_at": "2026-05-20T17:16:09+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 7.3,
+        "entropy": 0.81,
+        "inner_pct": 4.18
+      }
+    },
+    {
+      "path": "pav/J1909-3744/Y_FTd.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -YFTd <src> -g <out>/PNG",
+      "sha256": "47d6255d735560d289aee6b7ce7535316cda11eefc1f2a1d8c0024cf63b3a5bc",
+      "size_bytes": 7470,
+      "generated_at": "2026-05-20T17:11:43+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 7.3,
+        "entropy": 0.47,
+        "inner_pct": 3.85
+      }
+    },
+    {
+      "path": "pav/J1909-3744/Y_FTd__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -YFTd <src> -g <out>/PNG",
+      "sha256": "2e0f52fc0c9be0d38f385c98fa9c0450fbf473783a193a37f99ba58aa3505e7b",
+      "size_bytes": 7448,
+      "generated_at": "2026-05-20T17:16:47+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 7.3,
+        "entropy": 0.82,
+        "inner_pct": 4.18
+      }
+    },
+    {
+      "path": "pav/J1909-3744/Y_F__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -YF <src> -g <out>/PNG",
+      "sha256": "6c4526a0c1baeae782b14727eb344d9b45e547df8ce0fea40915595285e6ff12",
+      "size_bytes": 38140,
+      "generated_at": "2026-05-20T17:15:11+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 37.2,
+        "entropy": 2.78,
+        "inner_pct": 99.2
+      }
+    },
+    {
+      "path": "pav/J1909-3744/Y_Fd.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -YFd <src> -g <out>/PNG",
+      "sha256": "6bddef02e4f1d5ff451584135c2be15377e448926e18c95e3a332ec0de736aa3",
+      "size_bytes": 37495,
+      "generated_at": "2026-05-20T17:11:05+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 36.6,
+        "entropy": 2.75,
+        "inner_pct": 98.77
+      }
+    },
+    {
+      "path": "pav/J1909-3744/Y_Fd__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -YFd <src> -g <out>/PNG",
+      "sha256": "6e82318f2f5b0fec57e8b8e2061fae2a82f7372959300bb4a99379e377a6c70d",
+      "size_bytes": 38155,
+      "generated_at": "2026-05-20T17:16:14+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 37.3,
+        "entropy": 2.78,
+        "inner_pct": 99.2
+      }
+    },
+    {
+      "path": "pav/J1909-3744/Y_Fpd.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -YFpd <src> -g <out>/PNG",
+      "sha256": "dafa46197a029b57d09ee3abd081169b20e3eada7c15c3bf54b6e74b43b399f4",
+      "size_bytes": 34545,
+      "generated_at": "2026-05-20T17:42:30+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 33.7,
+        "entropy": 1.51,
+        "inner_pct": 90.31
+      }
+    },
+    {
+      "path": "pav/J1909-3744/Y_T.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -YT <src> -g <out>/PNG",
+      "sha256": "5663c56bf987a88f77631f3ce25c331c15d0d88fefe5a6311280341f9849eb3b",
+      "size_bytes": 7200,
+      "generated_at": "2026-05-20T17:10:03+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.0,
+        "entropy": 0.05,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/Y_T__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -YT <src> -g <out>/PNG",
+      "sha256": "27d07a306891fcc60cbc6f865079af84c7d9f3a27465cf4bd6f93b5cc0b229a3",
+      "size_bytes": 7712,
+      "generated_at": "2026-05-20T17:15:17+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 7.5,
+        "entropy": 3.59,
+        "inner_pct": 95.56
+      }
+    },
+    {
+      "path": "pav/J1909-3744/Y_Td.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -YTd <src> -g <out>/PNG",
+      "sha256": "d51f48a11a6f59d3e9df00a560925126feeb69b35886dbbf1adebd635b858a88",
+      "size_bytes": 7200,
+      "generated_at": "2026-05-20T17:11:15+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.0,
+        "entropy": 0.05,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/Y_Td__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -YTd <src> -g <out>/PNG",
+      "sha256": "52c33fa4d8d315e836a94281b190a0a4fed135d7f46ec40b8594adf66bb3b125",
+      "size_bytes": 7670,
+      "generated_at": "2026-05-20T17:16:21+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 7.5,
+        "entropy": 3.18,
+        "inner_pct": 98.58
+      }
+    },
+    {
+      "path": "pav/J1909-3744/Y_bare.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -Y <src> -g <out>/PNG",
+      "sha256": "e82b0ca0ca53550168268376072a63643d83dac427538bf38f3e66a7e294e6f1",
+      "size_bytes": 7125,
+      "generated_at": "2026-05-20T17:09:45+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.0,
+        "entropy": 0.05,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/Y_bare__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -Y <src> -g <out>/PNG",
+      "sha256": "962739a6a9ca88497331dedff18ef5511dfd57d3ebbac860077441b4a40e6a6a",
+      "size_bytes": 41732,
+      "generated_at": "2026-05-20T17:15:05+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 40.8,
+        "entropy": 3.2,
+        "inner_pct": 99.18
+      }
+    },
+    {
+      "path": "pav/J1909-3744/Y_d.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -Yd <src> -g <out>/PNG",
+      "sha256": "9e164f9527e8b7c4b46bd9e574f8e39ab73a57838c74b5ab82209e26d795ff0a",
+      "size_bytes": 7119,
+      "generated_at": "2026-05-20T17:10:47+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.0,
+        "entropy": 0.05,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/Y_d__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -Yd <src> -g <out>/PNG",
+      "sha256": "4fdddfbad2929bd118ca1ddf21e2e48a5b281a3a7df8b75a2b0cb241d8086b75",
+      "size_bytes": 42261,
+      "generated_at": "2026-05-20T17:16:02+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 41.3,
+        "entropy": 3.32,
+        "inner_pct": 99.1
+      }
+    },
+    {
+      "path": "pav/J1909-3744/Y_p.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -Yp <src> -g <out>/PNG",
+      "sha256": "e82b0ca0ca53550168268376072a63643d83dac427538bf38f3e66a7e294e6f1",
+      "size_bytes": 7125,
+      "generated_at": "2026-05-20T17:10:23+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.0,
+        "entropy": 0.05,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/Y_p__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -Yp <src> -g <out>/PNG",
+      "sha256": "636086e50ca788869dbde6a8d92e183b94aa870df07faec35cf2a496b5018ec0",
+      "size_bytes": 42238,
+      "generated_at": "2026-05-20T17:15:37+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 41.2,
+        "entropy": 3.31,
+        "inner_pct": 99.15
+      }
+    },
+    {
+      "path": "pav/J1909-3744/Y_pd.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pav -Ypd <src> -g <out>/PNG",
+      "sha256": "a0c830cf2220393bb5453db45cb3ccdf5e8a9b82999886bd908acc342f64d9c2",
+      "size_bytes": 7120,
+      "generated_at": "2026-05-20T17:11:34+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.0,
+        "entropy": 0.05,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pav/J1909-3744/Y_pd__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "pav -Ypd <src> -g <out>/PNG",
+      "sha256": "a65913fd29e1109297fa0db0d37e429b4640f2aedb71d3c8cc4ec739405fcfc3",
+      "size_bytes": 42594,
+      "generated_at": "2026-05-20T17:16:41+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 41.6,
+        "entropy": 3.33,
+        "inner_pct": 99.03
+      }
     },
     {
       "path": "pav/J1909-3744/dynamic__jd.png",
@@ -369,7 +4007,13 @@
       "command": "pav -DFTp -j D <src> -g <out>/PNG",
       "sha256": "9ed935a2036f26a542aaf4fc923602a77c14247da77260f15d51a898e1cf3444",
       "size_bytes": 7718,
-      "generated_at": "2026-05-12T13:15:26+10:00"
+      "generated_at": "2026-05-12T13:15:26+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.5,
+        "entropy": 0.12,
+        "inner_pct": 0.0
+      }
     },
     {
       "path": "pav/J1909-3744/stack__jd.png",
@@ -378,7 +4022,13 @@
       "command": "pav -GTp -j D <src> -g <out>/PNG",
       "sha256": "07abfa56d790560d7e11ef44f8a34743712b02c883fb7f1330ac7338441a59d7",
       "size_bytes": 173880,
-      "generated_at": "2026-05-12T13:15:36+10:00"
+      "generated_at": "2026-05-12T13:15:36+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 169.8,
+        "entropy": 0.6,
+        "inner_pct": 73.1
+      }
     },
     {
       "path": "paz/J0437-4715/auto.png",
@@ -387,7 +4037,13 @@
       "command": "paz -r -e <ext> -O <dir> <src>; psrplot -g 1200x800 -p freq <r>.ar -D <out>/png",
       "sha256": "fef58d1204403e07228b1907f98556d581a5afb238f223577d62edbb828fd439",
       "size_bytes": 215019,
-      "generated_at": "2026-05-12T13:21:39+10:00"
+      "generated_at": "2026-05-12T13:21:39+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 210.0,
+        "entropy": 1.49,
+        "inner_pct": 22.38
+      }
     },
     {
       "path": "paz/J0437-4715/badsub.png",
@@ -396,7 +4052,13 @@
       "command": "paz -w \"0 5\" -e <ext> -O <dir> <src>; psrplot -g 1200x800 -p time <r>.ar -D <out>/png",
       "sha256": "40ac791d767d7a6ad6008ac72052c02fa705bd31e93f2c5967b02c6b136dc43c",
       "size_bytes": 7269,
-      "generated_at": "2026-05-12T13:22:24+10:00"
+      "generated_at": "2026-05-12T13:22:24+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.1,
+        "entropy": 0.03,
+        "inner_pct": 0.0
+      }
     },
     {
       "path": "paz/J0437-4715/freqrange.png",
@@ -405,7 +4067,13 @@
       "command": "paz -F \"1200 1280\" -e <ext> -O <dir> <src>; psrplot -g 1200x800 -p freq <r>.ar -D <out>/png",
       "sha256": "541d404103557d9745a7964a7ddfc831e06c7859a82f78a3f6c2279ce712eaa9",
       "size_bytes": 266224,
-      "generated_at": "2026-05-12T13:22:09+10:00"
+      "generated_at": "2026-05-12T13:22:09+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 260.0,
+        "entropy": 1.0,
+        "inner_pct": 84.9
+      }
     },
     {
       "path": "paz/J0437-4715/manual-chans.png",
@@ -414,7 +4082,13 @@
       "command": "paz -z \"100 101 102\" -e <ext> -O <dir> <src>; psrplot -g 1200x800 -p freq <r>.ar -D <out>/png",
       "sha256": "0dac5fed50d1b406585a297c33078e37e0a63d82a30b8c7f20bf4a3d2937be99",
       "size_bytes": 292794,
-      "generated_at": "2026-05-12T13:21:54+10:00"
+      "generated_at": "2026-05-12T13:21:54+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 285.9,
+        "entropy": 1.08,
+        "inner_pct": 83.19
+      }
     },
     {
       "path": "paz/J1909-3744/auto.png",
@@ -423,7 +4097,13 @@
       "command": "paz -r -e <ext> -O <dir> <src>; psrplot -g 1200x800 -p freq <r>.ar -D <out>/png",
       "sha256": "f0cb81c3367689c27b2bb28c567fa414575090bd79fcf512b382fa4dec702184",
       "size_bytes": 256388,
-      "generated_at": "2026-05-12T13:22:56+10:00"
+      "generated_at": "2026-05-12T13:22:56+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 250.4,
+        "entropy": 2.42,
+        "inner_pct": 99.68
+      }
     },
     {
       "path": "paz/J1909-3744/badsub.png",
@@ -432,7 +4112,13 @@
       "command": "paz -w \"0 5\" -e <ext> -O <dir> <src>; psrplot -g 1200x800 -p time <r>.ar -D <out>/png",
       "sha256": "64a6a006b54cf4f1c9dd9ba7aa213e5ad700335925c9c0649bce68ce2c736ccf",
       "size_bytes": 7306,
-      "generated_at": "2026-05-12T13:24:30+10:00"
+      "generated_at": "2026-05-12T13:24:30+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.1,
+        "entropy": 0.03,
+        "inner_pct": 0.0
+      }
     },
     {
       "path": "paz/J1909-3744/freqrange.png",
@@ -441,7 +4127,13 @@
       "command": "paz -F \"1200 1280\" -e <ext> -O <dir> <src>; psrplot -g 1200x800 -p freq <r>.ar -D <out>/png",
       "sha256": "88f60902cb3b550a34e8b9401b77aaedcb8e5d99bc622c6e84b4da0e2dbcbb2d",
       "size_bytes": 321555,
-      "generated_at": "2026-05-12T13:23:59+10:00"
+      "generated_at": "2026-05-12T13:23:59+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 314.0,
+        "entropy": 2.64,
+        "inner_pct": 99.7
+      }
     },
     {
       "path": "paz/J1909-3744/manual-chans.png",
@@ -450,7 +4142,383 @@
       "command": "paz -z \"100 101 102\" -e <ext> -O <dir> <src>; psrplot -g 1200x800 -p freq <r>.ar -D <out>/png",
       "sha256": "a6cc8171f6c00d8604134f3cc6172a84ae46843091220e9f8df2d9510821ad63",
       "size_bytes": 341351,
-      "generated_at": "2026-05-12T13:23:27+10:00"
+      "generated_at": "2026-05-12T13:23:27+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 333.4,
+        "entropy": 2.71,
+        "inner_pct": 99.69
+      }
+    },
+    {
+      "path": "pdmp/J0437-4715/pdmp.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pdmp -mc 16 -ms 8 -g pdmp.png/PNG <src>   # external",
+      "sha256": "928ceebefc45595e04b8a62eaeab17bd8687bc0b402f24a7d851176a5e2ceaf7",
+      "size_bytes": 18117,
+      "generated_at": "2026-05-20T17:43:17+10:00",
+      "external": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 17.7,
+        "entropy": 1.25,
+        "inner_pct": 9.96
+      }
+    },
+    {
+      "path": "pdmp/J0437-4715/pdmp.txt",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pdmp -mc 16 -ms 8 <src> > pdmp.txt        # external",
+      "sha256": "2e351306051e1339086098ee7ccfc040d33e8e4917043111e466dc29f2abba45",
+      "size_bytes": 6373,
+      "generated_at": "2026-05-20T17:43:17+10:00",
+      "external": true
+    },
+    {
+      "path": "pdmp/J1909-3744/pdmp.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pdmp -mc 16 -ms 8 -g pdmp.png/PNG <src>   # external",
+      "sha256": "69f9f7c0b4278aeaf0d3a77748e41f1575edaa1aee41292fc2c6c7771041c55b",
+      "size_bytes": 20222,
+      "generated_at": "2026-05-20T17:43:20+10:00",
+      "external": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 19.7,
+        "entropy": 1.06,
+        "inner_pct": 8.48
+      }
+    },
+    {
+      "path": "pdmp/J1909-3744/pdmp.txt",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pdmp -mc 16 -ms 8 <src> > pdmp.txt        # external",
+      "sha256": "20df757616e5e943e4c9a52690e01cf5ba54bf6dc5063cf95926d422f1d4171a",
+      "size_bytes": 6549,
+      "generated_at": "2026-05-20T17:43:20+10:00",
+      "external": true
+    },
+    {
+      "path": "pipelines/pam-pat/J0437-4715/toas.tim",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar + template from psrsmooth",
+      "command": "pat -s <template.std> -A FDM <src> > toas.tim",
+      "sha256": "1e18345a8cdf41a95ee70189cabeee7b4f2a14018794800bebf54905a98e5809",
+      "size_bytes": 2343735,
+      "generated_at": "2026-05-20T17:31:23+10:00"
+    },
+    {
+      "path": "pipelines/pam-pat/J1909-3744/toas.tim",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar + template from psrsmooth",
+      "command": "pat -s <template.std> -A FDM <src> > toas.tim",
+      "sha256": "08bc9e62dca0f9f2571027d8c9b6c373c4722d99b96bf1286059cd87e4ab8f77",
+      "size_bytes": 4623480,
+      "generated_at": "2026-05-20T17:36:02+10:00"
+    },
+    {
+      "path": "pipelines/pam-pav/J0437-4715/D_FTpd.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar \u2192 pam -F --setnchn 32",
+      "command": "pam -F --setnchn 32 <src> ; pav -DFTpd <out>",
+      "sha256": "b1f66b5e303ab7b45c19d5730257b3447f5a7d770abd21b9ca388f785ed4fc7f",
+      "size_bytes": 7764,
+      "generated_at": "2026-05-20T17:29:14+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.6,
+        "entropy": 0.09,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pipelines/pam-pav/J0437-4715/D_Fpd.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar \u2192 pam -F --setnchn 32",
+      "command": "pam -F --setnchn 32 <src> ; pav -DFpd <out>",
+      "sha256": "4d383ccb0d6dd5408448e15631f7d57a995b9b1c0e3737bb14bc0c7603ec8451",
+      "size_bytes": 7877,
+      "generated_at": "2026-05-20T17:29:14+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.7,
+        "entropy": 0.09,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pipelines/pam-pav/J0437-4715/D_Tpd.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar \u2192 pam -F --setnchn 32",
+      "command": "pam -F --setnchn 32 <src> ; pav -DTpd <out>",
+      "sha256": "71b3629569af41324e215e771c0ec8fef651bb500c6f49bf5cb3d865495d758c",
+      "size_bytes": 8052,
+      "generated_at": "2026-05-20T17:29:14+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.9,
+        "entropy": 0.09,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pipelines/pam-pav/J0437-4715/D_bare.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar \u2192 pam -F --setnchn 32",
+      "command": "pam -F --setnchn 32 <src> ; pav -D <out>",
+      "sha256": "dacae7333b6f1a1d93c40fd44b5fe8bf3d5a144c55cb85cfcae8a0ab637cc999",
+      "size_bytes": 8715,
+      "generated_at": "2026-05-20T17:29:13+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 8.5,
+        "entropy": 0.13,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pipelines/pam-pav/J0437-4715/G_Tpd.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar \u2192 pam -F --setnchn 32",
+      "command": "pam -F --setnchn 32 <src> ; pav -GTpd <out>",
+      "sha256": "be499bc3786a22aa4792f533b24d2c312d5278351c6a6770374a6b57a9e55a00",
+      "size_bytes": 12967,
+      "generated_at": "2026-05-20T17:29:13+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 12.7,
+        "entropy": 0.94,
+        "inner_pct": 9.8
+      }
+    },
+    {
+      "path": "pipelines/pam-pav/J0437-4715/G_bare.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar \u2192 pam -F --setnchn 32",
+      "command": "pam -F --setnchn 32 <src> ; pav -G <out>",
+      "sha256": "a0e4bd9f29aabf862a28efe6544c859ba394f726afb4fba6e453b4fdb899aeef",
+      "size_bytes": 17536,
+      "generated_at": "2026-05-20T17:29:12+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 17.1,
+        "entropy": 0.96,
+        "inner_pct": 10.38
+      }
+    },
+    {
+      "path": "pipelines/pam-pav/J0437-4715/Y_FTpd.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar \u2192 pam -F --setnchn 32",
+      "command": "pam -F --setnchn 32 <src> ; pav -YFTpd <out>",
+      "sha256": "cd6472fe2c7ea549e3dff47a5ef8f2e460edde77fa174700963fc70b217162aa",
+      "size_bytes": 7711,
+      "generated_at": "2026-05-20T17:29:15+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 7.5,
+        "entropy": 1.48,
+        "inner_pct": 18.41
+      }
+    },
+    {
+      "path": "pipelines/pam-pav/J0437-4715/Y_Fpd.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar \u2192 pam -F --setnchn 32",
+      "command": "pam -F --setnchn 32 <src> ; pav -YFpd <out>",
+      "sha256": "38dd36ef5426b7fff2aebdad056823edd8ab50045c8fa3aae1f9aaa6f7714e30",
+      "size_bytes": 12985,
+      "generated_at": "2026-05-20T17:29:15+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 12.7,
+        "entropy": 1.37,
+        "inner_pct": 18.5
+      }
+    },
+    {
+      "path": "pipelines/pam-pav/J0437-4715/Y_Tpd.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar \u2192 pam -F --setnchn 32",
+      "command": "pam -F --setnchn 32 <src> ; pav -YTpd <out>",
+      "sha256": "e814f0f0c40984059b917e3fc19698a87931aee0b092613e5dd7069b2f82d532",
+      "size_bytes": 7321,
+      "generated_at": "2026-05-20T17:29:15+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 7.1,
+        "entropy": 1.9,
+        "inner_pct": 30.96
+      }
+    },
+    {
+      "path": "pipelines/pam-pav/J0437-4715/Y_bare.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar \u2192 pam -F --setnchn 32",
+      "command": "pam -F --setnchn 32 <src> ; pav -Y <out>",
+      "sha256": "3ae0a2d54b421b53d1032b18d8f1cb6445e18c882b8a72451ea275398587f694",
+      "size_bytes": 20408,
+      "generated_at": "2026-05-20T17:29:15+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 19.9,
+        "entropy": 1.75,
+        "inner_pct": 27.66
+      }
+    },
+    {
+      "path": "pipelines/pam-pav/J1909-3744/D_FTpd.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar \u2192 pam -F --setnchn 32",
+      "command": "pam -F --setnchn 32 <src> ; pav -DFTpd <out>",
+      "sha256": "1455cabd74595b67365e09becf019853cb5d1f8a1a2c23a88fdae3ad656ad1bc",
+      "size_bytes": 7762,
+      "generated_at": "2026-05-20T17:31:37+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.6,
+        "entropy": 0.12,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pipelines/pam-pav/J1909-3744/D_Fpd.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar \u2192 pam -F --setnchn 32",
+      "command": "pam -F --setnchn 32 <src> ; pav -DFpd <out>",
+      "sha256": "d70bd82e26a76ecc23f16caa08092dbeb35720902eb5dbcfcb1093a1e56aa8da",
+      "size_bytes": 9941,
+      "generated_at": "2026-05-20T17:31:36+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 9.7,
+        "entropy": 0.33,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pipelines/pam-pav/J1909-3744/D_Tpd.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar \u2192 pam -F --setnchn 32",
+      "command": "pam -F --setnchn 32 <src> ; pav -DTpd <out>",
+      "sha256": "066febbe09294d22c3dfc53358784d99af2739fd25169a956df8fda27955f0d5",
+      "size_bytes": 9423,
+      "generated_at": "2026-05-20T17:31:36+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 9.2,
+        "entropy": 0.25,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pipelines/pam-pav/J1909-3744/D_bare.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar \u2192 pam -F --setnchn 32",
+      "command": "pam -F --setnchn 32 <src> ; pav -D <out>",
+      "sha256": "53b8c8622fdcb603421ffb50ebb24f55da449a9448fa7eb7af623ec6645edc1f",
+      "size_bytes": 11295,
+      "generated_at": "2026-05-20T17:31:35+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 11.0,
+        "entropy": 0.76,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "pipelines/pam-pav/J1909-3744/G_Tpd.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar \u2192 pam -F --setnchn 32",
+      "command": "pam -F --setnchn 32 <src> ; pav -GTpd <out>",
+      "sha256": "5b5077464eb13aecd801b2c1fa2788597e33706e0609d2df41706019c5929675",
+      "size_bytes": 17525,
+      "generated_at": "2026-05-20T17:31:34+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 17.1,
+        "entropy": 0.23,
+        "inner_pct": 1.55
+      }
+    },
+    {
+      "path": "pipelines/pam-pav/J1909-3744/G_bare.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar \u2192 pam -F --setnchn 32",
+      "command": "pam -F --setnchn 32 <src> ; pav -G <out>",
+      "sha256": "d2a8ea30b81de2a32794c523ccef02bd19063bf4e8d0eaf721287c7448f9c641",
+      "size_bytes": 24050,
+      "generated_at": "2026-05-20T17:31:34+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 23.5,
+        "entropy": 3.1,
+        "inner_pct": 99.13
+      }
+    },
+    {
+      "path": "pipelines/pam-pav/J1909-3744/Y_FTpd.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar \u2192 pam -F --setnchn 32",
+      "command": "pam -F --setnchn 32 <src> ; pav -YFTpd <out>",
+      "sha256": "6370170911680e866f537392f9eac951c3b5e3dfa36c90827f4e5f14527c3f5e",
+      "size_bytes": 7283,
+      "generated_at": "2026-05-20T17:31:39+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 7.1,
+        "entropy": 0.38,
+        "inner_pct": 2.85
+      }
+    },
+    {
+      "path": "pipelines/pam-pav/J1909-3744/Y_Fpd.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar \u2192 pam -F --setnchn 32",
+      "command": "pam -F --setnchn 32 <src> ; pav -YFpd <out>",
+      "sha256": "7e5107d17acf01e2906ee35eb7c3e2730ce2f760e8dbdd1860bc89304b873246",
+      "size_bytes": 34473,
+      "generated_at": "2026-05-20T17:31:38+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 33.7,
+        "entropy": 1.51,
+        "inner_pct": 90.32
+      }
+    },
+    {
+      "path": "pipelines/pam-pav/J1909-3744/Y_Tpd.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar \u2192 pam -F --setnchn 32",
+      "command": "pam -F --setnchn 32 <src> ; pav -YTpd <out>",
+      "sha256": "ce20e0f938389d7371d786dc67571e17ad2ef2733f01bab3c995555f7d9d2672",
+      "size_bytes": 7474,
+      "generated_at": "2026-05-20T17:31:38+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 7.3,
+        "entropy": 1.36,
+        "inner_pct": 26.44
+      }
+    },
+    {
+      "path": "pipelines/pam-pav/J1909-3744/Y_bare.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar \u2192 pam -F --setnchn 32",
+      "command": "pam -F --setnchn 32 <src> ; pav -Y <out>",
+      "sha256": "bcf3611b4310ef6383ed09d0a6f20dbb6a57d62baf4c8a1c33b75194c1fc3278",
+      "size_bytes": 40929,
+      "generated_at": "2026-05-20T17:31:38+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 40.0,
+        "entropy": 3.35,
+        "inner_pct": 99.13
+      }
     },
     {
       "path": "pipelines/paz+pamFT+stokes/final.png",
@@ -459,7 +4527,13 @@
       "command": "cp scrunched.png final.png",
       "sha256": "f2b4762b0cd5264fa84b46ecfae4729ceafbb9039a7c501efaa018002c4c5bff",
       "size_bytes": 11373,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 11.1,
+        "entropy": 0.14,
+        "inner_pct": 0.71
+      }
     },
     {
       "path": "pipelines/paz+pamFT+stokes/raw.png",
@@ -468,7 +4542,13 @@
       "command": "psrplot -g 1200x800 -p freq raw_added.ar -D pipelines/paz+pamFT+stokes/raw.png/png",
       "sha256": "43dcbf620e6dbfdcb4f961e6a01d7417f2f22f45d21b115e90ab33915dc6869b",
       "size_bytes": 254232,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 248.3,
+        "entropy": 0.92,
+        "inner_pct": 99.7
+      }
     },
     {
       "path": "pipelines/paz+pamFT+stokes/scrunched.png",
@@ -477,7 +4557,13 @@
       "command": "pam -FT -e FT raw_added.paz; psrplot -g 1200x800 -p stokes raw_added.paz.FT -D pipelines/paz+pamFT+stokes/scrunched.png/png",
       "sha256": "f2b4762b0cd5264fa84b46ecfae4729ceafbb9039a7c501efaa018002c4c5bff",
       "size_bytes": 11373,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 11.1,
+        "entropy": 0.14,
+        "inner_pct": 0.71
+      }
     },
     {
       "path": "pipelines/paz+pamFT+stokes/zapped.png",
@@ -486,7 +4572,13 @@
       "command": "paz -r -e paz raw_added.ar; psrplot -g 1200x800 -p freq raw_added.paz -D pipelines/paz+pamFT+stokes/zapped.png/png",
       "sha256": "1b31b351486a06874ce035c12e58f4189d6b3c6959adc3073eabbe26afb02abc",
       "size_bytes": 218019,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 212.9,
+        "entropy": 0.82,
+        "inner_pct": 92.57
+      }
     },
     {
       "path": "pipelines/psradd+pamT+psrplot/added-tscr__step3.png",
@@ -495,7 +4587,13 @@
       "command": "pam -T -e Tscr added.ar; psrplot -g 1200x800 -p time -j F added.Tscr -D pipelines/psradd+pamT+psrplot/added-tscr__step3.png/png",
       "sha256": "cbe290a98ef4fa56e84077d6126a90a1864dd34847002a96d962520fb73f903f",
       "size_bytes": 9896,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 9.7,
+        "entropy": 1.36,
+        "inner_pct": 18.54
+      }
     },
     {
       "path": "pipelines/psradd+pamT+psrplot/added__step2.png",
@@ -504,7 +4602,13 @@
       "command": "psradd -o added.ar ep1.ar ep2.ar; psrplot -g 1200x800 -p time -j F added.ar -D pipelines/psradd+pamT+psrplot/added__step2.png/png",
       "sha256": "7a705711febaa2271a500b9de1c6b87c940ab8bdc9b6d10e42df28764ed75cec",
       "size_bytes": 19742,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 19.3,
+        "entropy": 1.3,
+        "inner_pct": 17.86
+      }
     },
     {
       "path": "pipelines/psradd+pamT+psrplot/ep1__step1.png",
@@ -513,7 +4617,13 @@
       "command": "psradd -o ep1.ar <first 16 raw subints>; psrplot -g 1200x800 -p time -j F ep1.ar -D pipelines/psradd+pamT+psrplot/ep1__step1.png/png",
       "sha256": "d7931c2cefe665fbd7a9a44129c2fb26fe4d77373f436cfbaddb625da282766d",
       "size_bytes": 14352,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 14.0,
+        "entropy": 1.33,
+        "inner_pct": 18.05
+      }
     },
     {
       "path": "pipelines/psradd+pamT+psrplot/ep2__step1b.png",
@@ -522,7 +4632,13 @@
       "command": "psradd -o ep2.ar <remaining raw subints>; psrplot -g 1200x800 -p time -j F ep2.ar -D pipelines/psradd+pamT+psrplot/ep2__step1b.png/png",
       "sha256": "ae894011472d323854dc76dc62a2cd17bb4005a56e2cf85d4e9ef6e1fa022755",
       "size_bytes": 14546,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 14.2,
+        "entropy": 1.3,
+        "inner_pct": 17.78
+      }
     },
     {
       "path": "pipelines/psradd+pamT+psrplot/final.png",
@@ -531,7 +4647,13 @@
       "command": "cp added-tscr__step3.png final.png",
       "sha256": "cbe290a98ef4fa56e84077d6126a90a1864dd34847002a96d962520fb73f903f",
       "size_bytes": 9896,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 9.7,
+        "entropy": 1.36,
+        "inner_pct": 18.54
+      }
     },
     {
       "path": "pipelines/template+pat/profile.png",
@@ -540,7 +4662,13 @@
       "command": "psrplot -g 1200x800 -p flux -j FT archives/J0437-4715_2024-07-25-12:13:23_zap.ar -D pipelines/template+pat/profile.png/png",
       "sha256": "91a2198cd832573075f09c130dd4f0c7c666839d1fcb65fc5e8ab9bab5c09d5c",
       "size_bytes": 9437,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 9.2,
+        "entropy": 0.07,
+        "inner_pct": 0.0
+      }
     },
     {
       "path": "pipelines/template+pat/residual.png",
@@ -549,7 +4677,13 @@
       "command": "pat -s template.std -A FDM <ar> > toas.tim; tempo2 -nobs 50000 -nofit -output general2 -f .par toas.tim \u2192 matplotlib",
       "sha256": "fe1b1e568efbb5b4e8320da5ea51b691927d9d56a7a1e31f8769ee9e6bd27b13",
       "size_bytes": 84889,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 82.9,
+        "entropy": 0.71,
+        "inner_pct": 11.78
+      }
     },
     {
       "path": "pipelines/template+pat/template.png",
@@ -558,7 +4692,13 @@
       "command": "pam -FT <ar>; psrsmooth -W <ar>.FT; psrplot -g 1200x800 -p flux <ar>.FT.sm -D pipelines/template+pat/template.png/png",
       "sha256": "f0cb9f847a83108666e2a94a2e451fe215b3adea1e6868b1b60192fff751b5ac",
       "size_bytes": 9365,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 9.1,
+        "entropy": 0.07,
+        "inner_pct": 0.0
+      }
     },
     {
       "path": "pipelines/template+pat/template.std",
@@ -612,7 +4752,13 @@
       "command": "psrplot -g 1200x800 -p flux -j DFT archives/J0437-4715_2024-07-25-12:13:23_zap.ar -D plots/psrplot/J0437-4715/flux__jdft.png/png",
       "sha256": "30c56d8d343481289490f40bae2cbda1d7da0c5c34596041441a0140fbbb8475",
       "size_bytes": 9371,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 9.2,
+        "entropy": 0.07,
+        "inner_pct": 0.0
+      }
     },
     {
       "path": "psrplot/J0437-4715/flux__jft.png",
@@ -621,7 +4767,13 @@
       "command": "psrplot -g 1200x800 -p flux -j FT archives/J0437-4715_2024-07-25-12:13:23_zap.ar -D plots/psrplot/J0437-4715/flux__jft.png/png",
       "sha256": "91a2198cd832573075f09c130dd4f0c7c666839d1fcb65fc5e8ab9bab5c09d5c",
       "size_bytes": 9437,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 9.2,
+        "entropy": 0.07,
+        "inner_pct": 0.0
+      }
     },
     {
       "path": "psrplot/J0437-4715/freq__jd.png",
@@ -630,7 +4782,13 @@
       "command": "psrplot -g 1200x800 -p freq -j D archives/J0437-4715_2024-07-25-12:13:23_zap.ar -D plots/psrplot/J0437-4715/freq__jd.png/png",
       "sha256": "ee0130f8a47aa288d5683d7b5b197d2ce8aaf0fc97a59c693e8567a75b3a5c72",
       "size_bytes": 293349,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 286.5,
+        "entropy": 1.11,
+        "inner_pct": 65.11
+      }
     },
     {
       "path": "psrplot/J0437-4715/freq__raw.png",
@@ -639,7 +4797,28 @@
       "command": "psrplot -g 1200x800 -p freq archives/J0437-4715_2024-07-25-12:13:23_zap.ar -D plots/psrplot/J0437-4715/freq__raw.png/png",
       "sha256": "f723aa2c6d5967783cbc0ef184c73453dc73bdaa0578d7baa35efbe706aeaf87",
       "size_bytes": 292781,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 285.9,
+        "entropy": 1.08,
+        "inner_pct": 83.19
+      }
+    },
+    {
+      "path": "psrplot/J0437-4715/joy__jdf.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "psrplot -p time -j DF <src> -D <out>/PNG",
+      "sha256": "2c6f54fd4661d5f5f15b32f99ae42d52e5172b67af51f00a47d66fd4341c1489",
+      "size_bytes": 19481,
+      "generated_at": "2026-05-20T17:42:07+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 19.0,
+        "entropy": 1.48,
+        "inner_pct": 19.92
+      }
     },
     {
       "path": "psrplot/J0437-4715/pa__jdft.png",
@@ -648,7 +4827,44 @@
       "command": "psrplot -g 1200x800 -p pa -j DFT archives/J0437-4715_2024-07-25-12:13:23_zap.ar -D plots/psrplot/J0437-4715/pa__jdft.png/png",
       "sha256": "1f0e723aaf83d8ec13957f7dbebd2117ec4d8376a39ddd8cf78fe938e0d7b464",
       "size_bytes": 12234,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 11.9,
+        "entropy": 0.17,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "psrplot/J0437-4715/polprof__jdft.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "psrplot -p Scyl -j DFT <src> -D <out>/PNG",
+      "sha256": "e377b679d9352217657ce86ccf57d42163baa6d654f8e094abf3434da1a76fb1",
+      "size_bytes": 12148,
+      "generated_at": "2026-05-20T17:42:35+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 11.9,
+        "entropy": 0.18,
+        "inner_pct": 0.51
+      }
+    },
+    {
+      "path": "psrplot/J0437-4715/polprof__jdft__dirty.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_dirty.ar",
+      "command": "psrplot -p Scyl -j DFT <src> -D <out>/PNG",
+      "sha256": "1519e47c752bc133f254f4ce48f6fceb7e8df4ad2f6b31125e3b96e7787d04b7",
+      "size_bytes": 12356,
+      "generated_at": "2026-05-20T17:42:39+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 12.1,
+        "entropy": 0.18,
+        "inner_pct": 0.5
+      }
     },
     {
       "path": "psrplot/J0437-4715/stokes__jdft.png",
@@ -657,7 +4873,13 @@
       "command": "psrplot -g 1200x800 -p stokes -j DFT archives/J0437-4715_2024-07-25-12:13:23_zap.ar -D plots/psrplot/J0437-4715/stokes__jdft.png/png",
       "sha256": "9c00a558c19aa216e72f94141e85bf26442df420e2b23404e7df0116997a9950",
       "size_bytes": 10987,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.7,
+        "entropy": 0.14,
+        "inner_pct": 0.71
+      }
     },
     {
       "path": "psrplot/J0437-4715/stokes__jft.png",
@@ -666,7 +4888,13 @@
       "command": "psrplot -g 1200x800 -p stokes -j FT archives/J0437-4715_2024-07-25-12:13:23_zap.ar -D plots/psrplot/J0437-4715/stokes__jft.png/png",
       "sha256": "42ea512826753477b49f272c305f269327da87cea05fb2976adf213fb3a08a3a",
       "size_bytes": 10998,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.7,
+        "entropy": 0.14,
+        "inner_pct": 0.72
+      }
     },
     {
       "path": "psrplot/J0437-4715/time__jdf.png",
@@ -675,7 +4903,13 @@
       "command": "psrplot -g 1200x800 -p time -j DF archives/J0437-4715_2024-07-25-12:13:23_zap.ar -D plots/psrplot/J0437-4715/time__jdf.png/png",
       "sha256": "649a10fb272acc5cdb6a1879b56767ad426dea0ec3ee9b2396993e1c3d2fabf2",
       "size_bytes": 19502,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 19.0,
+        "entropy": 1.48,
+        "inner_pct": 19.92
+      }
     },
     {
       "path": "psrplot/J0437-4715/time__jf.png",
@@ -684,7 +4918,13 @@
       "command": "psrplot -g 1200x800 -p time -j F archives/J0437-4715_2024-07-25-12:13:23_zap.ar -D plots/psrplot/J0437-4715/time__jf.png/png",
       "sha256": "ab16771bbbee0a23cb0d70c1e984bd80a1a66a79c53609207d3c7510dadab45f",
       "size_bytes": 19485,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 19.0,
+        "entropy": 1.47,
+        "inner_pct": 19.78
+      }
     },
     {
       "path": "psrplot/J1909-3744/flux__jdft.png",
@@ -693,7 +4933,13 @@
       "command": "psrplot -g 1200x800 -p flux -j DFT archives/J1909-3744_2024-07-25-00:04:55_zap.ar -D plots/psrplot/J1909-3744/flux__jdft.png/png",
       "sha256": "b8bf8cffdebdb4b2c7bd6e39939338786a4366d465d7b105dc4010bd4d412551",
       "size_bytes": 10308,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.1,
+        "entropy": 0.14,
+        "inner_pct": 0.0
+      }
     },
     {
       "path": "psrplot/J1909-3744/flux__jft.png",
@@ -702,7 +4948,13 @@
       "command": "psrplot -g 1200x800 -p flux -j FT archives/J1909-3744_2024-07-25-00:04:55_zap.ar -D plots/psrplot/J1909-3744/flux__jft.png/png",
       "sha256": "afce7e13b2e5c884b7af79bd2f895973e7afef5bfc59e4ac006c67c3ffe27c5b",
       "size_bytes": 10447,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.2,
+        "entropy": 0.14,
+        "inner_pct": 0.0
+      }
     },
     {
       "path": "psrplot/J1909-3744/freq__jd.png",
@@ -711,7 +4963,13 @@
       "command": "psrplot -g 1200x800 -p freq -j D archives/J1909-3744_2024-07-25-00:04:55_zap.ar -D plots/psrplot/J1909-3744/freq__jd.png/png",
       "sha256": "3188da98e4b396597c95a8b83986f0b0b285a2a541ea80f5ba63ef2be89aed6e",
       "size_bytes": 343418,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 335.4,
+        "entropy": 2.79,
+        "inner_pct": 99.69
+      }
     },
     {
       "path": "psrplot/J1909-3744/freq__raw.png",
@@ -720,7 +4978,28 @@
       "command": "psrplot -g 1200x800 -p freq archives/J1909-3744_2024-07-25-00:04:55_zap.ar -D plots/psrplot/J1909-3744/freq__raw.png/png",
       "sha256": "b660dd788fe64e89dfde421051435d5e3ba918cc8fb4fd91252418bc6e986e93",
       "size_bytes": 341320,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 333.3,
+        "entropy": 2.71,
+        "inner_pct": 99.69
+      }
+    },
+    {
+      "path": "psrplot/J1909-3744/joy__jdf.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "psrplot -p time -j DF <src> -D <out>/PNG",
+      "sha256": "47aa9ff4b60cc652ffb5a953e6b1362c632b005f8a11ab972d8a07f90c8b5899",
+      "size_bytes": 51593,
+      "generated_at": "2026-05-20T17:42:22+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 50.4,
+        "entropy": 2.72,
+        "inner_pct": 99.22
+      }
     },
     {
       "path": "psrplot/J1909-3744/pa__jdft.png",
@@ -729,7 +5008,44 @@
       "command": "psrplot -g 1200x800 -p pa -j DFT archives/J1909-3744_2024-07-25-00:04:55_zap.ar -D plots/psrplot/J1909-3744/pa__jdft.png/png",
       "sha256": "4d59273809680b00a012eb324c5435f8a51293df41cf46595f067dedb5b6d285",
       "size_bytes": 8072,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": false,
+      "blank_metrics": {
+        "size_kb": 7.9,
+        "entropy": 0.05,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "psrplot/J1909-3744/polprof__jdft.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "psrplot -p Scyl -j DFT <src> -D <out>/PNG",
+      "sha256": "7b078559531c72cb2c767f758f85400099ce49bfbea1ed95bd4f377f69ec2c7c",
+      "size_bytes": 10845,
+      "generated_at": "2026-05-20T17:42:48+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.6,
+        "entropy": 0.17,
+        "inner_pct": 0.99
+      }
+    },
+    {
+      "path": "psrplot/J1909-3744/polprof__jdft__dirty.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_dirty.ar",
+      "command": "psrplot -p Scyl -j DFT <src> -D <out>/PNG",
+      "sha256": "2a75a1c136856c93e6d810e05d46d9f56c6920abe4c8bd9839ccbc2056626cde",
+      "size_bytes": 11852,
+      "generated_at": "2026-05-20T17:42:55+10:00",
+      "dirty": true,
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 11.6,
+        "entropy": 0.18,
+        "inner_pct": 1.12
+      }
     },
     {
       "path": "psrplot/J1909-3744/stokes__jdft.png",
@@ -738,7 +5054,13 @@
       "command": "psrplot -g 1200x800 -p stokes -j DFT archives/J1909-3744_2024-07-25-00:04:55_zap.ar -D plots/psrplot/J1909-3744/stokes__jdft.png/png",
       "sha256": "61f78ed34c4939b05c16bafaa90c5338b4251e50f1e3362a756397843116866a",
       "size_bytes": 10720,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.5,
+        "entropy": 0.16,
+        "inner_pct": 1.11
+      }
     },
     {
       "path": "psrplot/J1909-3744/stokes__jft.png",
@@ -747,7 +5069,13 @@
       "command": "psrplot -g 1200x800 -p stokes -j FT archives/J1909-3744_2024-07-25-00:04:55_zap.ar -D plots/psrplot/J1909-3744/stokes__jft.png/png",
       "sha256": "73a6fdc14e89bcec3229fa14a822e2776d6570e28bb9a9f0489210ac5c92b50f",
       "size_bytes": 10880,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.6,
+        "entropy": 0.16,
+        "inner_pct": 1.1
+      }
     },
     {
       "path": "psrplot/J1909-3744/time__jdf.png",
@@ -756,7 +5084,13 @@
       "command": "psrplot -g 1200x800 -p time -j DF archives/J1909-3744_2024-07-25-00:04:55_zap.ar -D plots/psrplot/J1909-3744/time__jdf.png/png",
       "sha256": "90a7f1f1cc398372a2ae8aa00eaa4b2e3638d6be372689a408a5ab2fcc6b7919",
       "size_bytes": 51596,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 50.4,
+        "entropy": 2.72,
+        "inner_pct": 99.22
+      }
     },
     {
       "path": "psrplot/J1909-3744/time__jf.png",
@@ -765,7 +5099,13 @@
       "command": "psrplot -g 1200x800 -p time -j F archives/J1909-3744_2024-07-25-00:04:55_zap.ar -D plots/psrplot/J1909-3744/time__jf.png/png",
       "sha256": "41d7fc89db7322a56b70cecfe825dfb9d7ac76fde05503b61bcfedf8a4adae5f",
       "size_bytes": 52049,
-      "generated_at": "2026-05-11T19:54:20+10:00"
+      "generated_at": "2026-05-11T19:54:20+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 50.8,
+        "entropy": 2.75,
+        "inner_pct": 98.86
+      }
     },
     {
       "path": "psrstat/J0437-4715/profile.txt",
@@ -802,6 +5142,366 @@
       "sha256": "806c1477e1eccb55abffe0343ef672d114bd0c9954077c1b3dd107953d3cb9de",
       "size_bytes": 215,
       "generated_at": "2026-05-12T13:21:07+10:00"
+    },
+    {
+      "path": "rotation/J0437-4715/phase_00.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam --rot 0.00 <src> ; psrplot -p flux -j FT <out>",
+      "sha256": "b9a33b1c7e8627f531d9fb5330afe1f3a4505464e7b2b5f37e92ac0224c7d9d0",
+      "size_bytes": 9406,
+      "generated_at": "2026-05-20T17:36:11+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 9.1,
+        "entropy": 0.07,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "rotation/J0437-4715/phase_02.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam --rot 0.08 <src> ; psrplot -p flux -j FT <out>",
+      "sha256": "b9a33b1c7e8627f531d9fb5330afe1f3a4505464e7b2b5f37e92ac0224c7d9d0",
+      "size_bytes": 9406,
+      "generated_at": "2026-05-20T17:36:25+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 9.1,
+        "entropy": 0.07,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "rotation/J0437-4715/phase_04.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam --rot 0.16 <src> ; psrplot -p flux -j FT <out>",
+      "sha256": "b9a33b1c7e8627f531d9fb5330afe1f3a4505464e7b2b5f37e92ac0224c7d9d0",
+      "size_bytes": 9406,
+      "generated_at": "2026-05-20T17:36:35+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 8.9,
+        "entropy": 0.07,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "rotation/J0437-4715/phase_06.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam --rot 0.25 <src> ; psrplot -p flux -j FT <out>",
+      "sha256": "b9a33b1c7e8627f531d9fb5330afe1f3a4505464e7b2b5f37e92ac0224c7d9d0",
+      "size_bytes": 9406,
+      "generated_at": "2026-05-20T17:36:45+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 8.3,
+        "entropy": 0.07,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "rotation/J0437-4715/phase_08.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam --rot 0.33 <src> ; psrplot -p flux -j FT <out>",
+      "sha256": "b9a33b1c7e8627f531d9fb5330afe1f3a4505464e7b2b5f37e92ac0224c7d9d0",
+      "size_bytes": 9406,
+      "generated_at": "2026-05-20T17:36:55+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 8.2,
+        "entropy": 0.07,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "rotation/J0437-4715/phase_10.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam --rot 0.41 <src> ; psrplot -p flux -j FT <out>",
+      "sha256": "b9a33b1c7e8627f531d9fb5330afe1f3a4505464e7b2b5f37e92ac0224c7d9d0",
+      "size_bytes": 9406,
+      "generated_at": "2026-05-20T17:37:05+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 8.2,
+        "entropy": 0.07,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "rotation/J0437-4715/phase_12.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam --rot 0.50 <src> ; psrplot -p flux -j FT <out>",
+      "sha256": "b9a33b1c7e8627f531d9fb5330afe1f3a4505464e7b2b5f37e92ac0224c7d9d0",
+      "size_bytes": 9406,
+      "generated_at": "2026-05-20T17:37:15+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 8.3,
+        "entropy": 0.07,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "rotation/J0437-4715/phase_14.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam --rot 0.58 <src> ; psrplot -p flux -j FT <out>",
+      "sha256": "b9a33b1c7e8627f531d9fb5330afe1f3a4505464e7b2b5f37e92ac0224c7d9d0",
+      "size_bytes": 9406,
+      "generated_at": "2026-05-20T17:37:25+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 8.5,
+        "entropy": 0.07,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "rotation/J0437-4715/phase_16.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam --rot 0.66 <src> ; psrplot -p flux -j FT <out>",
+      "sha256": "b9a33b1c7e8627f531d9fb5330afe1f3a4505464e7b2b5f37e92ac0224c7d9d0",
+      "size_bytes": 9406,
+      "generated_at": "2026-05-20T17:37:35+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 9.2,
+        "entropy": 0.07,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "rotation/J0437-4715/phase_18.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam --rot 0.75 <src> ; psrplot -p flux -j FT <out>",
+      "sha256": "b9a33b1c7e8627f531d9fb5330afe1f3a4505464e7b2b5f37e92ac0224c7d9d0",
+      "size_bytes": 9406,
+      "generated_at": "2026-05-20T17:37:45+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 9.0,
+        "entropy": 0.07,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "rotation/J0437-4715/phase_20.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam --rot 0.83 <src> ; psrplot -p flux -j FT <out>",
+      "sha256": "b9a33b1c7e8627f531d9fb5330afe1f3a4505464e7b2b5f37e92ac0224c7d9d0",
+      "size_bytes": 9406,
+      "generated_at": "2026-05-20T17:37:55+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 9.1,
+        "entropy": 0.07,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "rotation/J0437-4715/phase_22.png",
+      "archive": "J0437-4715",
+      "source": "J0437-4715_clean.ar",
+      "command": "pam --rot 0.91 <src> ; psrplot -p flux -j FT <out>",
+      "sha256": "b9a33b1c7e8627f531d9fb5330afe1f3a4505464e7b2b5f37e92ac0224c7d9d0",
+      "size_bytes": 9406,
+      "generated_at": "2026-05-20T17:38:05+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 9.1,
+        "entropy": 0.07,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "rotation/J1909-3744/phase_00.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam --rot 0.00 <src> ; psrplot -p flux -j FT <out>",
+      "sha256": "6d03b6428d57b03bec550cfac2747b9b235261211f9382bc492c135abefba821",
+      "size_bytes": 10436,
+      "generated_at": "2026-05-20T17:38:25+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.1,
+        "entropy": 0.14,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "rotation/J1909-3744/phase_02.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam --rot 0.08 <src> ; psrplot -p flux -j FT <out>",
+      "sha256": "6d03b6428d57b03bec550cfac2747b9b235261211f9382bc492c135abefba821",
+      "size_bytes": 10436,
+      "generated_at": "2026-05-20T17:38:45+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.2,
+        "entropy": 0.14,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "rotation/J1909-3744/phase_04.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam --rot 0.16 <src> ; psrplot -p flux -j FT <out>",
+      "sha256": "6d03b6428d57b03bec550cfac2747b9b235261211f9382bc492c135abefba821",
+      "size_bytes": 10436,
+      "generated_at": "2026-05-20T17:39:05+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.8,
+        "entropy": 0.14,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "rotation/J1909-3744/phase_06.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam --rot 0.25 <src> ; psrplot -p flux -j FT <out>",
+      "sha256": "6d03b6428d57b03bec550cfac2747b9b235261211f9382bc492c135abefba821",
+      "size_bytes": 10436,
+      "generated_at": "2026-05-20T17:39:25+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 11.0,
+        "entropy": 0.14,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "rotation/J1909-3744/phase_08.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam --rot 0.33 <src> ; psrplot -p flux -j FT <out>",
+      "sha256": "6d03b6428d57b03bec550cfac2747b9b235261211f9382bc492c135abefba821",
+      "size_bytes": 10436,
+      "generated_at": "2026-05-20T17:39:44+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 11.1,
+        "entropy": 0.14,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "rotation/J1909-3744/phase_10.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam --rot 0.41 <src> ; psrplot -p flux -j FT <out>",
+      "sha256": "6d03b6428d57b03bec550cfac2747b9b235261211f9382bc492c135abefba821",
+      "size_bytes": 10436,
+      "generated_at": "2026-05-20T17:40:05+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.7,
+        "entropy": 0.14,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "rotation/J1909-3744/phase_12.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam --rot 0.50 <src> ; psrplot -p flux -j FT <out>",
+      "sha256": "6d03b6428d57b03bec550cfac2747b9b235261211f9382bc492c135abefba821",
+      "size_bytes": 10436,
+      "generated_at": "2026-05-20T17:40:24+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 11.1,
+        "entropy": 0.14,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "rotation/J1909-3744/phase_14.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam --rot 0.58 <src> ; psrplot -p flux -j FT <out>",
+      "sha256": "6d03b6428d57b03bec550cfac2747b9b235261211f9382bc492c135abefba821",
+      "size_bytes": 10436,
+      "generated_at": "2026-05-20T17:40:44+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 11.1,
+        "entropy": 0.14,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "rotation/J1909-3744/phase_16.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam --rot 0.66 <src> ; psrplot -p flux -j FT <out>",
+      "sha256": "6d03b6428d57b03bec550cfac2747b9b235261211f9382bc492c135abefba821",
+      "size_bytes": 10436,
+      "generated_at": "2026-05-20T17:41:04+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.1,
+        "entropy": 0.14,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "rotation/J1909-3744/phase_18.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam --rot 0.75 <src> ; psrplot -p flux -j FT <out>",
+      "sha256": "6d03b6428d57b03bec550cfac2747b9b235261211f9382bc492c135abefba821",
+      "size_bytes": 10436,
+      "generated_at": "2026-05-20T17:41:24+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.0,
+        "entropy": 0.14,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "rotation/J1909-3744/phase_20.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam --rot 0.83 <src> ; psrplot -p flux -j FT <out>",
+      "sha256": "6d03b6428d57b03bec550cfac2747b9b235261211f9382bc492c135abefba821",
+      "size_bytes": 10436,
+      "generated_at": "2026-05-20T17:41:43+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.0,
+        "entropy": 0.14,
+        "inner_pct": 0.0
+      }
+    },
+    {
+      "path": "rotation/J1909-3744/phase_22.png",
+      "archive": "J1909-3744",
+      "source": "J1909-3744_clean.ar",
+      "command": "pam --rot 0.91 <src> ; psrplot -p flux -j FT <out>",
+      "sha256": "6d03b6428d57b03bec550cfac2747b9b235261211f9382bc492c135abefba821",
+      "size_bytes": 10436,
+      "generated_at": "2026-05-20T17:42:03+10:00",
+      "valid": true,
+      "blank_metrics": {
+        "size_kb": 10.0,
+        "entropy": 0.14,
+        "inner_pct": 0.0
+      }
     },
     {
       "path": "vap/J0437-4715/all.txt",

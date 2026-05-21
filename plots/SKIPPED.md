@@ -16,3 +16,27 @@ The two reference archives store total intensity only (not full Stokes),
 so `pav -S*` views are unavailable.  The UI falls back to the copyable-
 command panel for these four catalog entries, which is the desired
 graceful degradation.
+- **pav failed** — `pav -GF J0437-4715_dirty.ar`
+- **pav failed** — `pav -GFT J0437-4715_dirty.ar`
+- **pav failed** — `pav -GFd J0437-4715_dirty.ar`
+- **pav failed** — `pav -GFTd J0437-4715_dirty.ar`
+- **pav failed** — `pav -GF J1909-3744_dirty.ar`
+- **pav failed** — `pav -GFT J1909-3744_dirty.ar`
+- **pav failed** — `pav -GFd J1909-3744_dirty.ar`
+- **pav failed** — `pav -GFTd J1909-3744_dirty.ar`
+- **pav failed** — `pav -GF J0437-4715_clean.ar`
+- **pav failed** — `pav -GFT J0437-4715_clean.ar`
+- **pav failed** — `pav -GFd J0437-4715_clean.ar`
+- **pav failed** — `pav -GFTd J0437-4715_clean.ar`
+- **pav failed** — `pav -GF J0437-4715_dirty.ar`
+- **pav failed** — `pav -GFT J0437-4715_dirty.ar`
+- **pav failed** — `pav -GFd J0437-4715_dirty.ar`
+- **pav failed** — `pav -GFTd J0437-4715_dirty.ar`
+- **pav failed** — `pav -GF J1909-3744_clean.ar`
+- **pav failed** — `pav -GFT J1909-3744_clean.ar`
+- **pav failed** — `pav -GFd J1909-3744_clean.ar`
+- **pav failed** — `pav -GFTd J1909-3744_clean.ar`
+- **pav failed** — `pav -GF J1909-3744_dirty.ar`
+- **pav failed** — `pav -GFT J1909-3744_dirty.ar`
+- **pav failed** — `pav -GFd J1909-3744_dirty.ar`
+- **pav failed** — `pav -GFTd J1909-3744_dirty.ar`

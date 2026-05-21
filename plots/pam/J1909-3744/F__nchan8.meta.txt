@@ -1,0 +1,2 @@
+filename   nchan   nsub   nbin   npol   freq   bw
+J1909-3744_F__nchan8.ar   8   63   1024   4   1283.582   856.000

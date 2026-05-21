@@ -1,0 +1,2 @@
+filename   nchan   nsub   nbin   npol   freq   bw
+J1909-3744_FTD__nchan32__nsub4.ar   32   4   1024   4   1283.582   856.000

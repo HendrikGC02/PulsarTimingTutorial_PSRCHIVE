@@ -1,0 +1,2 @@
+filename   nchan   nsub   nbin   npol   freq   bw
+J0437-4715_F__nchan16.ar   16   31   1024   4   1283.582   856.000

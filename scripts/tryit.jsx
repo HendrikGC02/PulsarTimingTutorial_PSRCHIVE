@@ -458,9 +458,86 @@ function expectedFilename({ archive, type, j }) {
   return `plots/psrplot/${archive}/${type}__${jSuffix(j)}.png`;
 }
 
+/* ---------- MANIFEST.json — fetched once, exposes valid / external / dirty
+   per plot path.  Components call useManifestEntry(path) to render the
+   degenerate / external badges. ---------- */
+let __manifestPromise = null;
+function loadManifest() {
+  if (!__manifestPromise) {
+    __manifestPromise = fetch("plots/MANIFEST.json")
+      .then(r => r.ok ? r.json() : { entries: [] })
+      .then(M => {
+        const byPath = new Map();
+        for (const e of (M.entries || [])) byPath.set(e.path, e);
+        return byPath;
+      })
+      .catch(() => new Map());
+  }
+  return __manifestPromise;
+}
+function useManifestEntry(path) {
+  const [entry, setEntry] = useState(null);
+  useEffect(() => {
+    let cancel = false;
+    loadManifest().then(map => {
+      if (cancel) return;
+      // strip leading "plots/" if caller included it
+      const key = path?.replace(/^plots\//, "");
+      setEntry(key ? (map.get(key) || null) : null);
+    });
+    return () => { cancel = true; };
+  }, [path]);
+  return entry;
+}
+
+/* ---------- inline banner shown above an output that the blank-checker
+   tagged invalid (degenerate plot — usually a flag combo PSRCHIVE
+   accepts but that produces no meaningful image). ---------- */
+function ManifestBanners({ entry }) {
+  if (!entry) return null;
+  return (
+    <div className="sk-col" style={{ gap: 6, width: "100%", maxWidth: 820, margin: "0 auto 8px" }}>
+      {entry.valid === false && (
+        <div style={{
+          background: "#3a2912", border: "1px solid #7a5326",
+          padding: "8px 12px", borderRadius: 4, color: "#f0c992",
+          fontFamily: "var(--font-mono)", fontSize: 11.5, lineHeight: 1.45,
+        }}>
+          <b style={{ color: "#f7d68b" }}>⚠ degenerate combination</b>
+          {" — "}PSRCHIVE accepts this flag set but the result is a blank /
+          axis-only plot. This is a real and useful thing to see (it
+          tells you the flags are incompatible with the data layout) —
+          but the rendered image carries no information.
+        </div>
+      )}
+      {entry.external && (
+        <div style={{
+          background: "#1e2533", border: "1px solid #3a4b66",
+          padding: "6px 10px", borderRadius: 4, color: "#a9bcd5",
+          fontFamily: "var(--font-mono)", fontSize: 10.5, letterSpacing: 0.4,
+          textTransform: "uppercase",
+        }}>
+          ↗ external tool — not part of PSRCHIVE
+        </div>
+      )}
+      {entry.dirty && (
+        <div style={{
+          background: "#2a1f1f", border: "1px solid #5a3838",
+          padding: "5px 10px", borderRadius: 4, color: "#dca8a8",
+          fontFamily: "var(--font-mono)", fontSize: 10.5, letterSpacing: 0.4,
+          textTransform: "uppercase",
+        }}>
+          ⚠ dirty archive — RFI still present (paz not applied)
+        </div>
+      )}
+    </div>
+  );
+}
+
 /* ---------- image with graceful fallback ---------- */
 function PlotImage({ src, fallbackCommand, fallbackNote }) {
   const [state, setState] = useState("loading"); // loading | ok | missing
+  const entry = useManifestEntry(src);
   useEffect(() => {
     setState("loading");
     const im = new Image();
@@ -470,8 +547,11 @@ function PlotImage({ src, fallbackCommand, fallbackNote }) {
   }, [src]);
   if (state === "ok") {
     return (
-      <div style={{ border: "1px solid #1b2c25", padding: 4, background: "#000" }}>
-        <img src={src} alt="" style={{ display: "block", maxWidth: "100%", maxHeight: 420 }} />
+      <div className="sk-col" style={{ alignItems: "center", width: "100%" }}>
+        <ManifestBanners entry={entry} />
+        <div style={{ border: "1px solid #1b2c25", padding: 4, background: "#000" }}>
+          <img src={src} alt="" style={{ display: "block", maxWidth: "100%", maxHeight: 420 }} />
+        </div>
       </div>
     );
   }

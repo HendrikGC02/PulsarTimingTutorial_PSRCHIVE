@@ -1,0 +1,2 @@
+filename   nchan   nsub   nbin   npol   freq   bw
+J1909-3744_F__nchan16__dirty.ar   16   65   1024   4   1283.582   856.000

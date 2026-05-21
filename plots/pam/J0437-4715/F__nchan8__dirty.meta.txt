@@ -1,0 +1,2 @@
+filename   nchan   nsub   nbin   npol   freq   bw
+J0437-4715_F__nchan8__dirty.ar   8   33   1024   4   1283.582   856.000
