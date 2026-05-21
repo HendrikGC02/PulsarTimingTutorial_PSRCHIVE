@@ -106,8 +106,18 @@ function pavCliFlags(flags) {
   const ops = PAV_FLAG_ORDER.filter(k => flags[k]).join("");
   return ops ? "-" + ops : "";
 }
-// Set of ops keys actually generated for these archives (per plots/MANIFEST.json).
-const PAV_AVAILABLE_OPS = new Set(["bare", "F", "T", "p", "d", "FT", "Fd", "Td", "pd", "FTd"]);
+// Per-mode availability map.  Files were generated per-archive but the
+// (mode, ops) combos are not symmetric across modes: G has no F-anything
+// (failed on these archives, see plots/SKIPPED.md), Y has a unique Fpd
+// combo, etc.  Mirrors what's actually in plots/MANIFEST.json.
+const PAV_AVAILABLE_BY_MODE = {
+  G: new Set(["bare", "T", "Td", "d", "p", "pd"]),
+  D: new Set(["bare", "F", "FT", "FTd", "Fd", "T", "Td", "d", "p", "pd"]),
+  Y: new Set(["bare", "F", "FT", "FTd", "Fd", "Fpd", "T", "Td", "d", "p", "pd"]),
+};
+// A handful of clean-only combos: the generator didn't run them against the
+// raw archive.  Used to gate the "raw" toggle for those specific cells.
+const PAV_CLEAN_ONLY = new Set(["Y_Fpd"]);
 
 // pam grouping: D and P are flag-only (no nchan/nsub axes).
 // F has nchan ∈ {8,16,32,116}.
@@ -180,7 +190,7 @@ const CATALOG = [
       ]},
     ],
     defaults: { mode: "D", flags: { F: true, T: true, d: true } },
-    validityFor: (opts, _dirty) => {
+    validityFor: (opts, dirty) => {
       const ops = pavOpsKey(opts.flags || {});
       if (opts.mode === "Y" && (opts.flags?.T)) {
         return { state: "rejected", reason: "pav -Y needs the time axis intact; -T removes it." };
@@ -191,8 +201,12 @@ const CATALOG = [
       if (opts.mode === "D" && (ops === "F" || ops === "FT")) {
         return { state: "degenerate", reason: "-D plots the dynamic spectrum; -F/-FT collapses one of its axes, leaving an empty plot." };
       }
-      if (!PAV_AVAILABLE_OPS.has(ops)) {
-        return { state: "unavailable", reason: `pav -${opts.mode}${ops === "bare" ? "" : ops} wasn't included in the generator run (no PNG on disk).` };
+      const modeSet = PAV_AVAILABLE_BY_MODE[opts.mode];
+      if (!modeSet || !modeSet.has(ops)) {
+        return { state: "unavailable", reason: `pav -${opts.mode}${ops === "bare" ? "" : ops} wasn't included in the generator run for the ${opts.mode} mode (no PNG on disk).` };
+      }
+      if (dirty && PAV_CLEAN_ONLY.has(`${opts.mode}_${ops}`)) {
+        return { state: "unavailable", reason: `pav -${opts.mode}${ops} on the raw archive wasn't generated; only the cleaned version exists.` };
       }
       return { state: "ok" };
     },
@@ -298,7 +312,10 @@ const CATALOG = [
   },
   {
     id: "pam-FT", cmd: "pam", group: "SCRUNCH", label: "pam -FT · fscrunch + tscrunch",
-    outKind: "image+meta", supportsDirty: true,
+    outKind: "image+meta",
+    // `_raw` variants of FT/FTD aren't on disk — the generator only ran them
+    // on the cleaned archive.  Hide the workspace toggle for these entries.
+    supportsDirty: false,
     blurb: "Both axes at once — pick N_chan × N_subint.",
     options: [
       { id: "nchan", label: "N_chan",   choices: PAM_FT_NCHANS },
@@ -313,7 +330,9 @@ const CATALOG = [
   },
   {
     id: "pam-FTD", cmd: "pam", group: "SCRUNCH", label: "pam -FTD · fscrunch + tscrunch + dedisperse",
-    outKind: "image+meta", supportsDirty: true,
+    outKind: "image+meta",
+    // see comment on pam-FT — the dirty variants of these grids weren't generated.
+    supportsDirty: false,
     blurb: "Full reduction in one step.",
     options: [
       { id: "nchan", label: "N_chan",   choices: PAM_FT_NCHANS },
@@ -615,9 +634,9 @@ const PIPELINES = [
     label: "pam → psrsmooth → pat (clean reduction first)",
     blurb: "Reduce the archive with pam first, build the template from that, then generate TOAs.",
     steps: [
-      { cmd: "pam",       flags: "-FT -e FT ${ar}.ar",                  out: "${ar}.FT",        img: "pam/J0437-4715/FT__nchan16__nsub1.png" },
+      { cmd: "pam",       flags: "-FT -e FT ${ar}.ar",                  out: "${ar}.FT",        img: "pam/${ar}/FT__nchan16__nsub1.png" },
       { cmd: "psrsmooth", flags: "-W ${ar}.FT",                         out: "${ar}.FT.sm",     img: "pipelines/template+pat/template.png" },
-      { cmd: "pat",       flags: "-s ${ar}.FT.sm -A FDM ${ar}.ar",      out: "toas.tim",        img: "pipelines/pam-pat/J0437-4715/toas.tim", textOnly: true, annot: "pipelines/pam-pat/J0437-4715/toas.annot.json" },
+      { cmd: "pat",       flags: "-s ${ar}.FT.sm -A FDM ${ar}.ar",      out: "toas.tim",        img: "pipelines/pam-pat/${ar}/toas.tim", textOnly: true, annot: "pipelines/pam-pat/${ar}/toas.annot.json" },
     ],
   },
   {
@@ -625,11 +644,11 @@ const PIPELINES = [
     label: "vap → paz → pam → psrsmooth → pat",
     blurb: "Full inspection → clean → scrunch → template → TOAs workflow.",
     steps: [
-      { cmd: "vap",       flags: '-c "name,nbin,nchan,nsubint" ${ar}.ar',     out: "header",          img: "vap/J0437-4715/header.txt",                          textOnly: true, annot: "vap/J0437-4715/header.annot.json" },
+      { cmd: "vap",       flags: '-c "name,nbin,nchan,nsubint" ${ar}.ar',     out: "header",          img: "vap/${ar}/header.txt",                          textOnly: true, annot: "vap/${ar}/header.annot.json" },
       { cmd: "paz",       flags: "-r -e zap ${ar}.ar",                        out: "${ar}.zap",       img: "pipelines/paz+pamFT+stokes/zapped.png" },
       { cmd: "pam",       flags: "-FT -e FT ${ar}.zap",                       out: "${ar}.zap.FT",    img: "pipelines/paz+pamFT+stokes/scrunched.png" },
       { cmd: "psrsmooth", flags: "-W ${ar}.zap.FT",                           out: "${ar}.zap.FT.sm", img: "pipelines/template+pat/template.png" },
-      { cmd: "pat",       flags: "-s template.std -A FDM ${ar}.ar > toa.tim", out: "toa.tim",         img: "pat/J0437-4715/toas.tim",                            textOnly: true, annot: "pat/J0437-4715/toas.annot.json" },
+      { cmd: "pat",       flags: "-s template.std -A FDM ${ar}.ar > toa.tim", out: "toa.tim",         img: "pat/${ar}/toas.tim",                            textOnly: true, annot: "pat/${ar}/toas.annot.json" },
     ],
   },
   {
@@ -637,8 +656,8 @@ const PIPELINES = [
     label: "pam → pav (scrunch then short-flag plot)",
     blurb: "Apply pam's scrunch first, then plot the result with pav's short flags.",
     steps: [
-      { cmd: "pam", flags: "-F --setnchn 32 -e f32 ${ar}.ar",   out: "${ar}.f32",            img: "pam/J0437-4715/F__nchan32.png" },
-      { cmd: "pav", flags: "-DFTpd ${ar}.f32 -g out.png/PNG",   out: "→ image",              img: "pipelines/pam-pav/J0437-4715/D_FTpd.png" },
+      { cmd: "pam", flags: "-F --setnchn 32 -e f32 ${ar}.ar",   out: "${ar}.f32",            img: "pam/${ar}/F__nchan32.png" },
+      { cmd: "pav", flags: "-DFTpd ${ar}.f32 -g out.png/PNG",   out: "→ image",              img: "pipelines/pam-pav/${ar}/D_FTpd.png" },
     ],
   },
 ];
@@ -862,7 +881,17 @@ function InteractiveV2() {
   }, [archive, type, j, dirty]);
 
   const pipeline = useMemo(() => PIPELINES.find(p => p.id === pipelineId), [pipelineId]);
-  const currentStep = pipeline && pipeline.steps[Math.min(pipelineStep, pipeline.steps.length - 1)];
+  // Pipeline step substitution: replace literal `${ar}` in img/annot/flags with
+  // the active archive so a pipeline can show different artifacts per archive.
+  const substAr = (s) => typeof s === "string" ? s.replace(/\$\{ar\}/g, archive) : s;
+  const currentStepRaw = pipeline && pipeline.steps[Math.min(pipelineStep, pipeline.steps.length - 1)];
+  const currentStep = currentStepRaw && {
+    ...currentStepRaw,
+    img:   substAr(currentStepRaw.img),
+    annot: substAr(currentStepRaw.annot),
+    flags: substAr(currentStepRaw.flags),
+    out:   substAr(currentStepRaw.out),
+  };
 
   const selectType = (nextType) => {
     const combos = availableJCombosFor(nextType, archive);

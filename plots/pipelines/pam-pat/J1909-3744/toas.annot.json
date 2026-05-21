@@ -1,6 +1,6 @@
 {
   "format": "tempo2 IPTA",
-  "describes": "Each line is one time-of-arrival.  Column 1 is the archive used; col 2 is observing frequency in MHz; col 3 the modified Julian date; col 4 the formal uncertainty in µs; col 5 the observatory code; trailing -<flag> <value> pairs are pipeline metadata (band, frontend, group, etc).",
+  "describes": "Each line is one time-of-arrival.  Column 1 is the archive used; col 2 the observing frequency in MHz; col 3 the modified Julian date; col 4 the formal uncertainty in µs; col 5 the observatory code; trailing -<flag> <value> pairs are pipeline metadata (band, frontend, group, etc).",
   "spans": [
     {
       "line": 9999,

@@ -1,19 +1,20 @@
 {
-  "version": 1,
+  "format": "psrstat -c \"all:bin:mean\"",
+  "describes": "One value per phase bin (1024 rows by default) — the integrated intensity at that bin.  Plot this and you have the profile.",
   "spans": [
     {
-      "line": 0,
-      "start": 143,
-      "end": 155,
-      "label": "metric name \u2014 value is -",
-      "kind": "field"
+      "line": 9999,
+      "start": 0,
+      "end": 0,
+      "kind": "flag",
+      "label": "bin index  (0..nbin-1)"
     },
     {
-      "line": 0,
-      "start": 156,
-      "end": 157,
-      "label": "value of all:bin:mean",
-      "kind": "field"
+      "line": 9999,
+      "start": 0,
+      "end": 0,
+      "kind": "frequency",
+      "label": "mean intensity in that bin"
     }
   ]
 }

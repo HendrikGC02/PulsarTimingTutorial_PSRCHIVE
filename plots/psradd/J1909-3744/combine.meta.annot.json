@@ -1,68 +1,27 @@
 {
-  "version": 1,
+  "format": "vap of the combined archive",
+  "describes": "After psradd appended two archives, this vap dump confirms that nbin / nchan / npol are unchanged (psradd appends in time only) and that the length doubled.",
   "spans": [
     {
-      "line": 1,
+      "line": 9999,
       "start": 0,
-      "end": 22,
-      "label": "filename \u2014 column from vap header",
-      "kind": "field"
+      "end": 0,
+      "kind": "filename",
+      "label": "summed archive filename"
     },
     {
-      "line": 1,
-      "start": 25,
-      "end": 35,
-      "label": "name \u2014 column from vap header",
-      "kind": "field"
+      "line": 9999,
+      "start": 0,
+      "end": 0,
+      "kind": "flag",
+      "label": "nbin / nchan / nsubint / npol  (data shape after the append)"
     },
     {
-      "line": 1,
-      "start": 38,
-      "end": 42,
-      "label": "nbin \u2014 column from vap header",
-      "kind": "field"
-    },
-    {
-      "line": 1,
-      "start": 45,
-      "end": 49,
-      "label": "nchan \u2014 column from vap header",
-      "kind": "field"
-    },
-    {
-      "line": 1,
-      "start": 52,
-      "end": 59,
-      "label": "nsubint \u2014 column from vap header",
-      "kind": "field"
-    },
-    {
-      "line": 1,
-      "start": 62,
-      "end": 63,
-      "label": "npol \u2014 column from vap header",
-      "kind": "field"
-    },
-    {
-      "line": 1,
-      "start": 66,
-      "end": 74,
-      "label": "length \u2014 column from vap header",
-      "kind": "field"
-    },
-    {
-      "line": 1,
-      "start": 77,
-      "end": 84,
-      "label": "bw \u2014 column from vap header",
-      "kind": "field"
-    },
-    {
-      "line": 1,
-      "start": 87,
-      "end": 96,
-      "label": "dm \u2014 column from vap header",
-      "kind": "field"
+      "line": 9999,
+      "start": 0,
+      "end": 0,
+      "kind": "mjd",
+      "label": "length  (sum of the input archives' lengths, in seconds)"
     }
   ]
 }

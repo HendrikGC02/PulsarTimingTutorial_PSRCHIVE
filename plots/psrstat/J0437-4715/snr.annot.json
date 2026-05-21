@@ -1,47 +1,27 @@
 {
-  "version": 1,
+  "format": "psrstat -c \"snr,off:avg,off:rms\"",
+  "describes": "Three derived quantities computed from the fully fscrunched + tscrunched profile: peak-S/N (psrchive's \"snr\"), the mean intensity in the off-pulse window, and its RMS.  Used to sanity-check the calibration and zap before TOA generation.",
   "spans": [
     {
-      "line": 0,
-      "start": 143,
-      "end": 146,
-      "label": "metric name \u2014 value is 18281.345703125",
-      "kind": "field"
+      "line": 9999,
+      "start": 0,
+      "end": 0,
+      "kind": "flag",
+      "label": "snr  —  peak signal-to-noise ratio"
     },
     {
-      "line": 0,
-      "start": 147,
-      "end": 162,
-      "label": "value of snr",
-      "kind": "field"
+      "line": 9999,
+      "start": 0,
+      "end": 0,
+      "kind": "observatory",
+      "label": "off:avg  —  mean off-pulse intensity (should be ~0 after baseline removal)"
     },
     {
-      "line": 0,
-      "start": 163,
-      "end": 170,
-      "label": "metric name \u2014 value is 3462.25174069095",
-      "kind": "field"
-    },
-    {
-      "line": 0,
-      "start": 171,
-      "end": 187,
-      "label": "value of off:avg",
-      "kind": "field"
-    },
-    {
-      "line": 0,
-      "start": 188,
-      "end": 195,
-      "label": "metric name \u2014 value is 0.276528759354824",
-      "kind": "field"
-    },
-    {
-      "line": 0,
-      "start": 196,
-      "end": 213,
-      "label": "value of off:rms",
-      "kind": "field"
+      "line": 9999,
+      "start": 0,
+      "end": 0,
+      "kind": "error",
+      "label": "off:rms  —  RMS of the off-pulse window (the \"noise floor\")"
     }
   ]
 }
