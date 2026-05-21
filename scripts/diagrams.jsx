@@ -40,7 +40,7 @@ function SiteHeader({ active = "landing", compact = false }) {
           letterSpacing: -0.3,
           whiteSpace: "nowrap",
         }}>✦ PSRCHIVE</div>
-        <div style={{ fontFamily: "var(--font-body)", fontSize: 13, color: "var(--ink-3)", whiteSpace: "nowrap" }}>
+        <div className="sk-brand-subtitle" style={{ fontFamily: "var(--font-body)", fontSize: 13, color: "var(--ink-3)", whiteSpace: "nowrap" }}>
           pulsar timing tutorial
         </div>
       </a>

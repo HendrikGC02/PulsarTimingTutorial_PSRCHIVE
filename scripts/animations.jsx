@@ -111,7 +111,7 @@ function FoldingAnim({ w = 460, h = 200 }) {
   const cloudPath = (seed) => {
     const r = mulberry32(seed);
     return pts.map((p, i) => {
-      const v = p.signal + (r() * 2 - 1) * 0.7;
+      const v = p.signal + (r() * 2 - 1) * 0.35;
       const x = 36 + (w - 56) * p.phase;
       const y = h - 30 - v * (h - 80);
       return `${i === 0 ? "M" : "L"} ${x.toFixed(1)} ${y.toFixed(1)}`;
@@ -132,16 +132,23 @@ function FoldingAnim({ w = 460, h = 200 }) {
   return (
     <div>
       <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={{ display: "block", background: "var(--card-2)", borderRadius: 6 }}>
+        <defs>
+          <clipPath id="folding-plot">
+            <rect x="36" y="14" width={w - 48} height={h - 44} />
+          </clipPath>
+        </defs>
         <line x1="36" y1={h - 30} x2={w - 12} y2={h - 30} stroke="var(--ink-4)" strokeWidth="1" />
         <line x1="36" y1="14" x2="36" y2={h - 30} stroke="var(--ink-4)" strokeWidth="1" />
         <text x={w / 2} y={h - 8} textAnchor="middle" fontSize="11" fontFamily="var(--font-body)" fill="var(--ink-3)">pulse phase</text>
         <text x="14" y={h / 2} textAnchor="middle" fontSize="11" fontFamily="var(--font-body)" fill="var(--ink-3)" transform={`rotate(-90 14 ${h / 2})`}>flux</text>
-        {/* cloud of individual rotations behind the mean */}
-        {cloudOpacity > 0.01 && cloudSeeds.map((s, i) => (
-          <path key={i} d={cloudPath(s)} fill="none" stroke="var(--ink-3)" strokeWidth="0.7" opacity={cloudOpacity * (0.45 + (i % 3) * 0.18)} />
-        ))}
-        {/* the running average */}
-        <path d={path} fill="none" stroke="var(--green)" strokeWidth="1.8" strokeLinejoin="round" />
+        {/* cloud of individual rotations behind the mean (clipped to the plot area) */}
+        <g clipPath="url(#folding-plot)">
+          {cloudOpacity > 0.01 && cloudSeeds.map((s, i) => (
+            <path key={i} d={cloudPath(s)} fill="none" stroke="var(--ink-3)" strokeWidth="0.7" opacity={cloudOpacity * (0.45 + (i % 3) * 0.18)} />
+          ))}
+          {/* the running average */}
+          <path d={path} fill="none" stroke="var(--green)" strokeWidth="1.8" strokeLinejoin="round" />
+        </g>
         <g transform={`translate(${w - 110}, 18)`}>
           <rect width="98" height="26" rx="13" fill="var(--green)" />
           <text x="49" y="18" textAnchor="middle" fontSize="13" fontFamily="var(--font-mono)" fontWeight="700" fill="var(--paper)">

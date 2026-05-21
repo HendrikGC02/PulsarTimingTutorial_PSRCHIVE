@@ -2,10 +2,18 @@
 
 /* ============================================================
    V2 · INTERACTIVE PAGE — stateful IDE
-   The argument inspector + plot-type radio + -j toggles all
-   feed a single state object. State → command string + expected
-   filename in plots/...  An <img> tries to load it; if it 404s
-   we degrade gracefully to a "copy this command" panel.
+   Mode-driven workspace.  Three top-level modes:
+     - "single"   → legacy psrplot single-command panel (plot type +
+                    -j flag toggles)
+     - "catalog"  → CATALOG-driven flow.  Each entry describes one
+                    PSRCHIVE / adjacent command with its option space.
+                    A matrix-aware filename builder maps state →
+                    plots/<command>/<archive>/<key>(__dirty)?.<ext>.
+     - "pipeline" → multi-step chain.  Each step renders an image or
+                    annotated text panel.
+   Every catalog entry can optionally support a clean ⇄ dirty
+   archive toggle (workspace-level state), in which case its
+   artifact() honours the toggle.
    ============================================================ */
 
 const { useState, useMemo, useRef, useEffect } = React;
@@ -13,48 +21,50 @@ const { useState, useMemo, useRef, useEffect } = React;
 const V2_IPG_W = 1300;
 const V2_IPG_H = 920;
 
-/* ---------- catalog mirrors plots-spec.md ----------
-   Single-command presets (gallery section "Single commands")
-   and pipeline presets (gallery section "Pipelines"). The UI
-   builds the filename and command from the active preset. */
-
+/* ---------- archives + psrplot single-mode catalog ---------- */
 const ARCHIVES = [
-  { id: "J0437-4715", label: "J0437-4715 (MeerKAT-ish)" },
-  { id: "J1909-3744", label: "J1909-3744" },
+  { id: "J0437-4715", label: "J0437-4715 (MeerKAT)" },
+  { id: "J1909-3744", label: "J1909-3744 (MeerKAT)" },
 ];
 
 const PLOT_TYPES = [
-  { id: "flux",   label: "flux profile",      defaultJ: { D: true,  F: true,  T: true  }, group: "Profiles" },
-  { id: "freq",   label: "phase × frequency", defaultJ: { D: false, F: false, T: false }, group: "Phase × frequency" },
-  { id: "time",   label: "phase × time",      defaultJ: { D: false, F: true,  T: false }, group: "Phase × time" },
-  { id: "stokes", label: "stokes profile",    defaultJ: { D: true,  F: true,  T: true  }, group: "Polarisation" },
-  { id: "pa",     label: "position angle",    defaultJ: { D: true,  F: true,  T: true  }, group: "Polarisation" },
+  { id: "flux",    label: "flux profile",       defaultJ: { D: true,  F: true,  T: true  }, group: "Profiles" },
+  { id: "freq",    label: "phase × frequency",  defaultJ: { D: false, F: false, T: false }, group: "Phase × frequency" },
+  { id: "time",    label: "phase × time",       defaultJ: { D: false, F: true,  T: false }, group: "Phase × time" },
+  { id: "stokes",  label: "Stokes profile",     defaultJ: { D: true,  F: true,  T: true  }, group: "Polarisation" },
+  { id: "pa",      label: "position angle",     defaultJ: { D: true,  F: true,  T: true  }, group: "Polarisation" },
+  { id: "polprof", label: "pol profile (Scyl)", defaultJ: { D: true,  F: true,  T: true  }, group: "Polarisation" },
+  { id: "joy",     label: "joy-division stack", defaultJ: { D: true,  F: false, T: false }, group: "Other" },
 ];
 
-// Filenames actually present on disk under plots/.  Stored without the
-// "plots/" prefix so we can compare against `expectedFilename().replace(/^plots\//,"")`.
-// Keep in sync with plots/MANIFEST.json.  Each entry below is verified to exist.
+// Filenames present on disk under plots/.  Stored without the
+// "plots/" prefix.  Keep in sync with plots/MANIFEST.json — this is the
+// allowlist for the legacy single-mode plot button.
 const AVAILABLE = new Set([
-  // J0437-4715 — psrplot single-command gallery
-  "psrplot/J0437-4715/flux__jft.png",   "psrplot/J0437-4715/flux__jdft.png",
-  "psrplot/J0437-4715/freq__raw.png",   "psrplot/J0437-4715/freq__jd.png",
-  "psrplot/J0437-4715/time__jf.png",    "psrplot/J0437-4715/time__jdf.png",
-  "psrplot/J0437-4715/stokes__jft.png", "psrplot/J0437-4715/stokes__jdft.png",
+  // J0437-4715
+  "psrplot/J0437-4715/flux__jft.png",    "psrplot/J0437-4715/flux__jdft.png",
+  "psrplot/J0437-4715/freq__raw.png",    "psrplot/J0437-4715/freq__jd.png",
+  "psrplot/J0437-4715/time__jf.png",     "psrplot/J0437-4715/time__jdf.png",
+  "psrplot/J0437-4715/stokes__jft.png",  "psrplot/J0437-4715/stokes__jdft.png",
   "psrplot/J0437-4715/pa__jdft.png",
-  // J1909-3744 — psrplot single-command gallery
-  "psrplot/J1909-3744/flux__jft.png",   "psrplot/J1909-3744/flux__jdft.png",
-  "psrplot/J1909-3744/freq__raw.png",   "psrplot/J1909-3744/freq__jd.png",
-  "psrplot/J1909-3744/time__jf.png",    "psrplot/J1909-3744/time__jdf.png",
-  "psrplot/J1909-3744/stokes__jft.png", "psrplot/J1909-3744/stokes__jdft.png",
+  "psrplot/J0437-4715/polprof__jdft.png","psrplot/J0437-4715/polprof__jdft__dirty.png",
+  "psrplot/J0437-4715/joy__jdf.png",
+  // J1909-3744
+  "psrplot/J1909-3744/flux__jft.png",    "psrplot/J1909-3744/flux__jdft.png",
+  "psrplot/J1909-3744/freq__raw.png",    "psrplot/J1909-3744/freq__jd.png",
+  "psrplot/J1909-3744/time__jf.png",     "psrplot/J1909-3744/time__jdf.png",
+  "psrplot/J1909-3744/stokes__jft.png",  "psrplot/J1909-3744/stokes__jdft.png",
   "psrplot/J1909-3744/pa__jdft.png",
+  "psrplot/J1909-3744/polprof__jdft.png","psrplot/J1909-3744/polprof__jdft__dirty.png",
+  "psrplot/J1909-3744/joy__jdf.png",
 ]);
 
-/** Available -j combinations per plot type, derived from AVAILABLE.
- *  Used to render the "available combinations" hint chips and to snap
- *  to the nearest existing combo when the user switches plot type. */
+/** Available -j combinations per plot type, derived from AVAILABLE. */
 function availableJCombosFor(type, archive) {
   const out = [];
   const seen = new Set();
+  // psrplot polprof comes in both clean and __dirty — the suffix split below
+  // handles only the "j-flag" part of the filename for legacy single-mode.
   for (const key of AVAILABLE) {
     const m = key.match(/^psrplot\/([^/]+)\/([^_]+)__([a-z]+)\.png$/);
     if (!m) continue;
@@ -66,35 +76,62 @@ function availableJCombosFor(type, archive) {
   }
   return out;
 }
-
-/** Convert a jSuffix string back into a {D,F,T} bool record. */
 function jFromSuffix(sfx) {
-  return { D: sfx.includes("d"), F: sfx.includes("f"), T: sfx.includes("t") };
+  // Files use "raw" or "j" + dft letters in any order; reverse that.
+  const letters = (sfx === "raw") ? "" : sfx.replace(/^j/, "");
+  return { D: letters.includes("d"), F: letters.includes("f"), T: letters.includes("t") };
 }
 
 /* ============================================================
-   COMMAND CATALOG
-   ------------------------------------------------------------
-   Each entry describes one *flow* the user can explore: a
-   PSRCHIVE command + a discrete option space (radio-like) + an
-   artifact filename built from the chosen options.
-
-   `outKind`:
-     - "image"     → PNG rendered in the output panel
-     - "text"      → plain stdout rendered in a terminal panel
-     - "annotated" → stdout with a .annot.json sidecar driving
-                     per-column tooltips (e.g. pat .tim format)
-
-   `artifact(state)` returns { path, command, note?, expected? }
-   where `path` is relative to plots/ (no prefix).  When the
-   file does not exist on disk the UI degrades gracefully.
-
-   Group keys mirror the conceptual phases of timing work
-   (inspect → plot → clean → combine → scrunch → template →
-    timing) so the sidebar reads like the GettingTOAs workflow.
+   CATALOG
+   Each entry: { id, cmd, group, label, blurb, outKind, options,
+                 defaults, supportsDirty?, validityFor?(opts, dirty),
+                 artifact(opts, ar, dirty) }.  See the rewrite notes in
+   AUDIT.md for the matrix semantics for pav and pam.
    ============================================================ */
+
+const PAV_MODES = [
+  { id: "G", label: "G · subint stack" },
+  { id: "D", label: "D · dynamic spectrum" },
+  { id: "Y", label: "Y · joy / subint" },
+];
+// pav scrunch flags are checkboxes; order in filename is F, T, p, d to match
+// what tools/gen/generate_pav.sh writes.  Use bare when nothing's selected.
+const PAV_FLAG_ORDER = ["F", "T", "p", "d"];
+function pavOpsKey(flags) {
+  const ops = PAV_FLAG_ORDER.filter(k => flags[k]).join("");
+  return ops || "bare";
+}
+function pavCliFlags(flags) {
+  const ops = PAV_FLAG_ORDER.filter(k => flags[k]).join("");
+  return ops ? "-" + ops : "";
+}
+// Set of ops keys actually generated for these archives (per plots/MANIFEST.json).
+const PAV_AVAILABLE_OPS = new Set(["bare", "F", "T", "p", "d", "FT", "Fd", "Td", "pd", "FTd"]);
+
+// pam grouping: D and P are flag-only (no nchan/nsub axes).
+// F has nchan ∈ {8,16,32,116}.
+// T has nsub ∈ {1,2,4}.
+// FT and FTD have nchan ∈ {8,16,32} × nsub ∈ {1,2,4}.
+const PAM_F_NCHANS = [
+  { id: "8",   label: "8"   },
+  { id: "16",  label: "16"  },
+  { id: "32",  label: "32"  },
+  { id: "116", label: "116" },
+];
+const PAM_FT_NCHANS = [
+  { id: "8",  label: "8"  },
+  { id: "16", label: "16" },
+  { id: "32", label: "32" },
+];
+const PAM_NSUBS = [
+  { id: "1", label: "1 (all)" },
+  { id: "2", label: "2" },
+  { id: "4", label: "4" },
+];
+
 const CATALOG = [
-  // ----- INSPECT (text output) -----
+  // ----- INSPECT -----
   {
     id: "vap-header", cmd: "vap", group: "INSPECT", label: "vap · header summary",
     outKind: "annotated", blurb: "Read a few fields out of the archive header.",
@@ -124,26 +161,70 @@ const CATALOG = [
     }),
   },
 
-  // ----- PLOT (image output) -----
-  // Note: psrplot is special-cased — it predates the CATALOG and lives in
-  // the legacy `psrplot` mode below.  The entry here is a *pointer* the
-  // sidebar can render that switches the UI to legacy single-mode.
-  { id: "psrplot", cmd: "psrplot", group: "PLOT", label: "psrplot · phase × {freq|time|stokes|pa}",
+  // ----- PLOT -----
+  { id: "psrplot", cmd: "psrplot", group: "PLOT", label: "psrplot · phase × {freq|time|stokes|pa|polprof|joy}",
     outKind: "legacy-psrplot", blurb: "The main plotting front-end.", options: [], defaults: {} },
   {
-    id: "pav", cmd: "pav", group: "PLOT", label: "pav · short-flag plotter",
-    outKind: "image", blurb: "Older but ubiquitous: same data, terser flags.",
-    options: [{ id: "view", label: "view", choices: [
-      { id: "dynamic", cli: "-DFTp -j D", label: "dynamic spectrum"  },
-      { id: "stack",   cli: "-GTp  -j D", label: "subint stack"      },
-      // pav -S* views (profile, stokes) need full-polarisation archives;
-      // the bundled reference archives are Stokes I only, so those views
-      // are unavailable here.  Re-add when an Iquv archive is in the set.
-    ]}],
-    defaults: { view: "dynamic" },
+    id: "pav", cmd: "pav", group: "PLOT", label: "pav · short-flag plotter (full matrix)",
+    outKind: "image", supportsDirty: true,
+    blurb: "Older but ubiquitous. Pick one plot mode and tick whatever scrunch flags you want — just like psrplot.",
+    // Mixed option shape: one radio (mode) plus four independent toggles.
+    // The right-pane render special-cases optionKind: 'flags' below.
+    options: [
+      { id: "mode", label: "mode (-G | -D | -Y)", choices: PAV_MODES },
+      { id: "flags", label: "scrunch flags", optionKind: "flags", choices: [
+        { id: "F", label: "-F", hint: "fscrunch (sum frequency axis)" },
+        { id: "T", label: "-T", hint: "tscrunch (sum sub-integrations)" },
+        { id: "p", label: "-p", hint: "profile mode" },
+        { id: "d", label: "-d", hint: "dedisperse" },
+      ]},
+    ],
+    defaults: { mode: "D", flags: { F: true, T: true, d: true } },
+    validityFor: (opts, _dirty) => {
+      const ops = pavOpsKey(opts.flags || {});
+      if (opts.mode === "Y" && (opts.flags?.T)) {
+        return { state: "rejected", reason: "pav -Y needs the time axis intact; -T removes it." };
+      }
+      if (opts.mode === "G" && (opts.flags?.F)) {
+        return { state: "unavailable", reason: "pav -GF* failed on the supplied MeerKAT archives during generation. See plots/SKIPPED.md." };
+      }
+      if (opts.mode === "D" && (ops === "F" || ops === "FT")) {
+        return { state: "degenerate", reason: "-D plots the dynamic spectrum; -F/-FT collapses one of its axes, leaving an empty plot." };
+      }
+      if (!PAV_AVAILABLE_OPS.has(ops)) {
+        return { state: "unavailable", reason: `pav -${opts.mode}${ops === "bare" ? "" : ops} wasn't included in the generator run (no PNG on disk).` };
+      }
+      return { state: "ok" };
+    },
+    artifact: (opts, ar, dirty) => {
+      const ops = pavOpsKey(opts.flags || {});
+      return {
+        path: `pav/${ar}/${opts.mode}_${ops}${dirty ? "__dirty" : ""}.png`,
+        command: `pav -${opts.mode}${pavCliFlags(opts.flags || {}).slice(1)} ${ar}${dirty ? "_raw" : ""}.ar -g out.png/PNG`,
+      };
+    },
+  },
+  {
+    id: "dynspec", cmd: "psrplot -p b", group: "PLOT", label: "psrplot -p b · dynamic spectrum",
+    outKind: "image", supportsDirty: true,
+    blurb: "Bandpass / dynamic spectrum (the proper one — frequency × time of the pulse).",
+    options: [],
+    defaults: {},
+    artifact: (s, ar, dirty) => ({
+      path: `dynspec/${ar}/dynspec${dirty ? "__dirty" : ""}.png`,
+      command: `psrplot -p b -jDB -x -lpol=0 ${ar}${dirty ? "_raw" : ""}.ar -D out.png/png`,
+    }),
+  },
+  {
+    id: "rotation", cmd: "pam --rot", group: "PLOT", label: "pam --rot · rotate phase",
+    outKind: "rotation-scrubber",
+    blurb: "Cycle through twelve phase rotations of the integrated profile (animation).",
+    options: [],
+    defaults: {},
     artifact: (s, ar) => ({
-      path: `pav/${ar}/${s.view}__jd.png`,
-      command: `pav ${({ dynamic: "-DFTp", profile: "-SFTp", stack: "-GTp", stokes: "-SFTpd" })[s.view]} -j D ${ar}.ar -g out.png/PNG`,
+      framePath: (i) => `rotation/${ar}/phase_${String(i * 2).padStart(2, "0")}.png`,
+      frames: 12,
+      command: `for p in 0.00 0.08 ... 0.92; do pam --rot $p -e r ${ar}.ar; psrplot -p flux -jFT ${ar}.r -D phase_$(printf %02d $((p*100))).png/png; done`,
     }),
   },
 
@@ -152,17 +233,16 @@ const CATALOG = [
     id: "paz", cmd: "paz", group: "CLEAN", label: "paz · zap RFI",
     outKind: "image", blurb: "Mask channels or sub-integrations as zero-weight.",
     options: [{ id: "mode", label: "mode", choices: [
-      { id: "auto",       cli: "-r",              label: "auto (-r)"        },
-      { id: "manual-chans", cli: '-z "100 101 102"', label: "manual channels"  },
-      { id: "freqrange",  cli: '-F "1200 1280"',   label: "frequency range"  },
-      { id: "badsub",     cli: '-w "0 5"',         label: "drop sub-ints 0,5"},
+      { id: "auto",         cli: "-r",                  label: "auto (-r)"          },
+      { id: "manual-chans", cli: '-z "100 101 102"',    label: "manual channels"    },
+      { id: "freqrange",    cli: '-F "1200 1280"',      label: "frequency range"    },
+      { id: "badsub",       cli: '-w "0 5"',            label: "drop sub-ints 0,5"  },
     ]}],
     defaults: { mode: "auto" },
     artifact: (s, ar) => {
-      const fname = ({ auto: "auto", "manual-chans": "manual-chans", freqrange: "freqrange", badsub: "badsub" })[s.mode];
       const cli = ({ auto: "-r -e r", "manual-chans": '-z "100 101 102" -e z', freqrange: '-F "1200 1280" -e F', badsub: '-w "0 5" -e w' })[s.mode];
       return {
-        path: `paz/${ar}/${fname}.png`,
+        path: `paz/${ar}/${s.mode}.png`,
         command: `paz ${cli} ${ar}.ar  &&  psrplot -p freq ${ar}.<ext> -D out.png/png`,
       };
     },
@@ -180,51 +260,97 @@ const CATALOG = [
     }),
   },
 
-  // ----- SCRUNCH -----
+  // ----- SCRUNCH (pam family) -----
   {
-    id: "pam-fscrunch", cmd: "pam", group: "SCRUNCH", label: "pam · fscrunch channels",
-    outKind: "image+meta", blurb: "Sum adjacent frequency channels.",
-    options: [{ id: "nchn", label: "target N_chan", choices: [
-      { id: "8",   cli: "--setnchn 8 -e f8",     label: "8"   },
-      { id: "32",  cli: "--setnchn 32 -e f32",   label: "32"  },
-      { id: "128", cli: "--setnchn 128 -e f128", label: "128" },
-    ]}],
-    defaults: { nchn: "32" },
-    artifact: (s, ar) => ({
-      path: `pam/${ar}/fscrunch-${s.nchn}.png`,
-      metaPath: `pam/${ar}/fscrunch-${s.nchn}.meta.txt`,
-      metaAnnot: `pam/${ar}/fscrunch-${s.nchn}.meta.annot.json`,
-      command: `pam --setnchn ${s.nchn} -e f${s.nchn} ${ar}.ar  &&  psrplot -p freq ${ar}.f${s.nchn} -D out.png/png`,
+    id: "pam-D", cmd: "pam", group: "SCRUNCH", label: "pam -D · dedisperse",
+    outKind: "image+meta", supportsDirty: true,
+    blurb: "Incoherent dedispersion using the DM in the archive header.",
+    options: [], defaults: {},
+    artifact: (s, ar, dirty) => ({
+      path: `pam/${ar}/D${dirty ? "__dirty" : ""}.png`,
+      metaPath: `pam/${ar}/D${dirty ? "__dirty" : ""}.meta.txt`,
+      command: `pam -D -e D ${ar}${dirty ? "_raw" : ""}.ar  &&  psrplot -p freq ${ar}.D -D out.png/png`,
     }),
   },
   {
-    id: "pam-tscrunch", cmd: "pam", group: "SCRUNCH", label: "pam · tscrunch sub-integrations",
-    outKind: "image+meta", blurb: "Sum adjacent sub-integrations in time.",
-    options: [{ id: "nsub", label: "target N_subint", choices: [
-      { id: "1",  cli: "-T -e Tscr",         label: "1 (all)" },
-      { id: "4",  cli: "--setnsub 4 -e t4",   label: "4"      },
-      { id: "16", cli: "--setnsub 16 -e t16", label: "16"     },
-    ]}],
+    id: "pam-F", cmd: "pam", group: "SCRUNCH", label: "pam -F · fscrunch (channels)",
+    outKind: "image+meta", supportsDirty: true,
+    blurb: "Sum adjacent frequency channels down to N_chan.",
+    options: [{ id: "nchan", label: "target N_chan", choices: PAM_F_NCHANS }],
+    defaults: { nchan: "32" },
+    artifact: (s, ar, dirty) => ({
+      path: `pam/${ar}/F__nchan${s.nchan}${dirty ? "__dirty" : ""}.png`,
+      metaPath: `pam/${ar}/F__nchan${s.nchan}${dirty ? "__dirty" : ""}.meta.txt`,
+      command: `pam --setnchn ${s.nchan} -e f${s.nchan} ${ar}${dirty ? "_raw" : ""}.ar  &&  psrplot -p freq ${ar}.f${s.nchan} -D out.png/png`,
+    }),
+  },
+  {
+    id: "pam-T", cmd: "pam", group: "SCRUNCH", label: "pam -T · tscrunch (sub-integrations)",
+    outKind: "image+meta", supportsDirty: true,
+    blurb: "Sum adjacent sub-integrations.",
+    options: [{ id: "nsub", label: "target N_subint", choices: PAM_NSUBS }],
     defaults: { nsub: "1" },
-    artifact: (s, ar) => ({
-      path: `pam/${ar}/tscrunch-${s.nsub}.png`,
-      metaPath: `pam/${ar}/tscrunch-${s.nsub}.meta.txt`,
-      metaAnnot: `pam/${ar}/tscrunch-${s.nsub}.meta.annot.json`,
-      command: `pam ${s.nsub === "1" ? "-T -e Tscr" : `--setnsub ${s.nsub} -e t${s.nsub}`} ${ar}.ar  &&  psrplot -p time ${ar}.${s.nsub === "1" ? "Tscr" : "t" + s.nsub} -D out.png/png`,
+    artifact: (s, ar, dirty) => ({
+      path: `pam/${ar}/T__nsub${s.nsub}${dirty ? "__dirty" : ""}.png`,
+      metaPath: `pam/${ar}/T__nsub${s.nsub}${dirty ? "__dirty" : ""}.meta.txt`,
+      command: `pam ${s.nsub === "1" ? "-T -e Tscr" : `--setnsub ${s.nsub} -e t${s.nsub}`} ${ar}${dirty ? "_raw" : ""}.ar  &&  psrplot -p time ${ar}.<ext> -D out.png/png`,
     }),
   },
   {
-    id: "pam-bscrunch", cmd: "pam", group: "SCRUNCH", label: "pam · bscrunch phase bins",
+    id: "pam-FT", cmd: "pam", group: "SCRUNCH", label: "pam -FT · fscrunch + tscrunch",
+    outKind: "image+meta", supportsDirty: true,
+    blurb: "Both axes at once — pick N_chan × N_subint.",
+    options: [
+      { id: "nchan", label: "N_chan",   choices: PAM_FT_NCHANS },
+      { id: "nsub",  label: "N_subint", choices: PAM_NSUBS },
+    ],
+    defaults: { nchan: "16", nsub: "2" },
+    artifact: (s, ar, dirty) => ({
+      path: `pam/${ar}/FT__nchan${s.nchan}__nsub${s.nsub}${dirty ? "__dirty" : ""}.png`,
+      metaPath: `pam/${ar}/FT__nchan${s.nchan}__nsub${s.nsub}${dirty ? "__dirty" : ""}.meta.txt`,
+      command: `pam --setnchn ${s.nchan} --setnsub ${s.nsub} -e ft ${ar}${dirty ? "_raw" : ""}.ar  &&  psrplot -p freq ${ar}.ft -D out.png/png`,
+    }),
+  },
+  {
+    id: "pam-FTD", cmd: "pam", group: "SCRUNCH", label: "pam -FTD · fscrunch + tscrunch + dedisperse",
+    outKind: "image+meta", supportsDirty: true,
+    blurb: "Full reduction in one step.",
+    options: [
+      { id: "nchan", label: "N_chan",   choices: PAM_FT_NCHANS },
+      { id: "nsub",  label: "N_subint", choices: PAM_NSUBS },
+    ],
+    defaults: { nchan: "16", nsub: "1" },
+    artifact: (s, ar, dirty) => ({
+      path: `pam/${ar}/FTD__nchan${s.nchan}__nsub${s.nsub}${dirty ? "__dirty" : ""}.png`,
+      metaPath: `pam/${ar}/FTD__nchan${s.nchan}__nsub${s.nsub}${dirty ? "__dirty" : ""}.meta.txt`,
+      command: `pam --setnchn ${s.nchan} --setnsub ${s.nsub} -D -e ftd ${ar}${dirty ? "_raw" : ""}.ar  &&  psrplot -p freq ${ar}.ftd -D out.png/png`,
+    }),
+  },
+  {
+    id: "pam-P", cmd: "pam", group: "SCRUNCH", label: "pam -P · pscrunch (sum polarisations)",
+    outKind: "image+meta", supportsDirty: true,
+    blurb: "Sum the polarisation axis into total intensity.",
+    options: [], defaults: {},
+    artifact: (s, ar, dirty) => ({
+      path: `pam/${ar}/P${dirty ? "__dirty" : ""}.png`,
+      metaPath: `pam/${ar}/P${dirty ? "__dirty" : ""}.meta.txt`,
+      command: `pam -p -e p ${ar}${dirty ? "_raw" : ""}.ar  &&  psrplot -p flux -jFT ${ar}.p -D out.png/png`,
+    }),
+  },
+  // legacy shorthand entries — kept for back-compat with deep links from
+  // older versions of the site.  Same artifacts that pam-F / pam-T /
+  // pam-bscrunch already deliver but under flat filenames.
+  {
+    id: "pam-bscrunch", cmd: "pam", group: "SCRUNCH", label: "pam --bscrunch · bin scrunch",
     outKind: "image+meta", blurb: "Sum adjacent phase bins.",
     options: [{ id: "nbin", label: "target N_bin", choices: [
-      { id: "256",  cli: "--setnbin 256 -e b256",   label: "256"  },
-      { id: "1024", cli: "--setnbin 1024 -e b1024", label: "1024" },
+      { id: "256",  label: "256"  },
+      { id: "1024", label: "1024" },
     ]}],
     defaults: { nbin: "1024" },
     artifact: (s, ar) => ({
       path: `pam/${ar}/bscrunch-${s.nbin}.png`,
       metaPath: `pam/${ar}/bscrunch-${s.nbin}.meta.txt`,
-      metaAnnot: `pam/${ar}/bscrunch-${s.nbin}.meta.annot.json`,
       command: `pam --setnbin ${s.nbin} -e b${s.nbin} ${ar}.ar  &&  psrplot -p flux -jFT ${ar}.b${s.nbin} -D out.png/png`,
     }),
   },
@@ -243,10 +369,10 @@ const CATALOG = [
   // ----- TIMING -----
   {
     id: "pat", cmd: "pat", group: "TIMING", label: "pat · generate TOAs (.tim)",
-    outKind: "annotated", blurb: "Cross-correlate vs a template, emit one TOA line per sub-integration.",
+    outKind: "annotated", blurb: "Cross-correlate vs a template; one TOA line per sub-integration.",
     options: [{ id: "format", label: "format", choices: [
-      { id: "tempo2", cli: "-f 'tempo2 IPTA'", label: "tempo2 IPTA" },
-      { id: "princeton", cli: "", label: "princeton (default)" },
+      { id: "tempo2",    cli: "-f 'tempo2 IPTA'", label: "tempo2 IPTA" },
+      { id: "princeton", cli: "",                  label: "princeton (default)" },
     ]}, { id: "algo", label: "algorithm", choices: [
       { id: "FDM", cli: "-A FDM", label: "FDM (frequency-domain)" },
       { id: "PGS", cli: "-A PGS", label: "PGS (phase-gradient)" },
@@ -258,13 +384,27 @@ const CATALOG = [
       command: `pat -s template.std ${({FDM:"-A FDM",PGS:"-A PGS"})[s.algo]} ${({tempo2:"-f 'tempo2 IPTA'",princeton:""})[s.format]} ${ar}.ar > toas.tim`,
     }),
   },
+
+  // ----- ADJACENT (not part of PSRCHIVE) -----
+  {
+    id: "pdmp", cmd: "pdmp", group: "ADJACENT", label: "pdmp · DM / period search",
+    outKind: "image+text", supportsDirty: false,
+    blurb: "DM & spin-period optimiser (sigproc / dspsr — adjacent to PSRCHIVE).",
+    options: [], defaults: {},
+    artifact: (s, ar) => ({
+      path: `pdmp/${ar}/pdmp.png`,
+      textPath: `pdmp/${ar}/pdmp.txt`,
+      command: `pdmp -g pdmp.ps/cps ${ar}.ar  &&  ps2pdf pdmp.ps`,
+      external: true,
+    }),
+  },
 ];
 
 const CATALOG_BY_ID = Object.fromEntries(CATALOG.map(e => [e.id, e]));
-const CATALOG_GROUPS = ["INSPECT", "PLOT", "CLEAN", "COMBINE", "SCRUNCH", "TEMPLATE", "TIMING"];
+const CATALOG_GROUPS = ["INSPECT", "PLOT", "CLEAN", "COMBINE", "SCRUNCH", "TEMPLATE", "TIMING", "ADJACENT"];
 
 /* ---------- TextOutput: monospace stdout panel with .annot.json tooltips ---------- */
-function TextOutput({ src, annotSrc, command }) {
+function TextOutput({ src, annotSrc, command, externalNote = null }) {
   const [text, setText] = useState(null);
   const [annot, setAnnot] = useState(null);
   const [error, setError] = useState(null);
@@ -305,14 +445,10 @@ function TextOutput({ src, annotSrc, command }) {
     return <div style={{ color: "#7c9c8d", fontFamily: "var(--font-mono)", fontSize: 12 }}>loading…</div>;
   }
 
-  // For .tim files which can be huge, only show the first N lines.
   const MAX_LINES = 8;
   const allLines = text.split(/\r?\n/);
   const truncated = allLines.length > MAX_LINES;
   const shownLines = truncated ? allLines.slice(0, MAX_LINES) : allLines;
-
-  // annotation rendering: for each shown line we look for spans whose
-  // `line` matches and wrap their slice in a <span> with a tooltip.
   const lineHasAnnot = (lineNo) => annot?.spans?.some(s => (s.line ?? 0) === lineNo);
 
   return (
@@ -336,7 +472,7 @@ function TextOutput({ src, annotSrc, command }) {
           <div key={li} style={{ minHeight: 18 }}>
             {annot && lineHasAnnot(li)
               ? renderAnnotatedLine(ln, li, annot.spans, showAll)
-              : ln || " "}
+              : ln || " "}
           </div>
         ))}
         {truncated && (
@@ -345,18 +481,30 @@ function TextOutput({ src, annotSrc, command }) {
           </div>
         )}
       </pre>
-      {annot?.spans?.length > 0 && (
+      {(annot?.describes || annot?.spans?.length > 0) && (
         <div style={{ marginTop: 10, padding: "10px 14px", background: "#0a100d", border: "1px solid #1b2c25", borderRadius: 4 }}>
-          <div style={{ fontFamily: "var(--font-display)", fontSize: 10, fontWeight: 600, color: "#9fd3b9", textTransform: "uppercase", letterSpacing: 1.4, marginBottom: 6 }}>what the columns mean</div>
-          <div className="sk-col sk-gap-2">
-            {Array.from(new Map(annot.spans.map(s => [s.kind || s.label, s])).values()).map((s, i) => (
-              <div key={i} className="sk-row" style={{ gap: 10, fontSize: 12, fontFamily: "var(--font-body)", color: "#cfe3d7" }}>
-                <span style={{ display: "inline-block", width: 10, height: 10, background: kindColor(s.kind || ""), borderRadius: 2 }} />
-                <span style={{ fontFamily: "var(--font-mono)", color: "#9fd3b9", minWidth: 90 }}>{s.kind || "field"}</span>
-                <span>{s.label}</span>
-              </div>
-            ))}
+          <div style={{ fontFamily: "var(--font-display)", fontSize: 10, fontWeight: 600, color: "#9fd3b9", textTransform: "uppercase", letterSpacing: 1.4, marginBottom: 6 }}>
+            {annot?.format ? `${annot.format} — what the columns mean` : "what the columns mean"}
           </div>
+          {annot.describes && (
+            <div style={{ fontSize: 11.5, lineHeight: 1.5, color: "#9fbeae", marginBottom: 8 }}>{annot.describes}</div>
+          )}
+          {annot.spans && (
+            <div className="sk-col sk-gap-2">
+              {Array.from(new Map(annot.spans.map(s => [s.kind || s.label, s])).values()).map((s, i) => (
+                <div key={i} className="sk-row" style={{ gap: 10, fontSize: 12, fontFamily: "var(--font-body)", color: "#cfe3d7" }}>
+                  <span style={{ display: "inline-block", width: 10, height: 10, background: kindColor(s.kind || ""), borderRadius: 2 }} />
+                  <span style={{ fontFamily: "var(--font-mono)", color: "#9fd3b9", minWidth: 90 }}>{s.kind || "field"}</span>
+                  <span>{s.label}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+      {externalNote && (
+        <div style={{ marginTop: 10, padding: "8px 12px", background: "#1e2533", border: "1px solid #3a4b66", borderRadius: 4, color: "#a9bcd5", fontFamily: "var(--font-mono)", fontSize: 11 }}>
+          ↗ {externalNote}
         </div>
       )}
     </div>
@@ -375,7 +523,6 @@ function kindColor(kind) {
 }
 
 function renderAnnotatedLine(text, lineIdx, spans, showAll) {
-  // spans for this line, sorted by start
   const onLine = spans.filter(s => (s.line ?? 0) === lineIdx).slice().sort((a, b) => a.start - b.start);
   const parts = [];
   let cursor = 0;
@@ -396,6 +543,39 @@ function renderAnnotatedLine(text, lineIdx, spans, showAll) {
   });
   if (cursor < text.length) parts.push(<span key="tail">{text.slice(cursor)}</span>);
   return parts;
+}
+
+/* ---------- RotationScrubber: 12-frame phase rotation animation ---------- */
+function RotationScrubber({ framePath, frames = 12 }) {
+  const [i, setI] = useState(0);
+  const [playing, setPlaying] = useState(true);
+  useEffect(() => {
+    if (!playing) return;
+    const id = setInterval(() => setI(x => (x + 1) % frames), 300);
+    return () => clearInterval(id);
+  }, [playing, frames]);
+  return (
+    <div className="sk-col" style={{ gap: 10, alignItems: "center", width: "100%" }}>
+      <div style={{ border: "1px solid #1b2c25", padding: 4, background: "#000" }}>
+        <img src={framePath(i)} alt={`phase rotation frame ${i}`} style={{ display: "block", maxWidth: "100%", maxHeight: 420 }} />
+      </div>
+      <div className="sk-row" style={{ alignItems: "center", gap: 10, width: "min(620px, 100%)" }}>
+        <button onClick={() => setPlaying(p => !p)}
+          style={{ width: 26, height: 26, borderRadius: 13, border: "1px solid #4dbb91",
+                   background: playing ? "#4dbb91" : "transparent",
+                   color: playing ? "#0a100d" : "#4dbb91", cursor: "pointer",
+                   fontFamily: "var(--font-mono)", fontSize: 11 }}>
+          {playing ? "▮▮" : "▶"}
+        </button>
+        <input type="range" min="0" max={frames - 1} value={i}
+          onChange={e => { setPlaying(false); setI(+e.target.value); }}
+          style={{ flex: 1, accentColor: "#4dbb91" }} />
+        <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "#9fd3b9", minWidth: 120, textAlign: "right" }}>
+          frame {String(i).padStart(2, "0")} / {frames - 1} · φ = {(i / frames).toFixed(2)}
+        </span>
+      </div>
+    </div>
+  );
 }
 
 const PIPELINES = [
@@ -421,12 +601,23 @@ const PIPELINES = [
   },
   {
     id: "template+pat",
-    label: "psrsmooth → pat",
-    blurb: "Build a template, then generate TOAs against it.",
+    label: "psrsmooth → pat → residuals",
+    blurb: "Build a template, generate TOAs against it, view the .tim file + residuals plot.",
     steps: [
-      { cmd: "psrplot", flags: "-p flux -j FT ${ar}.ar",               out: "profile.png",    img: "pipelines/template+pat/profile.png" },
-      { cmd: "psrsmooth", flags: "-W ${ar}.FT",                        out: "${ar}.FT.sm",    img: "pipelines/template+pat/template.png" },
-      { cmd: "pat",     flags: "-s template.std ${ar}.ar > toa.tim",   out: "toa.tim",        img: "pipelines/template+pat/residual.png" },
+      { cmd: "psrplot",   flags: "-p flux -j FT ${ar}.ar",               out: "profile.png",     img: "pipelines/template+pat/profile.png" },
+      { cmd: "psrsmooth", flags: "-W ${ar}.FT",                          out: "${ar}.FT.sm",     img: "pipelines/template+pat/template.png" },
+      { cmd: "pat",       flags: "-s template.std ${ar}.ar > toas.tim",  out: "toas.tim",        img: "pipelines/template+pat/toa-text.txt", textOnly: true, annot: "pat/J0437-4715/toas.annot.json" },
+      { cmd: "tempo2",    flags: "-f ${ar}.par toas.tim",                out: "residuals.png",   img: "pipelines/template+pat/residual.png" },
+    ],
+  },
+  {
+    id: "pam-pat",
+    label: "pam → psrsmooth → pat (clean reduction first)",
+    blurb: "Reduce the archive with pam first, build the template from that, then generate TOAs.",
+    steps: [
+      { cmd: "pam",       flags: "-FT -e FT ${ar}.ar",                  out: "${ar}.FT",        img: "pam/J0437-4715/FT__nchan16__nsub1.png" },
+      { cmd: "psrsmooth", flags: "-W ${ar}.FT",                         out: "${ar}.FT.sm",     img: "pipelines/template+pat/template.png" },
+      { cmd: "pat",       flags: "-s ${ar}.FT.sm -A FDM ${ar}.ar",      out: "toas.tim",        img: "pipelines/pam-pat/J0437-4715/toas.tim", textOnly: true, annot: "pipelines/pam-pat/J0437-4715/toas.annot.json" },
     ],
   },
   {
@@ -441,26 +632,42 @@ const PIPELINES = [
       { cmd: "pat",       flags: "-s template.std -A FDM ${ar}.ar > toa.tim", out: "toa.tim",         img: "pat/J0437-4715/toas.tim",                            textOnly: true, annot: "pat/J0437-4715/toas.annot.json" },
     ],
   },
+  {
+    id: "pam-pav",
+    label: "pam → pav (scrunch then short-flag plot)",
+    blurb: "Apply pam's scrunch first, then plot the result with pav's short flags.",
+    steps: [
+      { cmd: "pam", flags: "-F --setnchn 32 -e f32 ${ar}.ar",   out: "${ar}.f32",            img: "pam/J0437-4715/F__nchan32.png" },
+      { cmd: "pav", flags: "-DFTpd ${ar}.f32 -g out.png/PNG",   out: "→ image",              img: "pipelines/pam-pav/J0437-4715/D_FTpd.png" },
+    ],
+  },
 ];
 
 /* ---------- builders ---------- */
 function jSuffix(j) {
-  // alphabetised lowercase concatenation, "raw" if empty (matches plots-spec)
+  // Matches the filename convention used by generate_plots.sh:
+  //   no -j ops → "raw"
+  //   any subset → "j" + alphabetised lowercase letters, e.g. {D,F,T} → "jdft"
   const s = ["d", "f", "t"].filter(k => j[k.toUpperCase()]).join("");
-  return s || "raw";
+  return s ? "j" + s : "raw";
 }
 function buildSingleCommand({ archive, type, j }) {
   const ops = ["D", "F", "T"].filter(k => j[k]).join("");
   const jflag = ops ? `-j ${ops} ` : "";
-  return `psrplot -p ${type} ${jflag}${archive}.ar -D out.png/png`;
+  // Special-cased plot type aliases that map to PSRCHIVE -p flags
+  const pflag = ({ polprof: "Scyl", joy: "time" })[type] || type;
+  return `psrplot -p ${pflag} ${jflag}${archive}.ar -D out.png/png`;
 }
-function expectedFilename({ archive, type, j }) {
-  return `plots/psrplot/${archive}/${type}__${jSuffix(j)}.png`;
+function expectedFilename({ archive, type, j, dirty }) {
+  const suffix = jSuffix(j);
+  // polprof has a clean and __dirty variant
+  if (type === "polprof") {
+    return `plots/psrplot/${archive}/polprof__${suffix}${dirty ? "__dirty" : ""}.png`;
+  }
+  return `plots/psrplot/${archive}/${type}__${suffix}.png`;
 }
 
-/* ---------- MANIFEST.json — fetched once, exposes valid / external / dirty
-   per plot path.  Components call useManifestEntry(path) to render the
-   degenerate / external badges. ---------- */
+/* ---------- Manifest loader ---------- */
 let __manifestPromise = null;
 function loadManifest() {
   if (!__manifestPromise) {
@@ -481,7 +688,6 @@ function useManifestEntry(path) {
     let cancel = false;
     loadManifest().then(map => {
       if (cancel) return;
-      // strip leading "plots/" if caller included it
       const key = path?.replace(/^plots\//, "");
       setEntry(key ? (map.get(key) || null) : null);
     });
@@ -490,53 +696,64 @@ function useManifestEntry(path) {
   return entry;
 }
 
-/* ---------- inline banner shown above an output that the blank-checker
-   tagged invalid (degenerate plot — usually a flag combo PSRCHIVE
-   accepts but that produces no meaningful image). ---------- */
-function ManifestBanners({ entry }) {
-  if (!entry) return null;
-  return (
-    <div className="sk-col" style={{ gap: 6, width: "100%", maxWidth: 820, margin: "0 auto 8px" }}>
-      {entry.valid === false && (
-        <div style={{
-          background: "#3a2912", border: "1px solid #7a5326",
-          padding: "8px 12px", borderRadius: 4, color: "#f0c992",
-          fontFamily: "var(--font-mono)", fontSize: 11.5, lineHeight: 1.45,
-        }}>
-          <b style={{ color: "#f7d68b" }}>⚠ degenerate combination</b>
-          {" — "}PSRCHIVE accepts this flag set but the result is a blank /
-          axis-only plot. This is a real and useful thing to see (it
-          tells you the flags are incompatible with the data layout) —
-          but the rendered image carries no information.
-        </div>
-      )}
-      {entry.external && (
-        <div style={{
-          background: "#1e2533", border: "1px solid #3a4b66",
-          padding: "6px 10px", borderRadius: 4, color: "#a9bcd5",
-          fontFamily: "var(--font-mono)", fontSize: 10.5, letterSpacing: 0.4,
-          textTransform: "uppercase",
-        }}>
-          ↗ external tool — not part of PSRCHIVE
-        </div>
-      )}
-      {entry.dirty && (
-        <div style={{
-          background: "#2a1f1f", border: "1px solid #5a3838",
-          padding: "5px 10px", borderRadius: 4, color: "#dca8a8",
-          fontFamily: "var(--font-mono)", fontSize: 10.5, letterSpacing: 0.4,
-          textTransform: "uppercase",
-        }}>
-          ⚠ dirty archive — RFI still present (paz not applied)
-        </div>
-      )}
-    </div>
-  );
+function ManifestBanners({ entry, validity }) {
+  const banners = [];
+  if (validity?.state && validity.state !== "ok") {
+    const color = {
+      degenerate:  { bg: "#3a2912", border: "#7a5326", text: "#f0c992", title: "⚠ degenerate combination" },
+      rejected:    { bg: "#2a1f1f", border: "#5a3838", text: "#dca8a8", title: "✗ rejected by PSRCHIVE" },
+      unavailable: { bg: "#2a1f1f", border: "#5a3838", text: "#dca8a8", title: "⚠ artifact unavailable" },
+    }[validity.state] || { bg: "#1e2533", border: "#3a4b66", text: "#a9bcd5", title: "note" };
+    banners.push(
+      <div key="v" style={{
+        background: color.bg, border: `1px solid ${color.border}`,
+        padding: "8px 12px", borderRadius: 4, color: color.text,
+        fontFamily: "var(--font-mono)", fontSize: 11.5, lineHeight: 1.45,
+      }}>
+        <b style={{ color: color.text }}>{color.title}</b>
+        {" — "}{validity.reason}
+      </div>
+    );
+  }
+  if (entry?.valid === false) {
+    banners.push(
+      <div key="d" style={{
+        background: "#3a2912", border: "1px solid #7a5326",
+        padding: "8px 12px", borderRadius: 4, color: "#f0c992",
+        fontFamily: "var(--font-mono)", fontSize: 11.5, lineHeight: 1.45,
+      }}>
+        <b style={{ color: "#f7d68b" }}>⚠ degenerate combination</b>
+        {" — "}PSRCHIVE accepted these flags but produced a blank /
+        axis-only plot.  The image carries no information.
+      </div>
+    );
+  }
+  if (entry?.external) {
+    banners.push(
+      <div key="x" style={{
+        background: "#1e2533", border: "1px solid #3a4b66",
+        padding: "6px 10px", borderRadius: 4, color: "#a9bcd5",
+        fontFamily: "var(--font-mono)", fontSize: 10.5, letterSpacing: 0.4,
+        textTransform: "uppercase",
+      }}>↗ external tool — not part of PSRCHIVE</div>
+    );
+  }
+  if (entry?.dirty) {
+    banners.push(
+      <div key="r" style={{
+        background: "#2a1f1f", border: "1px solid #5a3838",
+        padding: "5px 10px", borderRadius: 4, color: "#dca8a8",
+        fontFamily: "var(--font-mono)", fontSize: 10.5, letterSpacing: 0.4,
+        textTransform: "uppercase",
+      }}>⚠ dirty archive — RFI still present (paz not applied)</div>
+    );
+  }
+  if (!banners.length) return null;
+  return <div className="sk-col" style={{ gap: 6, width: "100%", maxWidth: 820, margin: "0 auto 8px" }}>{banners}</div>;
 }
 
-/* ---------- image with graceful fallback ---------- */
-function PlotImage({ src, fallbackCommand, fallbackNote }) {
-  const [state, setState] = useState("loading"); // loading | ok | missing
+function PlotImage({ src, fallbackCommand, fallbackNote, validity }) {
+  const [state, setState] = useState("loading");
   const entry = useManifestEntry(src);
   useEffect(() => {
     setState("loading");
@@ -548,7 +765,7 @@ function PlotImage({ src, fallbackCommand, fallbackNote }) {
   if (state === "ok") {
     return (
       <div className="sk-col" style={{ alignItems: "center", width: "100%" }}>
-        <ManifestBanners entry={entry} />
+        <ManifestBanners entry={entry} validity={validity} />
         <div style={{ border: "1px solid #1b2c25", padding: 4, background: "#000" }}>
           <img src={src} alt="" style={{ display: "block", maxWidth: "100%", maxHeight: 420 }} />
         </div>
@@ -556,29 +773,31 @@ function PlotImage({ src, fallbackCommand, fallbackNote }) {
     );
   }
   return (
-    <div style={{ width: "min(560px, 90%)", padding: "22px 24px", border: "1px dashed #2a4538", borderRadius: 6, background: "#0d1714", color: "#cfe3d7" }}>
-      <div style={{ fontFamily: "var(--font-display)", fontSize: 12, fontWeight: 600, color: "#e0a36a", textTransform: "uppercase", letterSpacing: 1.4 }}>
-        {state === "loading" ? "loading…" : "not precomputed"}
+    <div className="sk-col" style={{ alignItems: "center", width: "100%" }}>
+      <ManifestBanners entry={entry} validity={validity} />
+      <div style={{ width: "min(560px, 90%)", padding: "22px 24px", border: "1px dashed #2a4538", borderRadius: 6, background: "#0d1714", color: "#cfe3d7" }}>
+        <div style={{ fontFamily: "var(--font-display)", fontSize: 12, fontWeight: 600, color: "#e0a36a", textTransform: "uppercase", letterSpacing: 1.4 }}>
+          {state === "loading" ? "loading…" : "not precomputed"}
+        </div>
+        {state === "missing" && (
+          <>
+            <div style={{ fontSize: 13, marginTop: 6, color: "#9fbeae", lineHeight: 1.5 }}>
+              {fallbackNote || "This combination of flags isn't in the precomputed gallery. Run it on your own archive:"}
+            </div>
+            <div className="sk-code" style={{ marginTop: 10, fontSize: 12 }}>
+              <span className="prompt">$</span> {fallbackCommand}
+            </div>
+            <button
+              onClick={() => navigator.clipboard?.writeText(fallbackCommand)}
+              style={{ marginTop: 10, padding: "4px 10px", fontFamily: "var(--font-mono)", fontSize: 11, background: "transparent", color: "#4dbb91", border: "1px solid #4dbb91", borderRadius: 4, cursor: "pointer" }}
+            >📋 copy command</button>
+          </>
+        )}
       </div>
-      {state === "missing" && (
-        <>
-          <div style={{ fontSize: 13, marginTop: 6, color: "#9fbeae", lineHeight: 1.5 }}>
-            {fallbackNote || "This combination of flags isn't in the precomputed gallery. Run it on your own archive:"}
-          </div>
-          <div className="sk-code" style={{ marginTop: 10, fontSize: 12 }}>
-            <span className="prompt">$</span> {fallbackCommand}
-          </div>
-          <button
-            onClick={() => navigator.clipboard?.writeText(fallbackCommand)}
-            style={{ marginTop: 10, padding: "4px 10px", fontFamily: "var(--font-mono)", fontSize: 11, background: "transparent", color: "#4dbb91", border: "1px solid #4dbb91", borderRadius: 4, cursor: "pointer" }}
-          >📋 copy command</button>
-        </>
-      )}
     </div>
   );
 }
 
-/* ---------- gallery row (sidebar) ---------- */
 function GalleryRow({ active, label, indent = 0, header = false, onClick }) {
   return (
     <button onClick={onClick} disabled={header}
@@ -588,8 +807,11 @@ function GalleryRow({ active, label, indent = 0, header = false, onClick }) {
         background: active ? "#1f3a30" : "transparent",
         color: active ? "#d5ecdd" : header ? "#cfe3d7" : "#9fbeae",
         fontWeight: header ? 600 : 400,
-        borderLeft: active ? "2px solid #4dbb91" : "2px solid transparent",
-        border: 0,
+        // left accent rendered with box-shadow so we don't mix the `border`
+        // shorthand with `borderLeft` (which produces React's "conflicting
+        // property" rerender warning).
+        boxShadow: active ? "inset 2px 0 0 #4dbb91" : "inset 2px 0 0 transparent",
+        border: "0",
         fontFamily: "var(--font-mono)", fontSize: 12,
         cursor: header ? "default" : "pointer",
         textTransform: header ? "uppercase" : "none",
@@ -600,24 +822,26 @@ function GalleryRow({ active, label, indent = 0, header = false, onClick }) {
 }
 
 function InteractiveV2() {
-  const [mode, setMode] = useState("single"); // 'single' | 'pipeline' | 'catalog'
+  const [mode, setMode] = useState("single");
   const [archive, setArchive] = useState("J0437-4715");
+  const [dirty, setDirty] = useState(false);
   const [type, setType] = useState("freq");
   const [j, setJ] = useState({ D: false, F: false, T: false });
   const [pipelineId, setPipelineId] = useState(PIPELINES[0].id);
   const [pipelineStep, setPipelineStep] = useState(2);
 
-  // ---- catalog mode (Phase C — pav, pam, paz, vap, psrstat, pat) ----
   const [catalogId, setCatalogId] = useState("pav");
   const [catalogOpts, setCatalogOpts] = useState(() => ({ ...CATALOG_BY_ID["pav"].defaults }));
   const catalogItem = CATALOG_BY_ID[catalogId] || CATALOG[0];
   const catalogArtifact = useMemo(
-    () => catalogItem.artifact ? catalogItem.artifact(catalogOpts, archive) : null,
-    [catalogItem, catalogOpts, archive]
+    () => catalogItem.artifact ? catalogItem.artifact(catalogOpts, archive, dirty && (catalogItem.supportsDirty || false)) : null,
+    [catalogItem, catalogOpts, archive, dirty]
+  );
+  const catalogValidity = useMemo(
+    () => catalogItem.validityFor ? catalogItem.validityFor(catalogOpts, dirty) : { state: "ok" },
+    [catalogItem, catalogOpts, dirty]
   );
 
-  // Pick a catalog item: reset options to its defaults.  If it's the
-  // legacy-psrplot pointer, switch to single mode instead.
   const selectCatalog = (id) => {
     const it = CATALOG_BY_ID[id];
     if (!it) return;
@@ -627,26 +851,21 @@ function InteractiveV2() {
     setCatalogOpts({ ...it.defaults });
   };
 
-  // active artifacts
   const single = useMemo(() => {
-    const file = expectedFilename({ archive, type, j });
+    const file = expectedFilename({ archive, type, j, dirty });
     const rel = file.replace(/^plots\//, "");
     return {
       file,
       command: buildSingleCommand({ archive, type, j }),
       available: AVAILABLE.has(rel),
     };
-  }, [archive, type, j]);
+  }, [archive, type, j, dirty]);
 
   const pipeline = useMemo(() => PIPELINES.find(p => p.id === pipelineId), [pipelineId]);
-  const currentStep = pipeline && pipeline.steps[pipelineStep];
+  const currentStep = pipeline && pipeline.steps[Math.min(pipelineStep, pipeline.steps.length - 1)];
 
-  // When the user changes plot type via the inspector radio, snap -j to the
-  // nearest available combo for that type+archive.  Prefer the type's
-  // defaultJ if its filename exists, otherwise fall back to the first
-  // available combo, otherwise leave the current j unchanged.
   const selectType = (nextType) => {
-    const combos = availableJCombosFor(nextType, archive); // e.g. ["jft","jdft"]
+    const combos = availableJCombosFor(nextType, archive);
     if (combos.length === 0) { setType(nextType); return; }
     const pt = PLOT_TYPES.find(p => p.id === nextType);
     const wantSfx = pt ? jSuffix(pt.defaultJ) : combos[0];
@@ -655,14 +874,8 @@ function InteractiveV2() {
     setJ(jFromSuffix(sfx));
   };
 
-  const availableCombos = useMemo(
-    () => availableJCombosFor(type, archive),
-    [type, archive]
-  );
+  const availableCombos = useMemo(() => availableJCombosFor(type, archive), [type, archive]);
 
-  // When the user switches archive, snap -j to a combo that exists for the
-  // current plot type on the new archive (both archives currently share the
-  // same set, but this future-proofs against asymmetric coverage).
   const selectArchive = (nextArchive) => {
     const combos = availableJCombosFor(type, nextArchive);
     setArchive(nextArchive);
@@ -684,9 +897,14 @@ function InteractiveV2() {
     } else {
       setMode("pipeline");
       setPipelineId(preset.id);
-      setPipelineStep(preset.steps - 1);
+      setPipelineStep(0);
     }
   };
+
+  // dirty toggle is only meaningful for entries that opt in, or for psrplot
+  // single mode when the polprof variant is selected.
+  const dirtyMeaningful = (mode === "single" && type === "polprof")
+    || (mode === "catalog" && catalogItem.supportsDirty);
 
   return (
     <div className="sk-page" style={{ width: V2_IPG_W, minHeight: V2_IPG_H, overflow: "hidden", background: "#0d1714" }}>
@@ -694,10 +912,20 @@ function InteractiveV2() {
       <div className="sk-row" style={{ background: "#0a100d", color: "#cfe3d7", height: 32, alignItems: "center", paddingLeft: 14, gap: 18, borderBottom: "1px solid #1b2c25" }}>
         <span style={{ fontFamily: "var(--font-display)", fontSize: 11, fontWeight: 600, color: "#9fd3b9", letterSpacing: 1.4, textTransform: "uppercase" }}>workspace</span>
         <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "#7c9c8d" }}>
-          {mode === "single" ? `psrplot · ${archive}`
-            : mode === "catalog" ? `${catalogItem.cmd} · ${archive}`
+          {mode === "single" ? `psrplot · ${archive}${dirtyMeaningful && dirty ? " (raw)" : ""}`
+            : mode === "catalog" ? `${catalogItem.cmd} · ${archive}${dirtyMeaningful && dirty ? " (raw)" : ""}`
             : `pipeline · ${pipeline.label}`}
         </span>
+        {/* archive raw / clean toggle */}
+        {dirtyMeaningful && (
+          <span style={{ marginLeft: 6, fontFamily: "var(--font-mono)", fontSize: 11, color: "#7c9c8d" }}>
+            archive:
+            <button onClick={() => setDirty(false)}
+              style={{ marginLeft: 6, padding: "2px 8px", background: !dirty ? "#1f3a30" : "transparent", color: !dirty ? "#d5ecdd" : "#7c9c8d", border: "1px solid #2a4538", borderRadius: 3, cursor: "pointer", fontFamily: "var(--font-mono)", fontSize: 11 }}>clean</button>
+            <button onClick={() => setDirty(true)}
+              style={{ marginLeft: 4, padding: "2px 8px", background: dirty ? "#3a2912" : "transparent", color: dirty ? "#f0c992" : "#7c9c8d", border: "1px solid " + (dirty ? "#7a5326" : "#2a4538"), borderRadius: 3, cursor: "pointer", fontFamily: "var(--font-mono)", fontSize: 11 }}>raw</button>
+          </span>
+        )}
         <span style={{ marginLeft: "auto", marginRight: 14, fontFamily: "var(--font-mono)", fontSize: 11, color: "#7c9c8d" }}>
           mode:
           {[
@@ -721,7 +949,6 @@ function InteractiveV2() {
         <div style={{ background: "#0a100d", borderRight: "1px solid #1b2c25", overflow: "auto", maxHeight: V2_IPG_H - 64 }}>
           <div style={{ padding: "10px 14px", borderBottom: "1px solid #1b2c25", color: "#6a8378", textTransform: "uppercase", fontSize: 10, letterSpacing: 1.4, fontFamily: "var(--font-display)", fontWeight: 600 }}>Gallery</div>
 
-          {/* Catalog — grouped by phase of work (Phase C) */}
           {CATALOG_GROUPS.map(g => {
             const items = CATALOG.filter(c => c.group === g);
             if (!items.length) return null;
@@ -742,7 +969,6 @@ function InteractiveV2() {
             );
           })}
 
-          {/* Pipelines */}
           <GalleryRow header label="▾ Pipelines · multi-step" />
           {PIPELINES.map(p => (
             <GalleryRow
@@ -771,13 +997,13 @@ function InteractiveV2() {
 
           {mode === "pipeline" && (
             <div style={{ padding: "12px 16px 10px", borderBottom: "1px solid #1b2c25", background: "#0a100d" }}>
-              <div className="sk-row" style={{ justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+              <div className="sk-row" style={{ justifyContent: "space-between", alignItems: "center", marginBottom: 8, flexWrap: "wrap", gap: 8 }}>
                 <span style={{ fontFamily: "var(--font-display)", fontSize: 11, fontWeight: 600, color: "#9fd3b9", letterSpacing: 1.4, textTransform: "uppercase" }}>Pipeline · {pipeline.steps.length} steps</span>
                 <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "#7c9c8d" }}>{pipeline.blurb}</span>
               </div>
               <div className="sk-row" style={{ alignItems: "stretch", gap: 0, flexWrap: "wrap" }}>
                 {pipeline.steps.map((s, i) => {
-                  const ed = i === pipelineStep;
+                  const ed = i === Math.min(pipelineStep, pipeline.steps.length - 1);
                   return (
                     <React.Fragment key={i}>
                       <button onClick={() => setPipelineStep(i)} style={{
@@ -813,8 +1039,8 @@ function InteractiveV2() {
               borderRight: "1px solid #1b2c25", borderTop: "2px solid #4dbb91", marginTop: -1,
             }}>{
               mode === "single" ? "command.sh ●"
-              : mode === "catalog" ? `${catalogItem.cmd}.sh ●`
-              : `step${pipelineStep + 1}.sh ●`
+              : mode === "catalog" ? `${catalogItem.cmd.replace(/ .*/, "")}.sh ●`
+              : `step${Math.min(pipelineStep + 1, pipeline.steps.length)}.sh ●`
             }</div>
           </div>
 
@@ -825,7 +1051,7 @@ function InteractiveV2() {
               <span style={{ color: "#6a8378" }}># {
                 mode === "single" ? "Configure flags on the right to change the output."
                 : mode === "catalog" ? catalogItem.blurb
-                : `step ${pipelineStep + 1} of ${pipeline.steps.length}`
+                : `step ${Math.min(pipelineStep + 1, pipeline.steps.length)} of ${pipeline.steps.length}`
               }</span>
             </div>
             <div className="sk-row" style={{ gap: 14 }}>
@@ -834,16 +1060,16 @@ function InteractiveV2() {
                 {mode === "single" ? (
                   <>
                     <span style={{ color: "#4dbb91" }}>psrplot</span>{" "}
-                    <span style={{ color: "#e0a36a" }}>-p</span> {type}{" "}
+                    <span style={{ color: "#e0a36a" }}>-p</span> {({ polprof: "Scyl", joy: "time" })[type] || type}{" "}
                     {(j.D || j.F || j.T) && <><span style={{ color: "#e0a36a" }}>-j</span> {["D","F","T"].filter(k=>j[k]).join("")}{" "}</>}
-                    {archive}.ar{" "}
+                    {archive}{dirty && type === "polprof" ? "_raw" : ""}.ar{" "}
                     <span style={{ color: "#e0a36a" }}>-D</span> <span style={{ color: "#c8d99f" }}>out.png/png</span>
                     <span style={{ background: "#cbe6d8", color: "#0d1714", marginLeft: 1 }}>&nbsp;</span>
                   </>
                 ) : mode === "catalog" ? (
                   <>
-                    <span style={{ color: "#4dbb91" }}>{catalogItem.cmd}</span>{" "}
-                    <span style={{ color: "#cfe3d7" }}>{catalogArtifact?.command?.replace(new RegExp(`^${catalogItem.cmd}\\s+`), "") || ""}</span>
+                    <span style={{ color: "#4dbb91" }}>{catalogItem.cmd.split(" ")[0]}</span>{" "}
+                    <span style={{ color: "#cfe3d7" }}>{catalogArtifact?.command?.replace(new RegExp(`^${catalogItem.cmd.split(" ")[0]}\\s+`), "") || ""}</span>
                   </>
                 ) : (
                   <>
@@ -862,10 +1088,10 @@ function InteractiveV2() {
                 <span style={{ fontFamily: "var(--font-display)", fontSize: 12, fontWeight: 600, color: "#9fd3b9", letterSpacing: 1.4, textTransform: "uppercase" }}>output</span>
                 <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "#7c9c8d" }}>
                   {mode === "single"
-                    ? `${type} · -j ${jSuffix(j).toUpperCase()} · ${archive} ${single.available ? "· cached" : "· not in cache"}`
+                    ? `${type} · -j ${jSuffix(j).toUpperCase()} · ${archive}${dirtyMeaningful && dirty ? " · raw" : ""} ${single.available ? "· cached" : "· not in cache"}`
                     : mode === "catalog"
-                    ? `${catalogItem.id} · ${archive} · ${catalogItem.outKind}`
-                    : `${pipeline.id} · step ${pipelineStep + 1} of ${pipeline.steps.length}`}
+                    ? `${catalogItem.id} · ${archive}${dirtyMeaningful && dirty ? " · raw" : ""} · ${catalogItem.outKind}`
+                    : `${pipeline.id} · step ${Math.min(pipelineStep + 1, pipeline.steps.length)} of ${pipeline.steps.length}`}
                 </span>
               </div>
               <div className="sk-row sk-gap-8" style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>
@@ -884,28 +1110,47 @@ function InteractiveV2() {
                   ? <PlotImage src={single.file} fallbackCommand={single.command} />
                   : <PlotImage src={`__missing__/${type}__${jSuffix(j)}.png`} fallbackCommand={single.command} />
               ) : mode === "catalog" ? (
-                catalogItem.outKind === "annotated" || catalogItem.outKind === "text"
-                  ? <TextOutput
-                      src={"plots/" + catalogArtifact.path}
-                      annotSrc={catalogArtifact.annot ? "plots/" + catalogArtifact.annot : null}
-                      command={catalogArtifact.command}
-                    />
-                  : catalogItem.outKind === "image+meta"
-                    ? (
-                        <div className="sk-col" style={{ gap: 14, alignItems: "center", width: "100%" }}>
-                          <PlotImage src={"plots/" + catalogArtifact.path} fallbackCommand={catalogArtifact.command} />
-                          {catalogArtifact.metaPath && (
-                            <div style={{ width: "100%", maxWidth: 820 }}>
-                              <TextOutput
-                                src={"plots/" + catalogArtifact.metaPath}
-                                annotSrc={catalogArtifact.metaAnnot ? "plots/" + catalogArtifact.metaAnnot : null}
-                                command={"vap -c \"nbin,nchan,nsubint,npol,length,bw\" <result>.ar"}
-                              />
-                            </div>
-                          )}
-                        </div>
-                      )
-                    : <PlotImage src={"plots/" + catalogArtifact.path} fallbackCommand={catalogArtifact.command} />
+                catalogValidity.state === "rejected" || catalogValidity.state === "unavailable"
+                  ? <PlotImage src={`__invalid__/${catalogItem.id}`} fallbackCommand={catalogArtifact?.command || ""} validity={catalogValidity} />
+                  : catalogItem.outKind === "rotation-scrubber"
+                    ? <RotationScrubber framePath={catalogArtifact.framePath} frames={catalogArtifact.frames} />
+                    : catalogItem.outKind === "image+text"
+                      ? (
+                          <div className="sk-col" style={{ gap: 14, alignItems: "center", width: "100%" }}>
+                            <PlotImage src={"plots/" + catalogArtifact.path} fallbackCommand={catalogArtifact.command} validity={catalogValidity} />
+                            {catalogArtifact.textPath && (
+                              <div style={{ width: "100%", maxWidth: 820 }}>
+                                <TextOutput
+                                  src={"plots/" + catalogArtifact.textPath}
+                                  command={catalogArtifact.command}
+                                  externalNote={catalogArtifact.external ? "this tool ships outside PSRCHIVE — install separately." : null}
+                                />
+                              </div>
+                            )}
+                          </div>
+                        )
+                      : catalogItem.outKind === "annotated" || catalogItem.outKind === "text"
+                        ? <TextOutput
+                            src={"plots/" + catalogArtifact.path}
+                            annotSrc={catalogArtifact.annot ? "plots/" + catalogArtifact.annot : null}
+                            command={catalogArtifact.command}
+                          />
+                        : catalogItem.outKind === "image+meta"
+                          ? (
+                              <div className="sk-col" style={{ gap: 14, alignItems: "center", width: "100%" }}>
+                                <PlotImage src={"plots/" + catalogArtifact.path} fallbackCommand={catalogArtifact.command} validity={catalogValidity} />
+                                {catalogArtifact.metaPath && (
+                                  <div style={{ width: "100%", maxWidth: 820 }}>
+                                    <TextOutput
+                                      src={"plots/" + catalogArtifact.metaPath}
+                                      annotSrc={catalogArtifact.metaAnnot ? "plots/" + catalogArtifact.metaAnnot : null}
+                                      command={"vap -c \"nbin,nchan,nsubint,npol,length,bw\" <result>.ar"}
+                                    />
+                                  </div>
+                                )}
+                              </div>
+                            )
+                          : <PlotImage src={"plots/" + catalogArtifact.path} fallbackCommand={catalogArtifact.command} validity={catalogValidity} />
               ) : (
                 currentStep.textOnly
                   ? <TextOutput
@@ -925,7 +1170,7 @@ function InteractiveV2() {
             <span style={{ color: "#6a8378", textTransform: "uppercase", fontSize: 10, letterSpacing: 1.4, fontFamily: "var(--font-display)", fontWeight: 600 }}>Arguments</span>
             <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "#4dbb91" }}>{
               mode === "single" ? "psrplot"
-              : mode === "catalog" ? catalogItem.cmd
+              : mode === "catalog" ? catalogItem.cmd.split(" ")[0]
               : currentStep.cmd
             }</span>
           </div>
@@ -943,27 +1188,50 @@ function InteractiveV2() {
                   <div style={{ marginTop: 16, fontFamily: "var(--font-display)", fontSize: 10, fontWeight: 600, color: "#9fd3b9", textTransform: "uppercase", letterSpacing: 1.4 }}>
                     {opt.label}
                   </div>
-                  <div className="sk-col" style={{ marginTop: 6, gap: 4 }}>
-                    {opt.choices.map(ch => {
-                      const active = catalogOpts[opt.id] === ch.id;
-                      return (
-                        <button key={ch.id} onClick={() => setCatalogOpts(o => ({ ...o, [opt.id]: ch.id }))}
-                          style={{
-                            textAlign: "left", padding: "6px 9px", borderRadius: 4, cursor: "pointer",
-                            background: active ? "#1f3a30" : "transparent",
-                            borderLeft: active ? "2px solid #4dbb91" : "2px solid transparent",
-                            border: 0, color: active ? "#d5ecdd" : "#9fbeae",
-                            fontFamily: "var(--font-mono)", fontSize: 12,
-                          }}>
-                          <span style={{ color: "#e0a36a", fontWeight: 700, marginRight: 6 }}>{ch.id}</span>
-                          <span style={{ fontSize: 11, color: active ? "#cfe3d7" : "#6a8378" }}>{ch.label}</span>
-                          {ch.cli && (
-                            <div style={{ marginTop: 2, fontFamily: "var(--font-mono)", fontSize: 10, color: active ? "#9fbeae" : "#4a5d54", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>$ {ch.cli}</div>
-                          )}
-                        </button>
-                      );
-                    })}
-                  </div>
+                  {opt.optionKind === "flags" ? (
+                    // checkbox list — like psrplot's -j toggles
+                    <div className="sk-col" style={{ marginTop: 6, gap: 5 }}>
+                      {opt.choices.map(ch => {
+                        const flags = catalogOpts[opt.id] || {};
+                        const on = !!flags[ch.id];
+                        return (
+                          <label key={ch.id} style={{ display: "flex", alignItems: "center", gap: 9, padding: "5px 8px", background: on ? "#13201b" : "transparent", border: "1px solid " + (on ? "#4dbb91" : "#1b2c25"), borderRadius: 4, cursor: "pointer" }}>
+                            <input type="checkbox" checked={on}
+                              onChange={e => setCatalogOpts(o => ({
+                                ...o,
+                                [opt.id]: { ...(o[opt.id] || {}), [ch.id]: e.target.checked },
+                              }))}
+                              style={{ accentColor: "#4dbb91" }} />
+                            <span style={{ color: "#e0a36a", fontWeight: 700, fontFamily: "var(--font-mono)", fontSize: 12, minWidth: 24 }}>{ch.label}</span>
+                            <span style={{ marginLeft: "auto", color: "#6a8378", fontSize: 10 }}>{ch.hint}</span>
+                          </label>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    // radio-style list of choices (the original shape)
+                    <div className="sk-col" style={{ marginTop: 6, gap: 4 }}>
+                      {opt.choices.map(ch => {
+                        const active = catalogOpts[opt.id] === ch.id;
+                        return (
+                          <button key={ch.id} onClick={() => setCatalogOpts(o => ({ ...o, [opt.id]: ch.id }))}
+                            style={{
+                              textAlign: "left", padding: "6px 9px", borderRadius: 4, cursor: "pointer",
+                              background: active ? "#1f3a30" : "transparent",
+                              boxShadow: active ? "inset 2px 0 0 #4dbb91" : "inset 2px 0 0 transparent",
+                              border: 0, color: active ? "#d5ecdd" : "#9fbeae",
+                              fontFamily: "var(--font-mono)", fontSize: 12,
+                            }}>
+                            <span style={{ color: "#e0a36a", fontWeight: 700, marginRight: 6 }}>{ch.id}</span>
+                            <span style={{ fontSize: 11, color: active ? "#cfe3d7" : "#6a8378" }}>{ch.label}</span>
+                            {ch.cli && (
+                              <div style={{ marginTop: 2, fontFamily: "var(--font-mono)", fontSize: 10, color: active ? "#9fbeae" : "#4a5d54", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>$ {ch.cli}</div>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
                 </React.Fragment>
               ))}
 
@@ -978,9 +1246,18 @@ function InteractiveV2() {
                 ))}
               </div>
 
-              <div style={{ marginTop: 14, padding: 10, background: "rgba(224,133,106,.06)", borderRadius: 5, border: "1px solid #2a4538", fontSize: 11, lineHeight: 1.45, color: "#9fbeae" }}>
-                Many of these artifacts are <i>planned</i> — the page degrades to "not precomputed" with a copyable command until <code>tools/gen/</code> scripts run against a real PSRCHIVE install. See <a href="../tools/HANDOFF.md" style={{ color: "#4dbb91" }}>tools/HANDOFF.md</a>.
-              </div>
+              {catalogItem.supportsDirty && (
+                <div style={{ marginTop: 10, padding: 8, background: dirty ? "#3a2912" : "#13201b", border: "1px solid " + (dirty ? "#7a5326" : "#2a4538"), borderRadius: 4, color: dirty ? "#f0c992" : "#9fd3b9", fontFamily: "var(--font-mono)", fontSize: 11 }}>
+                  {dirty ? "⚠ showing the raw (RFI-present) variant" : "✓ showing the cleaned (paz -r applied) variant"}
+                  <div style={{ marginTop: 4, fontSize: 10, color: "#7c9c8d" }}>toggle in the workspace bar above</div>
+                </div>
+              )}
+
+              {catalogValidity.state === "ok" && (
+                <div style={{ marginTop: 14, padding: 10, background: "#13201b", borderRadius: 5, border: "1px solid #2a4538", color: "#9fd3b9", fontSize: 11, lineHeight: 1.45 }}>
+                  ✓ <b>resolved</b> — loading <code style={{ color: "#cfe3d7" }}>plots/{catalogArtifact?.path}</code>
+                </div>
+              )}
             </>
           ) : mode === "single" ? (
             <>
@@ -1019,7 +1296,7 @@ function InteractiveV2() {
                 ))}
               </div>
 
-              {/* available combos hint — click to snap */}
+              {/* available combos hint */}
               <div style={{ marginTop: 12, fontFamily: "var(--font-display)", fontSize: 10, fontWeight: 600, color: "#9fd3b9", textTransform: "uppercase", letterSpacing: 1.4 }}>
                 cached combos <span style={{ color: "#7c9c8d", fontWeight: 400 }}>for {type}</span>
               </div>
@@ -1053,7 +1330,6 @@ function InteractiveV2() {
                 ))}
               </div>
 
-              {/* status */}
               <div style={{ marginTop: 14, padding: 10, background: single.available ? "#13201b" : "rgba(224,133,106,.10)", borderRadius: 5, border: "1px solid " + (single.available ? "#2a4538" : "#5a3a2a"), fontSize: 11, lineHeight: 1.45 }}>
                 {single.available
                   ? <span style={{ color: "#9fd3b9" }}>✓ <b>cached</b> — loading <code style={{ color: "#cfe3d7" }}>{single.file.replace(/^plots\//, "")}</code></span>
@@ -1066,7 +1342,7 @@ function InteractiveV2() {
                 <b>{pipeline.label}</b>
                 <div style={{ color: "#7c9c8d", marginTop: 4 }}>{pipeline.blurb}</div>
               </div>
-              <div style={{ marginTop: 14, fontFamily: "var(--font-display)", fontSize: 10, fontWeight: 600, color: "#9fd3b9", textTransform: "uppercase", letterSpacing: 1.4 }}>step {pipelineStep + 1} of {pipeline.steps.length}</div>
+              <div style={{ marginTop: 14, fontFamily: "var(--font-display)", fontSize: 10, fontWeight: 600, color: "#9fd3b9", textTransform: "uppercase", letterSpacing: 1.4 }}>step {Math.min(pipelineStep + 1, pipeline.steps.length)} of {pipeline.steps.length}</div>
               <div className="sk-code" style={{ marginTop: 6, fontSize: 11 }}>
                 <span className="prompt">$</span> {currentStep.cmd} {currentStep.flags}
               </div>
@@ -1094,14 +1370,14 @@ function InteractiveV2() {
       <div className="sk-row" style={{ background: "#0e3b2e", color: "#d5ecdd", height: 32, fontFamily: "var(--font-mono)", fontSize: 11, alignItems: "center", padding: "0 14px", gap: 18, flexWrap: "wrap" }}>
         <span>✓ ready</span>
         <span>{
-          mode === "single" ? `psrplot · 1 archive · ${jSuffix(j).toUpperCase()}`
-          : mode === "catalog" ? `${catalogItem.cmd} · ${catalogItem.group.toLowerCase()}`
+          mode === "single" ? `psrplot · ${archive}${dirtyMeaningful && dirty ? " (raw)" : ""} · ${jSuffix(j).toUpperCase()}`
+          : mode === "catalog" ? `${catalogItem.cmd.split(" ")[0]} · ${catalogItem.group.toLowerCase()}${dirtyMeaningful && dirty ? " · raw" : ""}`
           : `${pipeline.id} · ${pipeline.steps.length} steps`
         }</span>
         <span style={{ marginLeft: "auto" }}>{
           mode === "pipeline" ? "step cached"
           : mode === "single" ? (single.available ? "image cached" : "missing — copy + run")
-          : "see right panel"
+          : catalogValidity.state === "ok" ? "artifact cached" : `flagged · ${catalogValidity.state}`
         }</span>
       </div>
     </div>

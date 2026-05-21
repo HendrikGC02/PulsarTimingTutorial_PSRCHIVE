@@ -186,15 +186,17 @@ body { background: var(--paper); color: var(--ink); margin: 0; font-family: var(
 }
 .sk-arrow svg { display: block; overflow: visible; }
 
-/* chip / pill */
+/* chip / pill — small rounded rectangle so multi-line content survives */
 .sk-chip {
   display: inline-flex; align-items: center; gap: 5px;
   border: 1.2px solid var(--ink-2);
-  border-radius: 999px;
-  padding: 2px 10px;
-  font-family: var(--font-hand);
-  font-size: 15px;
+  border-radius: 10px;
+  padding: 4px 12px;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 500;
   background: var(--paper);
+  line-height: 1.35;
 }
 .sk-chip.green { border-color: var(--green); color: var(--green); }
 .sk-chip.fill  { background: var(--green); color: var(--paper); border-color: var(--green); }
@@ -204,9 +206,10 @@ body { background: var(--paper); color: var(--ink); margin: 0; font-family: var(
   border: 1.5px solid var(--ink);
   border-radius: 6px;
   background: var(--paper);
-  padding: 6px 14px;
-  font-family: var(--font-hand);
-  font-size: 16px;
+  padding: 7px 14px;
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  font-weight: 500;
   display: inline-flex; align-items: center; gap: 6px;
 }
 .sk-btn.green { background: var(--green); color: var(--paper); border-color: var(--green); }
@@ -257,13 +260,14 @@ body { background: var(--paper); color: var(--ink); margin: 0; font-family: var(
 
 /* faux nav row */
 .sk-nav {
-  display: flex; align-items: center; gap: 16px;
-  font-family: var(--font-hand);
-  font-size: 17px;
+  display: flex; align-items: center; gap: 22px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 500;
 }
-.sk-nav .item { color: var(--ink-2); }
+.sk-nav .item { color: var(--ink-2); padding: 2px 4px; }
 .sk-nav .item.active { color: var(--green); font-weight: 700; }
-.sk-nav .item.active::after { content: " ✦"; }
+.sk-nav .item.active::after { content: " ✦"; margin-left: 2px; }
 
 /* simple flex helpers (scoped) */
 .sk-row { display: flex; }
@@ -345,6 +349,14 @@ body { background: var(--paper); color: var(--ink); margin: 0; font-family: var(
   /* hide bulky chrome on phones */
   .sk-nav .item { display: none; }
   .sk-nav .item.active { display: inline; }
+  /* hide subtitle next to brand so the nav buttons don't crowd it */
+  .sk-brand-subtitle { display: none; }
 }
 /* horizontal-scroll safety net: the IDE wants 1300px minimum, allow scroll rather than break */
 .ipg-shell { overflow-x: auto; }
+
+/* All inline SVG diagrams should never overflow their parent box (fixes the
+   dedispersion right-edge clip and any other column where the SVG's natural
+   width exceeds the container).  viewBox is already set on every diagram so
+   scaling preserves aspect. */
+.sk-box svg, .sk-page svg { max-width: 100%; height: auto; }
